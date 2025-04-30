@@ -1,0 +1,180 @@
+{# templates/event/register.html.twig #} {% extends 'base.html.twig' %} {% block title %}Inscription Événement{%
+endblock %} {% block body %}
+
+<section id="hero" class="hero section dark-background">
+    <img src="{{asset('assets/img/ecole.jpg')}}" loading="lazy" alt="" data-aos="fade-in">
+    <div class="container mt-4">
+        <h2 data-aos="fade-up" data-aos-delay="100" style="color: #fff;">
+            Invitation au Barbecue - 31 Mai 2024
+        </h2>
+
+
+        <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="#barbecue" class="btn btn-success btn-lg rounded-pill px-5 py-3">Inscrivez-vous</a>
+        </div>
+    </div>
+</section>
+<section class="py-5 py-5 bg-light bg-gradient">
+    <div class="container">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="{{ 'formations.alerts.close'|trans }}"></button>
+        </div>
+        {% endfor %}
+        <div id="barbecue" class="row g-4">
+            <div class="col-md-12">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <i class="bi bi-backpack-fill fs-1 text-success me-3"></i>
+
+                            <h3 class="h4 fw-bold mb-0">
+                                Invitation au Barbecue - 31 Mai 2024
+                            </h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 mb-4">
+                                <p>
+                                    Chers Parents,<br><br> C'est avec grand plaisir que nous vous invitons, ainsi que
+                                    vos enfants, à un barbecue en plein air qui se déroulera le <strong>Vendredi
+                                        31 mai 2024</strong> à partir de <strong>11h</strong> au niveau de la Rôtisserie
+                                    du complexe Touristique <strong>"la Corne d'Or"</strong> <br><br>
+                                    <a href="https://maps.app.goo.gl/W1rg7G5U5o16uzNi6" target="_blank">Voir la
+                                        localisation sur Google
+                                        Maps</a><br><br> Merci de confirmer votre présence <strong>avant le Jeudi 09
+                                        Mai 2024</strong>.<br>
+                                    <em>NB : En raison du nombre de places limité, seuls les frères et sœurs sont
+                                        autorisés.</em>
+                                </p>
+                                <button class="btn btn-success rounded-pill px-4 mt-3" data-bs-toggle="modal"
+                                    data-bs-target="#inscriptionModal">
+                                    S'inscrire
+                                </button>
+                            </div>
+                            <div class="col-md-5 d-flex align-items-center justify-content-center">
+                                <img src="{{ asset('assets/img/barbecue.jpg') }}" loading="lazy"
+                                    alt="{{ 'formation.details.title'|trans }}" class="img-fluid rounded-4 shadow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Modal Inscription -->
+<div class="modal fade" id="inscriptionModal" tabindex="-1" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="inscriptionModalLabel">Inscription à l’événement <span
+                        id="formationTitle"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ form_start(form, {'attr': {'id': 'inscription-form'}}) }}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder':
+                        'FirstName'|trans}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'LastName'|trans}})
+                        }}
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'|trans}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Phone'|trans}}) }}
+                    </div>
+                </div>
+
+                <h5 class="mt-4">Ajoutez les enfants ou accompagnants (max 6)</h5>
+                <div data-prototype="{{ form_widget(form.guests.vars.prototype)|e('html_attr') }}"
+                    class="guests-collection mb-3">
+                    {% for guestForm in form.guests %}
+                    <div class="guest-form row mb-2">
+                        <div class="col-md-5">
+                            {{ form_row(guestForm.firstName, {'label': 'Nom'}) }}
+                        </div>
+                        <div class="col-md-5">
+                            {{ form_row(guestForm.lastName, {'label': 'Prénom'}) }}
+                        </div>
+                        <div class="col-md-2 align-self-end">
+                            <button type="button" class="btn btn-danger btn-sm remove-guest">Supprimer</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button type="button" class="btn btn-primary btn-sm mb-3" id="add-guest">+ Ajouter un
+                    accompagnant</button>
+                <div>{{ form_row(form._token) }}</div>
+                <button type="submit" class="btn btn-success w-100">Confirmer l'inscription</button> {{ form_end(form)
+                }}
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const collectionHolder = document.querySelector('.guests-collection');
+        const addBtn = document.getElementById('add-guest');
+        const maxGuests = 6;
+
+        let index = collectionHolder.children.length;
+
+        addBtn.addEventListener('click', () => {
+            if (index < maxGuests) {
+                // Créer un conteneur pour le nouveau guest
+                const guestRow = document.createElement('div');
+                guestRow.classList.add('guest-form', 'row', 'mb-2');
+
+                // Récupérer le prototype et remplacer l'index
+                let prototype = collectionHolder.dataset.prototype;
+                prototype = prototype.replace(/__name__/g, index);
+
+                // Créer la structure HTML pour le nouveau guest
+                guestRow.innerHTML = `
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="event_registration_guests_${index}_firstName" class="form-label required">Nom</label>
+                            <input type="text" id="event_registration_guests_${index}_firstName" name="event_registration[guests][${index}][firstName]" required="required" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="event_registration_guests_${index}_lastName" class="form-label required">Prénom</label>
+                            <input type="text" id="event_registration_guests_${index}_lastName" name="event_registration[guests][${index}][lastName]" required="required" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <button type="button" class="btn btn-danger btn-sm remove-guest">Supprimer</button>
+                    </div>
+                `;
+
+                // Ajouter la nouvelle ligne au conteneur
+                collectionHolder.appendChild(guestRow);
+                index++;
+            }
+        });
+
+        // Gérer la suppression des guests
+        collectionHolder.addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-guest')) {
+                e.target.closest('.guest-form').remove();
+                index--;
+            }
+        });
+    });
+</script>
+{% endblock %}

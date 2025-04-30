@@ -1,17 +1,177 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}{{ 'site.name'|trans }} {{ 'site.name1'|trans }} {{ 'site.name2'|trans }} - {% endblock %}
+    </title>
+
+    <meta name="description"
+        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs. Découvrez la méthode Montessori adaptée à la culture algérienne.">
+    <meta name="keywords"
+        content="Montessori Algérie, formation montessori, pédagogie montessori, éducation alternative Algérie, AMI Algérie, montessori alger, ateliers montessori, éducation enfants Alger">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mia-dz.com/">
+    <meta property="og:title" content="Montessori Institut d'Algerie - La référence Montessori en Algérie">
+    <meta property="og:description"
+        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.">
+    <meta property="og:image" content="{{ asset('assets/img/logo.png') }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mia-dz.com/">
+    <meta property="twitter:title" content="Montessori Institut d'Algerie - La référence Montessori en Algérie">
+    <meta property="twitter:description"
+        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.">
+    <meta property="twitter:image" content="{{ asset('assets/img/logo.png') }}">
+
+    <!-- Données structurées JSON-LD pour organisation éducative -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            "name": "Montessori Institut d'Algerie",
+            "alternateName": "MIA",
+            "url": "https://mia-dz.com",
+            "logo": "https://mia-dz.com/assets/img/logo.png",
+            "description": "Premier institut officiel Montessori en Algérie offrant des formations AMI et des ateliers pédagogiques adaptés à la culture algérienne.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Alger",
+                "addressCountry": "Algérie"
+            },
+            "email": "info@mia-dz.com",
+            "telephone": "+213 666 340 821",
+            "sameAs": [
+                "https://www.facebook.com/montessorialgerie",
+                "https://www.instagram.com/montessori_algerie"
+            ]
+        }
+    </script>
+    <!-- Favicons -->
+
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favico/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/favico/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/img/favico/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favico/apple-touch-icon.png') }}" />
+    <link rel="manifest" href="{{ asset('assets/img/favico/site.webmanifest') }}">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"> {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+    {% block header %}
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+            <a href="{{ path('app_home') }}" class="logo d-flex align-items-center me-auto">
+                <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="Montessori Algerie" class="logo-img">
+                <div class="logo-text">
+                    <h2 class="sitenames">Montessori</h2>
+                    <h2 class="sitenames">Algerie</h2>
+                </div>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="/" class="active">Home<br></a></li>
+                    <li><a href="/recrutement">Recrutement</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <a class="btn-getstarted" href="#">Get Started</a>
+
+        </div>
+    </header>
+    {% endblock %}
+
+    <main class="main">
+        {% block body %} {# Content blocks will be replaced in each template #} {% endblock %}
+    </main>
+    {% block footer %}
+    <footer id="footer" class="footer position-relative light-background">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <!-- Logo et texte -->
+                <div class="col-lg-4 col-md-6 footer-brand text-center text-md-start">
+                    <a href="{{ path('app_home') }}" class="logo d-flex align-items-center">
+                        <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="Montessori Algerie"
+                            class="logo-img">
+                        <div class="logo-text">
+                            <h2 class="sitenames">Montessori</h2>
+                            <h2 class="sitenames">Algerie</h2>
+                            <h2 class="sitenames"></h2>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Liens utiles -->
+                <div class="col-lg-4 col-md-6 footer-links text-center text-md-start">
+                    <h4>Liens utiles</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Employment</a></li>
+                        <li><a href="#">Recrutement</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
+                    <h4>Contact</h4>
+                    <p style="line-height: 2.8;">
+                        <i class="bi bi-geo-alt"></i> Alger, Algérie <br>
+                        <i class="bi bi-envelope"></i> info@montessorialgerie.com <br>
+                        <i class="bi bi-telephone"></i> +213 666 340 821 <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="container text-center mt-4">
+            <p>© <strong class="sitename">Montessori Algerie 2025</strong> | Tous droits réservés</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+    <!-- Main JS File -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    {% block javascripts %}{% endblock %}
+
+</body>
+
 </html>

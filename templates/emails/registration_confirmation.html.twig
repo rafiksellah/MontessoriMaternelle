@@ -1,0 +1,78 @@
+{# templates/emails/registration_confirmation.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de participation au barbecue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #0056b3;
+        }
+
+        .important {
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        .program {
+            background-color: #eef5ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Confirmation de participation</h1>
+
+        <p>Chers parents {{ registration.firstName }} {{ registration.lastName }},</p>
+
+        <p>Nous vous remercions chaleureusement d'avoir confirmé votre participation au barbecue prévu le 31/05 et nous
+            sommes ravis de vous retrouver.</p>
+
+        <div class="program">
+            <h3>Programme de la journée :</h3>
+            <ul>
+                <li>Arrivée des parents (accès au complexe à 1500 DA) et installation</li>
+                <li><strong>11h30 :</strong> Rassemblement pour le barbecue au niveau de la Rôtisserie "Coliseum"</li>
+                <li><strong>12h00 :</strong> Déjeuner</li>
+                <li><strong>Après le repas :</strong> Photos de groupe</li>
+                <li>Temps libre pour les familles</li>
+            </ul>
+        </div>
+
+        <p class="important">NB: vos enfants seront sous votre entière responsabilité durant toute la journée.</p>
+
+        <p>Vous avez inscrit les personnes suivantes :</p>
+        <ul>
+            {% for guest in registration.guests %}
+            <li>{{ guest.firstName }} {{guest.lastName}}</li>
+            {% endfor %}
+        </ul>
+
+        <p>Au plaisir de vous recevoir !</p>
+
+        <p>Cordialement,<br> L'équipe d'organisation</p>
+    </div>
+</body>
+
+</html>

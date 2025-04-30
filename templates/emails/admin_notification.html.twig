@@ -1,0 +1,42 @@
+{% extends 'emails/base_email.html.twig' %} {% block title %}Nouvelle demande de contact - Montessori Algérie{% endblock
+%} {% block body %}
+<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
+    <div style="text-align: center; margin-bottom: 30px;">
+    </div>
+    <h2 style="color: #009970;">Nouvelle demande de contact</h2>
+
+    <div style="background-color: #f8f9fa; border-radius: 5px; padding: 20px; margin-bottom: 20px;">
+        <p><strong>Date de soumission :</strong> {{ contact.createdAt|date('d/m/Y H:i') }}</p>
+        <p><strong>Type de demande :</strong> {% if contact.objective == 'visit_request' %} Demande de visite {% elseif
+            contact.objective == 'enrollment_request' %} Demande d'inscription {% else %} Demande d'information {% endif
+            %}
+        </p>
+
+        <h3 style="color: #009970; margin-top: 20px;">Informations parent/enfant</h3>
+        <p><strong>Nom du parent :</strong> {{ contact.parentName }}</p>
+        <p><strong>Email :</strong> {{ contact.email }}</p>
+        <p><strong>Téléphone :</strong> {{ contact.phoneNumber }}</p>
+        <p><strong>Nom de l'enfant :</strong> {{ contact.childName }}</p>
+        <p><strong>Date de naissance de l'enfant :</strong> {{ contact.childBirthDate|date('d/m/Y') }}</p>
+
+        <h3 style="color: #009970; margin-top: 20px;">Informations complémentaires</h3>
+        <p><strong>Comment a-t-il entendu parler de nous :</strong> {{ contact.heardAboutUs }}</p>
+
+        {% if contact.expectations %}
+        <h3 style="color: #009970; margin-top: 20px;">Attentes et commentaires</h3>
+        <div style="background-color: #fff; border-left: 4px solid #009970; padding: 15px; margin-top: 10px;">
+            <p style="margin: 0;">{{ contact.expectations|nl2br }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 14px; color: #666;">
+        <p>Cet email a été généré automatiquement. Veuillez ne pas répondre à cet email.</p>
+        <p>Pour contacter cette personne, utilisez les coordonnées fournies ci-dessus.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #999;">
+        <p>&copy; {{ 'now'|date('Y') }} École Montessori Algérie. Tous droits réservés.</p>
+    </div>
+</div>
+{% endblock %}

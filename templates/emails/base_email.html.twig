@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Email Montessori Algérie{% endblock %}</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333333;
+            background-color: #f5f5f5;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .email-header {
+            padding: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .email-content {
+            padding: 20px;
+        }
+
+        .email-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            background-color: #f8f9fa;
+            border-top: 1px solid #eaeaea;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            color: #009970;
+            margin-top: 0;
+        }
+
+        a {
+            color: #009970;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #009970;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #007556;
+            text-decoration: none;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <img src="{{ absolute_url(asset('assets/img/logo.png')) }}" alt="Montessori Algérie" style="height:50px;">
+        </div>
+
+        <div class="email-content">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div class="email-footer">
+            <p>École Montessori Algérie</p>
+            <p>
+                <a href="{{ url('app_home') }}" target="_blank">www.montessori-algerie.com</a> |
+                <a href="mailto:contact@montessori-algerie.com">contact@montessori-algerie.com</a>
+            </p>
+            <p>&copy; {{ 'now'|date('Y') }} École Montessori Algérie. Tous droits réservés.</p>
+        </div>
+    </div>
+</body>
+
+</html>

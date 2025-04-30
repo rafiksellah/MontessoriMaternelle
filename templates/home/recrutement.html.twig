@@ -1,0 +1,231 @@
+{% extends 'base.html.twig' %} {% block title %}Recrutement - {{ parent() }}{% endblock %} {% block stylesheets %}
+<link href="{{ asset('assets/css/recrutement.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
+<!-- Section 1: Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="{{ asset('assets/img/recrutement.jpg') }}" alt="Carrières à Montessori Algérie"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+            <div class="col-lg-6 hero-content">
+                <h1 class="section-title">CARRIÈRES à Montessori Algérie</h1>
+                <p class="section-text">Bienvenue sur la page Carrières de Montessori Algérie, un espace dédié à ceux
+                    qui partagent notre passion pour offrir une éducation d'exception.</p>
+                <a href="#jobs" class="btn btn-primary">Découvrir nos offres</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 2: Pourquoi rejoindre Montessori Algérie -->
+<section class="careers-section">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Pourquoi rejoindre Montessori Algérie ?</h2>
+
+        <!-- Premier bloc: image + 2 avantages -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <img src="{{ asset('assets/img/atelier.jpg') }}" alt="Formation continue"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="benefits-box">
+                            <h4>FORMATION CONTINUE</h4>
+                            <p>Nous croyons en l'apprentissage continu et proposons des formations régulières pour
+                                enrichir vos compétences et approfondir votre expertise.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefits-box">
+                            <h4>SALAIRES COMPÉTITIFS ET AVANTAGES</h4>
+                            <p>Nous reconnaissons et valorisons votre engagement en veillant à ce que votre rémunération
+                                soit à la hauteur de vos contributions. En outre, nous offrons des avantages sociaux
+                                attractifs, tels qu'une assurance santé, des prêts
+                                sociaux et un accompagnement pour la garde d'enfants.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deuxième bloc: image + 2 avantages (ordre inversé) -->
+        <div class="row align-items-center">
+            <div class="col-lg-7 order-lg-1 order-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="benefits-box">
+                            <h4>ENVIRONNEMENT COLLABORATIF</h4>
+                            <p>La collaboration est au cœur de notre culture, favorisant des relations solides et un
+                                esprit d'équipe harmonieux.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="benefits-box">
+                            <h4>MISSION CENTRÉE SUR L'ENFANT</h4>
+                            <p>Vous participerez à une mission essentielle : façonner l'avenir des enfants en leur
+                                offrant une éducation d'excellence.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
+                <img src="{{ asset('assets/img/recrt4.jpg') }}" alt="Environnement collaboratif"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Nos Métiers -->
+<section class="jobs-section" id="jobs">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">NOS MÉTIERS</h2>
+
+        <!-- Premier bloc: Image à gauche + Équipe Pédagogique et Management administrative -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <img src="{{ asset('assets/img/recrutement.webp') }}" alt="Équipe pédagogique"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Équipe Pédagogique</h3>
+                            <div class="job-title">Enseignant d'anglais / d'arabe / Français</div>
+                            <div class="job-title">Enseignant de musique</div>
+                            <div class="job-title">Animateurs culture, sciences et nature</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Équipe Management administrative</h3>
+                            <div class="job-title">Directeur administratif et RH</div>
+                            <div class="job-title">Office manager</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deuxième bloc: Image à droite + Équipe HSE et Activité Extrascolaire -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-7 order-lg-1 order-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Equipe HSE</h3>
+                            <div class="job-title">Responsable HSE : temps plein ou partiel</div>
+                            <div class="job-title">Cuisinier/Chef : temps plein</div>
+                            <div class="job-title">Aide-cuisinier</div>
+                            <div class="job-title">Personnel d'entretien et d'hygiène</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Equipe HSE (suite)</h3>
+                            <div class="job-title">Agent d'accueil</div>
+                            <div class="job-title">Agent de sécurité</div>
+                            <div class="job-title">Factotum</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
+                <img src="{{ asset('assets/img/recrt.jpg') }}" alt="Équipe HSE" class="img-fluid section-image"
+                    loading="lazy">
+            </div>
+        </div>
+
+        <!-- Troisième bloc: Image à gauche + Équipe Activités Extrascolaires et Santé -->
+        <div class="row align-items-center mb-5">
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <img src="{{ asset('assets/img/recrt2.avif') }}" alt="Activités extrascolaires"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Equipe Activité Extrascolaire</h3>
+                            <div class="job-title">Directeur des activités extrascolaires</div>
+                            <div class="job-title">Animateurs culture, sports, sciences et nature</div>
+                            <div class="job-title">Experts/passionnés de culture et histoire algérienne</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Equipe Santé</h3>
+                            <div class="job-title">Médecin</div>
+                            <div class="job-title">Psychologue : temps plein ou partiel</div>
+                            <div class="job-title">Orthophoniste : temps plein ou partiel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quatrième bloc: Image à droite + Équipe Marketing et Technique -->
+        <div class="row align-items-center">
+            <div class="col-lg-7 order-lg-1 order-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Équipe marketing</h3>
+                            <div class="job-title">Gestionnaire de communauté</div>
+                            <div class="job-title">Spécialiste du marketing numérique</div>
+                            <div class="job-title">Graphiste</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="jobs-category">
+                            <h3>Équipe technique</h3>
+                            <div class="job-title">Technicien informatique</div>
+                            <div class="job-title">Ingénieur informatique</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
+                <img src="{{ asset('assets/img/recrt3.avif') }}" alt="Équipe marketing et technique"
+                    class="img-fluid section-image" loading="lazy">
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="row mt-5">
+            <div class="col-12 text-center">
+                <h3 class="mb-4">Intéressé(e) par l'une de nos opportunités ?</h3>
+                <a href="mailto:recrutement@mia-dz.com" class="btn btn-primary btn-lg">Postulez maintenant</a>
+                <p class="mt-3">Ou envoyez votre CV et lettre de motivation à <strong>recrutement@mia-dz.com</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} {% block javascripts %}
+<script>
+    // Animation pour les boîtes d'avantages
+    document.addEventListener('DOMContentLoaded', function () {
+        // Ajouter des animations AOS si nécessaire
+        if (typeof AOS !== 'undefined') {
+            const benefitsBoxes = document.querySelectorAll('.benefits-box');
+            benefitsBoxes.forEach((box, index) => {
+                box.setAttribute('data-aos', 'fade-up');
+                box.setAttribute('data-aos-delay', (index * 100).toString());
+            });
+
+            const jobTitles = document.querySelectorAll('.job-title');
+            jobTitles.forEach((job, index) => {
+                job.setAttribute('data-aos', 'fade-right');
+                job.setAttribute('data-aos-delay', (index * 50).toString());
+            });
+
+            AOS.refresh();
+        }
+    });
+</script>
+{% endblock %}

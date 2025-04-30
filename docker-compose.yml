@@ -1,0 +1,6 @@
+services:
+  montessorialgerie:
+    image: montessorialgerie
+    build:
+      context: .
+      dockerfile: ./Dockerfile
