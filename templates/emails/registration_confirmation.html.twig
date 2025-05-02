@@ -1,77 +1,213 @@
-{# templates/emails/registration_confirmation.html.twig #}
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmation de participation au barbecue</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             color: #333;
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: #f7f7f7;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        h1 {
-            color: #0056b3;
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
         }
 
-        .important {
-            font-weight: bold;
-            color: #d9534f;
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+            text-align: center;
         }
 
         .program {
-            background-color: #eef5ff;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .time-block {
+            margin-bottom: 20px;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .time-icon {
+            margin-right: 10px;
+            display: inline-block;
+            width: 24px;
+            text-align: center;
+        }
+
+        .description {
+            padding-left: 34px;
+            margin-top: 5px;
+        }
+
+        .important {
+            background-color: #fff5f5;
+            border-left: 4px solid #e74c3c;
             padding: 15px;
-            border-radius: 5px;
-            margin: 15px 0;
+            margin: 20px 0;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .participants {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .program {
+                padding: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Confirmation de participation</h1>
+        <div class="header">
+            <h1>Confirmation de participation</h1>
+        </div>
 
         <p>Chers parents {{ registration.firstName }} {{ registration.lastName }},</p>
 
-        <p>Nous vous remercions chaleureusement d'avoir confirmé votre participation au barbecue prévu le 31/05 et nous
-            sommes ravis de vous retrouver.</p>
+        <p>Nous vous remercions chaleureusement d'avoir confirmé votre participation au barbecue prévu le
+            <strong>vendredi 30 mai 2025</strong> et nous sommes ravis de vous retrouver.
+        </p>
 
         <div class="program">
-            <h3>Programme de la journée :</h3>
+            <h2>Voici le programme de la journée :</h2>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🏖️</span> <span>Dès 9h00</span> – Arrivée & baignade à la plage
+                </div>
+                <div class="description">
+                    Présentez votre laissez-passer à l'entrée, installez-vous tranquillement... puis direction la plage
+                    ! Profitez de la brise marine, pataugez les pieds dans l'eau ou lancez-vous pour une baignade
+                    matinale.
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🌊</span> <span>9h30</span> – Cap sur la plage pour <em>La course des mains
+                        folles</em>
+                </div>
+                <div class="description">
+                    Ensemble, parents et enfants se lancent un défi coopératif et rafraîchissant : faire passer un
+                    gobelet d'eau jusqu'à remplir un seau... sans renverser !
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🌱</span> <span>10h30</span> – Place à <em>La course des nœuds</em> sur la
+                    pelouse
+                </div>
+                <div class="description">
+                    Une jambe attachée entre parent et enfant, c'est parti pour une course folle... où le rythme et la
+                    complicité font toute la différence !
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🔥</span> <span>11h30</span> – Rendez-vous à la Rôtisserie "Coliseum"
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🍽️</span> <span>12h00</span> – Déjeuner
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">📸</span> <span>14h00</span> – Photo de groupe
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🎭</span> <span>14h15</span> – Direction le théâtre pour <em>Mime en
+                        folie</em>
+                </div>
+                <div class="description">
+                    Chaque famille entre en scène pour mimer des animaux, des métiers ou des situations rigolotes... fou
+                    rire garanti !
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">☀️</span> <span>Après-midi libre</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="participants">
+            <h3>Vous avez inscrit les personnes suivantes :</h3>
             <ul>
-                <li>Arrivée des parents (accès au complexe à 1500 DA) et installation</li>
-                <li><strong>11h30 :</strong> Rassemblement pour le barbecue au niveau de la Rôtisserie "Coliseum"</li>
-                <li><strong>12h00 :</strong> Déjeuner</li>
-                <li><strong>Après le repas :</strong> Photos de groupe</li>
-                <li>Temps libre pour les familles</li>
+                <li>{{ registration.firstName }} {{ registration.lastName }} (vous-même)</li>
+                {% for guest in registration.guests %}
+                <li>{{ guest.firstName }} {{ guest.lastName }}</li>
+                {% endfor %}
             </ul>
         </div>
 
-        <p class="important">NB: vos enfants seront sous votre entière responsabilité durant toute la journée.</p>
-
-        <p>Vous avez inscrit les personnes suivantes :</p>
-        <ul>
-            {% for guest in registration.guests %}
-            <li>{{ guest.firstName }} {{guest.lastName}}</li>
-            {% endfor %}
-        </ul>
+        <div class="important">
+            NB: vos enfants seront sous votre entière responsabilité durant toute la journée.
+        </div>
 
         <p>Au plaisir de vous recevoir !</p>
 
-        <p>Cordialement,<br> L'équipe d'organisation</p>
+        <div class="footer">
+            <p>Cordialement,<br>L'équipe d'organisation</p>
+        </div>
     </div>
 </body>
 

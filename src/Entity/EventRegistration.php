@@ -45,6 +45,9 @@ class EventRegistration
     )]
     private Collection $guests;
 
+    #[ORM\OneToOne(mappedBy: 'eventRegistration', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->guests = new ArrayCollection();
@@ -150,6 +153,28 @@ class EventRegistration
     public function setRegisteredAt($registeredAt)
     {
         $this->registeredAt = $registeredAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setEventRegistration(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getEventRegistration() !== $this) {
+            $user->setEventRegistration($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }
