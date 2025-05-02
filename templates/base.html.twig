@@ -98,7 +98,11 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="#">Get Started</a>
+            {# <a class="btn-getstarted" href="#">Get Started</a> #} {% if app.user %}
+            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
+                <button type="submit" class="btn btn-danger">Déconnexion</button>
+            </form>
+            {# <a class="btn-getstarted" href="{{ path('app_login') }}">Se connecter</a> #} {% endif %}
 
         </div>
     </header>

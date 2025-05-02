@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvelle inscription au barbecue</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        .info-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 3px;
+        }
+
+        .guest-list {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .action-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nouvelle inscription au barbecue</h1>
+        </div>
+
+        <p>Bonjour,</p>
+
+        <p>Une nouvelle inscription a été enregistrée pour le barbecue du <strong>vendredi 30 mai 2025</strong>.</p>
+
+        <div class="info-section">
+            <div class="info-label">Informations du participant :</div>
+            <p><strong>Nom :</strong> {{ registration.lastName }}</p>
+            <p><strong>Prénom :</strong> {{ registration.firstName }}</p>
+            <p><strong>Email :</strong> {{ registration.email }}</p>
+            <p><strong>Téléphone :</strong> {{ registration.phone }}</p>
+            <p><strong>Date d'inscription :</strong> {{ registration.registeredAt|date('d/m/Y à H:i') }}</p>
+        </div>
+
+        <div class="guest-list">
+            <h3>Invités :</h3>
+            {% if registration.guests|length > 0 %}
+            <ul>
+                {% for guest in registration.guests %}
+                <li>{{ guest.firstName }} {{ guest.lastName }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>Aucun invité supplémentaire.</p>
+            {% endif %}
+        </div>
+
+        <p>Nombre total de participants : <strong>{{ registration.guests|length + 1 }}</strong></p>
+
+        {#
+        <div style="text-align: center;">
+            <a href="{{ url('admin_event_registrations') }}" class="action-button">Voir les détails dans
+                l'administration</a>
+        </div> #}
+
+        <div class="footer">
+            <p>Ce message a été envoyé automatiquement - Merci de ne pas y répondre.</p>
+        </div>
+    </div>
+</body>
+
+</html>

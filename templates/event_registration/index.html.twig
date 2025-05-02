@@ -5,15 +5,15 @@ endblock %} {% block body %}
     <img src="{{asset('assets/img/ecole.jpg')}}" loading="lazy" alt="" data-aos="fade-in">
     <div class="container mt-4">
         <h2 data-aos="fade-up" data-aos-delay="100" style="color: #fff;">
-            Invitation au Barbecue - 31 Mai 2024
+            Invitation au Barbecue - 30 Mai 2025
         </h2>
-
 
         <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
             <a href="#barbecue" class="btn btn-success btn-lg rounded-pill px-5 py-3">Inscrivez-vous</a>
         </div>
     </div>
 </section>
+
 <section class="py-5 py-5 bg-light bg-gradient">
     <div class="container">
         {% for message in app.flashes('success') %}
@@ -22,7 +22,13 @@ endblock %} {% block body %}
             <button type="button" class="btn-close" data-bs-dismiss="alert"
                 aria-label="{{ 'formations.alerts.close'|trans }}"></button>
         </div>
+        {% endfor %} {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endfor %}
+
         <div id="barbecue" class="row g-4">
             <div class="col-md-12">
                 <div class="card h-100 border-0 shadow-sm">
@@ -31,26 +37,28 @@ endblock %} {% block body %}
                             <i class="bi bi-backpack-fill fs-1 text-success me-3"></i>
 
                             <h3 class="h4 fw-bold mb-0">
-                                Invitation au Barbecue - 31 Mai 2024
+                                Invitation au Barbecue - 30 Mai 2025
                             </h3>
                         </div>
                         <div class="row">
                             <div class="col-md-7 mb-4">
                                 <p>
-                                    Chers Parents,<br><br> C'est avec grand plaisir que nous vous invitons, ainsi que
-                                    vos enfants, à un barbecue en plein air qui se déroulera le <strong>Vendredi
-                                        31 mai 2024</strong> à partir de <strong>11h</strong> au niveau de la Rôtisserie
-                                    du complexe Touristique <strong>"la Corne d'Or"</strong> <br><br>
-                                    <a href="https://maps.app.goo.gl/W1rg7G5U5o16uzNi6" target="_blank">Voir la
-                                        localisation sur Google
-                                        Maps</a><br><br> Merci de confirmer votre présence <strong>avant le Jeudi 09
-                                        Mai 2024</strong>.<br>
-                                    <em>NB : En raison du nombre de places limité, seuls les frères et sœurs sont
-                                        autorisés.</em>
+                                    Chers Parents,<br><br> Merci de vous être connectés ! Le barbecue en plein air se
+                                    tiendra le <strong>vendredi 30 mai 2025</strong> à partir de <strong>9h</strong>, à
+                                    la Rôtisserie du complexe touristique <strong>"La Corne d'Or"</strong>.<br><br>
+
+                                    <a href="https://maps.app.goo.gl/W1rg7G5U5o16uzNi6" target="_blank"
+                                        class="text-success">
+                                        <i class="bi bi-geo-alt-fill me-1"></i> Voir la localisation sur Google Maps
+                                    </a><br><br> Ce sera l'occasion de profiter d'un cadre naturel exceptionnel, de la
+                                    plage et des aires de jeux. Les enfants pourront apporter ballons, vélos ou frisbees
+                                    pour s'amuser librement.<br><br> Afin de confirmer
+                                    votre présence au barbecue, merci de remplir le formulaire ci-dessous en indiquant
+                                    le nombre de participants :
                                 </p>
                                 <button class="btn btn-success rounded-pill px-4 mt-3" data-bs-toggle="modal"
                                     data-bs-target="#inscriptionModal">
-                                    S'inscrire
+                                    <i class="bi bi-calendar2-check me-2"></i> S'inscrire
                                 </button>
                             </div>
                             <div class="col-md-5 d-flex align-items-center justify-content-center">
@@ -64,37 +72,64 @@ endblock %} {% block body %}
         </div>
     </div>
 </section>
+
 <!-- Modal Inscription -->
 <div class="modal fade" id="inscriptionModal" tabindex="-1" aria-labelledby="inscriptionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="inscriptionModalLabel">Inscription à l’événement <span
-                        id="formationTitle"></span></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="inscriptionModalLabel">Inscription au barbecue du 30 mai 2025</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{ form_start(form, {'attr': {'id': 'inscription-form'}}) }}
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder':
-                        'FirstName'|trans}}) }}
-                    </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'LastName'|trans}})
-                        }}
-                    </div>
+                <!-- Note importante dans un encadré -->
+                <div class="alert alert-info mb-4">
+                    <p class="mb-2"><strong><i class="bi bi-info-circle-fill me-2"></i>Informations importantes
+                            :</strong></p>
+                    <ul class="mb-0">
+                        <li>Date limite de réponse : <strong>jeudi 15 mai 2025</strong></li>
+                        <li>Nous avons hâte de vous retrouver pour partager ce moment de détente et de convivialité.
+                        </li>
+                        <li><strong>NB :</strong> En raison du nombre de places limité, seuls les frères et sœurs âgés
+                            de moins de 12 ans pourront être présents.</li>
+                    </ul>
                 </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        {{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'|trans}}) }}
+
+                {{ form_start(form, {'attr': {'id': 'inscription-form'}}) }}
+
+                <!-- Afficher les informations utilisateur en lecture seule -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-person-fill me-2 text-success"></i>Vos informations</h5>
                     </div>
-                    <div class="col-md-6">
-                        {{ form_row(form.phone, {'attr': {'class': 'form-control', 'placeholder': 'Phone'|trans}}) }}
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(form.firstName, {'attr': {'class': 'form-control-plaintext', 'readonly':
+                                'readonly'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.lastName, {'attr': {'class': 'form-control-plaintext', 'readonly':
+                                'readonly'}}) }}
+                            </div>
+                        </div>
+                        <div class="row mb-0">
+                            <div class="col-md-6">
+                                {{ form_row(form.email, {'attr': {'class': 'form-control-plaintext', 'readonly':
+                                'readonly'}}) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.phone, {'attr': {'class': 'form-control-plaintext', 'readonly':
+                                'readonly'}}) }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h5 class="mt-4">Ajoutez les enfants ou accompagnants (max 6)</h5>
+                <h5 class="mt-4 d-flex align-items-center">
+                    <i class="bi bi-people-fill me-2 text-success"></i> Ajoutez le conjoint et les enfants (max 5)
+                </h5>
                 <div data-prototype="{{ form_widget(form.guests.vars.prototype)|e('html_attr') }}"
                     class="guests-collection mb-3">
                     {% for guestForm in form.guests %}
@@ -106,30 +141,33 @@ endblock %} {% block body %}
                             {{ form_row(guestForm.lastName, {'label': 'Prénom'}) }}
                         </div>
                         <div class="col-md-2 align-self-end">
-                            <button type="button" class="btn btn-danger btn-sm remove-guest">Supprimer</button>
+                            <button type="button" class="btn btn-danger btn-sm remove-guest">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
 
-                <button type="button" class="btn btn-primary btn-sm mb-3" id="add-guest">+ Ajouter un
-                    accompagnant</button>
+                <button type="button" class="btn btn-primary btn-sm mb-3" id="add-guest">
+                    <i class="bi bi-plus-circle me-1"></i> Ajouter un accompagnant
+                </button>
+
                 <div>{{ form_row(form._token) }}</div>
-                <button type="submit" class="btn btn-success w-100">Confirmer l'inscription</button> {{ form_end(form)
-                }}
+
+                <button type="submit" class="btn btn-success w-100">
+                    <i class="bi bi-check-circle-fill me-2"></i> Confirmer l'inscription
+                </button> {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
         </div>
     </div>
 </div>
-</div>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const collectionHolder = document.querySelector('.guests-collection');
         const addBtn = document.getElementById('add-guest');
-        const maxGuests = 6;
+        const maxGuests = 5;
 
         let index = collectionHolder.children.length;
 
@@ -158,7 +196,9 @@ endblock %} {% block body %}
                         </div>
                     </div>
                     <div class="col-md-2 align-self-end">
-                        <button type="button" class="btn btn-danger btn-sm remove-guest">Supprimer</button>
+                        <button type="button" class="btn btn-danger btn-sm remove-guest">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
                 `;
 
@@ -170,7 +210,7 @@ endblock %} {% block body %}
 
         // Gérer la suppression des guests
         collectionHolder.addEventListener('click', function (e) {
-            if (e.target.classList.contains('remove-guest')) {
+            if (e.target.classList.contains('remove-guest') || e.target.closest('.remove-guest')) {
                 e.target.closest('.guest-form').remove();
                 index--;
             }
