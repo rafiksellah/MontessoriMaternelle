@@ -16,4 +16,14 @@ register:
     defaults:
         _locale: '%kernel.default_locale%'
     requirements:
+        _locale: 'en|fr|ar'
+
+event:
+    path: /event/register
+    controller: App\Controller\EventRegistrationController::index
+    methods: [GET]
+    defaults:
+        path: /fr
+        _locale: '%kernel.default_locale%'
+    requirements:
         _locale: 'en|fr|ar'        

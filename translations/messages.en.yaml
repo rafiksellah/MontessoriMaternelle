@@ -241,3 +241,78 @@ registration:
   login_here: 'Login here'
   success_message: 'Your account has been successfully created!'
 
+# translations/message.en.yaml
+
+recrutement:
+  title: "Recruitment"
+  hero:
+    heading: "CAREERS at Montessori Algeria"
+    description: "Welcome to the Careers page of Montessori Algeria, a space dedicated to those who share our passion for delivering exceptional education."
+    discover_button: "Explore our openings"
+  pourquoi:
+    heading: "Why join Montessori Algeria?"
+    formation_continue:
+      title: "CONTINUOUS TRAINING"
+      description: "We believe in lifelong learning and offer regular training to enhance your skills and deepen your expertise."
+    salaires:
+      title: "COMPETITIVE SALARIES AND BENEFITS"
+      description: "We recognize and value your commitment by ensuring your compensation reflects your contributions. We also offer attractive benefits such as health insurance, social loans, and childcare support."
+    environnement:
+      title: "COLLABORATIVE ENVIRONMENT"
+      description: "Collaboration is at the heart of our culture, fostering strong relationships and a harmonious team spirit."
+    mission:
+      title: "CHILD-CENTERED MISSION"
+      description: "You will take part in a vital mission: shaping the future of children by providing them with a high-quality education."
+  metiers:
+    heading: "OUR JOBS"
+    pedagogique:
+      title: "Teaching Team"
+      postes:
+        - "English / Arabic / French Teacher"
+        - "Music Teacher"
+        - "Cultural, Science and Nature Facilitators"
+    administratif:
+      title: "Administrative Management Team"
+      postes:
+        - "Administrative and HR Director"
+        - "Office Manager"
+    hse1:
+      title: "HSE Team"
+      postes:
+        - "HSE Manager: full-time or part-time"
+        - "Cook/Chef: full-time"
+        - "Assistant Cook"
+        - "Cleaning and Hygiene Staff"
+    hse2:
+      title: "HSE Team (continued)"
+      postes:
+        - "Receptionist"
+        - "Security Guard"
+        - "Handyman"
+    extrascolaire:
+      title: "Extracurricular Activities Team"
+      postes:
+        - "Director of Extracurricular Activities"
+        - "Cultural, Sports, Science and Nature Facilitators"
+        - "Experts/enthusiasts in Algerian culture and history"
+    sante:
+      title: "Health Team"
+      postes:
+        - "Doctor"
+        - "Psychologist: full-time or part-time"
+        - "Speech Therapist: full-time or part-time"
+    marketing:
+      title: "Marketing Team"
+      postes:
+        - "Community Manager"
+        - "Digital Marketing Specialist"
+        - "Graphic Designer"
+    technique:
+      title: "Technical Team"
+      postes:
+        - "IT Technician"
+        - "IT Engineer"
+  cta:
+    heading: "Interested in one of our opportunities?"
+    button: "Apply now"
+    email_text: "Or send your resume and cover letter to"

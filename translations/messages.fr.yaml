@@ -241,3 +241,79 @@ registration:
   login_here: 'Connectez-vous ici'
   success_message: 'Votre compte a été créé avec succès!'
 
+# translations/message.fr.yaml
+
+recrutement:
+  title: "Recrutement"
+  hero:
+    heading: "CARRIÈRES à Montessori Algérie"
+    description: "Bienvenue sur la page Carrières de Montessori Algérie, un espace dédié à ceux qui partagent notre passion pour offrir une éducation d'exception."
+    discover_button: "Découvrir nos offres"
+  pourquoi:
+    heading: "Pourquoi rejoindre Montessori Algérie ?"
+    formation_continue:
+      title: "FORMATION CONTINUE"
+      description: "Nous croyons en l'apprentissage continu et proposons des formations régulières pour enrichir vos compétences et approfondir votre expertise."
+    salaires:
+      title: "SALAIRES COMPÉTITIFS ET AVANTAGES"
+      description: "Nous reconnaissons et valorisons votre engagement en veillant à ce que votre rémunération soit à la hauteur de vos contributions. En outre, nous offrons des avantages sociaux attractifs, tels qu'une assurance santé, des prêts sociaux et un accompagnement pour la garde d'enfants."
+    environnement:
+      title: "ENVIRONNEMENT COLLABORATIF"
+      description: "La collaboration est au cœur de notre culture, favorisant des relations solides et un esprit d'équipe harmonieux."
+    mission:
+      title: "MISSION CENTRÉE SUR L'ENFANT"
+      description: "Vous participerez à une mission essentielle : façonner l'avenir des enfants en leur offrant une éducation d'excellence."
+  metiers:
+    heading: "NOS MÉTIERS"
+    pedagogique:
+      title: "Équipe Pédagogique"
+      postes:
+        - "Enseignant d'anglais / d'arabe / Français"
+        - "Enseignant de musique"
+        - "Animateurs culture, sciences et nature"
+    administratif:
+      title: "Équipe Management administrative"
+      postes:
+        - "Directeur administratif et RH"
+        - "Office manager"
+    hse1:
+      title: "Equipe HSE"
+      postes:
+        - "Responsable HSE : temps plein ou partiel"
+        - "Cuisinier/Chef : temps plein"
+        - "Aide-cuisinier"
+        - "Personnel d'entretien et d'hygiène"
+    hse2:
+      title: "Equipe HSE (suite)"
+      postes:
+        - "Agent d'accueil"
+        - "Agent de sécurité"
+        - "Factotum"
+    extrascolaire:
+      title: "Equipe Activité Extrascolaire"
+      postes:
+        - "Directeur des activités extrascolaires"
+        - "Animateurs culture, sports, sciences et nature"
+        - "Experts/passionnés de culture et histoire algérienne"
+    sante:
+      title: "Equipe Santé"
+      postes:
+        - "Médecin"
+        - "Psychologue : temps plein ou partiel"
+        - "Orthophoniste : temps plein ou partiel"
+    marketing:
+      title: "Équipe marketing"
+      postes:
+        - "Gestionnaire de communauté"
+        - "Spécialiste du marketing numérique"
+        - "Graphiste"
+    technique:
+      title: "Équipe technique"
+      postes:
+        - "Technicien informatique"
+        - "Ingénieur informatique"
+  cta:
+    heading: "Intéressé(e) par l'une de nos opportunités ?"
+    button: "Postulez maintenant"
+    email_text: "Ou envoyez votre CV et lettre de motivation à"
+

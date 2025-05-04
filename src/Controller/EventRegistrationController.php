@@ -23,7 +23,7 @@ class EventRegistrationController extends AbstractController
         $this->translator = $translator;
     }
     
-    #[Route('/{_locale}/event/register', name: 'event_register')]
+    #[Route('/{_locale}/event/register', name: 'event_register',requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function register(Request $request, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
         $user = $this->getUser();
