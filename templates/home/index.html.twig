@@ -1,10 +1,8 @@
-{% extends 'base.html.twig' %} {% block title %}Montessori Algérie{% endblock %} {% block stylesheets %}
+{% extends 'base.html.twig' %} {% block title %}{{ 'site.name'|trans }} {{ 'site.name1'|trans }} {{ 'site.name2'|trans
+}} - {% endblock %} {% block stylesheets %}
 <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
 <main class="main">
     <!-- ======= Hero Section ======= -->
-    <!-- Votre section Hero existante -->
-
-
     <section id="hero-carousel" class="hero-carousel">
         <div class="container-fluid p-0" data-aos="fade-up">
             <div class="carousel-container">
@@ -21,8 +19,8 @@
                         <div class="carousel-item active">
                             <img src="{{ asset('/assets/img/ecole.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <h2>Bienvenue à Montessori Algérie</h2>
-                                <p>Premier institut officiel Montessori en Algérie</p>
+                                <h2>{{ 'hero.welcome'|trans }}</h2>
+                                <p>{{ 'hero.tagline'|trans }}</p>
                             </div>
                         </div>
 
@@ -30,8 +28,8 @@
                         <div class="carousel-item">
                             <img src="{{ asset('/assets/img/ami.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <h2>Une éducation respectueuse</h2>
-                                <p>Adaptée aux besoins spécifiques de chaque enfant</p>
+                                <h2>{{ 'hero.education'|trans }}</h2>
+                                <p>{{ 'hero.adapted'|trans }}</p>
                             </div>
                         </div>
 
@@ -39,8 +37,8 @@
                         <div class="carousel-item">
                             <img src="{{ asset('/assets/img/DJAM1602.jpg') }}" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                <h2>Développement naturel</h2>
-                                <p>Un environnement préparé pour favoriser l'autonomie</p>
+                                <h2>{{ 'hero.development'|trans }}</h2>
+                                <p>{{ 'hero.environment'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -60,6 +58,7 @@
         </div>
     </section>
     <!-- End Hero Carousel -->
+
     <!-- ======= Environnements Section ======= -->
     <section id="environnements" class="environnements">
         <div class="container" data-aos="fade-up">
@@ -71,9 +70,8 @@
             </div>
             {% endfor %}
             <div class="section-header">
-                <h2>NOS ENVIRONNEMENTS</h2>
-                <p>Chaque espace est soigneusement conçu pour répondre aux besoins spécifiques de chaque tranche d'âge
-                </p>
+                <h2>{{ 'environments.title'|trans }}</h2>
+                <p>{{ 'environments.subtitle'|trans }}</p>
             </div>
 
             <!-- Slider des environnements -->
@@ -85,13 +83,12 @@
                         <div class="environnement-item">
                             <div class="environnement-img">
                                 <img src="{{ asset('/assets/img/formation1.avif') }}" class="img-fluid"
-                                    alt="Environnement NIDO">
+                                    alt="{{ 'environments.nido.title'|trans }}">
                             </div>
                             <div class="environnement-info">
-                                <h3>NIDO</h3>
-                                <h4>6 - 15 mois</h4>
-                                <p>Un environnement pensé pour encourager le développement moteur, l'acquisition du
-                                    langage et l'autonomie.</p>
+                                <h3>{{ 'environments.nido.title'|trans }}</h3>
+                                <h4>{{ 'environments.nido.age'|trans }}</h4>
+                                <p>{{ 'environments.nido.description'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -102,12 +99,12 @@
                         <div class="environnement-item">
                             <div class="environnement-img">
                                 <img src="{{ asset('/assets/img/formation2.avif') }}" class="img-fluid"
-                                    alt="Communauté Enfantine">
+                                    alt="{{ 'environments.community.title'|trans }}">
                             </div>
                             <div class="environnement-info">
-                                <h3>COMMUNAUTÉ ENFANTINE</h3>
-                                <h4>16 mois - 3 ans</h4>
-                                <p>Axée sur l'autonomie, l'acquisition du langage et le développement moteur.</p>
+                                <h3>{{ 'environments.community.title'|trans }}</h3>
+                                <h4>{{ 'environments.community.age'|trans }}</h4>
+                                <p>{{ 'environments.community.description'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -118,15 +115,12 @@
                         <div class="environnement-item">
                             <div class="environnement-img">
                                 <img src="{{ asset('/assets/img/formation3.avif') }}" class="img-fluid"
-                                    alt="Casa Dei Bambini">
+                                    alt="{{ 'environments.casa.title'|trans }}">
                             </div>
                             <div class="environnement-info">
-                                <h3>CASA DEI BAMBINI</h3>
-                                <h4>3 - 6 ans</h4>
-                                <p>Un environnement qui permet d'explorer divers domaines, notamment la culture, la vie
-                                    pratique, le développement sensoriel, le langage sous toutes ses formes et les
-                                    concepts mathématiques.
-                                </p>
+                                <h3>{{ 'environments.casa.title'|trans }}</h3>
+                                <h4>{{ 'environments.casa.age'|trans }}</h4>
+                                <p>{{ 'environments.casa.description'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -148,22 +142,17 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="team-img">
                         <img src="{{ asset('/assets/img/equipe.webp') }}" class="img-fluid"
-                            alt="Notre équipe éducative">
+                            alt="{{ 'team.title'|trans }}">
                     </div>
                 </div>
 
                 <!-- Texte et bouton -->
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
-                    <h2>NOTRE ÉQUIPE ÉDUCATIVE</h2>
-                    <p>
-                        Nous sommes convaincus que chaque personne impliquée dans la vie d'un enfant joue un rôle
-                        fondamental dans son développement. Nos enseignants et notre personnel sont rigoureusement
-                        sélectionnés pour leur passion pour l'éducation et leur engagement envers
-                        la pédagogie Montessori authentique, enrichis par des formations continues dispensées au sein de
-                        notre école.
-                    </p>
+                    <h2>{{ 'team.title'|trans }}</h2>
+                    <p>{{ 'team.description'|trans }}</p>
                     <div class="team-btn">
-                        <a href="#" class="btn-rejoindre">Rejoindre notre équipe</a>
+                        <a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}"
+                            class="btn-rejoindre">{{ 'team.button'|trans }}</a>
                     </div>
                 </div>
             </div>
@@ -171,11 +160,13 @@
         </div>
     </section>
     <!-- End Team Section -->
+
+    <!-- ======= Contact Form Section ======= -->
     <section id="contact-form" class="contact-form">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
-                <h2>CONTACTEZ-NOUS</h2>
-                <p>Pour une visite ou une inscription, remplissez le formulaire ci-dessous</p>
+                <h2>{{ 'contact.title'|trans }}</h2>
+                <p>{{ 'contact.subtitle'|trans }}</p>
             </div>
 
             <div class="row gy-5">
@@ -183,7 +174,7 @@
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="contact-img">
                         <img src="{{asset('/assets/img/equipe.webp')}}" class="img-fluid"
-                            alt="Contactez Montessori Algérie">
+                            alt="{{ 'contact.title'|trans }}">
                     </div>
                 </div>
 
@@ -192,53 +183,58 @@
                     <div class="contact-form-container">
                         {% if form_success is defined and form_success %}
                         <div class="alert alert-success">
-                            Votre demande a été envoyée avec succès. Nous vous contacterons prochainement.
+                            {{ 'contact.success_message'|trans }}
                         </div>
                         {% endif %} {{ form_start(contact_form, {'attr': {'class': 'php-email-form'}}) }}
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                {{ form_label(contact_form.parentName) }} {{ form_widget(contact_form.parentName,
-                                {'attr': {'class': 'form-control'}}) }} {{ form_errors(contact_form.parentName) }}
+                                {{ form_label(contact_form.parentName, 'form.parent_name'|trans) }} {{
+                                form_widget(contact_form.parentName, {'attr': {'class': 'form-control'}}) }} {{
+                                form_errors(contact_form.parentName) }}
                             </div>
                             <div class="col-md-6 form-group">
-                                {{ form_label(contact_form.childName) }} {{ form_widget(contact_form.childName, {'attr':
-                                {'class': 'form-control'}}) }} {{ form_errors(contact_form.childName) }}
+                                {{ form_label(contact_form.childName, 'form.child_name'|trans) }} {{
+                                form_widget(contact_form.childName, {'attr': {'class': 'form-control'}}) }} {{
+                                form_errors(contact_form.childName) }}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 form-group mt-3">
-                                {{ form_label(contact_form.childBirthDate) }} {{
+                                {{ form_label(contact_form.childBirthDate, 'form.child_birth_date'|trans) }} {{
                                 form_widget(contact_form.childBirthDate, {'attr': {'class': 'form-control'}}) }} {{
                                 form_errors(contact_form.childBirthDate) }}
                             </div>
                             <div class="col-md-6 form-group mt-3">
-                                {{ form_label(contact_form.phoneNumber) }} {{ form_widget(contact_form.phoneNumber,
-                                {'attr': {'class': 'form-control'}}) }} {{ form_errors(contact_form.phoneNumber) }}
+                                {{ form_label(contact_form.phoneNumber, 'form.phone_number'|trans) }} {{
+                                form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control'}}) }} {{
+                                form_errors(contact_form.phoneNumber) }}
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            {{ form_label(contact_form.email) }} {{ form_widget(contact_form.email, {'attr': {'class':
-                            'form-control'}}) }} {{ form_errors(contact_form.email) }}
+                            {{ form_label(contact_form.email, 'form.email'|trans) }} {{ form_widget(contact_form.email,
+                            {'attr': {'class': 'form-control'}}) }} {{ form_errors(contact_form.email) }}
                         </div>
                         <div class="form-group mt-3">
-                            {{ form_label(contact_form.objective) }} {{ form_widget(contact_form.objective, {'attr':
-                            {'class': 'form-select'}}) }} {{ form_errors(contact_form.objective) }}
+                            {{ form_label(contact_form.objective, 'form.objective'|trans) }} {{
+                            form_widget(contact_form.objective, {'attr': {'class': 'form-select'}}) }} {{
+                            form_errors(contact_form.objective) }}
                         </div>
                         <div class="form-group mt-3">
-                            {{ form_label(contact_form.heardAboutUs) }} {{ form_widget(contact_form.heardAboutUs,
-                            {'attr': {'class': 'form-control'}}) }} {{ form_errors(contact_form.heardAboutUs) }}
+                            {{ form_label(contact_form.heardAboutUs, 'form.heard_about_us'|trans) }} {{
+                            form_widget(contact_form.heardAboutUs, {'attr': {'class': 'form-control'}}) }} {{
+                            form_errors(contact_form.heardAboutUs) }}
                         </div>
                         <div class="form-group mt-3">
-                            {{ form_label(contact_form.expectations) }} {{ form_widget(contact_form.expectations,
-                            {'attr': {'class': 'form-control', 'rows': '5'}}) }} {{
-                            form_errors(contact_form.expectations) }}
+                            {{ form_label(contact_form.expectations, 'form.expectations'|trans) }} {{
+                            form_widget(contact_form.expectations, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                            {{ form_errors(contact_form.expectations) }}
                         </div>
                         <div class="form-group mt-3">
-                            {{ form_widget(contact_form.agreeTerms) }} {{ form_label(contact_form.agreeTerms) }} {{
-                            form_errors(contact_form.agreeTerms) }}
+                            {{ form_widget(contact_form.agreeTerms) }} {{ form_label(contact_form.agreeTerms,
+                            'form.agree_terms'|trans) }} {{ form_errors(contact_form.agreeTerms) }}
                         </div>
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn-envoi">Envoyer</button>
+                            <button type="submit" class="btn-envoi">{{ 'contact.submit'|trans }}</button>
                         </div>
                         {{ form_end(contact_form) }}
                     </div>
@@ -247,6 +243,7 @@
         </div>
     </section>
     <!-- End Contact Form Section -->
+
     <script>
         /**
          * JavaScript pour initialiser le slider des environnements Montessori
@@ -286,6 +283,5 @@
             AOS.refresh();
         });
     </script>
-    <!-- Autres sections de votre site -->
 </main>
 {% endblock %}

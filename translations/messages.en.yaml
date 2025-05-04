@@ -1,0 +1,243 @@
+# General site information
+site:
+  name: 'Montessori'
+  name1: 'Algeria'
+  name2: ''
+  meta:
+    description: 'First official Montessori institute in Algeria. AMI training, educational workshops and resources for parents and educators. Discover the Montessori method adapted to Algerian culture.'
+    keywords: 'Montessori Algeria, montessori training, montessori pedagogy, alternative education Algeria, AMI Algeria, montessori algiers, montessori workshops, children education Algiers'
+    og_title: 'Montessori Institute of Algeria - The Montessori reference in Algeria'
+    og_description: 'First official Montessori institute in Algeria. AMI training, educational workshops and resources for parents and educators.'
+    twitter_title: 'Montessori Institute of Algeria - The Montessori reference in Algeria'
+    twitter_description: 'First official Montessori institute in Algeria. AMI training, educational workshops and resources for parents and educators.'
+
+
+# Footer
+footer:
+  useful_links: 'Useful Links'
+  contact: 'Contact'
+  address: 'Algiers, Algeria'
+  rights: 'All rights reserved'
+
+# Contact form
+contact:
+  title: 'Contact Us'
+  subtitle: 'Send us a message'
+  parent_name: 'Parent Name'
+  child_name: 'Child Name'
+  child_birth_date: 'Child Birth Date'
+  phone: 'Phone Number'
+  email: 'Email'
+  objective: 'Objective'
+  heard_about_us: 'How did you hear about us?'
+  expectations: 'Your expectations'
+  submit: 'Submit'
+  success_message: 'Your request has been successfully sent. We will contact you soon.'
+
+# employment page
+employment:
+  title: 'Join Our Team'
+  subtitle: 'Career opportunities at Montessori Algeria'
+  description: 'We are looking for people passionate about education and child development.'
+
+
+# Errors and system messages
+error:
+  not_found: 'Page not found'
+  server_error: 'Server error'
+  access_denied: 'Access denied'
+
+
+# Environments section
+environments:
+    title: 'OUR ENVIRONMENTS'
+    subtitle: 'Each space is carefully designed to meet the specific needs of each age group'
+    nido:
+        title: 'NIDO'
+        age: '6 - 15 months'
+        description: 'An environment designed to encourage motor development, language acquisition, and autonomy.'
+    community:
+        title: 'CHILDREN''S COMMUNITY'
+        age: '16 months - 3 years'
+        description: 'Focused on autonomy, language acquisition, and motor development.'
+    casa:
+        title: 'CASA DEI BAMBINI'
+        age: '3 - 6 years'
+        description: 'An environment that allows exploration of various areas, including culture, practical life, sensory development, language in all its forms, and mathematical concepts.'
+
+# Team section
+team:
+    title: 'OUR EDUCATIONAL TEAM'
+    description: 'We believe that each person involved in a child''s life plays a fundamental role in their development. Our teachers and staff are rigorously selected for their passion for education and commitment to authentic Montessori pedagogy, enriched by ongoing training provided within our school.'
+    button: 'Join our team'
+
+# Form labels
+form:
+    parent_name: 'Parent''s Name *'
+    child_name: 'Child''s Name *'
+    child_birth_date: 'Child''s date of birth *'
+    phone_number: 'Phone Number *'
+    email: 'Email *'
+    objective: 'Objective *'
+    objective_options:
+        visit: 'Visit Request'
+        enrollment: 'Enrollment Request'
+        information: 'Request information'
+    heard_about_us: 'How did you hear about us? *'
+    expectations: 'Tell us about yourself and what you''re looking for in your child''s education'
+    agree_terms: 'I agree that my data will be used to contact me about my request'
+
+# Alerts
+formations:
+    alerts:
+        close: 'Close'  
+# ENGLISH TRANSLATIONS
+
+# Navigation and common elements
+nav:
+  home: 'Home'
+  employment: 'Careers'
+  login: 'Login'
+  logout: 'Logout'
+
+# Alerts and notifications
+alerts:
+  close: 'Close'
+  success: 'Success'
+  error: 'Error'
+  info: 'Information'
+
+# Home page (existing)
+hero:
+  welcome: 'Welcome to Montessori Algeria'
+  tagline: 'First official Montessori institute in Algeria'
+  education: 'Respectful education'
+  adapted: 'Adapted to each child''s specific needs'
+  development: 'Natural development'
+  environment: 'A prepared environment to foster autonomy'
+
+# Confirmation email (barbecue)
+email:
+  confirmation:
+    subject: 'Confirmation of your participation in the barbecue'
+    title: 'Participation Confirmation'
+    greeting: 'Dear parents'
+    thank_you: 'We sincerely thank you for confirming your participation in the barbecue scheduled for Friday, May 30, 2025, and we are delighted to welcome you.'
+    program_title: 'Here is the program for the day:'
+    program:
+      arrival: 'Arrival & swimming at the beach'
+      arrival_desc: 'Present your pass at the entrance, settle in quietly... then head to the beach! Enjoy the sea breeze, wade in the water, or dive in for a morning swim.'
+      water_race: 'Head to the beach for The Crazy Hands Race'
+      water_race_desc: 'Together, parents and children take on a cooperative and refreshing challenge: passing a cup of water to fill a bucket... without spilling!'
+      knot_race: 'Time for The Knot Race on the lawn'
+      knot_race_desc: 'With one leg tied between parent and child, it''s time for a crazy race... where rhythm and complicity make all the difference!'
+      rotisserie: 'Meet at the "Coliseum" Rotisserie'
+      lunch: 'Lunch'
+      group_photo: 'Group photo'
+      mime: 'To the theater for Mime Madness'
+      mime_desc: 'Each family takes the stage to mime animals, professions, or funny situations... guaranteed laughs!'
+      free_time: 'Free afternoon'
+    participants_title: 'You have registered the following people:'
+    yourself: '(yourself)'
+    important_note: 'Note: your children will be under your full responsibility throughout the day.'
+    closing: 'We look forward to welcoming you!'
+    footer: 'Best regards,\nThe organizing team'
+  
+  admin:
+    subject: 'New barbecue registration - '
+    title: 'New barbecue registration'
+    details: 'Registration details:'
+    participant: 'Main participant:'
+    guests: 'Guests:'
+    no_guests: 'No guests'
+    date_registered: 'Registration date:'
+    footer: 'This is an automatic notification, please do not reply.'
+common:
+  alerts:
+    close: 'Close'
+  buttons:
+    close: 'Close'
+  nb: 'Note'
+
+event:
+  register:
+    title: 'Event Registration'
+    hero:
+      title: 'Barbecue Invitation - %date%'
+      button: 'Register Now'
+    card:
+      title: 'Barbecue Invitation - %date%'
+      greeting: 'Dear Parents,'
+      info: "Thank you for logging in! The outdoor barbecue will be held on %date% starting at %time%, at the \"Rotisserie\" of the %location% tourist complex."
+      location_link: 'View location on Google Maps'
+      description: "This will be an opportunity to enjoy an exceptional natural setting, the beach, and playgrounds. Children can bring balls, bikes, or frisbees to play freely."
+      registration_info: "To confirm your attendance at the barbecue, please fill out the form below indicating the number of participants:"
+      register_button: 'Register'
+      image_alt: 'Barbecue image'
+    modal:
+      title: 'Registration for the barbecue on %date%'
+      important_info: 'Important information'
+      deadline: 'Response deadline: %date%'
+      looking_forward: 'We are looking forward to meeting you to share this moment of relaxation and conviviality.'
+      limited_places: 'Due to the limited number of places, only siblings under 12 years old may attend.'
+      your_info: 'Your information'
+      add_guests: 'Add spouse and children (max 5)'
+      add_guest_button: 'Add a guest'
+      confirm_button: 'Confirm registration'
+    form:
+      first_name: 'First name'
+      last_name: 'Last name'  
+  form:
+    your_info: 'Your information'
+    first_name: 'Last Name'
+    last_name: 'First Name'
+    firstName: 'Last Name'
+    lastName: 'First Name'
+    email: 'Email'
+    phone: 'Phone'
+    add_guests: 'Add spouse and children (max 5)'
+    add_guest_button: 'Add a guest'
+    remove_guest: 'Remove'
+    confirm_registration: 'Confirm registration'
+  
+  flash:
+    login_required: 'You must be logged in to register for this event.'
+    already_registered: 'You are already registered for this event. You can modify your registration.'
+    registration_success: 'Your registration has been successfully recorded. A confirmation email has been sent.'
+security:
+  login:
+    title: 'Login'
+    subtitle: 'Access your Montessori space'
+    email: 'Email address'
+    email_placeholder: 'example@email.com'
+    password: 'Password'
+    password_placeholder: 'Your password'
+    remember_me: 'Remember me'
+    forgot_password: 'Forgot password?'
+    submit: 'Login'
+    already_logged: 'You are logged in as'
+    logout: 'Logout'
+    no_account: "Don't have an account yet?"
+    register_here: 'Register here'
+
+registration:
+  title: 'Join the Montessori community'
+  subtitle: 'Create your account to access our educational resources'
+  first_name: 'First name'
+  first_name_placeholder: 'Your first name'
+  last_name: 'Last name'
+  last_name_placeholder: 'Your last name'
+  email: 'Email address'
+  email_placeholder: 'example@email.com'
+  email_help: 'We will never share your email with third parties.'
+  phone: 'Phone number'
+  phone_placeholder: 'Ex: 05XXXXXXXX'
+  password: 'Password'
+  password_placeholder: 'Choose a secure password'
+  password_help: 'Use at least 8 characters, including letters, numbers and special characters.'
+  agree_terms: 'I agree to the terms of use'
+  submit: 'Register'
+  have_account: 'Already have an account?'
+  login_here: 'Login here'
+  success_message: 'Your account has been successfully created!'
+

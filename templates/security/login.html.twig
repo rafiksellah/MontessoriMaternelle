@@ -1,5 +1,5 @@
-{# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block title %}Connexion - {{ parent() }}{%
-endblock %} {% block stylesheets %}
+{# templates/security/login.html.twig #} {% extends 'base.html.twig' %} {% block title %}{{ 'security.login.title'|trans
+}} - {{ parent() }}{% endblock %} {% block stylesheets %}
 <style>
     .login-section {
         padding: 80px 0;
@@ -124,8 +124,8 @@ endblock %} {% block stylesheets %}
                 <div class="card login-card">
                     <div class="card-header">
                         <i class="bi bi-box-arrow-in-right login-icon"></i>
-                        <h2 class="mb-0">Connexion</h2>
-                        <p class="mb-0">Accédez à votre espace Montessori</p>
+                        <h2 class="mb-0">{{ 'security.login.title'|trans }}</h2>
+                        <p class="mb-0">{{ 'security.login.subtitle'|trans }}</p>
                     </div>
                     <div class="card-body p-4 p-md-5">
 
@@ -136,53 +136,57 @@ endblock %} {% block stylesheets %}
                         </div>
                         {% endif %} {% if app.user %}
                         <div class="alert alert-info mb-4">
-                            <i class="bi bi-info-circle-fill me-2"></i> Vous êtes connecté en tant que {{
+                            <i class="bi bi-info-circle-fill me-2"></i> {{ 'security.login.already_logged'|trans }} {{
                             app.user.userIdentifier }}
-                            <a href="{{ path('app_logout') }}" class="alert-link">Se déconnecter</a>
+                            <a href="{{ path('app_logout') }}" class="alert-link">{{ 'security.login.logout'|trans
+                                }}</a>
                         </div>
                         {% endif %}
 
                         <form method="post">
                             <div class="form-group mb-4">
-                                <label for="inputEmail" class="form-label">Adresse email</label>
+                                <label for="inputEmail" class="form-label">{{ 'security.login.email'|trans }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
                                         class="form-control" autocomplete="email" required autofocus
-                                        placeholder="exemple@email.com">
+                                        placeholder="{{ 'security.login.email_placeholder'|trans }}">
                                 </div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="inputPassword" class="form-label">Mot de passe</label>
+                                <label for="inputPassword" class="form-label">{{ 'security.login.password'|trans
+                                    }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                                     <input type="password" name="password" id="inputPassword" class="form-control"
-                                        autocomplete="current-password" required placeholder="Votre mot de passe">
+                                        autocomplete="current-password" required
+                                        placeholder="{{ 'security.login.password_placeholder'|trans }}">
                                 </div>
                             </div>
 
                             <div class="login-options">
                                 <div class="remember-me">
                                     <input type="checkbox" id="remember_me" name="_remember_me" checked>
-                                    <label for="remember_me">Se souvenir de moi</label>
+                                    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
                                 </div>
-                                <a href="#" class="forgot-password">Mot de passe oublié?</a>
+                                <a href="#" class="forgot-password">{{ 'security.login.forgot_password'|trans }}</a>
                             </div>
 
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary btn-lg" type="submit">
-                                    <i class="bi bi-box-arrow-in-right me-2"></i>Se connecter
+                                    <i class="bi bi-box-arrow-in-right me-2"></i>{{ 'security.login.submit'|trans }}
                                 </button>
                             </div>
                         </form>
 
+                        {#
                         <div class="text-center mt-4">
-                            <p>Pas encore de compte? <a href="{{ path('app_register') }}"
-                                    class="register-link">Inscrivez-vous ici</a></p>
-                        </div>
+                            <p>{{ 'security.login.no_account'|trans }} <a href="{{ path('app_register') }}"
+                                    class="register-link">{{ 'security.login.register_here'|trans }}</a></p>
+                        </div> #}
                     </div>
                 </div>
             </div>

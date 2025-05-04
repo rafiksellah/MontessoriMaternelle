@@ -1,0 +1,92 @@
+/* FR: templates/emails/fr/admin_notification_register_event.html.twig */
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nouvelle inscription au barbecue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .guests {
+            padding-left: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nouvelle inscription au barbecue</h1>
+        </div>
+
+        <div class="content">
+            <p>Bonjour,</p>
+
+            <p>Une nouvelle inscription a été enregistrée pour le barbecue du vendredi 30 mai 2025.</p>
+
+            <div class="info">
+                <h3>Informations du participant :</h3>
+                <p>
+                    Nom : {{ registration.lastName }}<br> Prénom : {{ registration.firstName }}<br> Email : {{
+                    registration.email }}<br> Téléphone : {{ registration.phone }}<br> Date d'inscription : {{
+                    registration.registeredAt|date('d/m/Y à H:i') }}
+                </p>
+            </div>
+
+            <div class="info">
+                <h3>Invités :</h3>
+                {% if registration.guests|length > 0 %}
+                <ul class="guests">
+                    {% for guest in registration.guests %}
+                    <li>{{ guest.firstName }} {{ guest.lastName }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>Aucun invité supplémentaire.</p>
+                {% endif %}
+            </div>
+
+            <p>Nombre total de participants : {{ registration.guests|length + 1 }}</p>
+        </div>
+
+        <div class="footer">
+            <p>Ce message a été envoyé automatiquement - Merci de ne pas y répondre.</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+# Informations générales du site
+site:
+  name: 'Montessori'
+  name1: 'Algérie'
+  name2: ''
+  meta:
+    description: 'Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs. Découvrez la méthode Montessori adaptée à la culture algérienne.'
+    keywords: 'Montessori Algérie, formation montessori, pédagogie montessori, éducation alternative Algérie, AMI Algérie, montessori alger, ateliers montessori, éducation enfants Alger'
+    og_title: 'Montessori Institut d''Algérie - La référence Montessori en Algérie'
+    og_description: 'Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.'
+    twitter_title: 'Montessori Institut d''Algérie - La référence Montessori en Algérie'
+    twitter_description: 'Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.'
+
+# Footer
+footer:
+  useful_links: 'Liens utiles'
+  contact: 'Contact'
+  address: 'Alger, Algérie'
+  rights: 'Tous droits réservés'
+
+# Formulaire de contact
+contact:
+  title: 'Contactez-nous'
+  subtitle: 'Envoyez-nous un message'
+  parent_name: 'Nom du parent'
+  child_name: 'Nom de l''enfant'
+  child_birth_date: 'Date de naissance de l''enfant'
+  phone: 'Numéro de téléphone'
+  email: 'Email'
+  objective: 'Objectif'
+  heard_about_us: 'Comment avez-vous entendu parler de nous ?'
+  expectations: 'Vos attentes'
+  submit: 'Envoyer'
+  success_message: 'Votre demande a été envoyée avec succès. Nous vous contacterons prochainement.'
+
+# Page de recrutement
+employment:
+  title: 'Rejoignez notre équipe'
+  subtitle: 'Opportunités de carrière chez Montessori Algérie'
+  description: 'Nous recherchons des personnes passionnées par l''éducation et le développement des enfants.'
+
+
+# Erreurs et messages système
+error:
+  not_found: 'Page non trouvée'
+  server_error: 'Erreur serveur'
+  access_denied: 'Accès refusé'
+
+# Environments section
+environments:
+    title: 'NOS ENVIRONNEMENTS'
+    subtitle: 'Chaque espace est soigneusement conçu pour répondre aux besoins spécifiques de chaque tranche d''âge'
+    nido:
+        title: 'NIDO'
+        age: '6 - 15 mois'
+        description: 'Un environnement pensé pour encourager le développement moteur, l''acquisition du langage et l''autonomie.'
+    community:
+        title: 'COMMUNAUTÉ ENFANTINE'
+        age: '16 mois - 3 ans'
+        description: 'Axée sur l''autonomie, l''acquisition du langage et le développement moteur.'
+    casa:
+        title: 'CASA DEI BAMBINI'
+        age: '3 - 6 ans'
+        description: 'Un environnement qui permet d''explorer divers domaines, notamment la culture, la vie pratique, le développement sensoriel, le langage sous toutes ses formes et les concepts mathématiques.'
+
+# Team section
+team:
+    title: 'NOTRE ÉQUIPE ÉDUCATIVE'
+    description: 'Nous sommes convaincus que chaque personne impliquée dans la vie d''un enfant joue un rôle fondamental dans son développement. Nos enseignants et notre personnel sont rigoureusement sélectionnés pour leur passion pour l''éducation et leur engagement envers la pédagogie Montessori authentique, enrichis par des formations continues dispensées au sein de notre école.'
+    button: 'Rejoindre notre équipe'
+
+# Form labels
+form:
+    parent_name: 'Nom du parent *'
+    child_name: 'Nom de l''enfant *'
+    child_birth_date: 'Date de naissance de l''enfant *'
+    phone_number: 'Numéro de téléphone *'
+    email: 'Courrier électronique *'
+    objective: 'Objectif *'
+    objective_options:
+        visit: 'Demande de visite'
+        enrollment: 'Demande d''inscription'
+        information: 'Demande d''information'
+    heard_about_us: 'Comment avez-vous entendu parler de nous ? *'
+    expectations: 'Parlez-nous de vous et de vos attentes pour l''éducation de votre enfant'
+    agree_terms: 'J''accepte que mes données soient utilisées pour me contacter à propos de ma demande'
+
+# Alerts
+formations:
+    alerts:
+        close: 'Fermer'
+
+# TRADUCTIONS FRANÇAISES
+
+# Navigation et éléments communs
+nav:
+  home: 'Accueil'
+  employment: 'Recrutement'
+  login: 'Se connecter'
+  logout: 'Déconnexion'
+
+# Alertes et notifications
+alerts:
+  close: 'Fermer'
+  success: 'Succès'
+  error: 'Erreur'
+  info: 'Information'
+
+# Page d'accueil (existante)
+hero:
+  welcome: 'Bienvenue à Montessori Algérie'
+  tagline: 'Premier institut officiel Montessori en Algérie'
+  education: 'Une éducation respectueuse'
+  adapted: 'Adaptée aux besoins spécifiques de chaque enfant'
+  development: 'Développement naturel'
+  environment: 'Un environnement préparé pour favoriser l''autonomie'
+
+# Email de confirmation (barbecue)
+email:
+  confirmation:
+    subject: 'Confirmation de votre participation au barbecue'
+    title: 'Confirmation de participation'
+    greeting: 'Chers parents'
+    thank_you: 'Nous vous remercions chaleureusement d''avoir confirmé votre participation au barbecue prévu le vendredi 30 mai 2025 et nous sommes ravis de vous retrouver.'
+    program_title: 'Voici le programme de la journée :'
+    program:
+      arrival: 'Arrivée & baignade à la plage'
+      arrival_desc: 'Présentez votre laissez-passer à l''entrée, installez-vous tranquillement... puis direction la plage ! Profitez de la brise marine, pataugez les pieds dans l''eau ou lancez-vous pour une baignade matinale.'
+      water_race: 'Cap sur la plage pour La course des mains folles'
+      water_race_desc: 'Ensemble, parents et enfants se lancent un défi coopératif et rafraîchissant : faire passer un gobelet d''eau jusqu''à remplir un seau... sans renverser !'
+      knot_race: 'Place à La course des nœuds sur la pelouse'
+      knot_race_desc: 'Une jambe attachée entre parent et enfant, c''est parti pour une course folle... où le rythme et la complicité font toute la différence !'
+      rotisserie: 'Rendez-vous à la Rôtisserie "Coliseum"'
+      lunch: 'Déjeuner'
+      group_photo: 'Photo de groupe'
+      mime: 'Direction le théâtre pour Mime en folie'
+      mime_desc: 'Chaque famille entre en scène pour mimer des animaux, des métiers ou des situations rigolotes... fou rire garanti !'
+      free_time: 'Après-midi libre'
+    participants_title: 'Vous avez inscrit les personnes suivantes :'
+    yourself: '(vous-même)'
+    important_note: 'NB: vos enfants seront sous votre entière responsabilité durant toute la journée.'
+    closing: 'Au plaisir de vous recevoir !'
+    footer: 'Cordialement,\nL''équipe d''organisation'
+
+  # Email à l'administrateur
+  admin:
+    subject: 'Nouvelle inscription au barbecue - '
+    title: 'Nouvelle inscription au barbecue'
+    details: 'Détails de l''inscription :'
+    participant: 'Participant principal :'
+    guests: 'Accompagnants :'
+    no_guests: 'Aucun accompagnant'
+    date_registered: 'Date d''inscription :'
+    footer: 'Cette notification est automatique, merci de ne pas y répondre.'
+        
+common:
+  alerts:
+    close: 'Fermer'
+  buttons:
+    close: 'Fermer'
+  nb: 'NB'
+
+event:
+  register:
+    title: 'Inscription Événement'
+    hero:
+      title: 'Invitation au Barbecue - %date%'
+      button: 'Inscrivez-vous'
+    card:
+      title: 'Invitation au Barbecue - %date%'
+      greeting: 'Chers Parents,'
+      info: "Merci de vous être connectés ! Le barbecue en plein air se tiendra le %date% à partir de %time%, à la Rôtisserie du complexe touristique %location%."
+      location_link: 'Voir la localisation sur Google Maps'
+      description: "Ce sera l'occasion de profiter d'un cadre naturel exceptionnel, de la plage et des aires de jeux. Les enfants pourront apporter ballons, vélos ou frisbees pour s'amuser librement."
+      registration_info: "Afin de confirmer votre présence au barbecue, merci de remplir le formulaire ci-dessous en indiquant le nombre de participants :"
+      register_button: "S'inscrire"
+      image_alt: 'Image du barbecue'
+    modal:
+      title: 'Inscription au barbecue du %date%'
+      important_info: 'Informations importantes'
+      deadline: 'Date limite de réponse : %date%'
+      looking_forward: 'Nous avons hâte de vous retrouver pour partager ce moment de détente et de convivialité.'
+      limited_places: 'En raison du nombre de places limité, seuls les frères et sœurs âgés de moins de 12 ans pourront être présents.'
+      your_info: 'Vos informations'
+      add_guests: 'Ajoutez le conjoint et les enfants (max 5)'
+      add_guest_button: 'Ajouter un accompagnant'
+      confirm_button: "Confirmer l'inscription"
+  form:
+    your_info: 'Vos informations'
+    first_name: 'Nom'
+    last_name: 'Prénom'
+    firstName: 'Nom'
+    lastName: 'Prénom'
+    email: 'Email'
+    phone: 'Téléphone'
+    add_guests: 'Ajoutez le conjoint et les enfants (max 5)'
+    add_guest_button: 'Ajouter un accompagnant'
+    remove_guest: 'Supprimer'
+    confirm_registration: 'Confirmer l''inscription'
+
+  # Messages flash
+  flash:
+    login_required: 'Vous devez être connecté pour vous inscrire à cet événement.'
+    already_registered: 'Vous êtes déjà inscrit à cet événement. Vous pouvez modifier votre inscription.'
+    registration_success: 'Votre inscription a bien été enregistrée. Un email de confirmation a été envoyé.'
+
+security:
+  login:
+    title: 'Connexion'
+    subtitle: 'Accédez à votre espace Montessori'
+    email: 'Adresse email'
+    email_placeholder: 'exemple@email.com'
+    password: 'Mot de passe'
+    password_placeholder: 'Votre mot de passe'
+    remember_me: 'Se souvenir de moi'
+    forgot_password: 'Mot de passe oublié?'
+    submit: 'Se connecter'
+    already_logged: 'Vous êtes connecté en tant que'
+    logout: 'Se déconnecter'
+    no_account: 'Pas encore de compte?'
+    register_here: 'Inscrivez-vous ici'
+
+registration:
+  title: 'Rejoignez la communauté Montessori'
+  subtitle: 'Créez votre compte pour accéder à nos ressources pédagogiques'
+  first_name: 'Prénom'
+  first_name_placeholder: 'Votre prénom'
+  last_name: 'Nom'
+  last_name_placeholder: 'Votre nom'
+  email: 'Adresse email'
+  email_placeholder: 'exemple@email.com'
+  email_help: 'Nous ne partagerons jamais votre email avec des tiers.'
+  phone: 'Numéro de téléphone'
+  phone_placeholder: 'Ex: 05XXXXXXXX'
+  password: 'Mot de passe'
+  password_placeholder: 'Choisissez un mot de passe sécurisé'
+  password_help: 'Utilisez au moins 8 caractères, incluant lettres, chiffres et caractères spéciaux.'
+  agree_terms: "J'accepte les conditions d'utilisation"
+  submit: "S'inscrire"
+  have_account: 'Vous avez déjà un compte?'
+  login_here: 'Connectez-vous ici'
+  success_message: 'Votre compte a été créé avec succès!'
+

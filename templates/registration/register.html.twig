@@ -1,5 +1,5 @@
-{# templates/registration/register.html.twig #} {% extends 'base.html.twig' %} {% block title %}Inscription - {{
-parent() }}{% endblock %} {% block stylesheets %}
+{# templates/registration/register.html.twig #} {% extends 'base.html.twig' %} {% block title %}{{
+'registration.title'|trans }} - {{ parent() }}{% endblock %} {% block stylesheets %}
 <style>
     .registration-section {
         padding: 80px 0;
@@ -34,6 +34,24 @@ parent() }}{% endblock %} {% block stylesheets %}
     .form-control:focus {
         border-color: #84b04a;
         box-shadow: 0 0 0 0.2rem rgba(132, 176, 74, 0.25);
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    }
+
+    .invalid-feedback {
+        display: block;
+        width: 100%;
+        margin-top: -10px;
+        margin-bottom: 10px;
+        font-size: 0.875em;
+        color: #dc3545;
     }
 
     .btn-primary {
@@ -85,88 +103,105 @@ parent() }}{% endblock %} {% block stylesheets %}
                 <div class="card registration-card">
                     <div class="card-header">
                         <i class="bi bi-person-plus-fill registration-icon"></i>
-                        <h2 class="mb-0">Rejoignez la communauté Montessori</h2>
-                        <p class="mb-0">Créez votre compte pour accéder à nos ressources pédagogiques</p>
+                        <h2 class="mb-0">{{ 'registration.title'|trans }}</h2>
+                        <p class="mb-0">{{ 'registration.subtitle'|trans }}</p>
                     </div>
                     <div class="card-body p-4 p-md-5">
-                        {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate':
-                        'novalidate'}}) }}
+                        {{ form_start(registrationForm) }}
 
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form_label(registrationForm.firstName, 'Prénom', {'label_attr': {'class':
-                                    'form-label'}}) }} {{ form_widget(registrationForm.firstName, {'attr': {'class':
-                                    'form-control', 'placeholder': 'Votre prénom'}}) }}
+                                    {{ form_label(registrationForm.firstName, 'registration.first_name'|trans,
+                                    {'label_attr': {'class': 'form-label'}}) }} {{
+                                    form_widget(registrationForm.firstName, {'attr': {'class': 'form-control' ~
+                                    (registrationForm.firstName.vars.valid ? '' : ' is-invalid'),
+                                    'placeholder': 'registration.first_name_placeholder'|trans}}) }} {% if not
+                                    registrationForm.firstName.vars.valid %}
                                     <div class="invalid-feedback">
                                         {{ form_errors(registrationForm.firstName) }}
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    {{ form_label(registrationForm.lastName, 'Nom', {'label_attr': {'class':
-                                    'form-label'}}) }} {{ form_widget(registrationForm.lastName, {'attr': {'class':
-                                    'form-control', 'placeholder': 'Votre nom'}}) }}
+                                    {{ form_label(registrationForm.lastName, 'registration.last_name'|trans,
+                                    {'label_attr': {'class': 'form-label'}}) }} {{
+                                    form_widget(registrationForm.lastName, {'attr': {'class': 'form-control' ~
+                                    (registrationForm.lastName.vars.valid ? '' : ' is-invalid'),
+                                    'placeholder': 'registration.last_name_placeholder'|trans}}) }} {% if not
+                                    registrationForm.lastName.vars.valid %}
                                     <div class="invalid-feedback">
                                         {{ form_errors(registrationForm.lastName) }}
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(registrationForm.email, 'Adresse email', {'label_attr': {'class':
-                            'form-label'}}) }} {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control',
-                            'placeholder': 'exemple@email.com'}}) }}
-                            <div class="form-text">Nous ne partagerons jamais votre email avec des tiers.</div>
+                            {{ form_label(registrationForm.email, 'registration.email'|trans, {'label_attr': {'class':
+                            'form-label'}}) }} {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'
+                            ~ (registrationForm.email.vars.valid ? '' : ' is-invalid'), 'placeholder':
+                            'registration.email_placeholder'|trans}}) }}
+                            <div class="form-text">{{ 'registration.email_help'|trans }}</div>
+                            {% if not registrationForm.email.vars.valid %}
                             <div class="invalid-feedback">
                                 {{ form_errors(registrationForm.email) }}
                             </div>
+                            {% endif %}
                         </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(registrationForm.phone, 'Numéro de téléphone', {'label_attr': {'class':
-                            'form-label'}}) }} {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control',
-                            'placeholder': 'Ex: 05XXXXXXXX'}}) }}
+                            {{ form_label(registrationForm.phone, 'registration.phone'|trans, {'label_attr': {'class':
+                            'form-label'}}) }} {{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'
+                            ~ (registrationForm.phone.vars.valid ? '' : ' is-invalid'), 'placeholder':
+                            'registration.phone_placeholder'|trans}}) }} {% if not registrationForm.phone.vars.valid %}
                             <div class="invalid-feedback">
                                 {{ form_errors(registrationForm.phone) }}
                             </div>
+                            {% endif %}
                         </div>
 
                         <div class="form-group mb-3">
-                            {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class':
-                            'form-label'}}) }} {{ form_widget(registrationForm.plainPassword, {'attr': {'class':
-                            'form-control', 'placeholder': 'Choisissez un mot de passe sécurisé'}}) }}
-                            <div class="form-text">Utilisez au moins 8 caractères, incluant lettres, chiffres et
-                                caractères spéciaux.</div>
+                            {{ form_label(registrationForm.plainPassword, 'registration.password'|trans, {'label_attr':
+                            {'class': 'form-label'}}) }} {{ form_widget(registrationForm.plainPassword, {'attr':
+                            {'class': 'form-control' ~ (registrationForm.plainPassword.vars.valid ? ''
+                            : ' is-invalid'), 'placeholder': 'registration.password_placeholder'|trans}}) }}
+                            <div class="form-text">{{ 'registration.password_help'|trans }}</div>
+                            {% if not registrationForm.plainPassword.vars.valid %}
                             <div class="invalid-feedback">
                                 {{ form_errors(registrationForm.plainPassword) }}
                             </div>
+                            {% endif %}
                         </div>
 
                         {% if registrationForm.agreeTerms is defined %}
                         <div class="form-check mb-4">
-                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }} {{
-                            form_label(registrationForm.agreeTerms, "J'accepte les conditions d'utilisation",
-                            {'label_attr': {'class': 'form-check-label'}}) }}
+                            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input' ~
+                            (registrationForm.agreeTerms.vars.valid ? '' : ' is-invalid')}}) }} {{
+                            form_label(registrationForm.agreeTerms, 'registration.agree_terms'|trans, {'label_attr':
+                            {'class':
+                            'form-check-label'}}) }} {% if not registrationForm.agreeTerms.vars.valid %}
                             <div class="invalid-feedback">
                                 {{ form_errors(registrationForm.agreeTerms) }}
                             </div>
+                            {% endif %}
                         </div>
                         {% endif %}
 
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-lg" type="submit">
-                                <i class="bi bi-check-circle-fill me-2"></i>S'inscrire
+                                <i class="bi bi-check-circle-fill me-2"></i>{{ 'registration.submit'|trans }}
                             </button>
                         </div>
 
                         {{ form_end(registrationForm) }}
 
                         <div class="text-center mt-4">
-                            <p>Vous avez déjà un compte? <a href="{{ path('app_login') }}"
-                                    class="login-link">Connectez-vous ici</a></p>
+                            <p>{{ 'registration.have_account'|trans }} <a href="{{ path('app_login') }}"
+                                    class="login-link">{{ 'registration.login_here'|trans }}</a></p>
                         </div>
                     </div>
                 </div>

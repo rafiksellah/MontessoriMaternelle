@@ -1,0 +1,96 @@
+/* Styles pour le sélecteur de langue */
+
+.lang-switch-container {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.lang-switch-wrapper {
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fa;
+}
+
+.lang-switch {
+    display: flex;
+    align-items: center;
+    padding: 6px 12px;
+    color: #495057;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.lang-switch:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.lang-switch:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #2a8d46;
+}
+
+.lang-switch.active {
+    background-color: #2a8d46;
+    color: white;
+}
+
+.lang-flag {
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.lang-name {
+    font-weight: 600;
+}
+
+
+/* Styles pour la version RTL */
+
+.rtl .lang-flag {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+
+/* Styles pour mobile */
+
+@media (max-width: 576px) {
+    .lang-switch-wrapper {
+        border-radius: 50px;
+        background-color: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    .lang-switch {
+        padding: 5px;
+        margin: 0 3px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: #f8f9fa;
+    }
+    .lang-switch:not(:last-child)::after {
+        display: none;
+    }
+    .lang-name {
+        display: none;
+    }
+    .lang-flag {
+        margin-right: 0;
+    }
+}

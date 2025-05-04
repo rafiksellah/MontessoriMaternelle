@@ -1,10 +1,11 @@
+/* AR: templates/emails/ar/registration_confirmation.html.twig */
 <!DOCTYPE html>
-<html>
+<html dir="rtl" lang="ar">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmation de participation au barbecue</title>
+    <title>تأكيد التسجيل للشواء</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -41,7 +42,7 @@
             padding: 20px;
             border-radius: 8px;
             margin: 25px 0;
-            border-left: 4px solid #3498db;
+            border-right: 4px solid #3498db;
         }
 
         .time-block {
@@ -57,20 +58,20 @@
         }
 
         .time-icon {
-            margin-right: 10px;
+            margin-left: 10px;
             display: inline-block;
             width: 24px;
             text-align: center;
         }
 
         .description {
-            padding-left: 34px;
+            padding-right: 34px;
             margin-top: 5px;
         }
 
         .important {
             background-color: #fff5f5;
-            border-left: 4px solid #e74c3c;
+            border-right: 4px solid #e74c3c;
             padding: 15px;
             margin: 20px 0;
             font-weight: bold;
@@ -108,91 +109,87 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Confirmation de participation</h1>
+            <h1>تأكيد التسجيل</h1>
         </div>
 
-        <p>Chers parents {{ registration.firstName }} {{ registration.lastName }},</p>
+        <p>أعزائي الوالدين {{ registration.firstName }} {{ registration.lastName }}،</p>
 
-        <p>Nous vous remercions chaleureusement d'avoir confirmé votre participation au barbecue prévu le
-            <strong>vendredi 30 mai 2025</strong> et nous sommes ravis de vous retrouver.
+        <p>نشكركم بحرارة على تأكيد مشاركتكم في حفل الشواء المقرر يوم
+            <strong>الجمعة 30 مايو 2025</strong>. يسعدنا الترحيب بكم قريبًا.
         </p>
 
         <div class="program">
-            <h2>Voici le programme de la journée :</h2>
+            <h2>إليكم برنامج اليوم:</h2>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🏖️</span> <span>Dès 9h00</span> – Arrivée & baignade à la plage
+                    <span class="time-icon">🏖️</span> <span>من الساعة 9:00 صباحًا</span> – الوصول والسباحة في الشاطئ
                 </div>
                 <div class="description">
-                    Présentez votre laissez-passer à l'entrée, installez-vous tranquillement... puis direction la plage
-                    ! Profitez de la brise marine, pataugez les pieds dans l'eau ou lancez-vous pour une baignade
-                    matinale.
+                    قدموا تصريح الدخول عند المدخل، واستقروا بشكل مريح... ثم توجهوا إلى الشاطئ! استمتعوا بنسيم البحر،
+                    وخوضوا في الماء أو انغمسوا في سباحة صباحية.
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🌊</span> <span>9h30</span> – Cap sur la plage pour <em>La course des mains
-                        folles</em>
+                    <span class="time-icon">🌊</span> <span>الساعة 9:30 صباحًا</span> – تحدي الشاطئ: <em>سباق الأيدي
+                        المجنونة</em>
                 </div>
                 <div class="description">
-                    Ensemble, parents et enfants se lancent un défi coopératif et rafraîchissant : faire passer un
-                    gobelet d'eau jusqu'à remplir un seau... sans renverser !
+                    معًا، يخوض الآباء والأطفال تحديًا تعاونيًا منعشًا: تمرير كوب من الماء لملء دلو... دون إراقة!
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🌱</span> <span>10h30</span> – Place à <em>La course des nœuds</em> sur la
-                    pelouse
+                    <span class="time-icon">🌱</span> <span>الساعة 10:30 صباحًا</span> – <em>سباق القدم المربوطة</em>
+                    على العشب
                 </div>
                 <div class="description">
-                    Une jambe attachée entre parent et enfant, c'est parti pour une course folle... où le rythme et la
-                    complicité font toute la différence !
+                    بربط قدم واحدة بين الوالدين والطفل، استعدوا لسباق مجنون... حيث يصنع الإيقاع والعمل الجماعي الفارق!
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🔥</span> <span>11h30</span> – Rendez-vous à la Rôtisserie "Coliseum"
+                    <span class="time-icon">🔥</span> <span>الساعة 11:30 صباحًا</span> – اللقاء عند مشوى "الكوليسيوم"
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🍽️</span> <span>12h00</span> – Déjeuner
+                    <span class="time-icon">🍽️</span> <span>الساعة 12:00 ظهرًا</span> – الغداء
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">📸</span> <span>14h00</span> – Photo de groupe
+                    <span class="time-icon">📸</span> <span>الساعة 2:00 مساءً</span> – صورة جماعية
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">🎭</span> <span>14h15</span> – Direction le théâtre pour <em>Mime en
-                        folie</em>
+                    <span class="time-icon">🎭</span> <span>الساعة 2:15 مساءً</span> – التوجه إلى المسرح لـ <em>جنون
+                        التمثيل الصامت</em>
                 </div>
                 <div class="description">
-                    Chaque famille entre en scène pour mimer des animaux, des métiers ou des situations rigolotes... fou
-                    rire garanti !
+                    كل عائلة تأخذ دورها على المسرح لتمثيل الحيوانات، المهن، أو المواقف المضحكة... الضحك مضمون!
                 </div>
             </div>
 
             <div class="time-block">
                 <div class="time">
-                    <span class="time-icon">☀️</span> <span>Après-midi libre</span>
+                    <span class="time-icon">☀️</span> <span>فترة ما بعد الظهر حرة</span>
                 </div>
             </div>
         </div>
 
         <div class="participants">
-            <h3>Vous avez inscrit les personnes suivantes :</h3>
+            <h3>لقد سجلتم الأشخاص التالية أسماؤهم:</h3>
             <ul>
-                <li>{{ registration.firstName }} {{ registration.lastName }} (vous-même)</li>
+                <li>{{ registration.firstName }} {{ registration.lastName }} (أنت)</li>
                 {% for guest in registration.guests %}
                 <li>{{ guest.firstName }} {{ guest.lastName }}</li>
                 {% endfor %}
@@ -200,13 +197,13 @@
         </div>
 
         <div class="important">
-            NB: vos enfants seront sous votre entière responsabilité durant toute la journée.
+            ملاحظة: سيكون أطفالكم تحت مسؤوليتكم الكاملة طوال اليوم.
         </div>
 
-        <p>Au plaisir de vous recevoir !</p>
+        <p>نتطلع للقائكم!</p>
 
         <div class="footer">
-            <p>Cordialement,<br>L'équipe d'organisation</p>
+            <p>مع أطيب التحيات،<br>فريق التنظيم</p>
         </div>
     </div>
 </body>

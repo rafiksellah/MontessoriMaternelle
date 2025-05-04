@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app.request.locale }}">
 
 <head>
     <meta charset="utf-8">
@@ -7,26 +7,22 @@
     <title>{% block title %}{{ 'site.name'|trans }} {{ 'site.name1'|trans }} {{ 'site.name2'|trans }} - {% endblock %}
     </title>
 
-    <meta name="description"
-        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs. Découvrez la méthode Montessori adaptée à la culture algérienne.">
-    <meta name="keywords"
-        content="Montessori Algérie, formation montessori, pédagogie montessori, éducation alternative Algérie, AMI Algérie, montessori alger, ateliers montessori, éducation enfants Alger">
+    <meta name="description" content="{{ 'site.meta.description'|trans }}">
+    <meta name="keywords" content="{{ 'site.meta.keywords'|trans }}">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mia-dz.com/">
-    <meta property="og:title" content="Montessori Institut d'Algerie - La référence Montessori en Algérie">
-    <meta property="og:description"
-        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.">
+    <meta property="og:title" content="{{ 'site.meta.og_title'|trans }}">
+    <meta property="og:description" content="{{ 'site.meta.og_description'|trans }}">
     <meta property="og:image" content="{{ asset('assets/img/logo.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://mia-dz.com/">
-    <meta property="twitter:title" content="Montessori Institut d'Algerie - La référence Montessori en Algérie">
-    <meta property="twitter:description"
-        content="Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs.">
+    <meta property="twitter:title" content="{{ 'site.meta.twitter_title'|trans }}">
+    <meta property="twitter:description" content="{{ 'site.meta.twitter_description'|trans }}">
     <meta property="twitter:image" content="{{ asset('assets/img/logo.png') }}">
 
     <!-- Données structurées JSON-LD pour organisation éducative -->
@@ -34,11 +30,11 @@
         {
             "@context": "https://schema.org",
             "@type": "EducationalOrganization",
-            "name": "Montessori Institut d'Algerie",
+            "name": "{{ 'site.name'|trans }} {{ 'site.name1'|trans }} {{ 'site.name2'|trans }}",
             "alternateName": "MIA",
             "url": "https://mia-dz.com",
             "logo": "https://mia-dz.com/assets/img/logo.png",
-            "description": "Premier institut officiel Montessori en Algérie offrant des formations AMI et des ateliers pédagogiques adaptés à la culture algérienne.",
+            "description": "{{ 'site.meta.description'|trans }}",
             "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Alger",
@@ -75,35 +71,70 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet"> {% block stylesheets %}{% endblock %}
+    <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+
+    <!-- Custom Language Selector CSS -->
+    <link href="{{ asset('assets/css/custom-language.css') }}" rel="stylesheet">
+
+    <!-- RTL support for Arabic -->
+    {% if app.request.locale == 'ar' %}
+    <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet"> {% endif %} {% block stylesheets %}{% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}">
+<body class="{% block body_class %}{% if app.request.locale == 'ar' %}rtl{% endif %}{% endblock %}">
 
     {% block header %}
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
-            <a href="{{ path('app_home') }}" class="logo d-flex align-items-center me-auto">
-                <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="Montessori Algerie" class="logo-img">
+            <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
+                class="logo d-flex align-items-center me-auto">
+                <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
+                    class="logo-img">
                 <div class="logo-text">
-                    <h2 class="sitenames">Montessori</h2>
-                    <h2 class="sitenames">Algerie</h2>
+                    <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
+                    <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
                 </div>
             </a>
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="active">Home<br></a></li>
-                    <li><a href="/recrutement">Recrutement</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}" class="active">{{
+                            'nav.home'|trans }}<br></a></li>
+                    <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}">{{
+                            'nav.employment'|trans }}</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            {# <a class="btn-getstarted" href="#">Get Started</a> #} {% if app.user %}
-            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
-                <button type="submit" class="btn btn-danger">Déconnexion</button>
-            </form>
-            {# <a class="btn-getstarted" href="{{ path('app_login') }}">Se connecter</a> #} {% endif %}
 
+            {% if app.user %}
+            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
+                <button type="submit" class="btn btn-danger">{{ 'nav.logout'|trans }}</button>
+            </form>
+            {% else %}
+            <a class="btn-getstarted" href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a> {% endif %}
+
+            <!-- Language Selector -->
+            <div class="language-selector mx-3">
+                <div class="lang-switch-container">
+                    <div class="lang-switch-wrapper">
+                        <a href="{{ path('change_locale', {'locale': 'fr'}) }}"
+                            class="lang-switch {% if app.request.locale == 'fr' %}active{% endif %}">
+                            <span class="lang-flag">🇫🇷</span>
+                            <span class="lang-name">FR</span>
+                        </a>
+                        <a href="{{ path('change_locale', {'locale': 'en'}) }}"
+                            class="lang-switch {% if app.request.locale == 'en' %}active{% endif %}">
+                            <span class="lang-flag">🇬🇧</span>
+                            <span class="lang-name">EN</span>
+                        </a>
+                        <a href="{{ path('change_locale', {'locale': 'ar'}) }}"
+                            class="lang-switch {% if app.request.locale == 'ar' %}active{% endif %}">
+                            <span class="lang-flag">🇩🇿</span>
+                            <span class="lang-name">عربي</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
     {% endblock %}
@@ -117,12 +148,13 @@
             <div class="row gy-4">
                 <!-- Logo et texte -->
                 <div class="col-lg-4 col-md-6 footer-brand text-center text-md-start">
-                    <a href="{{ path('app_home') }}" class="logo d-flex align-items-center">
-                        <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="Montessori Algerie"
+                    <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
+                        class="logo d-flex align-items-center">
+                        <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
                             class="logo-img">
                         <div class="logo-text">
-                            <h2 class="sitenames">Montessori</h2>
-                            <h2 class="sitenames">Algerie</h2>
+                            <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
+                            <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
                             <h2 class="sitenames"></h2>
                         </div>
                     </a>
@@ -130,19 +162,20 @@
 
                 <!-- Liens utiles -->
                 <div class="col-lg-4 col-md-6 footer-links text-center text-md-start">
-                    <h4>Liens utiles</h4>
+                    <h4>{{ 'footer.useful_links'|trans }}</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Employment</a></li>
-                        <li><a href="#">Recrutement</a></li>
+                        <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}">{{ 'nav.home'|trans }}</a>
+                        </li>
+                        <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}">{{
+                                'nav.employment'|trans }}</a></li>
                     </ul>
                 </div>
 
                 <!-- Contact -->
                 <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
-                    <h4>Contact</h4>
+                    <h4>{{ 'footer.contact'|trans }}</h4>
                     <p style="line-height: 2.8;">
-                        <i class="bi bi-geo-alt"></i> Alger, Algérie <br>
+                        <i class="bi bi-geo-alt"></i> {{ 'footer.address'|trans }} <br>
                         <i class="bi bi-envelope"></i> info@montessorialgerie.com <br>
                         <i class="bi bi-telephone"></i> +213 666 340 821 <br>
                     </p>
@@ -152,7 +185,8 @@
 
         <!-- Copyright -->
         <div class="container text-center mt-4">
-            <p>© <strong class="sitename">Montessori Algerie 2025</strong> | Tous droits réservés</p>
+            <p>© <strong class="sitename">{{ 'site.name'|trans }} {{ 'site.name1'|trans }} 2025</strong> | {{
+                'footer.rights'|trans }}</p>
         </div>
     </footer>
     {% endblock %}
