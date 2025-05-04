@@ -1,0 +1,224 @@
+/* RTL Support for Arabic Language */
+
+
+/* Direction générale du document */
+
+html,
+body {
+    direction: rtl;
+    text-align: right;
+}
+
+
+/* Navigation principale */
+
+.navmenu ul {
+    padding-right: 0;
+}
+
+.logo {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.navmenu {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+
+/* Boutons et formulaires */
+
+.btn-getstarted {
+    margin-right: 0;
+    margin-left: 15px;
+}
+
+.form-group label {
+    text-align: right;
+}
+
+
+/* Icons Bootstrap */
+
+.bi {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+
+/* Renversement des marges et paddings */
+
+.me-auto {
+    margin-right: 0 !important;
+    margin-left: auto !important;
+}
+
+.ms-auto {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+}
+
+.me-1,
+.me-2,
+.me-3,
+.me-4,
+.me-5 {
+    margin-right: 0 !important;
+}
+
+.ms-1 {
+    margin-left: 0 !important;
+    margin-right: 0.25rem !important;
+}
+
+.ms-2 {
+    margin-left: 0 !important;
+    margin-right: 0.5rem !important;
+}
+
+.ms-3 {
+    margin-left: 0 !important;
+    margin-right: 1rem !important;
+}
+
+.ms-4 {
+    margin-left: 0 !important;
+    margin-right: 1.5rem !important;
+}
+
+.ms-5 {
+    margin-left: 0 !important;
+    margin-right: 3rem !important;
+}
+
+.me-1 {
+    margin-right: 0 !important;
+    margin-left: 0.25rem !important;
+}
+
+.me-2 {
+    margin-right: 0 !important;
+    margin-left: 0.5rem !important;
+}
+
+.me-3 {
+    margin-right: 0 !important;
+    margin-left: 1rem !important;
+}
+
+.me-4 {
+    margin-right: 0 !important;
+    margin-left: 1.5rem !important;
+}
+
+.me-5 {
+    margin-right: 0 !important;
+    margin-left: 3rem !important;
+}
+
+
+/* Renversement des colonnes Bootstrap dans les rangées */
+
+@media (min-width: 768px) {
+    .row {
+        flex-direction: row-reverse;
+    }
+}
+
+
+/* Alignement du texte pour les classes utilitaires */
+
+.text-start {
+    text-align: right !important;
+}
+
+.text-end {
+    text-align: left !important;
+}
+
+
+/* Footer */
+
+.footer-contact i {
+    float: right;
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+
+/* Adaptation des popups et dropdowns */
+
+.dropdown-menu {
+    text-align: right;
+    left: auto;
+    right: 0;
+}
+
+
+/* Adaptation des formulaires */
+
+.form-check {
+    padding-left: 0;
+    padding-right: 1.5em;
+}
+
+.form-check .form-check-input {
+    float: right;
+    margin-left: 0;
+    margin-right: -1.5em;
+}
+
+
+/* Classes de Bootstrap pour le RTL */
+
+.float-start {
+    float: right !important;
+}
+
+.float-end {
+    float: left !important;
+}
+
+
+/* Spécifique pour les listes */
+
+ul,
+ol {
+    padding-left: 0;
+    padding-right: 2rem;
+}
+
+
+/* Adaptations pour les breadcrumbs */
+
+.breadcrumb-item+.breadcrumb-item::before {
+    float: right;
+    padding-right: 0;
+    padding-left: 0.5rem;
+}
+
+
+/* Adaptations pour les alertes */
+
+.alert-dismissible {
+    padding-left: 3rem;
+    padding-right: 1.25rem;
+}
+
+.alert-dismissible .btn-close {
+    left: 0;
+    right: auto;
+}
+
+
+/* Adaptations pour les media objects */
+
+.media {
+    flex-direction: row-reverse;
+}
+
+.media-body {
+    margin-left: 0;
+    margin-right: 1rem;
+}

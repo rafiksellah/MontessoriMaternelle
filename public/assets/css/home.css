@@ -1,0 +1,369 @@
+.hero-carousel {
+    width: 100%;
+    margin-top: 0;
+    position: relative;
+}
+
+.hero-carousel .carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-carousel .carousel-item {
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.hero-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-carousel .carousel-caption {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    padding: 0;
+}
+
+.hero-carousel .carousel-caption h2 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.hero-carousel .carousel-caption p {
+    font-size: 20px;
+    color: #fff;
+    max-width: 80%;
+    margin: 0 auto;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.hero-carousel .carousel-control-prev,
+.hero-carousel .carousel-control-next {
+    width: 10%;
+}
+
+.hero-carousel .carousel-indicators {
+    bottom: 20px;
+}
+
+.hero-carousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+}
+
+.hero-carousel .carousel-indicators button.active {
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .hero-carousel .carousel-item {
+        height: 60vh;
+    }
+    .hero-carousel .carousel-caption h2 {
+        font-size: 28px;
+    }
+    .hero-carousel .carousel-caption p {
+        font-size: 16px;
+    }
+}
+
+
+/* Styles pour la section Environnements */
+
+.environnements {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.environnements .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.environnements .section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #364146;
+    margin-bottom: 15px;
+}
+
+.environnements .section-header p {
+    font-size: 16px;
+    color: #627680;
+}
+
+.environnements-slider {
+    margin-bottom: 60px;
+}
+
+.environnement-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    height: 400px;
+}
+
+.environnement-img {
+    height: 250px;
+    overflow: hidden;
+}
+
+.environnement-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.environnement-item:hover .environnement-img img {
+    transform: scale(1.1);
+}
+
+.environnement-info {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.environnement-info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #364146;
+    margin-bottom: 5px;
+}
+
+.environnement-info h4 {
+    font-size: 16px;
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.environnement-info p {
+    color: #627680;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* Style pour les cartes des 3 environnements */
+
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-weight: 700;
+    color: #364146;
+    margin-bottom: 5px;
+}
+
+.card-text {
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+
+/* Styles pour la section Team */
+
+.team {
+    padding: 80px 0;
+}
+
+.team-img {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.team-img img {
+    width: 100%;
+}
+
+.team .content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team .content h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #364146;
+    margin-bottom: 20px;
+}
+
+.team .content p {
+    color: #627680;
+    margin-bottom: 30px;
+}
+
+.btn-rejoindre {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #009970;
+    color: #fff;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-rejoindre:hover {
+    background-color: #00b383;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 153, 112, 0.3);
+}
+
+
+/* Responsive pour les sections */
+
+@media (max-width: 991px) {
+    .team .content {
+        padding: 30px 0;
+        margin-top: 30px;
+    }
+    .environnement-item {
+        height: auto;
+    }
+}
+
+
+/* Swiper pagination customization */
+
+.swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(0, 153, 112, 0.4);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #009970;
+}
+
+
+/* Styles pour la section formulaire de contact */
+
+.contact-form {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.contact-form .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.contact-form .section-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #364146;
+    margin-bottom: 15px;
+}
+
+.contact-form .section-header p {
+    font-size: 16px;
+    color: #627680;
+}
+
+.contact-img {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.contact-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contact-form-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+}
+
+.php-email-form .form-group {
+    margin-bottom: 20px;
+}
+
+.php-email-form label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #364146;
+}
+
+.php-email-form .form-control,
+.php-email-form .form-select {
+    border-radius: 4px;
+    box-shadow: none;
+    font-size: 14px;
+    border-color: #dce3e8;
+    padding: 10px 15px;
+}
+
+.php-email-form .form-control:focus,
+.php-email-form .form-select:focus {
+    border-color: #009970;
+    box-shadow: 0 0 0 0.2rem rgba(0, 153, 112, 0.25);
+}
+
+.btn-envoi {
+    background-color: #009970;
+    border: none;
+    padding: 10px 30px;
+    color: #fff;
+    border-radius: 50px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.btn-envoi:hover {
+    background-color: #00b383;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 153, 112, 0.3);
+}
+
+@media (max-width: 991px) {
+    .contact-img {
+        margin-bottom: 30px;
+        height: 400px;
+    }
+}

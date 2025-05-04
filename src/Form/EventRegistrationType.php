@@ -10,29 +10,39 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EventRegistrationType extends AbstractType
 {
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('firstName', TextType::class, [
-                'label' => 'Nom',
+                'label' => $this->translator->trans('event.form.firstName'),
                 'disabled' => true,
                 'attr' => ['readonly' => true, 'class' => 'form-control-plaintext']
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Prénom',
+                'label' => $this->translator->trans('event.form.lastName'),
                 'disabled' => true,
                 'attr' => ['readonly' => true, 'class' => 'form-control-plaintext']
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => $this->translator->trans('event.form.email'),
                 'disabled' => true,
                 'attr' => ['readonly' => true, 'class' => 'form-control-plaintext']
             ])
             ->add('phone', TelType::class, [
-                'label' => 'Téléphone',
+                'label' => $this->translator->trans('event.form.phone'),
                 'disabled' => true,
                 'attr' => ['readonly' => true, 'class' => 'form-control-plaintext']
             ])
@@ -49,6 +59,7 @@ class EventRegistrationType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => EventRegistration::class,
+            'translation_domain' => 'messages'
         ]);
     }
 }

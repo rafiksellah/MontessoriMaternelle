@@ -1,0 +1,213 @@
+/* EN: templates/emails/en/registration_confirmation.html.twig */
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbecue Registration Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .program {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .time-block {
+            margin-bottom: 20px;
+        }
+
+        .time {
+            font-weight: bold;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .time-icon {
+            margin-right: 10px;
+            display: inline-block;
+            width: 24px;
+            text-align: center;
+        }
+
+        .description {
+            padding-left: 34px;
+            margin-top: 5px;
+        }
+
+        .important {
+            background-color: #fff5f5;
+            border-left: 4px solid #e74c3c;
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .participants {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .program {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Registration Confirmation</h1>
+        </div>
+
+        <p>Dear parents {{ registration.firstName }} {{ registration.lastName }},</p>
+
+        <p>Thank you warmly for confirming your participation in the barbecue scheduled for
+            <strong>Friday, May 30, 2025</strong>. We are delighted to welcome you soon.
+        </p>
+
+        <div class="program">
+            <h2>Here is the program for the day:</h2>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🏖️</span> <span>From 9:00 AM</span> – Arrival & beach swimming
+                </div>
+                <div class="description">
+                    Present your pass at the entrance, settle in comfortably... then head to the beach! Enjoy the sea
+                    breeze, wade in the water or dive in for a morning swim.
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🌊</span> <span>9:30 AM</span> – Beach challenge: <em>The crazy hands
+                        race</em>
+                </div>
+                <div class="description">
+                    Together, parents and children take on a cooperative and refreshing challenge: passing a cup of
+                    water to fill a bucket... without spilling!
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🌱</span> <span>10:30 AM</span> – <em>The three-legged race</em> on the lawn
+                </div>
+                <div class="description">
+                    With one leg tied between parent and child, get ready for a crazy race... where rhythm and teamwork
+                    make all the difference!
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🔥</span> <span>11:30 AM</span> – Meet at the "Coliseum" Rotisserie
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🍽️</span> <span>12:00 PM</span> – Lunch
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">📸</span> <span>2:00 PM</span> – Group photo
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">🎭</span> <span>2:15 PM</span> – Head to the theater for <em>Charades
+                        Madness</em>
+                </div>
+                <div class="description">
+                    Each family takes the stage to mime animals, professions, or funny situations... laughter
+                    guaranteed!
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">
+                    <span class="time-icon">☀️</span> <span>Free afternoon</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="participants">
+            <h3>You have registered the following people:</h3>
+            <ul>
+                <li>{{ registration.firstName }} {{ registration.lastName }} (yourself)</li>
+                {% for guest in registration.guests %}
+                <li>{{ guest.firstName }} {{ guest.lastName }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="important">
+            Note: your children will be under your full responsibility throughout the day.
+        </div>
+
+        <p>We look forward to seeing you!</p>
+
+        <div class="footer">
+            <p>Best regards,<br>The Organizing Team</p>
+        </div>
+    </div>
+</body>
+
+</html>
