@@ -23,7 +23,6 @@
     <div class="container">
         <h2 class="section-title text-center mb-5">Pourquoi rejoindre Montessori Algérie ?</h2>
 
-        <!-- Premier bloc: image + 2 avantages -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-5 mb-4 mb-lg-0">
                 <img src="{{ asset('assets/img/atelier.jpg') }}" alt="Formation continue"
@@ -51,7 +50,6 @@
             </div>
         </div>
 
-        <!-- Deuxième bloc: image + 2 avantages (ordre inversé) -->
         <div class="row align-items-center">
             <div class="col-lg-7 order-lg-1 order-2">
                 <div class="row">
@@ -84,7 +82,6 @@
     <div class="container">
         <h2 class="section-title text-center mb-5">NOS MÉTIERS</h2>
 
-        <!-- Premier bloc: Image à gauche + Équipe Pédagogique et Management administrative -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-5 mb-4 mb-lg-0">
                 <img src="{{ asset('assets/img/recrutement.webp') }}" alt="Équipe pédagogique"
@@ -111,7 +108,6 @@
             </div>
         </div>
 
-        <!-- Deuxième bloc: Image à droite + Équipe HSE et Activité Extrascolaire -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-7 order-lg-1 order-2">
                 <div class="row">
@@ -140,7 +136,6 @@
             </div>
         </div>
 
-        <!-- Troisième bloc: Image à gauche + Équipe Activités Extrascolaires et Santé -->
         <div class="row align-items-center mb-5">
             <div class="col-lg-5 mb-4 mb-lg-0">
                 <img src="{{ asset('assets/img/recrt2.avif') }}" alt="Activités extrascolaires"
@@ -168,7 +163,6 @@
             </div>
         </div>
 
-        <!-- Quatrième bloc: Image à droite + Équipe Marketing et Technique -->
         <div class="row align-items-center">
             <div class="col-lg-7 order-lg-1 order-2">
                 <div class="row">
@@ -208,23 +202,14 @@
 </section>
 {% endblock %} {% block javascripts %}
 <script>
-    // Animation pour les boîtes d'avantages
     document.addEventListener('DOMContentLoaded', function () {
-        // Ajouter des animations AOS si nécessaire
         if (typeof AOS !== 'undefined') {
             const benefitsBoxes = document.querySelectorAll('.benefits-box');
             benefitsBoxes.forEach((box, index) => {
                 box.setAttribute('data-aos', 'fade-up');
-                box.setAttribute('data-aos-delay', (index * 100).toString());
+                box.setAttribute('data-aos-delay', `${index * 100}`);
             });
-
-            const jobTitles = document.querySelectorAll('.job-title');
-            jobTitles.forEach((job, index) => {
-                job.setAttribute('data-aos', 'fade-right');
-                job.setAttribute('data-aos-delay', (index * 50).toString());
-            });
-
-            AOS.refresh();
+            AOS.init();
         }
     });
 </script>

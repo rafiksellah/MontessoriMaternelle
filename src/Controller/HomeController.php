@@ -66,32 +66,7 @@ class HomeController extends AbstractController
     #[Route('/{_locale}/recrutement', name: 'app_recrutement', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function recrutement(): Response
     {
+        
         return $this->render('home/recrutement.html.twig', []);
-    }
-    
-    #[Route('/change-locale/{locale}', name: 'change_locale')]
-    public function changeLocale(Request $request, string $locale): Response
-    {
-        // Récupérer la route actuelle depuis laquelle l'utilisateur a changé de langue
-        $referer = $request->headers->get('referer');
-        
-        // Rediriger vers la même page mais avec la nouvelle locale
-        // Extraction du chemin d'URL (sans le domaine et la locale actuelle)
-        $currentPath = parse_url($referer, PHP_URL_PATH);
-        
-        // Retirer la locale actuelle du chemin si elle existe
-        $pathParts = explode('/', trim($currentPath, '/'));
-        if (in_array($pathParts[0], ['fr', 'en', 'ar'])) {
-            array_shift($pathParts);
-        }
-        
-        // Construire le nouveau chemin avec la nouvelle locale
-        $newPath = '/' . $locale;
-        if (!empty($pathParts)) {
-            $newPath .= '/' . implode('/', $pathParts);
-        }
-        
-        // Rediriger vers la nouvelle URL
-        return $this->redirect($newPath);
     }
 }
