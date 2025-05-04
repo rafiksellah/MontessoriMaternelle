@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Barbecue Party Invitation</title>
+    <style>
+        @page {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+        }
+
+        .page-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .participants {
+            position: absolute;
+            bottom: 100px;
+            left: 50px;
+            width: 80%;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .participants-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #0098cc;
+            padding-bottom: 8px;
+        }
+
+        .participants-list {
+            font-size: 18px;
+            list-style-type: decimal;
+            margin-left: 20px;
+            padding-left: 10px;
+        }
+
+        .participants-list li {
+            margin-bottom: 8px;
+            padding: 3px 0;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-style: italic;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Here we use the absolute_url helper to ensure the full path is used -->
+        <img src="{{ asset(background_image_path) }}" alt="Barbecue Party Invitation" class="background-image">
+
+        <div class="participants">
+            <div class="participants-title">Liste des participants</div>
+            <ol class="participants-list">
+                <li>{{ registration.firstName }} {{ registration.lastName }}</li>
+                {% for guest in guests %}
+                <li>{{ guest.firstName }} {{ guest.lastName }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div class="footer">
+            Merci de présenter cette invitation à l'entrée. Nous vous attendons nombreux !
+        </div>
+    </div>
+</body>
+
+</html>
