@@ -1,0 +1,90 @@
+{% extends 'baseAdmin.html.twig' %} {% block title %}Utilisateurs{% endblock %} {% block body %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <h6>Liste des utilisateurs</h6>
+                    <a href="#" class="btn btn-sm bg-gradient-primary">Ajouter un
+                        utilisateur</a>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Utilisateur</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Email</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Téléphone</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Rôles</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Inscription à l'événement</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div>
+                                                {# <img
+                                                    src="{{ asset('admin/assets/img/team-' ~ ((loop.index % 4) + 1) ~ '.jpg') }}"
+                                                    class="avatar avatar-sm me-3" alt="user image"> #}
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ user.firstName }} {{ user.lastName }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ user.email }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ user.phone }}</p>
+                                    </td>
+                                    <td>
+                                        {% for role in user.roles %}
+                                        <span class="badge badge-sm bg-gradient-info">{{ role }}</span> {% endfor %}
+                                    </td>
+                                    <td>
+                                        {% if user.eventRegistration %}
+                                        <span class="badge badge-sm bg-gradient-success">Inscrit</span> {% else %}
+                                        <span class="badge badge-sm bg-gradient-secondary">Non inscrit</span> {% endif
+                                        %}
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="{{ path('app_user_show', {'id': user.id}) }}"
+                                            class="text-secondary font-weight-bold text-xs me-2" data-toggle="tooltip"
+                                            data-original-title="Voir détails">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="#" class="text-secondary font-weight-bold text-xs me-2"
+                                            data-toggle="tooltip" data-original-title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+
+                                    </td>
+                                </tr>
+                                {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center">Aucun utilisateur trouvé</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
