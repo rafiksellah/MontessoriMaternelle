@@ -75,6 +75,7 @@
 
     <!-- Custom Language Selector CSS -->
     <link href="{{ asset('assets/css/custom-language.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/responsive-header.css') }}" rel="stylesheet">
 
     <!-- RTL support for Arabic -->
     {% if app.request.locale == 'ar' %}
@@ -102,17 +103,9 @@
                     <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}">{{
                             'nav.employment'|trans }}</a></li>
                 </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
-
-
-            {% if app.user %}
-            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
-                <button type="submit" class="btn btn-danger">{{ 'nav.logout'|trans }}</button>
-            </form>
-            {% else %}
-            <a class="btn-getstarted" href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a> {% endif %}
-
+            <!-- Bouton mobile menu déplacé ici -->
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             <!-- Language Selector -->
             <div class="language-selector mx-3">
                 <div class="lang-switch-container">
@@ -132,6 +125,12 @@
                     </div>
                 </div>
             </div>
+            {% if app.user %}
+            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
+                <button type="submit" class="btn btn-danger">{{ 'nav.logout'|trans }}</button>
+            </form>
+            {% else %}
+            <a class="btn-getstarted" href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a> {% endif %}
         </div>
     </header>
     {% endblock %}
