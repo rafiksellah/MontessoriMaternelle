@@ -1,10 +1,16 @@
 /* RTL Support for Arabic Language */
 
 
+/* Ce fichier doit être chargé uniquement lorsque la langue est l'arabe */
+
+
+/* Il utilise le sélecteur html[dir="rtl"] pour cibler spécifiquement le mode RTL */
+
+
 /* Direction générale du document */
 
-html,
-body {
+html[dir="rtl"],
+html[dir="rtl"] body {
     direction: rtl;
     text-align: right;
 }
@@ -12,16 +18,16 @@ body {
 
 /* Navigation principale */
 
-.navmenu ul {
+html[dir="rtl"] .navmenu ul {
     padding-right: 0;
 }
 
-.logo {
+html[dir="rtl"] .logo {
     margin-right: 0;
     margin-left: auto;
 }
 
-.navmenu {
+html[dir="rtl"] .navmenu {
     margin-left: 0;
     margin-right: auto;
 }
@@ -29,19 +35,19 @@ body {
 
 /* Boutons et formulaires */
 
-.btn-getstarted {
+html[dir="rtl"] .btn-getstarted {
     margin-right: 0;
     margin-left: 15px;
 }
 
-.form-group label {
+html[dir="rtl"] .form-group label {
     text-align: right;
 }
 
 
 /* Icons Bootstrap */
 
-.bi {
+html[dir="rtl"] .bi {
     margin-right: 0;
     margin-left: 8px;
 }
@@ -49,70 +55,62 @@ body {
 
 /* Renversement des marges et paddings */
 
-.me-auto {
+html[dir="rtl"] .me-auto {
     margin-right: 0 !important;
     margin-left: auto !important;
 }
 
-.ms-auto {
+html[dir="rtl"] .ms-auto {
     margin-left: 0 !important;
     margin-right: auto !important;
 }
 
-.me-1,
-.me-2,
-.me-3,
-.me-4,
-.me-5 {
-    margin-right: 0 !important;
-}
-
-.ms-1 {
+html[dir="rtl"] .ms-1 {
     margin-left: 0 !important;
     margin-right: 0.25rem !important;
 }
 
-.ms-2 {
+html[dir="rtl"] .ms-2 {
     margin-left: 0 !important;
     margin-right: 0.5rem !important;
 }
 
-.ms-3 {
+html[dir="rtl"] .ms-3 {
     margin-left: 0 !important;
     margin-right: 1rem !important;
 }
 
-.ms-4 {
+html[dir="rtl"] .ms-4 {
     margin-left: 0 !important;
     margin-right: 1.5rem !important;
 }
 
-.ms-5 {
+html[dir="rtl"] .ms-5 {
     margin-left: 0 !important;
     margin-right: 3rem !important;
 }
 
-.me-1 {
+html[dir="rtl"] .me-1 {
     margin-right: 0 !important;
     margin-left: 0.25rem !important;
 }
 
-.me-2 {
+html[dir="rtl"] .me-2 {
     margin-right: 0 !important;
     margin-left: 0.5rem !important;
 }
 
-.me-3 {
+html[dir="rtl"] .me-3 {
     margin-right: 0 !important;
     margin-left: 1rem !important;
 }
 
-.me-4 {
+html[dir="rtl"] .me-4 {
     margin-right: 0 !important;
     margin-left: 1.5rem !important;
 }
 
-.me-5 {
+html[dir="rtl"] .me-5 {
     margin-right: 0 !important;
     margin-left: 3rem !important;
 }
@@ -121,7 +119,7 @@ body {
 /* Renversement des colonnes Bootstrap dans les rangées */
 
 @media (min-width: 768px) {
-    .row {
+    html[dir="rtl"] .row {
         flex-direction: row-reverse;
     }
 }
@@ -129,27 +127,58 @@ body {
 
 /* Alignement du texte pour les classes utilitaires */
 
-.text-start {
+html[dir="rtl"] .text-start {
     text-align: right !important;
 }
 
-.text-end {
+html[dir="rtl"] .text-end {
     text-align: left !important;
 }
 
 
-/* Footer */
+/* Footer spécifique */
 
-.footer-contact i {
+html[dir="rtl"] .footer-contact i {
     float: right;
     margin-left: 10px;
     margin-right: 0;
+    display: inline-block;
+    width: 20px;
+    /* Largeur fixe pour l'alignement */
+    text-align: center;
+}
+
+html[dir="rtl"] .footer .logo {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .footer .logo-text {
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .footer-links ul li {
+    position: relative;
+    padding-right: 15px;
+    padding-left: 0;
+}
+
+html[dir="rtl"] .footer-links ul li::before {
+    content: "\F134";
+    /* Code pour bi-chevron-left */
+    font-family: "bootstrap-icons";
+    position: absolute;
+    right: 0;
+    top: 2px;
+    transform: rotate(180deg);
+    /* Tourner la flèche pour RTL */
 }
 
 
 /* Adaptation des popups et dropdowns */
 
-.dropdown-menu {
+html[dir="rtl"] .dropdown-menu {
     text-align: right;
     left: auto;
     right: 0;
@@ -158,12 +187,12 @@ body {
 
 /* Adaptation des formulaires */
 
-.form-check {
+html[dir="rtl"] .form-check {
     padding-left: 0;
     padding-right: 1.5em;
 }
 
-.form-check .form-check-input {
+html[dir="rtl"] .form-check .form-check-input {
     float: right;
     margin-left: 0;
     margin-right: -1.5em;
@@ -172,27 +201,31 @@ body {
 
 /* Classes de Bootstrap pour le RTL */
 
-.float-start {
+html[dir="rtl"] .float-start {
     float: right !important;
 }
 
-.float-end {
+html[dir="rtl"] .float-end {
     float: left !important;
 }
 
 
 /* Spécifique pour les listes */
 
-ul,
-ol {
+html[dir="rtl"] ul,
+html[dir="rtl"] ol {
     padding-left: 0;
     padding-right: 2rem;
+}
+
+html[dir="rtl"] .list-unstyled {
+    padding-right: 0;
 }
 
 
 /* Adaptations pour les breadcrumbs */
 
-.breadcrumb-item+.breadcrumb-item::before {
+html[dir="rtl"] .breadcrumb-item+.breadcrumb-item::before {
     float: right;
     padding-right: 0;
     padding-left: 0.5rem;
@@ -201,12 +234,12 @@ ol {
 
 /* Adaptations pour les alertes */
 
-.alert-dismissible {
+html[dir="rtl"] .alert-dismissible {
     padding-left: 3rem;
     padding-right: 1.25rem;
 }
 
-.alert-dismissible .btn-close {
+html[dir="rtl"] .alert-dismissible .btn-close {
     left: 0;
     right: auto;
 }
@@ -214,11 +247,26 @@ ol {
 
 /* Adaptations pour les media objects */
 
-.media {
+html[dir="rtl"] .media {
     flex-direction: row-reverse;
 }
 
-.media-body {
+html[dir="rtl"] .media-body {
     margin-left: 0;
     margin-right: 1rem;
+}
+
+
+/* Corrections pour le mobile nav toggle */
+
+html[dir="rtl"] .mobile-nav-toggle {
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    html[dir="rtl"] .navbar-mobile .mobile-nav-toggle {
+        right: auto;
+        left: 15px;
+    }
 }

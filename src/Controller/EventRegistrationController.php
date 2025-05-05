@@ -24,6 +24,7 @@ class EventRegistrationController extends AbstractController
         $this->translator = $translator;
     }
     
+    #[Route('/event/register', name: 'event_register_no_locale')]
     #[Route('/{_locale}/event/register', name: 'event_register',requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function register(
         Request $request, 
@@ -117,6 +118,7 @@ class EventRegistrationController extends AbstractController
         MailerInterface $mailer, 
         string $locale,
         string $invitationFilePath
+
     ): void
     {
         try {
@@ -134,6 +136,12 @@ class EventRegistrationController extends AbstractController
                     'invitation_barbecue.pdf',
                     'application/pdf'
                 );
+               // Ajout de la deuxième pièce jointe - plan d'accès si nécessaire
+            $email->attachFromPath(
+                $this->getParameter('kernel.project_dir') . '/public/assets/img/programe.pdf', 
+                'programe.pdf',
+                'application/pdf'
+        );
             
             $mailer->send($email);
         } catch (\Exception $e) {
