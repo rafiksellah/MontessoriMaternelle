@@ -18,8 +18,8 @@ class ContactEmailService
     public function __construct(
         MailerInterface $mailer, 
         UrlGeneratorInterface $urlGenerator,
-        string $adminEmail = 'info@mia-dz.com',
-        string $senderEmail = 'noreply@mia-dz.com'
+        string $adminEmail = 'event@montessorialgerie.mia-dz.com',
+        string $senderEmail = 'noreply@montessorialgerie.mia-dz.com'
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
