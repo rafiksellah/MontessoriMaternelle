@@ -17,7 +17,7 @@ class EventEmailService
     public function __construct(
         MailerInterface $mailer, 
         TranslatorInterface $translator,
-        string $adminEmail = 'admin@example.com'
+        string $adminEmail = 'event@montessorialgerie.mia-dz.com'
     ) {
         $this->mailer = $mailer;
         $this->translator = $translator;
@@ -47,7 +47,7 @@ class EventEmailService
         $this->translator->setLocale($locale);
         
         $email = (new TemplatedEmail())
-            ->from(new Address('no-reply@example.com', 'Système de notification'))
+            ->from(new Address('event@montessorialgerie.mia-dz.com', 'Système de notification'))
             ->to(new Address($this->adminEmail, 'Administrateur'))
             ->subject($this->translator->trans('email.admin.subject', ['%name%' => $registration->getFirstName() . ' ' . $registration->getLastName()], 'messages', $locale))
             ->htmlTemplate('emails/' . $locale . '/event_admin_notification.html.twig')

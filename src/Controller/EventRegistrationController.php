@@ -92,6 +92,7 @@ class EventRegistrationController extends AbstractController
                 
                 // Envoyer l'email de confirmation à l'utilisateur avec invitation personnalisée
                 $this->sendConfirmationEmailWithCustomInvitation($registration, $mailer, $locale, $invitationFilePath);
+                $this->sendConfirmationEmail($registration, $mailer, $locale);
                 
                 // Remove the temporary file
                 if (file_exists($invitationFilePath)) {
@@ -123,7 +124,7 @@ class EventRegistrationController extends AbstractController
     {
         try {
             $email = (new TemplatedEmail())
-                ->from('contact@montessorialgerie.com')
+                ->from('event@montessorialgerie.mia-dz.com')
                 ->to($registration->getEmail())
                 ->subject($this->translator->trans('email.confirmation.subject', [], 'emails', $locale))
                 ->htmlTemplate('emails/'.$locale.'/registration_confirmation.html.twig')
@@ -169,7 +170,7 @@ class EventRegistrationController extends AbstractController
     private function sendConfirmationEmail(EventRegistration $registration, MailerInterface $mailer, string $locale): void
     {
         $email = (new TemplatedEmail())
-            ->from('contact@montessorialgerie.com')
+            ->from('event@montessorialgerie.mia-dz.com')
             ->to($registration->getEmail())
             ->subject($this->translator->trans('email.confirmation.subject', [], 'emails', $locale))
             ->htmlTemplate('emails/'.$locale.'/registration_confirmation.html.twig')
