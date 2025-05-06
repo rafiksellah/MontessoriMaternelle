@@ -48,6 +48,10 @@ class EventRegistration
     #[ORM\OneToOne(mappedBy: 'eventRegistration', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    
+    #[ORM\Column(options: ["default" => false])]
+    private bool $reminderSent = false;
+    
     public function __construct()
     {
         $this->guests = new ArrayCollection();
@@ -176,6 +180,17 @@ class EventRegistration
 
         $this->user = $user;
 
+        return $this;
+    }
+
+    public function isReminderSent(): bool
+    {
+        return $this->reminderSent;
+    }
+
+    public function setReminderSent(bool $reminderSent): self
+    {
+        $this->reminderSent = $reminderSent;
         return $this;
     }
 }

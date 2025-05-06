@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminder: Outdoor Barbecue Event</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #2c3e50;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .important {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reminder: Outdoor Barbecue Event</h1>
+        </div>
+
+        <p>Dear Parents {{ registration.firstName }} {{ registration.lastName }},</p>
+
+        <p>This is a friendly reminder about our outdoor barbecue event on <strong>{{ eventDate|date('l, F d, Y', 'UTC')
+                }}</strong>, starting at 9:00 AM at Rôtisserie of "La Corne d'Or" tourist complex.</p>
+
+        <p>Please confirm your attendance by <strong>{{ confirmationDeadline|date('F d, Y', 'UTC') }}</strong>.</p>
+
+        <div class="important">
+            <p>To view all the details of this friendly gathering, click the button below:</p>
+        </div>
+
+        <div class="btn-container">
+            <a href="{{ loginUrl }}" class="btn">Connect here</a>
+        </div>
+
+        <p>If you have already confirmed, please ignore this message.</p>
+
+        <div class="footer">
+            <p>Best regards,<br>The Organizing Team</p>
+        </div>
+    </div>
+</body>
+
+</html>

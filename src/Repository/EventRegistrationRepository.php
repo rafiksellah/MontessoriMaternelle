@@ -16,28 +16,12 @@ class EventRegistrationRepository extends ServiceEntityRepository
         parent::__construct($registry, EventRegistration::class);
     }
 
-    //    /**
-    //     * @return EventRegistration[] Returns an array of EventRegistration objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?EventRegistration
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findByReminderNotSent(): array
+    {
+        return $this->createQueryBuilder('er')
+            ->where('er.reminderSent = :reminderSent')
+            ->setParameter('reminderSent', false)
+            ->getQuery()
+            ->getResult();
+    }
 }
