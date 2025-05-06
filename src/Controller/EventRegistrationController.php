@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\EventRegistration;
 use Symfony\Component\Mime\Email;
+use App\Service\EventEmailService;
 use App\Form\EventRegistrationType;
 use App\Service\InvitationGenerator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,18 +19,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventRegistrationController extends AbstractController
 {
     private $translator;
+
+    private $eventEmailService;
     
-    public function __construct(TranslatorInterface $translator)
-    {
+    public function __construct(
+        TranslatorInterface $translator,
+        EventEmailService $eventEmailService
+    ) {
         $this->translator = $translator;
+        $this->eventEmailService = $eventEmailService;
     }
+    
     
     #[Route('/event/register', name: 'event_register_no_locale')]
     #[Route('/{_locale}/event/register', name: 'event_register',requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function register(
         Request $request, 
         EntityManagerInterface $em, 
-        MailerInterface $mailer,
         InvitationGenerator $invitationGenerator
     ): Response
     {
@@ -37,6 +43,7 @@ class EventRegistrationController extends AbstractController
         ini_set('memory_limit', '256M');
         
         $user = $this->getUser();
+        $locale = $request->getLocale(); // Get the current locale from the request
         
         // Vérifier si l'utilisateur est connecté
         if (!$user) {
@@ -70,9 +77,6 @@ class EventRegistrationController extends AbstractController
                 $em->persist($user);
                 $em->flush();
                 
-                // Using English only as requested
-                $locale = 'en';
-                
                 // Generate the personalized invitation with participant names
                 $invitationPdf = $invitationGenerator->generateInvitation($registration);
                 
@@ -90,9 +94,16 @@ class EventRegistrationController extends AbstractController
                 // Free memory
                 unset($invitationPdf);
                 
-                // Envoyer l'email de confirmation à l'utilisateur avec invitation personnalisée
-                $this->sendConfirmationEmailWithCustomInvitation($registration, $mailer, $locale, $invitationFilePath);
-                $this->sendAdminNotificationEmail($registration, $mailer, $locale);
+                // Send confirmation email using the service
+                $this->eventEmailService->sendConfirmationEmailWithAttachments(
+                    $registration, 
+                    $locale,
+                    $invitationFilePath, 
+                    $this->getParameter('kernel.project_dir') . '/public/assets/img/programme.pdf'
+                );
+                
+                // Send admin notification
+                $this->eventEmailService->sendAdminNotificationEmail($registration, $locale);
                 
                 // Remove the temporary file
                 if (file_exists($invitationFilePath)) {
@@ -112,86 +123,6 @@ class EventRegistrationController extends AbstractController
             'form' => $form->createView(),
             'user' => $user
         ]);
-    }
-
-    private function sendConfirmationEmailWithCustomInvitation(
-        EventRegistration $registration, 
-        MailerInterface $mailer, 
-        string $locale,
-        string $invitationFilePath
-
-    ): void
-    {
-        try {
-            $email = (new TemplatedEmail())
-                ->from('event@montessorialgerie.mia-dz.com')
-                ->to($registration->getEmail())
-                ->subject($this->translator->trans('email.confirmation.subject', [], 'emails', $locale))
-                ->htmlTemplate('emails/'.$locale.'/registration_confirmation.html.twig')
-                ->context([
-                    'registration' => $registration
-                ])
-                // Attach the personalized invitation with participant names
-                ->attachFromPath(
-                    $invitationFilePath,
-                    'invitation_barbecue.pdf',
-                    'application/pdf'
-                );
-               // Ajout de la deuxième pièce jointe - plan d'accès si nécessaire
-            $email->attachFromPath(
-                $this->getParameter('kernel.project_dir') . '/public/assets/img/programe.pdf', 
-                'programe.pdf',
-                'application/pdf'
-        );
-            
-            $mailer->send($email);
-        } catch (\Exception $e) {
-            // Log the error
-            error_log('Email Sending Error: ' . $e->getMessage());
-            throw $e;
-        }
-    }   
-    private function sendAdminNotificationEmail(EventRegistration $registration, MailerInterface $mailer, string $locale): void
-    {
-        $email = (new TemplatedEmail())
-            ->from('noreply@montessorialgerie.com')
-            ->to('contact@montessorialgerie.com')
-            ->subject($this->translator->trans('email.admin_notification.subject', [
-                '%firstName%' => $registration->getFirstName(),
-                '%lastName%' => $registration->getLastName()
-            ], 'emails', $locale))
-            ->htmlTemplate('emails/'.$locale.'/admin_notification_register_event.html.twig')
-            ->context([
-                'registration' => $registration
-            ]);
-        
-        $mailer->send($email);
-    }
-    private function sendConfirmationEmail(EventRegistration $registration, MailerInterface $mailer, string $locale): void
-    {
-        $email = (new TemplatedEmail())
-            ->from('event@montessorialgerie.mia-dz.com')
-            ->to($registration->getEmail())
-            ->subject($this->translator->trans('email.confirmation.subject', [], 'emails', $locale))
-            ->htmlTemplate('emails/'.$locale.'/registration_confirmation.html.twig')
-            ->context([
-                'registration' => $registration
-            ])
-            // Ajouter la pièce jointe (invitation)
-            ->attachFromPath(
-                $this->getParameter('kernel.project_dir') . '/public/assets/img/invitation.jpg',
-                'invitation.jpg',
-                'image/jpeg'
-            );
-        
-        // Ajout de la deuxième pièce jointe - plan d'accès si nécessaire
-        // $email->attachFromPath(
-        //     $this->getParameter('kernel.project_dir') . '/public/assets/img/plan_acces.pdf', 
-        //     'plan_acces.pdf',
-        //     'application/pdf'
-        // );
-        
-        $mailer->send($email);
     }
     
 }

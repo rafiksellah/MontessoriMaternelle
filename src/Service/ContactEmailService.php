@@ -19,7 +19,7 @@ class ContactEmailService
         MailerInterface $mailer, 
         UrlGeneratorInterface $urlGenerator,
         string $adminEmail = 'event@montessorialgerie.mia-dz.com',
-        string $senderEmail = 'noreply@montessorialgerie.mia-dz.com'
+        string $senderEmail = 'event@montessorialgerie.mia-dz.com'
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
