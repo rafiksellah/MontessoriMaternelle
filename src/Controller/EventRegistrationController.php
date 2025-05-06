@@ -92,7 +92,7 @@ class EventRegistrationController extends AbstractController
                 
                 // Envoyer l'email de confirmation à l'utilisateur avec invitation personnalisée
                 $this->sendConfirmationEmailWithCustomInvitation($registration, $mailer, $locale, $invitationFilePath);
-                $this->sendConfirmationEmail($registration, $mailer, $locale);
+                $this->sendAdminNotificationEmail($registration, $mailer, $locale);
                 
                 // Remove the temporary file
                 if (file_exists($invitationFilePath)) {
