@@ -220,26 +220,35 @@ security:
     no_account: 'Pas encore de compte?'
     register_here: 'Inscrivez-vous ici'
 
+# translations/messages.fr.yaml
 registration:
-  title: 'Rejoignez la communauté Montessori'
-  subtitle: 'Créez votre compte pour accéder à nos ressources pédagogiques'
-  first_name: 'Prénom'
-  first_name_placeholder: 'Votre prénom'
-  last_name: 'Nom'
-  last_name_placeholder: 'Votre nom'
-  email: 'Adresse email'
-  email_placeholder: 'exemple@email.com'
-  email_help: 'Nous ne partagerons jamais votre email avec des tiers.'
-  phone: 'Numéro de téléphone'
-  phone_placeholder: 'Ex: 05XXXXXXXX'
-  password: 'Mot de passe'
-  password_placeholder: 'Choisissez un mot de passe sécurisé'
-  password_help: 'Utilisez au moins 8 caractères, incluant lettres, chiffres et caractères spéciaux.'
+  title: "Créer un compte"
+  subtitle: "Rejoignez-nous pour profiter de nos services"
+  first_name: "Prénom"
+  first_name_placeholder: "Entrez votre prénom"
+  last_name: "Nom"
+  last_name_placeholder: "Entrez votre nom"
+  email: "Adresse email"
+  email_placeholder: "Entrez votre adresse email"
+  email_help: "Nous ne partagerons jamais votre email avec des tiers"
+  phone: "Numéro de téléphone"
+  phone_placeholder: "Entrez votre numéro de téléphone"
+  password: "Mot de passe"
+  password_placeholder: "Choisissez un mot de passe sécurisé"
+  password_help: "Votre mot de passe doit contenir au moins 8 caractères"
   agree_terms: "J'accepte les conditions d'utilisation"
   submit: "S'inscrire"
-  have_account: 'Vous avez déjà un compte?'
-  login_here: 'Connectez-vous ici'
-  success_message: 'Votre compte a été créé avec succès!'
+  have_account: "Vous avez déjà un compte ?"
+  login_here: "Connectez-vous ici"
+  
+  # Messages d'erreur
+  error:
+    email_already_used: "Cette adresse email est déjà utilisée."
+    general_error: "Une erreur est survenue lors de la création de votre compte. Veuillez réessayer."
+    
+  # Message de succès
+  success:
+    account_created: "Votre compte a été créé avec succès!"
 
 # translations/message.fr.yaml
 
