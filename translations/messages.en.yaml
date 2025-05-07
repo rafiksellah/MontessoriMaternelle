@@ -220,26 +220,35 @@ security:
     no_account: "Don't have an account yet?"
     register_here: 'Register here'
 
+# translations/messages.en.yaml
 registration:
-  title: 'Join the Montessori community'
-  subtitle: 'Create your account to access our educational resources'
-  first_name: 'First name'
-  first_name_placeholder: 'Your first name'
-  last_name: 'Last name'
-  last_name_placeholder: 'Your last name'
-  email: 'Email address'
-  email_placeholder: 'example@email.com'
-  email_help: 'We will never share your email with third parties.'
-  phone: 'Phone number'
-  phone_placeholder: 'Ex: 05XXXXXXXX'
-  password: 'Password'
-  password_placeholder: 'Choose a secure password'
-  password_help: 'Use at least 8 characters, including letters, numbers and special characters.'
-  agree_terms: 'I agree to the terms of use'
-  submit: 'Register'
-  have_account: 'Already have an account?'
-  login_here: 'Login here'
-  success_message: 'Your account has been successfully created!'
+  title: "Create an Account"
+  subtitle: "Join us to enjoy our services"
+  first_name: "First Name"
+  first_name_placeholder: "Enter your first name"
+  last_name: "Last Name"
+  last_name_placeholder: "Enter your last name"
+  email: "Email Address"
+  email_placeholder: "Enter your email address"
+  email_help: "We'll never share your email with anyone else"
+  phone: "Phone Number"
+  phone_placeholder: "Enter your phone number"
+  password: "Password"
+  password_placeholder: "Choose a secure password"
+  password_help: "Your password must be at least 8 characters long"
+  agree_terms: "I agree to the terms and conditions"
+  submit: "Register"
+  have_account: "Already have an account?"
+  login_here: "Login here"
+  
+  # Error messages
+  error:
+    email_already_used: "This email address is already in use."
+    general_error: "An error occurred while creating your account. Please try again."
+    
+  # Success message
+  success:
+    account_created: "Your account has been successfully created!"
 
 # translations/message.en.yaml
 
