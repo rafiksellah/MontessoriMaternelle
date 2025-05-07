@@ -182,7 +182,7 @@ event:
       looking_forward: 'Nous avons hâte de vous retrouver pour partager ce moment de détente et de convivialité.'
       limited_places: 'En raison du nombre de places limité, seuls les frères et sœurs âgés de moins de 12 ans pourront être présents.'
       your_info: 'Vos informations'
-      add_guests: 'Ajoutez le conjoint et les enfants (max 5)'
+      add_guests: 'Ajoutez le conjoint et les enfants (max 4)'
       add_guest_button: 'Ajouter un accompagnant'
       confirm_button: "Confirmer l'inscription"
   form:
@@ -193,7 +193,7 @@ event:
     lastName: 'Prénom'
     email: 'Email'
     phone: 'Téléphone'
-    add_guests: 'Ajoutez le conjoint et les enfants (max 5)'
+    add_guests: 'Ajoutez le conjoint et les enfants (max 4)'
     add_guest_button: 'Ajouter un accompagnant'
     remove_guest: 'Supprimer'
     confirm_registration: 'Confirmer l''inscription'

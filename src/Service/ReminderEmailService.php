@@ -45,7 +45,7 @@ class ReminderEmailService
         $this->eventDate = $eventDate ?? new \DateTime('2025-05-30');
         
         // Default confirmation deadline if not provided
-        $this->confirmationDeadline = $confirmationDeadline ?? new \DateTime('2025-05-25');
+        $this->confirmationDeadline = $confirmationDeadline ?? new \DateTime('2025-05-15');
         
         // Login URL
         $this->loginUrl = $loginUrl;

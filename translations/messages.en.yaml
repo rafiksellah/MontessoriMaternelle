@@ -181,7 +181,7 @@ event:
       looking_forward: 'We are looking forward to meeting you to share this moment of relaxation and conviviality.'
       limited_places: 'Due to the limited number of places, only siblings under 12 years old may attend.'
       your_info: 'Your information'
-      add_guests: 'Add spouse and children (max 5)'
+      add_guests: 'Add spouse and children (max 4)'
       add_guest_button: 'Add a guest'
       confirm_button: 'Confirm registration'
     form:
@@ -195,7 +195,7 @@ event:
     lastName: 'First Name'
     email: 'Email'
     phone: 'Phone'
-    add_guests: 'Add spouse and children (max 5)'
+    add_guests: 'Add spouse and children (max 4)'
     add_guest_button: 'Add a guest'
     remove_guest: 'Remove'
     confirm_registration: 'Confirm registration'
