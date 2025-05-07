@@ -60,13 +60,13 @@ class EventEmailService
                     $invitationFilePath,
                     'invitation_barbecue.pdf',
                     'application/pdf'
-                )
-                // Attach the program
-                ->attachFromPath(
-                    $programFilePath,
-                    'programme.pdf',
-                    'application/pdf'
                 );
+                // Attach the program
+                // ->attachFromPath(
+                //     $programFilePath,
+                //     'programme.pdf',
+                //     'application/pdf'
+                // );
             
             $this->mailer->send($email);
         } catch (\Exception $e) {
