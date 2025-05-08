@@ -169,7 +169,7 @@ event:
     card:
       title: 'Invitation au Barbecue - %date%'
       greeting: 'Chers Parents,'
-      info: "Merci de vous être connectés ! Le barbecue en plein air se tiendra le %date% à partir de %time%, à la Rôtisserie 'Coliseum' du complexe touristique %location%."
+      info: 'Merci de vous être connectés ! Le barbecue en plein air se tiendra le %date% à partir de %time%, à la Rôtisserie "Coliseum" du complexe touristique %location%.'
       location_link: 'Voir la localisation sur Google Maps'
       description: "Ce sera l'occasion de profiter d'un cadre naturel exceptionnel, de la plage et des aires de jeux. Les enfants pourront apporter ballons, vélos ou frisbees pour s'amuser librement."
       registration_info: "Afin de confirmer votre présence au barbecue, merci de remplir le formulaire ci-dessous en indiquant le nombre de participants :"
