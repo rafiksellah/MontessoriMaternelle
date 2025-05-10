@@ -168,12 +168,35 @@
 </div>
 
 <script>
+    // Modification du script pour ajouter un indicateur de chargement
     document.addEventListener('DOMContentLoaded', () => {
         const collectionHolder = document.querySelector('.guests-collection');
         const addBtn = document.getElementById('add-guest');
         const maxGuests = 4;
+        const form = document.getElementById('inscription-form');
+        const submitBtn = form.querySelector('button[type="submit"]');
 
         let index = collectionHolder.children.length;
+
+        // Ajout d'un indicateur de chargement
+        function showLoading() {
+            // Désactiver le bouton et ajouter l'indicateur de chargement
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> ' +
+                (submitBtn.textContent || 'Chargement...');
+        }
+
+        // Prévenir les soumissions multiples
+        form.addEventListener('submit', function (e) {
+            if (form.classList.contains('is-submitting')) {
+                e.preventDefault();
+                return false;
+            }
+
+            form.classList.add('is-submitting');
+            showLoading();
+            return true;
+        });
 
         addBtn.addEventListener('click', () => {
             if (index < maxGuests) {
@@ -191,24 +214,24 @@
 
                 // Créer la structure HTML pour le nouveau guest
                 guestRow.innerHTML = `
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="event_registration_guests_${index}_firstName" class="form-label required">${firstNameLabel}</label>
-                            <input type="text" id="event_registration_guests_${index}_firstName" name="event_registration[guests][${index}][firstName]" required="required" class="form-control">
-                        </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="event_registration_guests_${index}_firstName" class="form-label required">${firstNameLabel}</label>
+                        <input type="text" id="event_registration_guests_${index}_firstName" name="event_registration[guests][${index}][firstName]" required="required" class="form-control">
                     </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="event_registration_guests_${index}_lastName" class="form-label required">${lastNameLabel}</label>
-                            <input type="text" id="event_registration_guests_${index}_lastName" name="event_registration[guests][${index}][lastName]" required="required" class="form-control">
-                        </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="event_registration_guests_${index}_lastName" class="form-label required">${lastNameLabel}</label>
+                        <input type="text" id="event_registration_guests_${index}_lastName" name="event_registration[guests][${index}][lastName]" required="required" class="form-control">
                     </div>
-                    <div class="col-md-2 align-self-end">
-                        <button type="button" class="btn btn-danger btn-sm remove-guest">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </div>
-                `;
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <button type="button" class="btn btn-danger btn-sm remove-guest">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            `;
 
                 // Ajouter la nouvelle ligne au conteneur
                 collectionHolder.appendChild(guestRow);
