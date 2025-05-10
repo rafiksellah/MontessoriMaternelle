@@ -21,7 +21,7 @@ class EventRegistrationController extends AbstractController
     private $translator;
 
     private $eventEmailService;
-    
+
     public function __construct(
         TranslatorInterface $translator,
         EventEmailService $eventEmailService
@@ -29,28 +29,27 @@ class EventRegistrationController extends AbstractController
         $this->translator = $translator;
         $this->eventEmailService = $eventEmailService;
     }
-    
-    
+
+
     #[Route('/event/register', name: 'event_register_no_locale')]
-    #[Route('/{_locale}/event/register', name: 'event_register',requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
+    #[Route('/{_locale}/event/register', name: 'event_register', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function register(
-        Request $request, 
-        EntityManagerInterface $em, 
+        Request $request,
+        EntityManagerInterface $em,
         InvitationGenerator $invitationGenerator
-    ): Response
-    {
+    ): Response {
         // Set memory limit for the request
         ini_set('memory_limit', '256M');
-        
+
         $user = $this->getUser();
         $locale = $request->getLocale(); // Get the current locale from the request
-        
+
         // Vérifier si l'utilisateur est connecté
         if (!$user) {
             $this->addFlash('error', $this->translator->trans('event.error.login_required'));
             return $this->redirectToRoute('app_login');
         }
-        
+
         // Vérifier si l'utilisateur a déjà une inscription
         if ($user->getEventRegistration()) {
             $registration = $user->getEventRegistration();
@@ -64,9 +63,9 @@ class EventRegistrationController extends AbstractController
             $registration->setUser($user);
             $registration->setRegisteredAt(new \DateTimeImmutable());
         }
-        
+
         $form = $this->createForm(EventRegistrationType::class, $registration);
-        
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             try {
@@ -76,40 +75,40 @@ class EventRegistrationController extends AbstractController
                 $user->setEventRegistration($registration);
                 $em->persist($user);
                 $em->flush();
-                
+
                 // Generate the personalized invitation with participant names
                 $invitationPdf = $invitationGenerator->generateInvitation($registration);
-                
+
                 // Save the PDF to a temporary file with proper garbage collection
                 $tmpDir = $this->getParameter('kernel.project_dir') . '/var/tmp';
-    
+
                 // Créer le dossier si nécessaire
                 if (!file_exists($tmpDir)) {
                     mkdir($tmpDir, 0777, true);
                 }
-    
+
                 $invitationFilePath = $tmpDir . '/invitation_' . $registration->getId() . '_' . uniqid() . '.pdf';
                 file_put_contents($invitationFilePath, $invitationPdf);
-                
+
                 // Free memory
                 unset($invitationPdf);
-                
+
                 // Send confirmation email using the service
                 $this->eventEmailService->sendConfirmationEmailWithAttachments(
-                    $registration, 
+                    $registration,
                     $locale,
-                    $invitationFilePath, 
+                    $invitationFilePath,
                     $this->getParameter('kernel.project_dir') . '/public/assets/img/programme.pdf'
                 );
-                
+
                 // Send admin notification
                 $this->eventEmailService->sendAdminNotificationEmail($registration, $locale);
-                
+
                 // Remove the temporary file
                 if (file_exists($invitationFilePath)) {
                     unlink($invitationFilePath);
                 }
-                
+
                 $this->addFlash('success', $this->translator->trans('event.flash.registration_success'));
                 return $this->redirectToRoute('event_register');
             } catch (\Exception $e) {
@@ -118,11 +117,10 @@ class EventRegistrationController extends AbstractController
                 error_log('Registration Error: ' . $e->getMessage());
             }
         }
-        
+
         return $this->render('event_registration/index.html.twig', [
             'form' => $form->createView(),
             'user' => $user
         ]);
     }
-    
 }
