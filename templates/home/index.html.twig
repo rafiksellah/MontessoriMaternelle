@@ -2,6 +2,9 @@
 }} - {% endblock %} {% block stylesheets %}
 <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
 <main class="main">
+    <style>
+
+    </style>
     <!-- ======= Hero Section ======= -->
     <section id="hero-carousel" class="hero-carousel">
         <div class="container-fluid p-0" data-aos="fade-up">
@@ -59,79 +62,82 @@
     </section>
     <!-- End Hero Carousel -->
 
-    <!-- ======= Environnements Section ======= -->
-    <section id="environnements" class="environnements">
+    <!-- Environments Section -->
+    <section id="environments" class="environments light-background">
         <div class="container" data-aos="fade-up">
-            {% for message in app.flashes('success') %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"
-                    aria-label="{{ 'formations.alerts.close'|trans }}"></button>
-            </div>
-            {% endfor %}
-            <div class="section-header">
-                <h2>{{ 'environments.title'|trans }}</h2>
-                <p>{{ 'environments.subtitle'|trans }}</p>
+            <!-- Section header -->
+            <div class="section-header text-center mb-5">
+                <h2 class="envh2">{{ 'environments.title'|trans }}</h2 class="envh2">
+                <p class="envp">{{ 'environments.subtitle'|trans }}</p>
             </div>
 
-            <!-- Slider des environnements -->
-            <div class="swiper environnements-slider" data-aos="fade-up" data-aos-delay="200">
-                <div class="swiper-wrapper">
-
-                    <!-- Environnement 1: NIDO -->
-                    <div class="swiper-slide">
-                        <div class="environnement-item">
-                            <div class="environnement-img">
-                                <img src="{{ asset('/assets/img/formation1.avif') }}" class="img-fluid"
-                                    alt="{{ 'environments.nido.title'|trans }}">
-                            </div>
-                            <div class="environnement-info">
-                                <h3>{{ 'environments.nido.title'|trans }}</h3>
-                                <h4>{{ 'environments.nido.age'|trans }}</h4>
-                                <p>{{ 'environments.nido.description'|trans }}</p>
-                            </div>
-                        </div>
+            <!-- Flash messages -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8">
+                    {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <!-- End Environnement 1 -->
-
-                    <!-- Environnement 2: COMMUNAUTÉ ENFANTINE -->
-                    <div class="swiper-slide">
-                        <div class="environnement-item">
-                            <div class="environnement-img">
-                                <img src="{{ asset('/assets/img/formation2.avif') }}" class="img-fluid"
-                                    alt="{{ 'environments.community.title'|trans }}">
-                            </div>
-                            <div class="environnement-info">
-                                <h3>{{ 'environments.community.title'|trans }}</h3>
-                                <h4>{{ 'environments.community.age'|trans }}</h4>
-                                <p>{{ 'environments.community.description'|trans }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Environnement 2 -->
-
-                    <!-- Environnement 3: CASA DEI BAMBINI -->
-                    <div class="swiper-slide">
-                        <div class="environnement-item">
-                            <div class="environnement-img">
-                                <img src="{{ asset('/assets/img/formation3.avif') }}" class="img-fluid"
-                                    alt="{{ 'environments.casa.title'|trans }}">
-                            </div>
-                            <div class="environnement-info">
-                                <h3>{{ 'environments.casa.title'|trans }}</h3>
-                                <h4>{{ 'environments.casa.age'|trans }}</h4>
-                                <p>{{ 'environments.casa.description'|trans }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Environnement 3 -->
-
+                    {% endfor %}
                 </div>
-                <div class="swiper-pagination"></div>
+            </div>
+
+            <!-- Environment cards -->
+            <div class="row gy-4">
+                <!-- NIDO -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100">
+                        <img src="{{ asset('assets/img/formation1.avif') }}" class="card-img-top" alt="Nido"
+                            loading="lazy">
+                        <div class="card-body text-center p-4">
+                            <h3 class="card-title">{{ 'environments.nido.title'|trans }}</h3>
+                            <div class="age-badge mb-3">
+                                <span class="btn-getstarted rounded-pill px-3 py-2 fs-6">
+                                    {{ 'environments.nido.age'|trans }}
+                                </span>
+                            </div>
+                            <p class="card-text">{{ 'environments.nido.description'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMMUNAUTÉ ENFANTINE -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100">
+                        <img src="{{ asset('assets/img/formation2.avif') }}" class="card-img-top"
+                            alt="Communauté Enfantine" loading="lazy">
+                        <div class="card-body text-center p-4">
+                            <h3 class="card-title">{{ 'environments.community.title'|trans }}</h3>
+                            <div class="age-badge mb-3">
+                                <span class="btn-getstarted rounded-pill px-3 py-2 fs-6">
+                                    {{ 'environments.community.age'|trans }}
+                                </span>
+                            </div>
+                            <p class="card-text">{{ 'environments.community.description'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CASA DEI BAMBINI -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100">
+                        <img src="{{ asset('assets/img/formation3.avif') }}" class="card-img-top" alt="Casa dei Bambini"
+                            loading="lazy">
+                        <div class="card-body text-center p-4">
+                            <h3 class="card-title">{{ 'environments.casa.title'|trans }}</h3>
+                            <div class="age-badge mb-3">
+                                <span class="btn-getstarted rounded-pill px-3 py-2 fs-6">
+                                    {{ 'environments.casa.age'|trans }}
+                                </span>
+                            </div>
+                            <p class="card-text">{{ 'environments.casa.description'|trans }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <!-- End Environnements Section -->
 
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
@@ -149,11 +155,9 @@
                 <!-- Texte et bouton -->
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
                     <h2>{{ 'team.title'|trans }}</h2>
+                    <p> <strong>{{ 'team.subtitle'|trans }}</strong></p>
                     <p>{{ 'team.description'|trans }}</p>
-                    <div class="team-btn">
-                        <a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}"
-                            class="btn-rejoindre">{{ 'team.button'|trans }}</a>
-                    </div>
+
                 </div>
             </div>
 
@@ -161,88 +165,116 @@
     </section>
     <!-- End Team Section -->
 
-    <!-- ======= Contact Form Section ======= -->
-    <section id="contact-form" class="contact-form">
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact section-bg">
         <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>{{ 'contact.title'|trans }}</h2>
+
+            <div class="section-header text-center mb-5">
+                <h2 class="envh2">{{ 'contact.title'|trans }}</h2>
                 <p>{{ 'contact.subtitle'|trans }}</p>
             </div>
 
-            <div class="row gy-5">
-                <!-- Image à gauche -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="contact-img">
-                        <img src="{{asset('/assets/img/contact.jpg')}}" class="img-fluid"
-                            alt="{{ 'contact.title'|trans }}">
+            <!-- Flash messages -->
+            {% if form_success or app.flashes('success')|length > 0 %}
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {% for message in app.flashes('success') %}
+                        {{ message }}
+                        {% else %}
+                        {{ 'contact.success_message'|trans }}
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
+            </div>
+            {% endif %}
 
-                <!-- Formulaire à droite -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-form-container">
-                        {% if form_success is defined and form_success %}
-                        <div class="alert alert-success">
-                            {{ 'contact.success_message'|trans }}
-                        </div>
-                        {% endif %} {{ form_start(contact_form, {'attr': {'class': 'php-email-form'}}) }}
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                {{ form_label(contact_form.parentName, 'form.parent_name'|trans) }} {{
-                                form_widget(contact_form.parentName, {'attr': {'class': 'form-control'}}) }} {{
-                                form_errors(contact_form.parentName) }}
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body p-4 p-lg-5">
+                            {{ form_start(contact_form, {'attr': {'class': 'needs-validation'}}) }}
+                            <div class="row">
+                                <div class="col-12 mb-4">
+                                    {{ form_label(contact_form.parentName, null, {'label_attr': {'class':
+                                    'form-label'}}) }}
+                                    {{ form_widget(contact_form.parentName, {'attr': {'class': 'form-control',
+                                    'placeholder': 'contact.placeholder.parent_name'|trans}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.parentName) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    {{ form_label(contact_form.childName, null, {'label_attr': {'class': 'form-label'}})
+                                    }}
+                                    {{ form_widget(contact_form.childName, {'attr': {'class': 'form-control',
+                                    'placeholder': 'contact.placeholder.child_name'|trans}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.childName) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    {{ form_label(contact_form.childBirthDate, null, {'label_attr': {'class':
+                                    'form-label'}}) }}
+                                    {{ form_widget(contact_form.childBirthDate, {'attr': {'class': 'form-control'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.childBirthDate) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    {{ form_label(contact_form.phoneNumber, null, {'label_attr': {'class':
+                                    'form-label'}}) }}
+                                    {{ form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control',
+                                    'placeholder': '+213 000 000 000'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.phoneNumber) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    {{ form_label(contact_form.email, null, {'label_attr': {'class': 'form-label'}}) }}
+                                    {{ form_widget(contact_form.email, {'attr': {'class': 'form-control', 'placeholder':
+                                    'example@email.com'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.email) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    {{ form_label(contact_form.objective, null, {'label_attr': {'class': 'form-label'}})
+                                    }}
+                                    {{ form_widget(contact_form.objective, {'attr': {'class': 'form-select'}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.objective) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-4">
+                                    {{ form_label(contact_form.expectations, null, {'label_attr': {'class':
+                                    'form-label'}}) }}
+                                    {{ form_widget(contact_form.expectations, {'attr': {'class': 'form-control',
+                                    'placeholder': 'contact.placeholder.expectations'|trans}}) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(contact_form.expectations) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 py-3">{{ 'contact.submit'|trans
+                                        }}</button>
+                                </div>
                             </div>
-                            <div class="col-md-6 form-group">
-                                {{ form_label(contact_form.childName, 'form.child_name'|trans) }} {{
-                                form_widget(contact_form.childName, {'attr': {'class': 'form-control'}}) }} {{
-                                form_errors(contact_form.childName) }}
-                            </div>
+                            {{ form_end(contact_form) }}
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 form-group mt-3">
-                                {{ form_label(contact_form.childBirthDate, 'form.child_birth_date'|trans) }} {{
-                                form_widget(contact_form.childBirthDate, {'attr': {'class': 'form-control'}}) }} {{
-                                form_errors(contact_form.childBirthDate) }}
-                            </div>
-                            <div class="col-md-6 form-group mt-3">
-                                {{ form_label(contact_form.phoneNumber, 'form.phone_number'|trans) }} {{
-                                form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control'}}) }} {{
-                                form_errors(contact_form.phoneNumber) }}
-                            </div>
-                        </div>
-                        <div class="form-group mt-3">
-                            {{ form_label(contact_form.email, 'form.email'|trans) }} {{ form_widget(contact_form.email,
-                            {'attr': {'class': 'form-control'}}) }} {{ form_errors(contact_form.email) }}
-                        </div>
-                        <div class="form-group mt-3">
-                            {{ form_label(contact_form.objective, 'form.objective'|trans) }} {{
-                            form_widget(contact_form.objective, {'attr': {'class': 'form-select'}}) }} {{
-                            form_errors(contact_form.objective) }}
-                        </div>
-                        <div class="form-group mt-3">
-                            {{ form_label(contact_form.heardAboutUs, 'form.heard_about_us'|trans) }} {{
-                            form_widget(contact_form.heardAboutUs, {'attr': {'class': 'form-control'}}) }} {{
-                            form_errors(contact_form.heardAboutUs) }}
-                        </div>
-                        <div class="form-group mt-3">
-                            {{ form_label(contact_form.expectations, 'form.expectations'|trans) }} {{
-                            form_widget(contact_form.expectations, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
-                            {{ form_errors(contact_form.expectations) }}
-                        </div>
-                        <div class="form-group mt-3">
-                            {{ form_widget(contact_form.agreeTerms) }} {{ form_label(contact_form.agreeTerms,
-                            'form.agree_terms'|trans) }} {{ form_errors(contact_form.agreeTerms) }}
-                        </div>
-                        <div class="text-center mt-4">
-                            <button type="submit" class="btn-envoi">{{ 'contact.submit'|trans }}</button>
-                        </div>
-                        {{ form_end(contact_form) }}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End Contact Form Section -->
 
     <script>
         /**

@@ -1,8 +1,8 @@
 # Informations générales du site
 site:
-  name: 'Montessori'
-  name1: 'Algérie'
-  name2: ''
+  name: 'Maternelle'
+  name1: 'Montessori'
+  name2: 'Algérie'
   meta:
     description: 'Premier institut officiel Montessori en Algérie. Formation AMI, ateliers pédagogiques et ressources pour parents et éducateurs. Découvrez la méthode Montessori adaptée à la culture algérienne.'
     keywords: 'Montessori Algérie, formation montessori, pédagogie montessori, éducation alternative Algérie, AMI Algérie, montessori alger, ateliers montessori, éducation enfants Alger'
@@ -65,8 +65,9 @@ environments:
 
 # Team section
 team:
-    title: 'NOTRE ÉQUIPE ÉDUCATIVE'
-    description: 'Nous sommes convaincus que chaque personne impliquée dans la vie d''un enfant joue un rôle fondamental dans son développement. Nos enseignants et notre personnel sont rigoureusement sélectionnés pour leur passion pour l''éducation et leur engagement envers la pédagogie Montessori authentique, enrichis par des formations continues dispensées au sein de notre école.'
+    title: 'L’équipe MMA'
+    subtitle: 'Chez Montessori Algérie, nous plaçons l’adulte au cœur de l’environnement de l’enfant.'
+    description: 'Ce n’est pas uniquement la richesse du matériel pédagogique qui fait la différence, mais avant tout la qualité humaine et professionnelle de ceux qui accompagnent l’enfant au quotidien. C’est pourquoi le recrutement de nos collaborateurs fait l’objet d’une attention rigoureuse et d’exigences élevées. Nos éducateurs et éducatrices sont certifiés par l’Association Montessori Internationale (AMI) ainsi que par la Positive Discipline Association (PDA). Ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel.'
     button: 'Rejoindre notre équipe'
 
 # Form labels
@@ -108,10 +109,10 @@ alerts:
 
 # Page d'accueil (existante)
 hero:
-  welcome: 'Bienvenue à Montessori Algérie'
+  welcome: 'Bienvenue à la Maternelle Montessori Algérie'
   tagline: 'Premier institut officiel Montessori en Algérie'
-  education: 'Une éducation respectueuse'
-  adapted: 'Adaptée aux besoins spécifiques de chaque enfant'
+  education: 'MMA :  Maternelle Montessori Algérie '
+  adapted: '  Excellence & Authenticité'
   development: 'Développement naturel'
   environment: 'Un environnement préparé pour favoriser l''autonomie'
 
