@@ -83,58 +83,70 @@
 </head>
 
 <body class="{% block body_class %}{% if app.request.locale == 'ar' %}rtl{% endif %}{% endblock %}">
-
     {% block header %}
     <header id="header" class="header d-flex align-items-center sticky-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center">
-            <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
-                class="logo d-flex align-items-center me-auto">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <!-- Logo -->
+            <a href="{{ path('app_home', {'_locale': app.request.locale}) }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
                     class="logo-img">
                 <div class="logo-text">
                     <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
                     <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
+                    <h2 class="sitenames">{{ 'site.name2'|trans }}</h2>
                 </div>
             </a>
+
+            <!-- Menu de navigation principal -->
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}" class="active">{{
-                            'nav.home'|trans }}<br></a></li>
-                    <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}">{{
-                            'nav.employment'|trans }}</a></li>
+                    <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
+                            class="{% if app.request.get('_route') == 'app_home' %}active{% endif %}">
+                            {{ 'nav.home'|trans }}</a>
+                    </li>
+                    <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}"
+                            class="{% if app.request.get('_route') == 'app_recrutement' %}active{% endif %}">
+                            {{ 'nav.employment'|trans }}</a>
+                    </li>
                 </ul>
             </nav>
-            <!-- Bouton mobile menu déplacé ici -->
-            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            <!-- Language Selector -->
-            <div class="language-selector mx-3">
-                <div class="lang-switch-container">
-                    <div class="lang-switch-wrapper">
-                        <a href="{{ path('change_locale', {'locale': 'fr'}) }}"
-                            class="lang-switch {% if app.request.locale == 'fr' %}active{% endif %}">
-                            <span class="lang-name">FR</span>
-                        </a>
-                        <a href="{{ path('change_locale', {'locale': 'en'}) }}"
-                            class="lang-switch {% if app.request.locale == 'en' %}active{% endif %}">
-                            <span class="lang-name">EN</span>
-                        </a>
-                        <a href="{{ path('change_locale', {'locale': 'ar'}) }}"
-                            class="lang-switch {% if app.request.locale == 'ar' %}active{% endif %}">
-                            <span class="lang-name">ع</span>
-                        </a>
-                    </div>
-                </div>
+
+            <!-- Groupe d'éléments à droite -->
+            <div class="header-right-group">
+                <!-- Language Selector -->
+                <nav id="language-nav" class="navmenu">
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#"><span>{{ app.request.locale|capitalize }}</span> <i
+                                    class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a>
+                                </li>
+                                <li><a
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a>
+                                </li>
+                                <li><a
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ar'})) }}">ع</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Bouton login/logout -->
+                {% if app.user %}
+                <a class="btn-getstarted" href="{{ path('app_logout') }}">{{ 'nav.logout'|trans }}</a>
+                {% else %}
+                <a class="btn-getstarted" href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a>
+                {% endif %}
+
+                <!-- Bouton mobile menu -->
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </div>
-            {% if app.user %}
-            <form action="{{ path('app_logout') }}" method="post" style="margin-left: 10px;">
-                <button type="submit" class="btn btn-danger">{{ 'nav.logout'|trans }}</button>
-            </form>
-            {% else %}
-            <a class="btn-getstarted" href="{{ path('app_login') }}">{{ 'nav.login'|trans }}</a> {% endif %}
         </div>
     </header>
     {% endblock %}
-
     <main class="main">
         {% block body %} {# Content blocks will be replaced in each template #} {% endblock %}
     </main>
@@ -151,6 +163,7 @@
                         <div class="logo-text">
                             <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
                             <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
+                            <h2 class="sitenames">{{ 'site.name2'|trans }}</h2>
                             <h2 class="sitenames"></h2>
                         </div>
                     </a>
@@ -173,7 +186,6 @@
                     <p style="line-height: 2.8;">
                         <i class="bi bi-geo-alt"></i> {{ 'footer.address'|trans }} <br>
                         <i class="bi bi-envelope"></i> info@montessorialgerie.com <br>
-                        <i class="bi bi-telephone"></i> +213 666 340 821 <br>
                     </p>
                 </div>
             </div>

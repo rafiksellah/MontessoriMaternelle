@@ -3,7 +3,7 @@
 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; color: #333;">
     <div style="text-align: center; margin-bottom: 30px;">
     </div>
-    <h2 style="color: #009970;">Nouvelle demande de contact</h2>
+    <h2 style="color: #31B44C;">Nouvelle demande de contact</h2>
 
     <div style="background-color: #f8f9fa; border-radius: 5px; padding: 20px; margin-bottom: 20px;">
         <p><strong>Date de soumission :</strong> {{ contact.createdAt|date('d/m/Y H:i') }}</p>
@@ -12,19 +12,19 @@
             %}
         </p>
 
-        <h3 style="color: #009970; margin-top: 20px;">Informations parent/enfant</h3>
+        <h3 style="color: #31B44C; margin-top: 20px;">Informations parent/enfant</h3>
         <p><strong>Nom du parent :</strong> {{ contact.parentName }}</p>
         <p><strong>Email :</strong> {{ contact.email }}</p>
         <p><strong>Téléphone :</strong> {{ contact.phoneNumber }}</p>
         <p><strong>Nom de l'enfant :</strong> {{ contact.childName }}</p>
         <p><strong>Date de naissance de l'enfant :</strong> {{ contact.childBirthDate|date('d/m/Y') }}</p>
 
-        <h3 style="color: #009970; margin-top: 20px;">Informations complémentaires</h3>
+        <h3 style="color: #31B44C; margin-top: 20px;">Informations complémentaires</h3>
         <p><strong>Comment a-t-il entendu parler de nous :</strong> {{ contact.heardAboutUs }}</p>
 
         {% if contact.expectations %}
-        <h3 style="color: #009970; margin-top: 20px;">Attentes et commentaires</h3>
-        <div style="background-color: #fff; border-left: 4px solid #009970; padding: 15px; margin-top: 10px;">
+        <h3 style="color: #31B44C; margin-top: 20px;">Attentes et commentaires</h3>
+        <div style="background-color: #fff; border-left: 4px solid #31B44C; padding: 15px; margin-top: 10px;">
             <p style="margin: 0;">{{ contact.expectations|nl2br }}</p>
         </div>
         {% endif %}

@@ -44,7 +44,6 @@ class Contact
     private ?string $objective = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $heardAboutUs = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]

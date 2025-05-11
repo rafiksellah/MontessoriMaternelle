@@ -90,24 +90,15 @@ class ContactFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('heardAboutUs', TextType::class, [
-                'label' => 'Comment avez-vous entendu parler de nous ? / How did you hear about us? *',
+            ->add('expectations', TextareaType::class, [
+                'label' => 'Parlez-nous de vous et de vos attentes pour l\'éducation de votre enfant / Tell us about yourself and what you\'re looking for in your child\'s education *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez nous indiquer comment vous avez entendu parler de nous',
+                        'message' => 'Veuillez nous parler de vos attentes',
                     ]),
                 ],
-            ])
-            ->add('expectations', TextareaType::class, [
-                'label' => 'Parlez-nous de vous et de vos attentes pour l\'éducation de votre enfant / Tell us about yourself and what you\'re looking for in your child\'s education',
-                'required' => false,
-            ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => 'J\'accepte que mes données soient utilisées pour me contacter à propos de ma demande / I agree that my data will be used to contact me about my request',
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devez accepter les conditions pour continuer',
-                    ]),
+                'attr' => [
+                    'rows' => 5
                 ],
             ])
         ;

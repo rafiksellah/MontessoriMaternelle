@@ -2,7 +2,7 @@
 site:
   name: 'Montessori'
   name1: 'Algeria'
-  name2: ''
+  name2: 'Kindergarten'
   meta:
     description: 'First official Montessori institute in Algeria. AMI training, educational workshops and resources for parents and educators. Discover the Montessori method adapted to Algerian culture.'
     keywords: 'Montessori Algeria, montessori training, montessori pedagogy, alternative education Algeria, AMI Algeria, montessori algiers, montessori workshops, children education Algiers'
@@ -67,8 +67,9 @@ environments:
 
 # Team section
 team:
-    title: 'OUR EDUCATIONAL TEAM'
-    description: 'We believe that each person involved in a child''s life plays a fundamental role in their development. Our teachers and staff are rigorously selected for their passion for education and commitment to authentic Montessori pedagogy, enriched by ongoing training provided within our school.'
+    title: 'The MMA Team'
+    subtitle: 'At Montessori Algeria, we place the adult at the heart of the child’s environment.'
+    description: 'It is not only the richness of the educational material that makes the difference, but above all the human and professional quality of those who accompany the child daily. This is why the recruitment of our staff is carried out with rigorous attention and high standards. Our educators are certified by the Association Montessori Internationale (AMI) and the Positive Discipline Association (PDA). They also benefit from a continuous training program covering key areas such as health, safety, leadership, and both personal and professional development.'
     button: 'Join our team'
 
 # Form labels
@@ -109,10 +110,10 @@ alerts:
 
 # Home page (existing)
 hero:
-  welcome: 'Welcome to Montessori Algeria'
+  welcome: 'Welcome to Montessori Kindergarten Algeria'
   tagline: 'First official Montessori institute in Algeria'
-  education: 'Respectful education'
-  adapted: 'Adapted to each child''s specific needs'
+  education: 'MMA: Montessori Kindergarten of Algeria '
+  adapted: ' Excellence and Authenticity'
   development: 'Natural development'
   environment: 'A prepared environment to foster autonomy'
 
