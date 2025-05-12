@@ -1,205 +1,199 @@
 {% extends 'base.html.twig' %} {% block title %}Recrutement - {{ parent() }}{% endblock %} {% block stylesheets %}
 <link href="{{ asset('assets/css/recrutement.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
-<!-- Section 1: Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="{{ asset('assets/img/recrutement.jpg') }}" alt="Carrières à Montessori Algérie"
-                    class="img-fluid section-image" loading="lazy">
-            </div>
-            <div class="col-lg-6 hero-content">
-                <h1 class="section-title">CARRIÈRES à Montessori Algérie</h1>
-                <p class="section-text">Bienvenue sur la page Carrières de Montessori Algérie, un espace dédié à ceux
-                    qui partagent notre passion pour offrir une éducation d'exception.</p>
-                <a href="#jobs" class="btn btn-primary">Découvrir nos offres</a>
+<div class="page-title aos-init aos-animate" data-aos="fade">
+    <div class="heading">
+        <div class="container">
+            <div class="row d-flex justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h2 style="color: #fff !important; font-weight: 700;">{{ 'recruitment.title'|trans }}</h2>
+                    <p class="mb-0">{{ 'recruitment.intro'|trans }}</p>
+                </div>
             </div>
         </div>
     </div>
-</section>
+    <nav class="breadcrumbs">
+        <div class="container">
+            <ol>
+                <li><a href="/">{{ 'breadcrumb.home'|trans }}</a></li>
+                <li class="current">{{ 'breadcrumb.recruitment'|trans }}</li>
+            </ol>
+        </div>
+    </nav>
+</div>
 
 <!-- Section 2: Pourquoi rejoindre Montessori Algérie -->
-<section class="careers-section">
+<section id="why-us" class="section why-us">
     <div class="container">
-        <h2 class="section-title text-center mb-5">Pourquoi rejoindre Montessori Algérie ?</h2>
-
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-5 mb-4 mb-lg-0">
-                <img src="{{ asset('assets/img/atelier.jpg') }}" alt="Formation continue"
-                    class="img-fluid section-image" loading="lazy">
-            </div>
-            <div class="col-lg-7">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="benefits-box">
-                            <h4>FORMATION CONTINUE</h4>
-                            <p>Nous croyons en l'apprentissage continu et proposons des formations régulières pour
-                                enrichir vos compétences et approfondir votre expertise.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="benefits-box">
-                            <h4>SALAIRES COMPÉTITIFS ET AVANTAGES</h4>
-                            <p>Nous reconnaissons et valorisons votre engagement en veillant à ce que votre rémunération
-                                soit à la hauteur de vos contributions. En outre, nous offrons des avantages sociaux
-                                attractifs, tels qu'une assurance santé, des prêts
-                                sociaux et un accompagnement pour la garde d'enfants.</p>
-                        </div>
+        <div class="row gy-4">
+            <div class="col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+                <div class="why-box">
+                    <h3>{{ 'whyus.title'|trans }}</h3>
+                    <p>{{ 'whyus.intro'|trans }}</p>
+                    <div class="text-center">
+                        <a href="#" class="more-btn"><span>{{ 'whyus.button'|trans }}</span> <i
+                                class="bi bi-chevron-right"></i></a>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="row align-items-center">
-            <div class="col-lg-7 order-lg-1 order-2">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="benefits-box">
-                            <h4>ENVIRONNEMENT COLLABORATIF</h4>
-                            <p>La collaboration est au cœur de notre culture, favorisant des relations solides et un
-                                esprit d'équipe harmonieux.</p>
+            </div><!-- End Why Box -->
+            <div class="col-lg-8 d-flex align-items-stretch">
+                <div class="row gy-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-xl-4">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-clipboard-data"></i>
+                            <h4>{{ 'whyus.item1.title'|trans }}</h4>
+                            <p>{{ 'whyus.item1.text'|trans }}</p>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="benefits-box">
-                            <h4>MISSION CENTRÉE SUR L'ENFANT</h4>
-                            <p>Vous participerez à une mission essentielle : façonner l'avenir des enfants en leur
-                                offrant une éducation d'excellence.</p>
+                    </div><!-- End Icon Box -->
+                    <div class="col-xl-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-gem"></i>
+                            <h4>{{ 'whyus.item2.title'|trans }}</h4>
+                            <p>{{ 'whyus.item2.text'|trans }}</p>
                         </div>
-                    </div>
+                    </div><!-- End Icon Box -->
+                    <div class="col-xl-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                            <i class="bi bi-inboxes"></i>
+                            <h4>{{ 'whyus.item3.title'|trans }}</h4>
+                            <p>{{ 'whyus.item3.text'|trans }}</p>
+                        </div>
+                    </div><!-- End Icon Box -->
                 </div>
-            </div>
-            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
-                <img src="{{ asset('assets/img/recrt4.jpg') }}" alt="Environnement collaboratif"
-                    class="img-fluid section-image" loading="lazy">
             </div>
         </div>
     </div>
 </section>
+<!-- End Section 2-->
 
-<!-- Section 3: Nos Métiers -->
+<!-- Section: Nos Métiers -->
 <section class="jobs-section" id="jobs">
-    <div class="container">
-        <h2 class="section-title text-center mb-5">NOS MÉTIERS</h2>
+    <div class="container" data-aos="fade-up">
+        <h2 class="section-title text-center">{{ 'job.title'|trans }}</h2>
 
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-5 mb-4 mb-lg-0">
-                <img src="{{ asset('assets/img/recrutement.webp') }}" alt="Équipe pédagogique"
-                    class="img-fluid section-image" loading="lazy">
-            </div>
-            <div class="col-lg-7">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Équipe Pédagogique</h3>
-                            <div class="job-title">Enseignant d'anglais / d'arabe / Français</div>
-                            <div class="job-title">Enseignant de musique</div>
-                            <div class="job-title">Animateurs culture, sciences et nature</div>
-                        </div>
+        <div class="row">
+
+            <!-- Équipe Pédagogique -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrutement.webp') }}" alt="">
                     </div>
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Équipe Management administrative</h3>
-                            <div class="job-title">Directeur administratif et RH</div>
-                            <div class="job-title">Office manager</div>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.education.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.education.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.education.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.education.roles.1'|trans }}</li>
+                            <li>{{ 'job.team.education.roles.2'|trans }}</li>
+                            <li>{{ 'job.team.education.roles.3'|trans }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-7 order-lg-1 order-2">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Equipe HSE</h3>
-                            <div class="job-title">Responsable HSE : temps plein ou partiel</div>
-                            <div class="job-title">Cuisinier/Chef : temps plein</div>
-                            <div class="job-title">Aide-cuisinier</div>
-                            <div class="job-title">Personnel d'entretien et d'hygiène</div>
-                        </div>
+            <!-- Équipe Administrative -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrt.jpg') }}" alt="">
                     </div>
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Equipe HSE (suite)</h3>
-                            <div class="job-title">Agent d'accueil</div>
-                            <div class="job-title">Agent de sécurité</div>
-                            <div class="job-title">Factotum</div>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.admin.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.admin.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.admin.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.admin.roles.1'|trans }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
-                <img src="{{ asset('assets/img/recrt.jpg') }}" alt="Équipe HSE" class="img-fluid section-image"
-                    loading="lazy">
-            </div>
-        </div>
 
-        <div class="row align-items-center mb-5">
-            <div class="col-lg-5 mb-4 mb-lg-0">
-                <img src="{{ asset('assets/img/recrt2.avif') }}" alt="Activités extrascolaires"
-                    class="img-fluid section-image" loading="lazy">
-            </div>
-            <div class="col-lg-7">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Equipe Activité Extrascolaire</h3>
-                            <div class="job-title">Directeur des activités extrascolaires</div>
-                            <div class="job-title">Animateurs culture, sports, sciences et nature</div>
-                            <div class="job-title">Experts/passionnés de culture et histoire algérienne</div>
-                        </div>
+            <!-- Équipe HSE -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrt2.avif') }}" alt="">
                     </div>
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Equipe Santé</h3>
-                            <div class="job-title">Médecin</div>
-                            <div class="job-title">Psychologue : temps plein ou partiel</div>
-                            <div class="job-title">Orthophoniste : temps plein ou partiel</div>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.hse.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.hse.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.hse.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.hse.roles.1'|trans }}</li>
+                            <li>{{ 'job.team.hse.roles.2'|trans }}</li>
+                            <li>{{ 'job.team.hse.roles.3'|trans }}</li>
+                            <li>{{ 'job.team.hse.roles.4'|trans }}</li>
+                            <li>{{ 'job.team.hse.roles.5'|trans }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row align-items-center">
-            <div class="col-lg-7 order-lg-1 order-2">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Équipe marketing</h3>
-                            <div class="job-title">Gestionnaire de communauté</div>
-                            <div class="job-title">Spécialiste du marketing numérique</div>
-                            <div class="job-title">Graphiste</div>
-                        </div>
+            <!-- Extrascolaire -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
                     </div>
-                    <div class="col-md-6">
-                        <div class="jobs-category">
-                            <h3>Équipe technique</h3>
-                            <div class="job-title">Technicien informatique</div>
-                            <div class="job-title">Ingénieur informatique</div>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.extras.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.extras.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.extras.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.extras.roles.1'|trans }}</li>
+                            <li>{{ 'job.team.extras.roles.2'|trans }}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
-                <img src="{{ asset('assets/img/recrt3.avif') }}" alt="Équipe marketing et technique"
-                    class="img-fluid section-image" loading="lazy">
+
+            <!-- Équipe Santé -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.health.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.health.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.health.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.health.roles.1'|trans }}</li>
+                            <li>{{ 'job.team.health.roles.2'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Équipe Marketing -->
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#">{{ 'job.team.marketing.title'|trans }}</a></h5>
+                        <p class="fst-italic text-center">{{ 'job.team.marketing.desc'|trans }}</p>
+                        <ul class="job-list">
+                            <li>{{ 'job.team.marketing.roles.0'|trans }}</li>
+                            <li>{{ 'job.team.marketing.roles.1'|trans }}</li>
+                            <li>{{ 'job.team.marketing.roles.2'|trans }}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Call to Action -->
         <div class="row mt-5">
             <div class="col-12 text-center">
-                <h3 class="mb-4">Intéressé(e) par l'une de nos opportunités ?</h3>
-                <a href="mailto:recrutement@mia-dz.com" class="btn btn-primary btn-lg">Postulez maintenant</a>
-                <p class="mt-3">Ou envoyez votre CV et lettre de motivation à <strong>recrutement@mia-dz.com</strong>
-                </p>
+                <h3 class="mb-4">{{ 'job.cta.title'|trans }}</h3>
+                <a href="#" class="btn btn-primary btn-lg">{{ 'job.cta.button'|trans }}</a>
             </div>
         </div>
     </div>
 </section>
+<!-- End Section -->
 {% endblock %} {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {

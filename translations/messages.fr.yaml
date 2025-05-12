@@ -251,79 +251,80 @@ registration:
   success:
     account_created: "Votre compte a été créé avec succès!"
 
-# translations/message.fr.yaml
+# Why join us section
+recruitment.title: "Recrutement"
+recruitment.intro: "Bienvenue sur la page Carrières de Montessori Algérie, un espace dédié à ceux qui partagent notre passion pour offrir une éducation d'exception."
+breadcrumb.home: "Accueil"
+breadcrumb.recruitment: "Recrutement"
 
-recrutement:
-  title: "Recrutement"
-  hero:
-    heading: "CARRIÈRES à Montessori Algérie"
-    description: "Bienvenue sur la page Carrières de Montessori Algérie, un espace dédié à ceux qui partagent notre passion pour offrir une éducation d'exception."
-    discover_button: "Découvrir nos offres"
-  pourquoi:
-    heading: "Pourquoi rejoindre Montessori Algérie ?"
-    formation_continue:
-      title: "FORMATION CONTINUE"
-      description: "Nous croyons en l'apprentissage continu et proposons des formations régulières pour enrichir vos compétences et approfondir votre expertise."
-    salaires:
-      title: "SALAIRES COMPÉTITIFS ET AVANTAGES"
-      description: "Nous reconnaissons et valorisons votre engagement en veillant à ce que votre rémunération soit à la hauteur de vos contributions. En outre, nous offrons des avantages sociaux attractifs, tels qu'une assurance santé, des prêts sociaux et un accompagnement pour la garde d'enfants."
-    environnement:
-      title: "ENVIRONNEMENT COLLABORATIF"
-      description: "La collaboration est au cœur de notre culture, favorisant des relations solides et un esprit d'équipe harmonieux."
-    mission:
-      title: "MISSION CENTRÉE SUR L'ENFANT"
-      description: "Vous participerez à une mission essentielle : façonner l'avenir des enfants en leur offrant une éducation d'excellence."
-  metiers:
-    heading: "NOS MÉTIERS"
-    pedagogique:
-      title: "Équipe Pédagogique"
-      postes:
-        - "Enseignant d'anglais / d'arabe / Français"
-        - "Enseignant de musique"
-        - "Animateurs culture, sciences et nature"
-    administratif:
-      title: "Équipe Management administrative"
-      postes:
-        - "Directeur administratif et RH"
-        - "Office manager"
-    hse1:
-      title: "Equipe HSE"
-      postes:
-        - "Responsable HSE : temps plein ou partiel"
-        - "Cuisinier/Chef : temps plein"
-        - "Aide-cuisinier"
-        - "Personnel d'entretien et d'hygiène"
-    hse2:
-      title: "Equipe HSE (suite)"
-      postes:
-        - "Agent d'accueil"
-        - "Agent de sécurité"
-        - "Factotum"
-    extrascolaire:
-      title: "Equipe Activité Extrascolaire"
-      postes:
-        - "Directeur des activités extrascolaires"
-        - "Animateurs culture, sports, sciences et nature"
-        - "Experts/passionnés de culture et histoire algérienne"
-    sante:
-      title: "Equipe Santé"
-      postes:
-        - "Médecin"
-        - "Psychologue : temps plein ou partiel"
-        - "Orthophoniste : temps plein ou partiel"
-    marketing:
-      title: "Équipe marketing"
-      postes:
-        - "Gestionnaire de communauté"
-        - "Spécialiste du marketing numérique"
-        - "Graphiste"
-    technique:
-      title: "Équipe technique"
-      postes:
-        - "Technicien informatique"
-        - "Ingénieur informatique"
-  cta:
-    heading: "Intéressé(e) par l'une de nos opportunités ?"
-    button: "Postulez maintenant"
-    email_text: "Ou envoyez votre CV et lettre de motivation à"
+whyus.title: "Pourquoi rejoindre Montessori Algérie?"
+whyus.intro: >
+  Découvrez un environnement de travail pensé pour l’épanouissement professionnel et personnel :
+
+  Un cadre de travail exceptionnel.
+  Travaillez chaque jour dans un jardin luxuriant, apaisant et inspirant, conçu pour favoriser la concentration, la créativité et le bien-être.
+
+whyus.item1.title: "Une équipe multilingue, dynamique et engagée"
+whyus.item1.text: >
+  Rejoignez une équipe d’excellence, passionnée par l’éducation et composée de professionnels venant d’horizons variés. Ici, la diversité est une force !
+
+whyus.item2.title: "Une rémunération à la hauteur de votre talent"
+whyus.item2.text: >
+  Nous offrons un salaire compétitif, aligné avec vos compétences et votre engagement.
+
+whyus.item3.title: "Des avantages sociaux multiples"
+whyus.item3.text: >
+  Profitez de nombreux avantages sociaux : couverture santé, congés adaptés, formations continues, prêts sociaux.
+whyus.button: "En savoir plus"
+
+job.title: "NOS MÉTIERS"
+
+job.team.education.title: "Équipe Pédagogique"
+job.team.education.desc: "Enseignants et animateurs pour un apprentissage complet"
+job.team.education.roles:
+  - "Enseignant d'anglais"
+  - "Enseignant d'arabe"
+  - "Enseignant Français"
+  - "Enseignant de musique"
+
+job.team.admin.title: "Équipe Management administrative"
+job.team.admin.desc: "Gestion et administration de l'établissement"
+job.team.admin.roles:
+  - "Directeur administratif et RH"
+  - "Office manager"
+
+job.team.hse.title: "Équipe Support"
+job.team.hse.desc: "Hygiène, sécurité et environnement"
+job.team.hse.roles:
+  - "Responsable HSE"
+  - "Cuisinier/Chef"
+  - "Aide-cuisinier"
+  - "Personnel d'entretien et d'hygiène"
+  - "Agent d'accueil"
+  - "Factotum"
+
+job.team.extras.title: "Équipe Activité Extrascolaire"
+job.team.extras.desc: "Animation culturelle et sportive"
+job.team.extras.roles:
+  - "Directeur des activités extrascolaires"
+  - "Animateurs culture, sports, sciences et nature"
+  - "Experts/passionnés de culture et histoire algérienne"
+
+job.team.health.title: "Équipe Santé"
+job.team.health.desc: "Soins et bien-être des élèves"
+job.team.health.roles:
+  - "Médecin"
+  - "Psychologue"
+  - "Orthophoniste"
+
+job.team.marketing.title: "Équipe Marketing"
+job.team.marketing.desc: "Communication et support technique"
+job.team.marketing.roles:
+  - "Gestionnaire de communauté"
+  - "Spécialiste du marketing numérique"
+  - "Graphiste"
+
+job.cta.title: "Intéressé(e) par l'une de nos opportunités ?"
+job.cta.button: "Postulez maintenant"
+
 
