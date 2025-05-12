@@ -16,6 +16,7 @@
 ###< .htaccess file ###
 .htaccess
 /public/.htaccess
+/public/uploads
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml

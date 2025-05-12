@@ -188,13 +188,182 @@
         <div class="row mt-5">
             <div class="col-12 text-center">
                 <h3 class="mb-4">{{ 'job.cta.title'|trans }}</h3>
-                <a href="#" class="btn btn-primary btn-lg">{{ 'job.cta.button'|trans }}</a>
+                <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
+                    data-bs-target="#jobApplicationModal">
+                    {{ 'job.cta.button'|trans }}
+                </button>
             </div>
         </div>
     </div>
 </section>
-<!-- End Section -->
-{% endblock %} {% block javascripts %}
+<!-- Modal de candidature -->
+<div class="modal fade" id="jobApplicationModal" tabindex="-1" aria-labelledby="jobApplicationModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="jobApplicationModalLabel">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Formulaire de Candidature
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Progress bar -->
+                <div class="form-progress mb-4">
+                    <div class="form-progress-bar" id="formProgressBar"></div>
+                </div>
+
+                {{ form_start(form, {'attr': {'id': 'jobApplicationForm', 'class': 'needs-validation', 'novalidate':
+                true}}) }}
+
+                <!-- Informations personnelles -->
+                <div class="form-section">
+                    <h4><i class="bi bi-person me-2"></i>Informations personnelles</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.nom) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.prenom) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.dateNaissance) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.lieuResidence) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.nationalite) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-check mt-4">
+                                    {{ form_widget(form.permisTravail) }}
+                                    {{ form_label(form.permisTravail) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.telephone) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.email) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Candidature -->
+                <div class="form-section">
+                    <h4><i class="bi bi-briefcase me-2"></i>Candidature</h4>
+                    <div class="form-group">
+                        {{ form_row(form.posteSouhaite) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.raisonInteretPoste) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.cvFilename) }}
+                                {{ form_widget(form.cvFilename) }}
+                                <span id="cv-filename" class="filename-display text-muted small d-block mt-1">Aucun
+                                    fichier sélectionné</span>
+                                {{ form_errors(form.cvFilename) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label(form.motivationFileName) }}
+                                {{ form_widget(form.motivationFileName) }}
+                                <span id="motivation-filename"
+                                    class="filename-display text-muted small d-block mt-1">Aucun fichier
+                                    sélectionné</span>
+                                {{ form_errors(form.motivationFileName) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Langues -->
+                <div class="form-section">
+                    <h4><i class="bi bi-translate me-2"></i>Langues parlées et niveau de maîtrise</h4>
+                    <div class="languages-section">
+                        {% for langue in form.langues %}
+                        <div class="language-item card mb-3">
+                            <div class="card-body">
+                                {{ form_widget(langue.nom, {'attr': {'class': 'd-none'}}) }}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0 text-primary">{{ langue.nom.vars.value }}</h5>
+                                    <div class="col-6">
+                                        {{ form_label(langue.niveau, 'Niveau de maîtrise', {'label_attr': {'class':
+                                        'visually-hidden'}}) }}
+                                        {{ form_widget(langue.niveau, {'attr': {'class': 'form-select',
+                                        'placeholder': 'Sélectionnez votre niveau'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Motivation et vision -->
+                <div class="form-section">
+                    <h4><i class="bi bi-heart me-2"></i>Motivation et vision</h4>
+                    <div class="form-group">
+                        {{ form_row(form.motivationMMA) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_row(form.contributionMMA) }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.disponibilite) }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_row(form.engagement) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    {{ form_row(form.submit) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         if (typeof AOS !== 'undefined') {
@@ -205,6 +374,256 @@
             });
             AOS.init();
         }
+
+        // Form validation and submission
+        const form = document.getElementById('jobApplicationForm');
+        const progressBar = document.getElementById('formProgressBar');
+        const formSections = document.querySelectorAll('.form-section');
+
+        // Update progress bar
+        function updateProgressBar() {
+            let filledInputs = 0;
+            let totalInputs = 0;
+
+            form.querySelectorAll('input, select, textarea').forEach(input => {
+                if (input.type !== 'hidden' && input.name !== '_token') {
+                    totalInputs++;
+                    if (input.value && input.value.trim() !== '') {
+                        filledInputs++;
+                    }
+                }
+            });
+
+            const progress = (filledInputs / totalInputs) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Add event listeners to form inputs
+        form.querySelectorAll('input, select, textarea').forEach(input => {
+            input.addEventListener('input', updateProgressBar);
+            input.addEventListener('change', updateProgressBar);
+        });
+
+        // Initial progress update
+        updateProgressBar();
+
+        // Form submission with AJAX
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (form.checkValidity()) {
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+
+                // Show loading state
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Envoi en cours...';
+                submitBtn.disabled = true;
+
+                // Create FormData for file upload
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Success message
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('jobApplicationModal'));
+                            modal.hide();
+
+                            // Show success alert
+                            const alertDiv = document.createElement('div');
+                            alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3';
+                            alertDiv.style.zIndex = '9999';
+                            alertDiv.innerHTML = `
+                    <i class="bi bi-check-circle me-2"></i>
+                    ${data.message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                            document.body.appendChild(alertDiv);
+
+                            // Reset form
+                            form.reset();
+                            form.classList.remove('was-validated');
+                            updateProgressBar();
+
+                            // Remove alert after 5 seconds
+                            setTimeout(() => {
+                                alertDiv.remove();
+                            }, 5000);
+                        } else {
+                            // Show specific errors
+                            let errorMessage = data.message || 'Une erreur est survenue';
+
+                            // If there are specific field errors, add them
+                            if (data.errors && Array.isArray(data.errors)) {
+                                errorMessage += '<ul class="mt-2 mb-0">';
+                                data.errors.forEach(error => {
+                                    errorMessage += `<li>${error}</li>`;
+                                });
+                                errorMessage += '</ul>';
+                            }
+
+                            // If there are field-specific errors, display them
+                            if (data.fieldErrors) {
+                                Object.keys(data.fieldErrors).forEach(fieldName => {
+                                    const field = form.querySelector(`[name*="${fieldName}"]`);
+                                    if (field) {
+                                        // Remove existing error messages for this field
+                                        const existingError = field.parentElement.querySelector('.field-error');
+                                        if (existingError) {
+                                            existingError.remove();
+                                        }
+
+                                        // Add new error message
+                                        const errorDiv = document.createElement('div');
+                                        errorDiv.className = 'field-error text-danger small mt-1';
+                                        errorDiv.innerHTML = data.fieldErrors[fieldName].join(', ');
+                                        field.parentElement.appendChild(errorDiv);
+
+                                        // Add invalid class to field
+                                        field.classList.add('is-invalid');
+                                    }
+                                });
+                            }
+
+                            // Show general error message
+                            const alertDiv = document.createElement('div');
+                            alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                            alertDiv.innerHTML = `
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    ${errorMessage}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                            form.insertBefore(alertDiv, form.firstChild);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+                        alertDiv.innerHTML = `
+                <i class="bi bi-exclamation-triangle me-2"></i>
+                Une erreur est survenue. Veuillez réessayer.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+                        form.insertBefore(alertDiv, form.firstChild);
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
+            } else {
+                // Show validation errors for HTML5 validation
+                form.classList.add('was-validated');
+
+                // Find first invalid field and scroll to it
+                const firstInvalidField = form.querySelector(':invalid');
+                if (firstInvalidField) {
+                    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstInvalidField.focus();
+                }
+            }
+        });
+        // File input change handler
+        form.querySelectorAll('input[type="file"]').forEach(fileInput => {
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                const targetId = this.getAttribute('data-filename-target');
+
+                // Find the corresponding filename display element
+                let display = null;
+                if (targetId) {
+                    display = document.getElementById(targetId);
+                }
+
+                // If no target specified, try to find display element by convention
+                if (!display) {
+                    if (this.name === 'job_application[cvFilename]') {
+                        display = document.getElementById('cv-filename');
+                    } else if (this.name === 'job_application[motivationFileName]') {
+                        display = document.getElementById('motivation-filename');
+                    }
+                }
+
+                // Still no display element? Create one
+                if (!display) {
+                    display = document.createElement('span');
+                    display.className = 'filename-display text-muted small d-block mt-1';
+                    this.parentElement.appendChild(display);
+                }
+
+                if (file) {
+                    display.textContent = file.name;
+                    display.classList.remove('text-muted');
+                    display.classList.add('text-success');
+                } else {
+                    display.textContent = 'Aucun fichier sélectionné';
+                    display.classList.remove('text-success');
+                    display.classList.add('text-muted');
+                }
+            });
+        });
+        // Modal events
+        const modal = document.getElementById('jobApplicationModal');
+        modal.addEventListener('hidden.bs.modal', function () {
+            // Reset form when modal is closed
+            form.reset();
+            form.classList.remove('was-validated');
+            updateProgressBar();
+
+            // Remove any alerts
+            form.querySelectorAll('.alert').forEach(alert => alert.remove());
+        });
+    });
+    // Ajoutez cette fonction pour nettoyer les erreurs lors de la saisie
+    function clearFieldError(field) {
+        // Remove is-invalid class
+        field.classList.remove('is-invalid');
+
+        // Remove error message
+        const existingError = field.parentElement.querySelector('.field-error');
+        if (existingError) {
+            existingError.remove();
+        }
+    }
+
+    // Ajoutez ces event listeners après la création du formulaire
+    form.querySelectorAll('input, select, textarea').forEach(field => {
+        field.addEventListener('input', function () {
+            clearFieldError(this);
+        });
+
+        field.addEventListener('change', function () {
+            clearFieldError(this);
+        });
+    });
+
+    // Fonction pour nettoyer toutes les erreurs
+    function clearAllErrors() {
+        // Remove all alert messages
+        form.querySelectorAll('.alert').forEach(alert => alert.remove());
+
+        // Remove all field errors
+        form.querySelectorAll('.field-error').forEach(error => error.remove());
+
+        // Remove is-invalid classes
+        form.querySelectorAll('.is-invalid').forEach(field => {
+            field.classList.remove('is-invalid');
+        });
+    }
+
+    // Nettoyer les erreurs quand le modal s'ouvre
+    const modal = document.getElementById('jobApplicationModal');
+    modal.addEventListener('show.bs.modal', function () {
+        clearAllErrors();
     });
 </script>
 {% endblock %}

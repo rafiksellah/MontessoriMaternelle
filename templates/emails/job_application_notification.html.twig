@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouvelle candidature reçue - Montessori Algérie</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .email-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #dc3545;
+        }
+
+        h1 {
+            color: #dc3545;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .alert {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+
+        .candidate-info {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #dc3545;
+            margin: 20px 0;
+        }
+
+        .candidate-info h3 {
+            color: #dc3545;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background-color: #ffffff;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #212529;
+            font-size: 14px;
+        }
+
+        .section {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .section h3 {
+            color: #495057;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .languages-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .language-item {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .files-info {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .files-info h4 {
+            color: #007b8a;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .file-item {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            border: 1px solid #b8daff;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-radius: 8px;
+        }
+
+        .action-buttons h3 {
+            color: #007b8a;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 5px 10px;
+            background-color: #007b8a;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #006973;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .textarea-content {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            min-height: 80px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🔔 Nouvelle candidature reçue</h1>
+            <p style="color: #666;">Système de recrutement - Montessori Algérie</p>
+        </div>
+
+        <div class="alert">
+            <strong>⚡ Action requise :</strong> Une nouvelle candidature vient d'être soumise pour le poste de
+            <strong>{{ application.posteSouhaite }}</strong>
+        </div>
+
+        <div class="candidate-info">
+            <h3>👤 Informations du candidat</h3>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Nom complet</div>
+                    <div class="info-value">{{ application.nom }} {{ application.prenom }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">{{ application.email }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Téléphone</div>
+                    <div class="info-value">{{ application.telephone }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Date de naissance</div>
+                    <div class="info-value">{{ application.dateNaissance|date('d/m/Y') }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Lieu de résidence</div>
+                    <div class="info-value">{{ application.lieuResidence }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Nationalité</div>
+                    <div class="info-value">{{ application.nationalite }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Permis de travail</div>
+                    <div class="info-value">{{ application.permisTravail ? '✅ Oui' : '❌ Non' }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Disponibilité</div>
+                    <div class="info-value">{{ application.disponibilite }}</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Engagement souhaité</div>
+                    <div class="info-value">{{ application.engagement }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>💼 Candidature</h3>
+            <div class="info-item">
+                <div class="info-label">Poste souhaité</div>
+                <div class="info-value"><strong>{{ application.posteSouhaite }}</strong></div>
+            </div>
+
+            <h4 style="margin-top: 20px; color: #495057;">Raison de l'intérêt pour le poste :</h4>
+            <div class="textarea-content">
+                {{ application.raisonInteretPoste|nl2br }}
+            </div>
+        </div>
+
+        {% if application.langues|length > 0 %}
+        <div class="section">
+            <h3>🌐 Langues</h3>
+            <div class="languages-grid">
+                {% for langue in application.langues %}
+                {% if langue.niveau %}
+                <div class="language-item">
+                    <span><strong>{{ langue.nom }}</strong></span>
+                    <span class="badge">{{ langue.niveau }}</span>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="section">
+            <h3>💡 Motivation et vision</h3>
+
+            <h4 style="color: #495057;">Motivation à postuler chez MMA :</h4>
+            <div class="textarea-content">
+                {{ application.motivationMMA|nl2br }}
+            </div>
+
+            <h4 style="color: #495057; margin-top: 20px;">Contribution souhaitée à MMA :</h4>
+            <div class="textarea-content">
+                {{ application.contributionMMA|nl2br }}
+            </div>
+        </div>
+
+        <div class="files-info">
+            <h4>📎 Fichiers joints</h4>
+            {% if application.cvFilename %}
+            <div class="file-item">
+                <strong>CV :</strong> {{ application.cvFilename }}
+                <small style="color: #666; float: right;">📄 Fichier PDF</small>
+            </div>
+            {% endif %}
+
+            {% if application.motivationFilename %}
+            <div class="file-item">
+                <strong>Lettre de motivation :</strong> {{ application.motivationFilename }}
+                <small style="color: #666; float: right;">📄 Fichier PDF</small>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="action-buttons">
+            <h3>🎯 Prochaines étapes</h3>
+            <p>Veuillez examiner cette candidature et prendre les mesures nécessaires.</p>
+            <!-- Vous pouvez ajouter des liens vers votre système de gestion -->
+            <a href="#" class="btn">Consulter la candidature</a>
+            <a href="#" class="btn">Télécharger les fichiers</a>
+        </div>
+
+        <div class="footer">
+            <p><strong>Date de réception :</strong> {{ application.createdAt|date('d/m/Y à H:i:s') }}</p>
+            <p>&copy; {{ 'now'|date('Y') }} Montessori Algérie - Système de recrutement automatisé</p>
+        </div>
+    </div>
+</body>
+
+</html>
