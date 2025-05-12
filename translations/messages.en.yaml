@@ -251,78 +251,79 @@ registration:
   success:
     account_created: "Your account has been successfully created!"
 
-# translations/message.en.yaml
+# Why join us section
 
-recrutement:
-  title: "Recruitment"
-  hero:
-    heading: "CAREERS at Montessori Algeria"
-    description: "Welcome to the Careers page of Montessori Algeria, a space dedicated to those who share our passion for delivering exceptional education."
-    discover_button: "Explore our openings"
-  pourquoi:
-    heading: "Why join Montessori Algeria?"
-    formation_continue:
-      title: "CONTINUOUS TRAINING"
-      description: "We believe in lifelong learning and offer regular training to enhance your skills and deepen your expertise."
-    salaires:
-      title: "COMPETITIVE SALARIES AND BENEFITS"
-      description: "We recognize and value your commitment by ensuring your compensation reflects your contributions. We also offer attractive benefits such as health insurance, social loans, and childcare support."
-    environnement:
-      title: "COLLABORATIVE ENVIRONMENT"
-      description: "Collaboration is at the heart of our culture, fostering strong relationships and a harmonious team spirit."
-    mission:
-      title: "CHILD-CENTERED MISSION"
-      description: "You will take part in a vital mission: shaping the future of children by providing them with a high-quality education."
-  metiers:
-    heading: "OUR JOBS"
-    pedagogique:
-      title: "Teaching Team"
-      postes:
-        - "English / Arabic / French Teacher"
-        - "Music Teacher"
-        - "Cultural, Science and Nature Facilitators"
-    administratif:
-      title: "Administrative Management Team"
-      postes:
-        - "Administrative and HR Director"
-        - "Office Manager"
-    hse1:
-      title: "HSE Team"
-      postes:
-        - "HSE Manager: full-time or part-time"
-        - "Cook/Chef: full-time"
-        - "Assistant Cook"
-        - "Cleaning and Hygiene Staff"
-    hse2:
-      title: "HSE Team (continued)"
-      postes:
-        - "Receptionist"
-        - "Security Guard"
-        - "Handyman"
-    extrascolaire:
-      title: "Extracurricular Activities Team"
-      postes:
-        - "Director of Extracurricular Activities"
-        - "Cultural, Sports, Science and Nature Facilitators"
-        - "Experts/enthusiasts in Algerian culture and history"
-    sante:
-      title: "Health Team"
-      postes:
-        - "Doctor"
-        - "Psychologist: full-time or part-time"
-        - "Speech Therapist: full-time or part-time"
-    marketing:
-      title: "Marketing Team"
-      postes:
-        - "Community Manager"
-        - "Digital Marketing Specialist"
-        - "Graphic Designer"
-    technique:
-      title: "Technical Team"
-      postes:
-        - "IT Technician"
-        - "IT Engineer"
-  cta:
-    heading: "Interested in one of our opportunities?"
-    button: "Apply now"
-    email_text: "Or send your resume and cover letter to"
+recruitment.title: "Recruitment"
+recruitment.intro: "Welcome to the Careers page of Montessori Algeria, a space dedicated to those who share our passion for delivering exceptional education."
+breadcrumb.home: "Home"
+breadcrumb.recruitment: "Recruitment"
+
+whyus.title: "Why join Montessori Algeria?"
+whyus.intro: >
+  Discover a work environment designed for both professional and personal fulfillment:
+
+  An exceptional work setting.
+  Work every day in a lush, peaceful, and inspiring garden designed to foster focus, creativity, and well-being.
+
+whyus.item1.title: "A dynamic, multilingual, and committed team"
+whyus.item1.text: >
+  Join a top-tier team passionate about education, composed of professionals from diverse backgrounds. Here, diversity is a strength!
+
+whyus.item2.title: "A salary that reflects your talent"
+whyus.item2.text: >
+  We offer a competitive salary aligned with your skills and commitment.
+
+whyus.item3.title: "Multiple social benefits"
+whyus.item3.text: >
+  Enjoy numerous social benefits: health coverage, tailored leave, continuous training, and social loans.
+whyus.button: "Learn More"
+job.title: "OUR JOBS"
+
+job.team.education.title: "Educational Team"
+job.team.education.desc: "Teachers and instructors for comprehensive learning"
+job.team.education.roles:
+  - "English Teacher"
+  - "Arabic Teacher"
+  - "French Teacher"
+  - "Music Teacher"
+
+job.team.admin.title: "Administrative Management Team"
+job.team.admin.desc: "School management and administration"
+job.team.admin.roles:
+  - "HR and Admin Director"
+  - "Office Manager"
+
+job.team.hse.title: "Support Team"
+job.team.hse.desc: "Hygiene, safety, and environment"
+job.team.hse.roles:
+  - "HSE Manager"
+  - "Chef"
+  - "Assistant Cook"
+  - "Cleaning Staff"
+  - "Receptionist"
+  - "Handyman"
+
+job.team.extras.title: "Extracurricular Activities Team"
+job.team.extras.desc: "Cultural and sports animation"
+job.team.extras.roles:
+  - "Extracurricular Activities Director"
+  - "Cultural, Sports, Science, and Nature Animators"
+  - "Algerian History and Culture Enthusiasts"
+
+job.team.health.title: "Health Team"
+job.team.health.desc: "Student care and well-being"
+job.team.health.roles:
+  - "Doctor"
+  - "Psychologist"
+  - "Speech Therapist"
+
+job.team.marketing.title: "Marketing Team"
+job.team.marketing.desc: "Communication and technical support"
+job.team.marketing.roles:
+  - "Community Manager"
+  - "Digital Marketing Specialist"
+  - "Graphic Designer"
+
+job.cta.title: "Interested in one of our opportunities?"
+job.cta.button: "Apply Now"
+
