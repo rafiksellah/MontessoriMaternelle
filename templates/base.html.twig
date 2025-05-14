@@ -91,9 +91,9 @@
                 <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
                     class="logo-img">
                 <div class="logo-text">
-                    <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
+                    <h1 class="sitenames">{{ 'site.name'|trans }}</h1>
                     <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
-                    <h2 class="sitenames">{{ 'site.name2'|trans }}</h2>
+                    <h3 class="sitenames">{{ 'site.name2'|trans }}</h3>
                 </div>
             </a>
 
@@ -117,17 +117,19 @@
                 <nav id="language-nav" class="navmenu">
                     <ul>
                         <li class="dropdown">
-                            <a href="#"><span>{{ app.request.locale|capitalize }}</span> <i
-                                    class="bi bi-chevron-down"></i></a>
+                            <a href="#" aria-expanded="false">
+                                <span>{{ app.request.locale|upper }}</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </a>
                             <ul>
                                 <li><a
-                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a>
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Français</a>
                                 </li>
                                 <li><a
-                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a>
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">English</a>
                                 </li>
                                 <li><a
-                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ar'})) }}">ع</a>
+                                        href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'ar'})) }}">العربية</a>
                                 </li>
                             </ul>
                         </li>
@@ -155,7 +157,7 @@
         <div class="container footer-top">
             <div class="row gy-4">
                 <!-- Logo et texte -->
-                <div class="col-lg-4 col-md-6 footer-brand text-center text-md-start">
+                <div class="col-lg-4 col-md-6 footer-brand">
                     <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
                         class="logo d-flex align-items-center">
                         <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
@@ -164,13 +166,12 @@
                             <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
                             <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
                             <h2 class="sitenames">{{ 'site.name2'|trans }}</h2>
-                            <h2 class="sitenames"></h2>
                         </div>
                     </a>
                 </div>
 
                 <!-- Liens utiles -->
-                <div class="col-lg-4 col-md-6 footer-links text-center text-md-start">
+                <div class="col-lg-4 col-md-6 footer-links">
                     <h4>{{ 'footer.useful_links'|trans }}</h4>
                     <ul class="list-unstyled">
                         <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}">{{ 'nav.home'|trans }}</a>
@@ -181,7 +182,7 @@
                 </div>
 
                 <!-- Contact -->
-                <div class="col-lg-4 col-md-12 footer-contact text-center text-md-start">
+                <div class="col-lg-4 col-md-12 footer-contact">
                     <h4>{{ 'footer.contact'|trans }}</h4>
                     <p style="line-height: 2.8;">
                         <i class="bi bi-geo-alt"></i> {{ 'footer.address'|trans }} <br>
@@ -192,9 +193,13 @@
         </div>
 
         <!-- Copyright -->
-        <div class="container text-center mt-4">
-            <p>© <strong class="sitename">{{ 'site.name'|trans }} {{ 'site.name1'|trans }} 2025</strong> | {{
-                'footer.rights'|trans }}</p>
+        <div class="container copyright">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>© <strong class="sitename">{{ 'site.name'|trans }} {{ 'site.name1'|trans }} 2025</strong> | {{
+                        'footer.rights'|trans }}</p>
+                </div>
+            </div>
         </div>
     </footer>
     {% endblock %}
