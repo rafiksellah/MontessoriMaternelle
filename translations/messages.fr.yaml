@@ -18,7 +18,7 @@ footer:
   address: 'Alger, Algérie'
   rights: 'Tous droits réservés'
 
-# Formulaire de contact
+# messages.fr.yaml
 contact:
   title: 'Contactez-nous'
   subtitle: 'Envoyez-nous un message'
@@ -32,7 +32,35 @@ contact:
   expectations: 'Vos attentes'
   submit: 'Envoyer'
   success_message: 'Votre demande a été envoyée avec succès. Nous vous contacterons prochainement.'
-
+  error_message: 'Une erreur est survenue lors de l''envoi de votre demande. Veuillez réessayer plus tard.'
+  placeholder:
+    parent_name: 'Entrez le nom du parent'
+    child_name: 'Entrez le nom de l''enfant'
+    child_birth_date: 'Sélectionnez la date de naissance de l''enfant'
+    phone: 'Entrez le numéro de téléphone'
+    email: 'Entrez l''email'
+    objective: 'Sélectionnez l''objectif'
+    heard_about_us: 'Sélectionnez comment vous avez entendu parler de nous'
+    expectations: 'Parlez-nous de vous et de vos attentes pour l''éducation de votre enfant'
+  choices:
+    visit_request: 'Demande de visite'
+    enrollment_request: 'Demande d''inscription'
+    information_request: 'Demande d''information'
+  errors:
+    parent_name_required: 'Veuillez entrer le nom du parent'
+    parent_name_min: 'Le nom du parent doit contenir au minimum 2 caractères'
+    parent_name_max: 'Le nom du parent ne peut pas dépasser 100 caractères'
+    child_name_required: 'Veuillez entrer le nom de l''enfant'
+    child_name_min: 'Le nom de l''enfant doit contenir au minimum 2 caractères'
+    child_name_max: 'Le nom de l''enfant ne peut pas dépasser 100 caractères'
+    child_birth_date_required: 'Veuillez entrer la date de naissance de l''enfant'
+    phone_required: 'Veuillez entrer votre numéro de téléphone'
+    phone_min: 'Le numéro de téléphone doit contenir au minimum 8 chiffres'
+    phone_max: 'Le numéro de téléphone ne peut pas dépasser 20 chiffres'
+    email_required: 'Veuillez entrer votre adresse email'
+    email_invalid: 'L''adresse email {{ value }} n''est pas valide'
+    objective_required: 'Veuillez sélectionner un objectif'
+    expectations_required: 'Veuillez nous parler de vos attentes'
 # Page de recrutement
 employment:
   title: 'Rejoignez notre équipe'
@@ -328,3 +356,129 @@ job.cta.title: "Intéressé(e) par l'une de nos opportunités ?"
 job.cta.button: "Postulez maintenant"
 
 
+job_application:
+  title: "Formulaire de Candidature"
+  personal_info: "Informations personnelles"
+  application: "Candidature"
+  languages: "Langues parlées et niveau de maîtrise"
+  motivation: "Motivation et vision"
+  
+  # Personal Information Fields
+  nom: "Nom"
+  prenom: "Prénom"
+  date_naissance: "Date de naissance"
+  lieu_residence: "Lieu de résidence"
+  nationalite: "Nationalité"
+  permis_travail: "J'ai un permis de travail"
+  telephone: "Téléphone"
+  email: "Email"
+  
+  # Application Fields
+  poste_souhaite: "Poste souhaité"
+  raison_interet: "Pourquoi ce poste vous attire-t-il particulièrement ?"
+  cv_filename: "Joindre votre CV (PDF recommandé)"
+  motivation_filename: "Joindre votre lettre de motivation (optionnelle)"
+  
+  # Languages
+  niveau_maitrise: "Niveau de maîtrise"
+  
+  # Motivation Fields
+  motivation_mma: "Qu'est-ce qui vous motive à postuler chez MMA ?"
+  contribution_mma: "Quelle contribution souhaitez-vous apporter à MMA ?"
+  disponibilite: "Disponibilité"
+  engagement: "Engagement souhaité avec Montessori Algérie"
+  
+  # Placeholders
+  placeholders:
+    nom: "Votre nom"
+    prenom: "Votre prénom"
+    lieu_residence: "Ville, Pays"
+    nationalite: "Votre nationalité"
+    telephone: "+213 XX XX XX XX"
+    email: "votre.email@exemple.com"
+    raison_interet: "Expliquez en 2-3 phrases ce qui vous attire dans ce poste..."
+    motivation_mma: "Expliquez votre motivation à rejoindre Montessori Algérie..."
+    contribution_mma: "Décrivez la contribution que vous souhaitez apporter..."
+  
+  # Job Categories and Positions
+  jobs:
+    categories:
+      pedagogique: "Équipe Pédagogique"
+      administrative: "Équipe Management administrative"
+      support: "Équipe Support"
+      extrascolaire: "Équipe Activité Extrascolaire"
+      sante: "Équipe Santé"
+      marketing: "Équipe Marketing"
+    
+    positions:
+      enseignant_anglais: "Enseignant d'anglais"
+      enseignant_arabe: "Enseignant d'arabe"
+      enseignant_francais: "Enseignant Français"
+      enseignant_musique: "Enseignant de musique"
+      directeur_rh: "Directeur administratif et RH"
+      office_manager: "Office manager"
+      responsable_hse: "Responsable HSE"
+      cuisinier_chef: "Cuisinier/Chef"
+      aide_cuisinier: "Aide-cuisinier"
+      personnel_entretien: "Personnel d'entretien et d'hygiène"
+      agent_accueil: "Agent d'accueil"
+      factotum: "Factotum"
+      directeur_activites: "Directeur des activités extrascolaires"
+      animateur: "Animateurs culture, sports, sciences et nature"
+      expert_culture: "Experts/passionnés de culture et histoire algérienne"
+      medecin: "Médecin"
+      psychologue: "Psychologue"
+      orthophoniste: "Orthophoniste"
+      community_manager: "Gestionnaire de communauté"
+      marketing_digital: "Spécialiste du marketing numérique"
+      graphiste: "Graphiste"
+  
+  # Availibility Options
+  disponibilite_options:
+    immediate: "Immédiate"
+    preavis_1_mois: "Préavis de 1 mois"
+    preavis_2_mois: "Préavis de 2 mois"
+    autre: "Autre (à préciser)"
+  
+  # Engagement Options
+  engagement_options:
+    moins_1_an: "Moins d'1 an"
+    1_2_ans: "1 à 2 ans"
+    2_3_ans: "2 à 3 ans"
+    5_ans_plus: "5 ans et plus"
+  
+  # Languages Levels
+  language_levels:
+    debutant: "Débutant"
+    intermediaire: "Intermédiaire"
+    avance: "Avancé"
+    natif: "Natif"
+  
+  # Submit Button
+  submit: "Envoyer ma candidature"
+  
+  # File Upload Messages
+  no_file_selected: "Aucun fichier sélectionné"
+  
+  # Validation Messages
+  validation:
+    required: "Ce champ est obligatoire"
+    invalid_email: "Veuillez entrer une adresse email valide"
+    invalid_file: "Veuillez uploader un fichier PDF valide"
+    max_size: "Le fichier ne doit pas dépasser 10MB"
+  
+  # Success/Error Messages
+  messages:
+    success: "Votre candidature a été envoyée avec succès ! Vous recevrez une confirmation par email."
+    error: "Une erreur est survenue lors de l'envoi de votre candidature. Veuillez réessayer."
+    form_errors: "Veuillez corriger les erreurs dans le formulaire."
+    
+  # Progress Bar
+  progress: "Progression du formulaire"
+  
+  # Languages Names
+  language_names:
+    francais: "Français"
+    anglais: "Anglais"
+    arabe: "Arabe"
+    tamazight: "Tamazight"

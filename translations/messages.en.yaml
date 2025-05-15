@@ -19,7 +19,7 @@ footer:
   address: 'Algiers, Algeria'
   rights: 'All rights reserved'
 
-# Contact form
+# messages.en.yaml
 contact:
   title: 'Contact Us'
   subtitle: 'Send us a message'
@@ -33,6 +33,35 @@ contact:
   expectations: 'Your expectations'
   submit: 'Submit'
   success_message: 'Your request has been successfully sent. We will contact you soon.'
+  error_message: 'An error occurred while sending your request. Please try again later.'
+  placeholder:
+    parent_name: 'Enter parent name'
+    child_name: 'Enter child name'
+    child_birth_date: 'Select child birth date'
+    phone: 'Enter phone number'
+    email: 'Enter email address'
+    objective: 'Select an objective'
+    heard_about_us: 'Select an option'
+    expectations: 'Tell us about yourself and your expectations'
+  choices:
+    visit_request: 'Visit Request'
+    enrollment_request: 'Enrollment Request'
+    information_request: 'Information Request'
+  errors:
+    parent_name_required: 'Please enter the parent name'
+    parent_name_min: 'Parent name must be at least 2 characters long'
+    parent_name_max: 'Parent name cannot exceed 100 characters'
+    child_name_required: 'Please enter the child name'
+    child_name_min: 'Child name must be at least 2 characters long'
+    child_name_max: 'Child name cannot exceed 100 characters'
+    child_birth_date_required: 'Please enter the child birth date'
+    phone_required: 'Please enter your phone number'
+    phone_min: 'Phone number must be at least 8 digits long'
+    phone_max: 'Phone number cannot exceed 20 digits'
+    email_required: 'Please enter your email address'
+    email_invalid: 'The email {{ value }} is not valid'
+    objective_required: 'Please select an objective'
+    expectations_required: 'Please tell us about your expectations'
 
 # employment page
 employment:
@@ -327,3 +356,135 @@ job.team.marketing.roles:
 job.cta.title: "Interested in one of our opportunities?"
 job.cta.button: "Apply Now"
 
+# translations/messages.en.yaml
+job_application:
+  title: "Job Application Form"
+  personal_info: "Personal Information"
+  application: "Application"
+  languages: "Spoken Languages and Proficiency Level"
+  motivation: "Motivation and Vision"
+  
+  # Personal Information Fields
+  nom: "Last Name"
+  prenom: "First Name"
+  date_naissance: "Date of Birth"
+  lieu_residence: "Place of Residence"
+  nationalite: "Nationality"
+  permis_travail: "I have a work permit"
+  telephone: "Phone"
+  email: "Email"
+  
+  # Application Fields
+  poste_souhaite: "Desired Position"
+  raison_interet: "Why does this position particularly appeal to you?"
+  cv_filename: "Attach your CV (PDF recommended)"
+  motivation_filename: "Attach your cover letter (optional)"
+  
+  # Languages
+  niveau_maitrise: "Proficiency Level"
+  
+  # Motivation Fields
+  motivation_mma: "What motivates you to apply to MMA?"
+  contribution_mma: "What contribution would you like to make to MMA?"
+  disponibilite: "Availability"
+  engagement: "Desired commitment with Montessori Algeria"
+  
+  # Placeholders
+  placeholders:
+    nom: "Your last name"
+    prenom: "Your first name"
+    lieu_residence: "City, Country"
+    nationalite: "Your nationality"
+    telephone: "+213 XX XX XX XX"
+    email: "your.email@example.com"
+    raison_interet: "Explain in 2-3 sentences what attracts you to this position..."
+    motivation_mma: "Explain your motivation to join Montessori Algeria..."
+    contribution_mma: "Describe the contribution you want to make..."
+  
+  # Job Categories and Positions
+  jobs:
+    categories:
+      pedagogique: "Educational Team"
+      administrative: "Administrative Management Team"
+      support: "Support Team"
+      extrascolaire: "Extracurricular Activities Team"
+      sante: "Health Team"
+      marketing: "Marketing Team"
+    
+    positions:
+      enseignant_anglais: "English Teacher"
+      enseignant_arabe: "Arabic Teacher"
+      enseignant_francais: "French Teacher"
+      enseignant_musique: "Music Teacher"
+      directeur_rh: "Administrative and HR Director"
+      office_manager: "Office Manager"
+      responsable_hse: "HSE Manager"
+      cuisinier_chef: "Cook/Chef"
+      aide_cuisinier: "Assistant Cook"
+      personnel_entretien: "Cleaning and Hygiene Staff"
+      agent_accueil: "Receptionist"
+      factotum: "Factotum"
+      directeur_activites: "Extracurricular Activities Director"
+      animateur: "Culture, Sports, Science and Nature Animators"
+      expert_culture: "Experts/enthusiasts of Algerian culture and history"
+      medecin: "Doctor"
+      psychologue: "Psychologist"
+      orthophoniste: "Speech Therapist"
+      community_manager: "Community Manager"
+      marketing_digital: "Digital Marketing Specialist"
+      graphiste: "Graphic Designer"
+    
+    select_position: "Select a position"
+  
+  # Availibility Options
+  disponibilite_options:
+    immediate: "Immediate"
+    preavis_1_mois: "1 month notice"
+    preavis_2_mois: "2 months notice"
+    autre: "Other (please specify)"
+    select: "Select availability"
+  
+  # Engagement Options
+  engagement_options:
+    moins_1_an: "Less than 1 year"
+    1_2_ans: "1 to 2 years"
+    2_3_ans: "2 to 3 years"
+    5_ans_plus: "5 years and more"
+    select: "Select commitment"
+  
+  # Languages Levels
+  language_levels:
+    debutant: "Beginner"
+    intermediaire: "Intermediate"
+    avance: "Advanced"
+    natif: "Native"
+    select: "Select level"
+  
+  # Submit Button
+  submit: "Submit my application"
+  
+  # File Upload Messages
+  no_file_selected: "No file selected"
+  
+  # Validation Messages
+  validation:
+    required: "This field is required"
+    invalid_email: "Please enter a valid email address"
+    invalid_file: "Please upload a valid PDF file"
+    max_size: "File must not exceed 10MB"
+  
+  # Success/Error Messages
+  messages:
+    success: "Your application has been sent successfully! You will receive a confirmation by email."
+    error: "An error occurred while sending your application. Please try again."
+    form_errors: "Please correct the errors in the form."
+    
+  # Progress Bar
+  progress: "Form Progress"
+  
+  # Languages Names
+  language_names:
+    francais: "French"
+    anglais: "English"
+    arabe: "Arabic"
+    tamazight: "Tamazight"

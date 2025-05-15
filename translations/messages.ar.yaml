@@ -1,8 +1,8 @@
 # معلومات عامة عن الموقع
 site:
-  name: 'مونتيسوري'
-  name1: 'الجزائر'
-  name2: 'حضانة'
+  name: 'حضانة'
+  name1: 'مونتيسوري'
+  name2: 'الجزائر'
   meta:
     description: 'أول معهد مونتيسوري رسمي في الجزائر. تدريب AMI، ورش عمل تعليمية وموارد للآباء والمربين. اكتشف طريقة مونتيسوري المكيفة مع الثقافة الجزائرية.'
     keywords: 'مونتيسوري الجزائر، تدريب مونتيسوري، بيداغوجيا مونتيسوري، التعليم البديل الجزائر، AMI الجزائر، مونتيسوري الجزائر العاصمة، ورش عمل مونتيسوري، تعليم الأطفال الجزائر العاصمة'
@@ -19,7 +19,7 @@ footer:
   address: 'الجزائر العاصمة، الجزائر'
   rights: 'جميع الحقوق محفوظة'
 
-# نموذج الاتصال
+# messages.ar.yaml
 contact:
   title: 'اتصل بنا'
   subtitle: 'أرسل لنا رسالة'
@@ -33,6 +33,36 @@ contact:
   expectations: 'توقعاتك'
   submit: 'إرسال'
   success_message: 'تم إرسال طلبك بنجاح. سنتصل بك قريبًا.'
+  error_message: 'حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى لاحقًا.'
+  placeholder:
+    parent_name: 'أدخل اسم الوالد'
+    child_name: 'أدخل اسم الطفل'
+    child_birth_date: 'حدد تاريخ ميلاد الطفل'
+    phone: 'أدخل رقم الهاتف'
+    email: 'أدخل البريد الإلكتروني'
+    objective: 'اختر الهدف'
+    heard_about_us: 'اختر خيارًا'
+    expectations: 'أخبرنا عن نفسك وعن توقعاتك'
+  choices:
+    visit_request: 'طلب زيارة'
+    enrollment_request: 'طلب تسجيل'
+    information_request: 'طلب معلومات'
+  errors:
+    parent_name_required: 'يرجى إدخال اسم الوالد'
+    parent_name_min: 'يجب أن يحتوي اسم الوالد على حرفين على الأقل'
+    parent_name_max: 'لا يمكن أن يتجاوز اسم الوالد 100 حرف'
+    child_name_required: 'يرجى إدخال اسم الطفل'
+    child_name_min: 'يجب أن يحتوي اسم الطفل على حرفين على الأقل'
+    child_name_max: 'لا يمكن أن يتجاوز اسم الطفل 100 حرف'
+    child_birth_date_required: 'يرجى إدخال تاريخ ميلاد الطفل'
+    phone_required: 'يرجى إدخال رقم هاتفك'
+    phone_min: 'يجب أن يحتوي رقم الهاتف على 8 أرقام على الأقل'
+    phone_max: 'لا يمكن أن يتجاوز رقم الهاتف 20 رقمًا'
+    email_required: 'يرجى إدخال عنوان بريدك الإلكتروني'
+    email_invalid: 'عنوان البريد الإلكتروني {{ value }} غير صحيح'
+    objective_required: 'يرجى اختيار هدف'
+    expectations_required: 'يرجى إخبارنا عن توقعاتك'
+
 
 # صفحة التوظيف
 employment:
@@ -313,3 +343,131 @@ job.team.marketing.roles:
 
 job.cta.title: "هل أنت مهتم بإحدى فرصنا؟"
 job.cta.button: "قدّم الآن"
+
+# job_application
+job_application:
+  title: "نموذج طلب العمل"
+  personal_info: "المعلومات الشخصية"
+  application: "الطلب"
+  languages: "اللغات المحكية ومستوى الإتقان"
+  motivation: "الدافع والرؤية"
+  
+  # Personal Information Fields
+  nom: "اللقب"
+  prenom: "الاسم"
+  date_naissance: "تاريخ الولادة"
+  lieu_residence: "مكان الإقامة"
+  nationalite: "الجنسية"
+  permis_travail: "لدي رخصة عمل"
+  telephone: "الهاتف"
+  email: "البريد الإلكتروني"
+  
+  # Application Fields
+  poste_souhaite: "المنصب المرغوب"
+  raison_interet: "لماذا يجذبك هذا المنصب بشكل خاص؟"
+  cv_filename: "إرفاق سيرتك الذاتية (PDF مستحسن)"
+  motivation_filename: "إرفاق رسالة الدافع (اختياري)"
+  
+  # Languages
+  niveau_maitrise: "مستوى الإتقان"
+  
+  # Motivation Fields
+  motivation_mma: "ما الذي يحفزك للتقدم إلى MMA؟"
+  contribution_mma: "ما المساهمة التي تود تقديمها لـ MMA؟"
+  disponibilite: "التوفر"
+  engagement: "الالتزام المرغوب مع منتسوري الجزائر"
+  
+  # Placeholders
+  placeholders:
+    nom: "لقبك"
+    prenom: "اسمك"
+    lieu_residence: "المدينة، البلد"
+    nationalite: "جنسيتك"
+    telephone: "+213 XX XX XX XX"
+    email: "your.email@example.com"
+    raison_interet: "اشرح في جملتين أو ثلاث ما يجذبك في هذا المنصب..."
+    motivation_mma: "اشرح دافعك للانضمام إلى منتسوري الجزائر..."
+    contribution_mma: "صف المساهمة التي تريد تقديمها..."
+  
+  # Job Categories and Positions
+  jobs:
+    categories:
+      pedagogique: "الفريق التربوي"
+      administrative: "فريق الإدارة الإدارية"
+      support: "فريق الدعم"
+      extrascolaire: "فريق الأنشطة اللاصفية"
+      sante: "فريق الصحة"
+      marketing: "فريق التسويق"
+    
+    positions:
+      enseignant_anglais: "معلم إنجليزية"
+      enseignant_arabe: "معلم عربية"
+      enseignant_francais: "معلم فرنسية"
+      enseignant_musique: "معلم موسيقى"
+      directeur_rh: "مدير إداري وموارد بشرية"
+      office_manager: "مدير مكتب"
+      responsable_hse: "مسؤول HSE"
+      cuisinier_chef: "طباخ/شيف"
+      aide_cuisinier: "مساعد طباخ"
+      personnel_entretien: "موظف نظافة وصحة"
+      agent_accueil: "عامل استقبال"
+      factotum: "عامل متعدد المهام"
+      directeur_activites: "مدير الأنشطة اللاصفية"
+      animateur: "منشطو الثقافة والرياضة والعلوم والطبيعة"
+      expert_culture: "خبراء/متحمسون للثقافة والتاريخ الجزائري"
+      medecin: "طبيب"
+      psychologue: "عالم نفس"
+      orthophoniste: "معالج نطق"
+      community_manager: "مدير مجتمع"
+      marketing_digital: "أخصائي تسويق رقمي"
+      graphiste: "مصمم جرافيكي"
+  
+  # Availibility Options
+  disponibilite_options:
+    immediate: "فوري"
+    preavis_1_mois: "إشعار مسبق شهر واحد"
+    preavis_2_mois: "إشعار مسبق شهرين"
+    autre: "أخرى (حدد)"
+  
+  # Engagement Options
+  engagement_options:
+    moins_1_an: "أقل من سنة"
+    1_2_ans: "من سنة إلى سنتين"
+    2_3_ans: "من سنتين إلى ثلاث سنوات"
+    5_ans_plus: "5 سنوات وأكثر"
+  
+  # Languages Levels
+  language_levels:
+    debutant: "مبتدئ"
+    intermediaire: "متوسط"
+    avance: "متقدم"
+    natif: "لغة أم"
+  
+  # Submit Button
+  submit: "إرسال طلبي"
+  
+  # File Upload Messages
+  no_file_selected: "لم يتم تحديد ملف"
+  
+  # Validation Messages
+  validation:
+    required: "هذا المجال مطلوب"
+    invalid_email: "يرجى إدخال عنوان بريد إلكتروني صحيح"
+    invalid_file: "يرجى رفع ملف PDF صحيح"
+    max_size: "يجب ألا يتجاوز الملف 10 ميجابايت"
+  
+  # Success/Error Messages
+  messages:
+    success: "تم إرسال طلبك بنجاح! ستتلقى تأكيداً عبر البريد الإلكتروني."
+    error: "حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى."
+    form_errors: "يرجى تصحيح الأخطاء في النموذج."
+    
+  # Progress Bar
+  progress: "تقدم النموذج"
+  
+  # Languages Names
+  language_names:
+    francais: "الفرنسية"
+    anglais: "الإنجليزية"
+    arabe: "العربية"
+    tamazight: "الأمازيغية"

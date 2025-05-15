@@ -142,8 +142,7 @@
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
         <div class="container" data-aos="fade-up">
-
-            <div class="row">
+            <div class="row align-items-center">
                 <!-- Image d'équipe -->
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="team-img">
@@ -154,13 +153,15 @@
 
                 <!-- Texte et bouton -->
                 <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="200">
-                    <h2>{{ 'team.title'|trans }}</h2>
-                    <p> <strong>{{ 'team.subtitle'|trans }}</strong></p>
-                    <p>{{ 'team.description'|trans }}</p>
-
+                    <div class="content-wrapper">
+                        <h2 class="text-center">{{ 'team.title'|trans }}</h2>
+                        <div class="text-content">
+                            <p class="subtitle"><strong>{{ 'team.subtitle'|trans }}</strong></p>
+                            <p class="description">{{ 'team.description'|trans }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </section>
     <!-- End Team Section -->
@@ -193,14 +194,16 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-body p-4 p-lg-5">
-                            {{ form_start(contact_form, {'attr': {'class': 'needs-validation'}}) }}
+                        <div class="card-body p-4 p-lg-5 {% if app.request.locale == 'ar' %}rtl{% endif %}">
+                            {{ form_start(contact_form, {'attr': {'class': 'needs-validation', 'dir':
+                            (app.request.locale == 'ar' ? 'rtl' : 'ltr')}}) }}
                             <div class="row">
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.parentName, null, {'label_attr': {'class':
                                     'form-label'}}) }}
                                     {{ form_widget(contact_form.parentName, {'attr': {'class': 'form-control',
-                                    'placeholder': 'contact.placeholder.parent_name'|trans}}) }}
+                                    'placeholder': 'contact.placeholder.parent_name'|trans, 'dir': (app.request.locale
+                                    == 'ar' ? 'rtl' : 'ltr')}}) }}
                                     <div class="invalid-feedback">
                                         {{ form_errors(contact_form.parentName) }}
                                     </div>
@@ -210,7 +213,8 @@
                                     {{ form_label(contact_form.childName, null, {'label_attr': {'class': 'form-label'}})
                                     }}
                                     {{ form_widget(contact_form.childName, {'attr': {'class': 'form-control',
-                                    'placeholder': 'contact.placeholder.child_name'|trans}}) }}
+                                    'placeholder': 'contact.placeholder.child_name'|trans, 'dir': (app.request.locale ==
+                                    'ar' ? 'rtl' : 'ltr')}}) }}
                                     <div class="invalid-feedback">
                                         {{ form_errors(contact_form.childName) }}
                                     </div>
@@ -229,7 +233,7 @@
                                     {{ form_label(contact_form.phoneNumber, null, {'label_attr': {'class':
                                     'form-label'}}) }}
                                     {{ form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control',
-                                    'placeholder': '+213 000 000 000'}}) }}
+                                    'placeholder': '+213 000 000 000', 'dir': 'ltr'}}) }}
                                     <div class="invalid-feedback">
                                         {{ form_errors(contact_form.phoneNumber) }}
                                     </div>
@@ -238,7 +242,7 @@
                                 <div class="col-md-6 mb-4">
                                     {{ form_label(contact_form.email, null, {'label_attr': {'class': 'form-label'}}) }}
                                     {{ form_widget(contact_form.email, {'attr': {'class': 'form-control', 'placeholder':
-                                    'example@email.com'}}) }}
+                                    'example@email.com', 'dir': 'ltr'}}) }}
                                     <div class="invalid-feedback">
                                         {{ form_errors(contact_form.email) }}
                                     </div>
@@ -257,7 +261,8 @@
                                     {{ form_label(contact_form.expectations, null, {'label_attr': {'class':
                                     'form-label'}}) }}
                                     {{ form_widget(contact_form.expectations, {'attr': {'class': 'form-control',
-                                    'placeholder': 'contact.placeholder.expectations'|trans}}) }}
+                                    'placeholder': 'contact.placeholder.expectations'|trans, 'dir': (app.request.locale
+                                    == 'ar' ? 'rtl' : 'ltr')}}) }}
                                     <div class="invalid-feedback">
                                         {{ form_errors(contact_form.expectations) }}
                                     </div>
@@ -275,6 +280,26 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .rtl {
+            direction: rtl;
+            text-align: right;
+        }
+
+        .rtl .form-label {
+            text-align: right;
+        }
+
+        .rtl .btn {
+            direction: ltr;
+            /* Garder les boutons en LTR pour un meilleur rendu */
+        }
+
+        .rtl .form-select {
+            direction: ltr;
+        }
+    </style>
 
     <script>
         /**
