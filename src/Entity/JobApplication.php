@@ -56,7 +56,7 @@ class JobApplication
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Veuillez expliquer pourquoi ce poste vous attire')]
-    #[Assert\Length(min: 10, max: 500, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
+    #[Assert\Length(min: 10, max: 10000, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
     private ?string $raisonInteretPoste = null;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -70,12 +70,12 @@ class JobApplication
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Veuillez expliquer votre motivation')]
-    #[Assert\Length(min: 10, max: 1000, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
+    #[Assert\Length(min: 10, max: 10000, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
     private ?string $motivationMMA = null;
 
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Veuillez expliquer votre contribution')]
-    #[Assert\Length(min: 10, max: 1000, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
+    #[Assert\Length(min: 10, max: 10000, minMessage: 'Réponse trop courte', maxMessage: 'Réponse trop longue')]
     private ?string $contributionMMA = null;
 
     #[ORM\Column(type: 'string', length: 50)]

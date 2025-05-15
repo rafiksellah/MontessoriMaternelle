@@ -15,86 +15,100 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContactFormType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('parentName', TextType::class, [
-                'label' => 'Nom du parent / Parent\'s Name *',
+                'label' => $this->translator->trans('contact.parent_name') . ' *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer le nom du parent',
+                        'message' => $this->translator->trans('contact.errors.parent_name_required'),
                     ]),
                     new Length([
                         'min' => 2,
                         'max' => 100,
+                        'minMessage' => $this->translator->trans('contact.errors.parent_name_min'),
+                        'maxMessage' => $this->translator->trans('contact.errors.parent_name_max'),
                     ]),
                 ],
             ])
             ->add('childName', TextType::class, [
-                'label' => 'Nom de l\'enfant / Child\'s Name *',
+                'label' => $this->translator->trans('contact.child_name') . ' *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer le nom de l\'enfant',
+                        'message' => $this->translator->trans('contact.errors.child_name_required'),
                     ]),
                     new Length([
                         'min' => 2,
                         'max' => 100,
+                        'minMessage' => $this->translator->trans('contact.errors.child_name_min'),
+                        'maxMessage' => $this->translator->trans('contact.errors.child_name_max'),
                     ]),
                 ],
             ])
             ->add('childBirthDate', DateType::class, [
-                'label' => 'Date de naissance de l\'enfant / Child\'s date of birth *',
+                'label' => $this->translator->trans('contact.child_birth_date') . ' *',
                 'widget' => 'single_text',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer la date de naissance de l\'enfant',
+                        'message' => $this->translator->trans('contact.errors.child_birth_date_required'),
                     ]),
                 ],
             ])
             ->add('phoneNumber', TextType::class, [
-                'label' => 'Numéro de téléphone / Phone Number *',
+                'label' => $this->translator->trans('contact.phone') . ' *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer votre numéro de téléphone',
+                        'message' => $this->translator->trans('contact.errors.phone_required'),
                     ]),
                     new Length([
                         'min' => 8,
                         'max' => 20,
+                        'minMessage' => $this->translator->trans('contact.errors.phone_min'),
+                        'maxMessage' => $this->translator->trans('contact.errors.phone_max'),
                     ]),
                 ],
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Courrier électronique / Email *',
+                'label' => $this->translator->trans('contact.email') . ' *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez entrer votre adresse email',
+                        'message' => $this->translator->trans('contact.errors.email_required'),
                     ]),
                     new Email([
-                        'message' => 'L\'adresse email {{ value }} n\'est pas valide',
+                        'message' => $this->translator->trans('contact.errors.email_invalid'),
                     ]),
                 ],
             ])
             ->add('objective', ChoiceType::class, [
-                'label' => 'Objectif / Objective *',
+                'label' => $this->translator->trans('contact.objective') . ' *',
                 'choices' => [
-                    'Demande de visite / Visit Request' => 'visit_request',
-                    'Demande d\'inscription / Enrollment Request' => 'enrollment_request',
-                    'Demande d\'information / Request information' => 'information_request',
+                    $this->translator->trans('contact.choices.visit_request') => 'visit_request',
+                    $this->translator->trans('contact.choices.enrollment_request') => 'enrollment_request',
+                    $this->translator->trans('contact.choices.information_request') => 'information_request',
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez sélectionner un objectif',
+                        'message' => $this->translator->trans('contact.errors.objective_required'),
                     ]),
                 ],
             ])
             ->add('expectations', TextareaType::class, [
-                'label' => 'Parlez-nous de vous et de vos attentes pour l\'éducation de votre enfant / Tell us about yourself and what you\'re looking for in your child\'s education *',
+                'label' => $this->translator->trans('contact.expectations') . ' *',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Veuillez nous parler de vos attentes',
+                        'message' => $this->translator->trans('contact.errors.expectations_required'),
                     ]),
                 ],
                 'attr' => [
@@ -107,7 +121,6 @@ class ContactFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
             'data_class' => null,
         ]);
     }

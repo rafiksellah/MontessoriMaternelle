@@ -32,7 +32,6 @@ class HomeController extends AbstractController
         $this->translator = $translator;
     }
 
-
     #[Route('/{_locale}', name: 'app_home', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function index(
         Request $request,
@@ -40,13 +39,12 @@ class HomeController extends AbstractController
         ContactEmailService $emailService
     ): Response {
         $contact = new Contact();
+
+        // Créer le formulaire avec l'injection de dépendances correcte
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
 
         $form_success = false;
-
-        // In src/Controller/HomeController.php
-        // Improved version of the form submission handling
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Récupération des données du formulaire
@@ -86,13 +84,15 @@ class HomeController extends AbstractController
             'form_success' => $form_success,
         ]);
     }
+
     #[Route('/{_locale}/recrutement', name: 'app_recrutement', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
     public function recrutement(
         Request $request,
         EntityManagerInterface $em,
         MailerInterface $mailer,
         SluggerInterface $slugger,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        TranslatorInterface $translator
     ): Response {
         $jobApplication = new JobApplication();
         $form = $this->createForm(JobApplicationType::class, $jobApplication);
@@ -117,7 +117,7 @@ class HomeController extends AbstractController
                         $jobApplication->setCvFilename($newFilename);
                     } catch (FileException $e) {
                         $logger->error('Erreur lors de l\'upload du CV: ' . $e->getMessage());
-                        throw new \Exception('Erreur lors de l\'upload du fichier CV');
+                        throw new \Exception($translator->trans('job_application.messages.cv_upload_error'));
                     }
                 }
 
@@ -134,7 +134,7 @@ class HomeController extends AbstractController
                         $jobApplication->setMotivationFilename($newFilename);
                     } catch (FileException $e) {
                         $logger->error('Erreur lors de l\'upload de la lettre de motivation: ' . $e->getMessage());
-                        throw new \Exception('Erreur lors de l\'upload du fichier de motivation');
+                        throw new \Exception($translator->trans('job_application.messages.motivation_file_upload_error'));
                     }
                 }
 
@@ -143,17 +143,17 @@ class HomeController extends AbstractController
                 $em->flush();
 
                 // Envoyer un email de confirmation
-                $this->sendConfirmationEmail($mailer, $jobApplication);
+                $this->sendConfirmationEmail($mailer, $jobApplication, $translator);
 
                 // Réponse pour AJAX
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse([
                         'success' => true,
-                        'message' => 'Votre candidature a été envoyée avec succès ! Vous recevrez une confirmation par email.'
+                        'message' => $translator->trans('job_application.messages.success')
                     ]);
                 }
 
-                $this->addFlash('success', 'Votre candidature a été envoyée avec succès ! Vous recevrez une confirmation par email.');
+                $this->addFlash('success', $translator->trans('job_application.messages.success'));
                 return $this->redirectToRoute('app_recrutement');
             } catch (\Exception $e) {
                 $logger->error('Erreur lors de l\'envoi de la candidature: ' . $e->getMessage(), [
@@ -163,11 +163,11 @@ class HomeController extends AbstractController
                 if ($request->isXmlHttpRequest()) {
                     return new JsonResponse([
                         'success' => false,
-                        'message' => 'Une erreur est survenue lors de l\'envoi de votre candidature. Veuillez réessayer. Détail: ' . $e->getMessage()
+                        'message' => $translator->trans('job_application.messages.error_details', ['details' => $e->getMessage()])
                     ], 500);
                 }
 
-                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de votre candidature. Veuillez réessayer.');
+                $this->addFlash('error', $translator->trans('job_application.messages.error'));
             }
         }
 
@@ -210,7 +210,7 @@ class HomeController extends AbstractController
 
             return new JsonResponse([
                 'success' => false,
-                'message' => 'Veuillez corriger les erreurs dans le formulaire.',
+                'message' => $translator->trans('job_application.messages.form_errors'),
                 'errors' => $errors,
                 'fieldErrors' => $fieldErrors
             ], 400);
@@ -221,33 +221,35 @@ class HomeController extends AbstractController
         ]);
     }
 
-    private function sendConfirmationEmail(MailerInterface $mailer, JobApplication $jobApplication): void
+    private function sendConfirmationEmail(MailerInterface $mailer, JobApplication $jobApplication, TranslatorInterface $translator): void
     {
         try {
-            // Email au candidat
+            // Email au candidat avec traduction
             $candidateEmail = (new Email())
                 ->from('recrutement@montessorialgerie.mia-dz.com')
                 ->to($jobApplication->getEmail())
-                ->subject('Confirmation de réception de votre candidature - Montessori Algérie')
+                ->subject($translator->trans('job_application.email.candidate.subject'))
                 ->html($this->renderView('emails/job_application_confirmation.html.twig', [
-                    'application' => $jobApplication
+                    'application' => $jobApplication,
+                    'translator' => $translator
                 ]));
 
             $mailer->send($candidateEmail);
 
-            // Email à l'équipe RH
+            // Email à l'équipe RH avec traduction
             $hrEmail = (new Email())
                 ->from('recrutement@montessorialgerie.mia-dz.com')
                 ->to('recrutement@montessorialgerie.mia-dz.com')
-                ->subject('Nouvelle candidature reçue - ' . $jobApplication->getPosteSouhaite())
+                ->subject($translator->trans('job_application.email.hr.subject', ['position' => $jobApplication->getPosteSouhaite()]))
                 ->html($this->renderView('emails/job_application_notification.html.twig', [
-                    'application' => $jobApplication
+                    'application' => $jobApplication,
+                    'translator' => $translator
                 ]));
 
             $mailer->send($hrEmail);
         } catch (\Exception $e) {
             // Log l'erreur mais ne pas faire échouer toute la candidature
-            error_log('Erreur envoi email: ' . $e->getMessage());
+            error_log($translator->trans('job_application.messages.email_error') . ': ' . $e->getMessage());
         }
     }
 }

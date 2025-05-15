@@ -25,34 +25,39 @@
 <section id="why-us" class="section why-us">
     <div class="container">
         <div class="row gy-4">
-            <div class="col-lg-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="why-box">
                     <h3>{{ 'whyus.title'|trans }}</h3>
                     <p>{{ 'whyus.intro'|trans }}</p>
                     <div class="text-center">
-                        <a href="#" class="more-btn"><span>{{ 'whyus.button'|trans }}</span> <i
-                                class="bi bi-chevron-right"></i></a>
+                        <a href="#" class="more-btn">
+                            <span>{{ 'whyus.button'|trans }}</span>
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
                     </div>
                 </div>
             </div><!-- End Why Box -->
-            <div class="col-lg-8 d-flex align-items-stretch">
-                <div class="row gy-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-xl-4">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+
+            <div class="col-lg-8">
+                <div class="row gy-4 h-100" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-xl-4 d-flex">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
                             <i class="bi bi-clipboard-data"></i>
                             <h4>{{ 'whyus.item1.title'|trans }}</h4>
                             <p>{{ 'whyus.item1.text'|trans }}</p>
                         </div>
                     </div><!-- End Icon Box -->
-                    <div class="col-xl-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="col-xl-4 d-flex" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
                             <i class="bi bi-gem"></i>
                             <h4>{{ 'whyus.item2.title'|trans }}</h4>
                             <p>{{ 'whyus.item2.text'|trans }}</p>
                         </div>
                     </div><!-- End Icon Box -->
-                    <div class="col-xl-4 aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+
+                    <div class="col-xl-4 d-flex" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
                             <i class="bi bi-inboxes"></i>
                             <h4>{{ 'whyus.item3.title'|trans }}</h4>
                             <p>{{ 'whyus.item3.text'|trans }}</p>
@@ -204,7 +209,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="jobApplicationModalLabel">
                     <i class="bi bi-person-plus me-2"></i>
-                    Formulaire de Candidature
+                    {{ 'job_application.title'|trans }}
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
@@ -220,7 +225,7 @@
 
                 <!-- Informations personnelles -->
                 <div class="form-section">
-                    <h4><i class="bi bi-person me-2"></i>Informations personnelles</h4>
+                    <h4><i class="bi bi-person me-2"></i>{{ 'job_application.personal_info'|trans }}</h4>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -276,7 +281,7 @@
 
                 <!-- Candidature -->
                 <div class="form-section">
-                    <h4><i class="bi bi-briefcase me-2"></i>Candidature</h4>
+                    <h4><i class="bi bi-briefcase me-2"></i>{{ 'job_application.application'|trans }}</h4>
                     <div class="form-group">
                         {{ form_row(form.posteSouhaite) }}
                     </div>
@@ -288,8 +293,8 @@
                             <div class="form-group">
                                 {{ form_label(form.cvFilename) }}
                                 {{ form_widget(form.cvFilename) }}
-                                <span id="cv-filename" class="filename-display text-muted small d-block mt-1">Aucun
-                                    fichier sélectionné</span>
+                                <span id="cv-filename" class="filename-display text-muted small d-block mt-1">{{
+                                    'job_application.no_file_selected'|trans }}</span>
                                 {{ form_errors(form.cvFilename) }}
                             </div>
                         </div>
@@ -297,17 +302,17 @@
                             <div class="form-group">
                                 {{ form_label(form.motivationFileName) }}
                                 {{ form_widget(form.motivationFileName) }}
-                                <span id="motivation-filename"
-                                    class="filename-display text-muted small d-block mt-1">Aucun fichier
-                                    sélectionné</span>
+                                <span id="motivation-filename" class="filename-display text-muted small d-block mt-1">{{
+                                    'job_application.no_file_selected'|trans }}</span>
                                 {{ form_errors(form.motivationFileName) }}
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <!-- Langues -->
                 <div class="form-section">
-                    <h4><i class="bi bi-translate me-2"></i>Langues parlées et niveau de maîtrise</h4>
+                    <h4><i class="bi bi-translate me-2"></i>{{ 'job_application.languages'|trans }}</h4>
                     <div class="languages-section">
                         {% for langue in form.langues %}
                         <div class="language-item card mb-3">
@@ -316,10 +321,12 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="mb-0 text-primary">{{ langue.nom.vars.value }}</h5>
                                     <div class="col-6">
-                                        {{ form_label(langue.niveau, 'Niveau de maîtrise', {'label_attr': {'class':
+                                        {{ form_label(langue.niveau, 'job_application.niveau_maitrise'|trans,
+                                        {'label_attr': {'class':
                                         'visually-hidden'}}) }}
                                         {{ form_widget(langue.niveau, {'attr': {'class': 'form-select',
-                                        'placeholder': 'Sélectionnez votre niveau'}}) }}
+                                        'placeholder': 'job_application.language_levels.select'|trans}}) }}
+                                        {{ form_errors(langue.niveau) }}
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +337,7 @@
 
                 <!-- Motivation et vision -->
                 <div class="form-section">
-                    <h4><i class="bi bi-heart me-2"></i>Motivation et vision</h4>
+                    <h4><i class="bi bi-heart me-2"></i>{{ 'job_application.motivation'|trans }}</h4>
                     <div class="form-group">
                         {{ form_row(form.motivationMMA) }}
                     </div>
@@ -360,8 +367,6 @@
         </div>
     </div>
 </div>
-
-{% endblock %}
 
 {% block javascripts %}
 <script>
@@ -416,8 +421,9 @@
                 const submitBtn = form.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
 
-                // Show loading state
-                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Envoi en cours...';
+                // Show loading state - Use translations
+                const loadingText = '{{ "Envoi en cours..."|trans }}'; // Vous devriez ajouter cette traduction
+                submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ${loadingText}`;
                 submitBtn.disabled = true;
 
                 // Create FormData for file upload
@@ -453,13 +459,18 @@
                             form.classList.remove('was-validated');
                             updateProgressBar();
 
+                            // Reset file inputs display
+                            const noFileText = '{{ "job_application.no_file_selected"|trans }}';
+                            document.getElementById('cv-filename').textContent = noFileText;
+                            document.getElementById('motivation-filename').textContent = noFileText;
+
                             // Remove alert after 5 seconds
                             setTimeout(() => {
                                 alertDiv.remove();
                             }, 5000);
                         } else {
                             // Show specific errors
-                            let errorMessage = data.message || 'Une erreur est survenue';
+                            let errorMessage = data.message || '{{ "job_application.messages.error"|trans }}';
 
                             // If there are specific field errors, add them
                             if (data.errors && Array.isArray(data.errors)) {
@@ -510,7 +521,7 @@
                         alertDiv.className = 'alert alert-danger alert-dismissible fade show';
                         alertDiv.innerHTML = `
                 <i class="bi bi-exclamation-triangle me-2"></i>
-                Une erreur est survenue. Veuillez réessayer.
+                {{ "Une erreur est survenue. Veuillez réessayer."|trans }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             `;
                         form.insertBefore(alertDiv, form.firstChild);
@@ -532,6 +543,7 @@
                 }
             }
         });
+
         // File input change handler
         form.querySelectorAll('input[type="file"]').forEach(fileInput => {
             fileInput.addEventListener('change', function () {
@@ -565,12 +577,13 @@
                     display.classList.remove('text-muted');
                     display.classList.add('text-success');
                 } else {
-                    display.textContent = 'Aucun fichier sélectionné';
+                    display.textContent = '{{ "job_application.no_file_selected"|trans }}';
                     display.classList.remove('text-success');
                     display.classList.add('text-muted');
                 }
             });
         });
+
         // Modal events
         const modal = document.getElementById('jobApplicationModal');
         modal.addEventListener('hidden.bs.modal', function () {
@@ -581,49 +594,55 @@
 
             // Remove any alerts
             form.querySelectorAll('.alert').forEach(alert => alert.remove());
-        });
-    });
-    // Ajoutez cette fonction pour nettoyer les erreurs lors de la saisie
-    function clearFieldError(field) {
-        // Remove is-invalid class
-        field.classList.remove('is-invalid');
 
-        // Remove error message
-        const existingError = field.parentElement.querySelector('.field-error');
-        if (existingError) {
-            existingError.remove();
-        }
-    }
-
-    // Ajoutez ces event listeners après la création du formulaire
-    form.querySelectorAll('input, select, textarea').forEach(field => {
-        field.addEventListener('input', function () {
-            clearFieldError(this);
+            // Reset file inputs display
+            const noFileText = '{{ "job_application.no_file_selected"|trans }}';
+            document.getElementById('cv-filename').textContent = noFileText;
+            document.getElementById('motivation-filename').textContent = noFileText;
         });
 
-        field.addEventListener('change', function () {
-            clearFieldError(this);
-        });
-    });
-
-    // Fonction pour nettoyer toutes les erreurs
-    function clearAllErrors() {
-        // Remove all alert messages
-        form.querySelectorAll('.alert').forEach(alert => alert.remove());
-
-        // Remove all field errors
-        form.querySelectorAll('.field-error').forEach(error => error.remove());
-
-        // Remove is-invalid classes
-        form.querySelectorAll('.is-invalid').forEach(field => {
+        // Ajoutez cette fonction pour nettoyer les erreurs lors de la saisie
+        function clearFieldError(field) {
+            // Remove is-invalid class
             field.classList.remove('is-invalid');
-        });
-    }
 
-    // Nettoyer les erreurs quand le modal s'ouvre
-    const modal = document.getElementById('jobApplicationModal');
-    modal.addEventListener('show.bs.modal', function () {
-        clearAllErrors();
+            // Remove error message
+            const existingError = field.parentElement.querySelector('.field-error');
+            if (existingError) {
+                existingError.remove();
+            }
+        }
+
+        // Ajoutez ces event listeners après la création du formulaire
+        form.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function () {
+                clearFieldError(this);
+            });
+
+            field.addEventListener('change', function () {
+                clearFieldError(this);
+            });
+        });
+
+        // Fonction pour nettoyer toutes les erreurs
+        function clearAllErrors() {
+            // Remove all alert messages
+            form.querySelectorAll('.alert').forEach(alert => alert.remove());
+
+            // Remove all field errors
+            form.querySelectorAll('.field-error').forEach(error => error.remove());
+
+            // Remove is-invalid classes
+            form.querySelectorAll('.is-invalid').forEach(field => {
+                field.classList.remove('is-invalid');
+            });
+        }
+
+        // Nettoyer les erreurs quand le modal s'ouvre
+        modal.addEventListener('show.bs.modal', function () {
+            clearAllErrors();
+        });
     });
 </script>
+{% endblock %}
 {% endblock %}

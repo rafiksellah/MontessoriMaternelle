@@ -18,31 +18,39 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class JobApplicationType extends AbstractType
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             // Informations personnelles
             ->add('nom', TextType::class, [
-                'label' => 'Nom',
+                'label' => $this->translator->trans('job_application.nom'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Votre nom'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.nom')
                 ]
             ])
             ->add('prenom', TextType::class, [
-                'label' => 'Prénom',
+                'label' => $this->translator->trans('job_application.prenom'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Votre prénom'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.prenom')
                 ]
             ])
             ->add('dateNaissance', BirthdayType::class, [
-                'label' => 'Date de naissance',
+                'label' => $this->translator->trans('job_application.date_naissance'),
                 'required' => true,
                 'widget' => 'single_text',
                 'input' => 'datetime',
@@ -53,100 +61,66 @@ class JobApplicationType extends AbstractType
                 ]
             ])
             ->add('lieuResidence', TextType::class, [
-                'label' => 'Lieu de résidence',
+                'label' => $this->translator->trans('job_application.lieu_residence'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Ville, Pays'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.lieu_residence')
                 ]
             ])
             ->add('nationalite', TextType::class, [
-                'label' => 'Nationalité',
+                'label' => $this->translator->trans('job_application.nationalite'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Votre nationalité'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.nationalite')
                 ]
             ])
             ->add('permisTravail', CheckboxType::class, [
-                'label' => 'J\'ai un permis de travail',
+                'label' => $this->translator->trans('job_application.permis_travail'),
                 'required' => false,
                 'attr' => [
                     'class' => 'form-check-input'
                 ]
             ])
             ->add('telephone', TelType::class, [
-                'label' => 'Téléphone',
+                'label' => $this->translator->trans('job_application.telephone'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => '+213 XX XX XX XX'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.telephone')
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email',
+                'label' => $this->translator->trans('job_application.email'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'votre.email@exemple.com'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.email')
                 ]
             ])
 
             // Candidature
             ->add('posteSouhaite', ChoiceType::class, [
-                'label' => 'Poste souhaité',
+                'label' => $this->translator->trans('job_application.poste_souhaite'),
                 'required' => true,
-                'placeholder' => 'Choisissez un poste',
-                'choices' => [
-                    'Équipe Pédagogique' => [
-                        'Enseignant d\'anglais' => 'enseignant_anglais',
-                        'Enseignant d\'arabe' => 'enseignant_arabe',
-                        'Enseignant Français' => 'enseignant_francais',
-                        'Enseignant de musique' => 'enseignant_musique',
-                    ],
-                    'Équipe Management administrative' => [
-                        'Directeur administratif et RH' => 'directeur_rh',
-                        'Office manager' => 'office_manager',
-                    ],
-                    'Équipe Support' => [
-                        'Responsable HSE' => 'responsable_hse',
-                        'Cuisinier/Chef' => 'cuisinier_chef',
-                        'Aide-cuisinier' => 'aide_cuisinier',
-                        'Personnel d\'entretien et d\'hygiène' => 'personnel_entretien',
-                        'Agent d\'accueil' => 'agent_accueil',
-                        'Factotum' => 'factotum',
-                    ],
-                    'Équipe Activité Extrascolaire' => [
-                        'Directeur des activités extrascolaires' => 'directeur_activites',
-                        'Animateurs culture, sports, sciences et nature' => 'animateur',
-                        'Experts/passionnés de culture et histoire algérienne' => 'expert_culture',
-                    ],
-                    'Équipe Santé' => [
-                        'Médecin' => 'medecin',
-                        'Psychologue' => 'psychologue',
-                        'Orthophoniste' => 'orthophoniste',
-                    ],
-                    'Équipe Marketing' => [
-                        'Gestionnaire de communauté' => 'community_manager',
-                        'Spécialiste du marketing numérique' => 'marketing_digital',
-                        'Graphiste' => 'graphiste',
-                    ]
-                ],
+                'placeholder' => $this->translator->trans('job_application.jobs.select_position'),
+                'choices' => $this->getJobChoices(),
                 'attr' => [
                     'class' => 'form-select'
                 ]
             ])
             ->add('raisonInteretPoste', TextareaType::class, [
-                'label' => 'Pourquoi ce poste vous attire-t-il particulièrement ?',
+                'label' => $this->translator->trans('job_application.raison_interet'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'rows' => 4,
-                    'placeholder' => 'Expliquez en 2-3 phrases ce qui vous attire dans ce poste...'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.raison_interet')
                 ]
             ])
             ->add('cvFilename', FileType::class, [
-                'label' => 'Joindre votre CV (PDF recommandé)',
+                'label' => $this->translator->trans('job_application.cv_filename'),
                 'required' => true,
                 'constraints' => [
                     new File([
@@ -155,20 +129,20 @@ class JobApplicationType extends AbstractType
                             'application/pdf',
                             'application/x-pdf',
                         ],
-                        'mimeTypesMessage' => 'Veuillez uploader un fichier PDF valide',
+                        'mimeTypesMessage' => $this->translator->trans('job_application.validation.invalid_file'),
                     ])
                 ],
                 'attr' => [
                     'class' => 'form-control',
                     'accept' => '.pdf',
-                    'data-filename-target' => 'cv-filename' // Add this attribute
+                    'data-filename-target' => 'cv-filename'
                 ],
                 'label_attr' => [
                     'class' => 'form-label'
                 ]
             ])
             ->add('motivationFileName', FileType::class, [
-                'label' => 'Joindre votre lettre de motivation (optionnelle)',
+                'label' => $this->translator->trans('job_application.motivation_filename'),
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -177,13 +151,13 @@ class JobApplicationType extends AbstractType
                             'application/pdf',
                             'application/x-pdf',
                         ],
-                        'mimeTypesMessage' => 'Veuillez uploader un fichier PDF valide',
+                        'mimeTypesMessage' => $this->translator->trans('job_application.validation.invalid_file'),
                     ])
                 ],
                 'attr' => [
                     'class' => 'form-control',
                     'accept' => '.pdf',
-                    'data-filename-target' => 'motivation-filename' // Add this attribute
+                    'data-filename-target' => 'motivation-filename'
                 ],
                 'label_attr' => [
                     'class' => 'form-label'
@@ -197,67 +171,116 @@ class JobApplicationType extends AbstractType
                 'allow_add' => false,
                 'allow_delete' => false,
                 'data' => [
-                    ['nom' => 'Français', 'niveau' => ''],
-                    ['nom' => 'Anglais', 'niveau' => ''],
-                    ['nom' => 'Arabe', 'niveau' => ''],
-                    ['nom' => 'Tamazight', 'niveau' => '']
+                    ['nom' => $this->translator->trans('job_application.language_names.francais'), 'niveau' => ''],
+                    ['nom' => $this->translator->trans('job_application.language_names.anglais'), 'niveau' => ''],
+                    ['nom' => $this->translator->trans('job_application.language_names.arabe'), 'niveau' => ''],
+                    ['nom' => $this->translator->trans('job_application.language_names.tamazight'), 'niveau' => '']
                 ],
-                'label' => 'Langues parlées et niveau de maîtrise'
+                'label' => $this->translator->trans('job_application.languages')
             ])
 
             // Motivation et vision
             ->add('motivationMMA', TextareaType::class, [
-                'label' => 'Qu\'est-ce qui vous motive à postuler chez MMA ?',
+                'label' => $this->translator->trans('job_application.motivation_mma'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'rows' => 5,
-                    'placeholder' => 'Expliquez votre motivation à rejoindre Montessori Algérie...'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.motivation_mma')
                 ]
             ])
             ->add('contributionMMA', TextareaType::class, [
-                'label' => 'Quelle contribution souhaitez-vous apporter à MMA ?',
+                'label' => $this->translator->trans('job_application.contribution_mma'),
                 'required' => true,
                 'attr' => [
                     'class' => 'form-control',
                     'rows' => 5,
-                    'placeholder' => 'Décrivez la contribution que vous souhaitez apporter...'
+                    'placeholder' => $this->translator->trans('job_application.placeholders.contribution_mma')
                 ]
             ])
             ->add('disponibilite', ChoiceType::class, [
-                'label' => 'Disponibilité',
+                'label' => $this->translator->trans('job_application.disponibilite'),
                 'required' => true,
-                'placeholder' => 'Sélectionnez votre disponibilité',
-                'choices' => [
-                    'Immédiate' => 'immediate',
-                    'Préavis de 1 mois' => 'preavis_1_mois',
-                    'Préavis de 2 mois' => 'preavis_2_mois',
-                    'Autre (à préciser)' => 'autre'
-                ],
+                'placeholder' => $this->translator->trans('job_application.disponibilite_options.select'),
+                'choices' => $this->getDisponibiliteChoices(),
                 'attr' => [
                     'class' => 'form-select'
                 ]
             ])
             ->add('engagement', ChoiceType::class, [
-                'label' => 'Engagement souhaité avec Montessori Algérie',
+                'label' => $this->translator->trans('job_application.engagement'),
                 'required' => true,
-                'placeholder' => 'Sélectionnez votre engagement souhaité',
-                'choices' => [
-                    'Moins d\'1 an' => 'moins_1_an',
-                    '1 à 2 ans' => '1_2_ans',
-                    '2 à 3 ans' => '2_3_ans',
-                    '5 ans et plus' => '5_ans_plus'
-                ],
+                'placeholder' => $this->translator->trans('job_application.engagement_options.select'),
+                'choices' => $this->getEngagementChoices(),
                 'attr' => [
                     'class' => 'form-select'
                 ]
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Envoyer ma candidature',
+                'label' => $this->translator->trans('job_application.submit'),
                 'attr' => [
                     'class' => 'btn btn-primary btn-lg w-100'
                 ]
             ]);
+    }
+
+    private function getJobChoices(): array
+    {
+        return [
+            $this->translator->trans('job_application.jobs.categories.pedagogique') => [
+                $this->translator->trans('job_application.jobs.positions.enseignant_anglais') => 'enseignant_anglais',
+                $this->translator->trans('job_application.jobs.positions.enseignant_arabe') => 'enseignant_arabe',
+                $this->translator->trans('job_application.jobs.positions.enseignant_francais') => 'enseignant_francais',
+                $this->translator->trans('job_application.jobs.positions.enseignant_musique') => 'enseignant_musique',
+            ],
+            $this->translator->trans('job_application.jobs.categories.administrative') => [
+                $this->translator->trans('job_application.jobs.positions.directeur_rh') => 'directeur_rh',
+                $this->translator->trans('job_application.jobs.positions.office_manager') => 'office_manager',
+            ],
+            $this->translator->trans('job_application.jobs.categories.support') => [
+                $this->translator->trans('job_application.jobs.positions.responsable_hse') => 'responsable_hse',
+                $this->translator->trans('job_application.jobs.positions.cuisinier_chef') => 'cuisinier_chef',
+                $this->translator->trans('job_application.jobs.positions.aide_cuisinier') => 'aide_cuisinier',
+                $this->translator->trans('job_application.jobs.positions.personnel_entretien') => 'personnel_entretien',
+                $this->translator->trans('job_application.jobs.positions.agent_accueil') => 'agent_accueil',
+                $this->translator->trans('job_application.jobs.positions.factotum') => 'factotum',
+            ],
+            $this->translator->trans('job_application.jobs.categories.extrascolaire') => [
+                $this->translator->trans('job_application.jobs.positions.directeur_activites') => 'directeur_activites',
+                $this->translator->trans('job_application.jobs.positions.animateur') => 'animateur',
+                $this->translator->trans('job_application.jobs.positions.expert_culture') => 'expert_culture',
+            ],
+            $this->translator->trans('job_application.jobs.categories.sante') => [
+                $this->translator->trans('job_application.jobs.positions.medecin') => 'medecin',
+                $this->translator->trans('job_application.jobs.positions.psychologue') => 'psychologue',
+                $this->translator->trans('job_application.jobs.positions.orthophoniste') => 'orthophoniste',
+            ],
+            $this->translator->trans('job_application.jobs.categories.marketing') => [
+                $this->translator->trans('job_application.jobs.positions.community_manager') => 'community_manager',
+                $this->translator->trans('job_application.jobs.positions.marketing_digital') => 'marketing_digital',
+                $this->translator->trans('job_application.jobs.positions.graphiste') => 'graphiste',
+            ]
+        ];
+    }
+
+    private function getDisponibiliteChoices(): array
+    {
+        return [
+            $this->translator->trans('job_application.disponibilite_options.immediate') => 'immediate',
+            $this->translator->trans('job_application.disponibilite_options.preavis_1_mois') => 'preavis_1_mois',
+            $this->translator->trans('job_application.disponibilite_options.preavis_2_mois') => 'preavis_2_mois',
+            $this->translator->trans('job_application.disponibilite_options.autre') => 'autre'
+        ];
+    }
+
+    private function getEngagementChoices(): array
+    {
+        return [
+            $this->translator->trans('job_application.engagement_options.moins_1_an') => 'moins_1_an',
+            $this->translator->trans('job_application.engagement_options.1_2_ans') => '1_2_ans',
+            $this->translator->trans('job_application.engagement_options.2_3_ans') => '2_3_ans',
+            $this->translator->trans('job_application.engagement_options.5_ans_plus') => '5_ans_plus'
+        ];
     }
 
     public function configureOptions(OptionsResolver $resolver): void

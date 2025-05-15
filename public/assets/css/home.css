@@ -198,21 +198,27 @@ section .environnements-slider {
     margin-bottom: 10px;
 }
 
-
 /* Styles pour la section Team */
-
 .team {
     padding: 80px 0;
+    background-color: #f8f9fa;
 }
 
 .team-img {
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-img:hover {
+    transform: translateY(-5px);
 }
 
 .team-img img {
     width: 100%;
+    height: auto;
+    display: block;
 }
 
 .team .content {
@@ -220,19 +226,88 @@ section .environnements-slider {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
+}
+
+.team .content-wrapper {
+    padding: 20px;
 }
 
 .team .content h2 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 700;
-    color: #364146;
-#364146;
+    color:  #31B44C;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.team .content h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: #4CAF50;
+}
+
+.team .text-content {
+    text-align: justify;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.team .subtitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.team .description {
+    color: #627680;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: justify;
     margin-bottom: 20px;
 }
 
-.team .content p {
-    color: #627680;
-    margin-bottom: 30px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .team {
+        padding: 60px 0;
+    }
+    
+    .team .content h2 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+    
+    .team .text-content {
+        text-align: left;
+    }
+    
+    .team .description {
+        text-align: left;
+    }
+}
+
+/* Support RTL pour l'arabe */
+body.rtl .team .content h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body.rtl .team .text-content {
+    text-align: justify;
+}
+
+body.rtl .team .subtitle {
+    text-align: center;
+}
+
+body.rtl .team .description {
+    text-align: justify;
 }
 
 .btn-rejoindre {
