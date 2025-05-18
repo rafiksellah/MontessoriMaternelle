@@ -306,10 +306,34 @@ whyus.item3.title: "Multiple social benefits"
 whyus.item3.text: >
   Enjoy numerous social benefits: health coverage, tailored leave, continuous training, and social loans.
 whyus.button: "Learn More"
-job.title: "OUR JOBS"
+
+# Section title
+job.section.title: "Join Our Team"
+job.section.subtitle: "Contribute to the education and development of children in an inspiring environment"
+
+# Description for the education team
+job.team.education.desc: "Join our team of passionate educators trained in the Montessori method to guide children in their learning journey."
+
+# Description for the administrative team
+job.team.admin.desc: "Our administrative team ensures the smooth operation of our institution while maintaining the harmony of our learning environment."
+
+# Description for the support team
+job.team.hse.desc: "Our support team ensures the safety, cleanliness, and comfort of our learning environment for everyone."
+
+# Description for the extracurricular team
+job.team.extras.desc: "Enhance our students' educational experience with creative and engaging activities beyond the traditional school curriculum."
+
+# Description for the health team
+job.team.health.desc: "Take care of the physical and mental well-being of our students to help them thrive throughout their educational journey."
+
+# Description for the marketing team
+job.team.marketing.desc: "Share our educational philosophy and values with the world through creative and authentic communication."
+
+# Description CTA
+job.cta.description: "Share your passion for education and child development by joining our team."
+
 
 job.team.education.title: "Educational Team"
-job.team.education.desc: "Teachers and instructors for comprehensive learning"
 job.team.education.roles:
   - "English Teacher"
   - "Arabic Teacher"
@@ -317,13 +341,12 @@ job.team.education.roles:
   - "Music Teacher"
 
 job.team.admin.title: "Administrative Management Team"
-job.team.admin.desc: "School management and administration"
 job.team.admin.roles:
   - "HR and Admin Director"
   - "Office Manager"
 
 job.team.hse.title: "Support Team"
-job.team.hse.desc: "Hygiene, safety, and environment"
+
 job.team.hse.roles:
   - "HSE Manager"
   - "Chef"
@@ -333,21 +356,18 @@ job.team.hse.roles:
   - "Handyman"
 
 job.team.extras.title: "Extracurricular Activities Team"
-job.team.extras.desc: "Cultural and sports animation"
 job.team.extras.roles:
   - "Extracurricular Activities Director"
   - "Cultural, Sports, Science, and Nature Animators"
   - "Algerian History and Culture Enthusiasts"
 
 job.team.health.title: "Health Team"
-job.team.health.desc: "Student care and well-being"
 job.team.health.roles:
   - "Doctor"
   - "Psychologist"
   - "Speech Therapist"
 
 job.team.marketing.title: "Marketing Team"
-job.team.marketing.desc: "Communication and technical support"
 job.team.marketing.roles:
   - "Community Manager"
   - "Digital Marketing Specialist"

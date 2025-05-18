@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Guest;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Guest>
@@ -16,28 +17,31 @@ class GuestRepository extends ServiceEntityRepository
         parent::__construct($registry, Guest::class);
     }
 
-    //    /**
-    //     * @return Guest[] Returns an array of Guest objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('g.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Trouve tous les invités ajoutés depuis une date donnée
+     */
+    public function findGuestsSince(DateTimeImmutable $date): array
+    {
+        return $this->createQueryBuilder('g')
+            ->join('g.eventRegistration', 'e')
+            ->andWhere('e.registeredAt >= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
 
-    //    public function findOneBySomeField($value): ?Guest
-    //    {
-    //        return $this->createQueryBuilder('g')
-    //            ->andWhere('g.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Trouve tous les invités ajoutés entre deux dates
+     */
+    public function findGuestsBetween(DateTimeImmutable $start, DateTimeImmutable $end): array
+    {
+        return $this->createQueryBuilder('g')
+            ->join('g.eventRegistration', 'e')
+            ->andWhere('e.registeredAt >= :start')
+            ->andWhere('e.registeredAt <= :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getResult();
+    }
 }

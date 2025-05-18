@@ -1,4 +1,6 @@
-{% extends 'baseAdmin.html.twig' %} {% block title %}Dashboard{% endblock %} {% block body %}
+{% extends 'baseAdmin.html.twig' %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -7,16 +9,24 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total des inscrits</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    $53,000
-                                    <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                    {{ total_registrations }}
+                                    {% if monthly_registrations_change > 0 %}
+                                    <span class="text-success text-sm font-weight-bolder">+{{
+                                        monthly_registrations_change }}%</span>
+                                    {% elseif monthly_registrations_change < 0 %} <span
+                                        class="text-danger text-sm font-weight-bolder">{{ monthly_registrations_change
+                                        }}%</span>
+                                        {% else %}
+                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
+                                        {% endif %}
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="fas fa-user-friends text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -29,16 +39,24 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Utilisateurs</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    2,300
-                                    <span class="text-success text-sm font-weight-bolder">+3%</span>
+                                    {{ total_users }}
+                                    {% if monthly_users_change > 0 %}
+                                    <span class="text-success text-sm font-weight-bolder">+{{ monthly_users_change
+                                        }}%</span>
+                                    {% elseif monthly_users_change < 0 %} <span
+                                        class="text-danger text-sm font-weight-bolder">{{ monthly_users_change
+                                        }}%</span>
+                                        {% else %}
+                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
+                                        {% endif %}
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="fas fa-user text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -51,16 +69,24 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Invités</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    +3,462
-                                    <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                                    {{ total_guests }}
+                                    {% if monthly_guests_change > 0 %}
+                                    <span class="text-success text-sm font-weight-bolder">+{{ monthly_guests_change
+                                        }}%</span>
+                                    {% elseif monthly_guests_change < 0 %} <span
+                                        class="text-danger text-sm font-weight-bolder">{{ monthly_guests_change
+                                        }}%</span>
+                                        {% else %}
+                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
+                                        {% endif %}
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="fas fa-users text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -73,16 +99,24 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Inscrits du mois</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    $103,430
-                                    <span class="text-success text-sm font-weight-bolder">+5%</span>
+                                    {{ monthly_registrations }}
+                                    {% if monthly_registrations_change > 0 %}
+                                    <span class="text-success text-sm font-weight-bolder">+{{
+                                        monthly_registrations_change }}%</span>
+                                    {% elseif monthly_registrations_change < 0 %} <span
+                                        class="text-danger text-sm font-weight-bolder">{{ monthly_registrations_change
+                                        }}%</span>
+                                        {% else %}
+                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
+                                        {% endif %}
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="fas fa-calendar-alt text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -90,5 +124,269 @@
             </div>
         </div>
     </div>
+
+    <!-- Graphiques -->
+    <div class="row mt-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
+            <div class="card z-index-2">
+                <div class="card-header pb-0">
+                    <h6>Inscriptions par mois</h6>
+                    <p class="text-sm">
+                        <i class="fa fa-arrow-up text-success"></i>
+                        <span class="font-weight-bold">{{ monthly_registrations_change }}%</span> cette année
+                    </p>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                        <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card z-index-2">
+                <div class="card-header pb-0">
+                    <h6>Utilisateurs avec/sans compte</h6>
+                    <p class="text-sm">
+                        <i class="fa fa-arrow-up text-success"></i>
+                        <span class="font-weight-bold">{{ user_conversion_rate }}%</span> ont créé un compte
+                    </p>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                        <canvas id="chart-pie" class="chart-canvas" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistiques récentes -->
+    <div class="row mt-4">
+        <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h6>Dernières inscriptions</h6>
+                </div>
+                <div class="card-body p-3">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Date</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Invités</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Compte</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for registration in recent_registrations %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ registration.firstName }} {{
+                                                    registration.lastName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ registration.email }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{
+                                            registration.registeredAt|date('d/m/Y') }}</p>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ registration.guests|length }}</p>
+                                    </td>
+                                    <td>
+                                        {% if registration.user %}
+                                        <span class="badge badge-sm bg-gradient-success">Oui</span>
+                                        {% else %}
+                                        <span class="badge badge-sm bg-gradient-secondary">Non</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h6>Derniers utilisateurs inscrits</h6>
+                </div>
+                <div class="card-body p-3">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom
+                                    </th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Email</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Rôle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in recent_users %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0 text-sm">{{ user.firstName }} {{ user.lastName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ user.phone }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="text-xs font-weight-bold mb-0">{{ user.email }}</p>
+                                    </td>
+                                    <td>
+                                        {% if 'ROLE_ADMIN' in user.roles %}
+                                        <span class="badge badge-sm bg-gradient-success">Admin</span>
+                                        {% else %}
+                                        <span class="badge badge-sm bg-gradient-info">Utilisateur</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Données pour le graphique linéaire - Inscriptions par mois
+        var ctx1 = document.getElementById("chart-line").getContext("2d");
+        var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+
+        new Chart(ctx1, {
+            type: "line",
+            data: {
+                labels: {{ chart_months| json_encode | raw }},
+        datasets: [{
+            label: "Inscriptions",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#5e72e4",
+            backgroundColor: gradientStroke1,
+            borderWidth: 3,
+            fill: true,
+            data: {{ chart_registrations| json_encode | raw }},
+        maxBarThickness: 6
+                }],
+            },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false,
+            }
+        },
+        interaction: {
+            intersect: false,
+            mode: 'index',
+        },
+        scales: {
+            y: {
+                grid: {
+                    drawBorder: false,
+                    display: true,
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                },
+                ticks: {
+                    display: true,
+                    padding: 10,
+                    color: '#b2b9bf',
+                    font: {
+                        size: 11,
+                        family: "Open Sans",
+                        style: 'normal',
+                        lineHeight: 2
+                    },
+                }
+            },
+            x: {
+                grid: {
+                    drawBorder: false,
+                    display: false,
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    borderDash: [5, 5]
+                },
+                ticks: {
+                    display: true,
+                    color: '#b2b9bf',
+                    padding: 20,
+                    font: {
+                        size: 11,
+                        family: "Open Sans",
+                        style: 'normal',
+                        lineHeight: 2
+                    },
+                }
+            },
+        },
+    },
+        });
+
+    // Données pour le graphique circulaire - Utilisateurs avec/sans compte
+    var ctx2 = document.getElementById("chart-pie").getContext("2d");
+    new Chart(ctx2, {
+        type: 'pie',
+        data: {
+            labels: ['Sans compte', 'Avec compte'],
+            datasets: [{
+                data: [{{ users_without_account }}, {{ users_with_account }}],
+        backgroundColor: [
+            'rgba(203, 12, 159, 0.8)',
+            'rgba(94, 114, 228, 0.8)'
+        ],
+        borderColor: [
+            'rgba(203, 12, 159, 1)',
+            'rgba(94, 114, 228, 1)'
+        ],
+        borderWidth: 1
+    }]
+            },
+        options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+            }
+        }
+    }
+        });
+    });
+</script>
 {% endblock %}

@@ -305,10 +305,33 @@ whyus.item3.text: >
   Profitez de nombreux avantages sociaux : couverture santé, congés adaptés, formations continues, prêts sociaux.
 whyus.button: "En savoir plus"
 
-job.title: "NOS MÉTIERS"
+
+# Section title
+job.section.title: "Rejoignez Notre Équipe"
+job.section.subtitle: "Contribuez à l'éducation et au développement des enfants dans un environnement inspirant"
+
+# Description pour l'équipe pédagogique
+job.team.education.desc: "Rejoignez notre équipe d'éducateurs passionnés et formés à la méthode Montessori pour guider les enfants dans leur parcours d'apprentissage."
+
+# Description pour l'équipe administrative
+job.team.admin.desc: "Notre équipe administrative assure le bon fonctionnement de notre institution tout en maintenant l'harmonie de notre environnement d'apprentissage."
+
+# Description pour l'équipe support
+job.team.hse.desc: "Notre équipe de support veille à la sécurité, la propreté et le confort de notre environnement d'apprentissage pour tous."
+
+# Description pour l'équipe extrascolaire
+job.team.extras.desc: "Enrichissez l'expérience éducative de nos élèves avec des activités créatives et stimulantes au-delà du programme scolaire traditionnel."
+
+# Description pour l'équipe santé
+job.team.health.desc: "Veillez au bien-être physique et mental de nos élèves pour leur permettre de s'épanouir pleinement dans leur parcours éducatif."
+
+# Description pour l'équipe marketing
+job.team.marketing.desc: "Partagez notre philosophie éducative et nos valeurs avec le monde à travers une communication créative et authentique."
+
+# Description CTA
+job.cta.description: "Partagez votre passion pour l'éducation et le développement des enfants en rejoignant notre équipe."
 
 job.team.education.title: "Équipe Pédagogique"
-job.team.education.desc: "Enseignants et animateurs pour un apprentissage complet"
 job.team.education.roles:
   - "Enseignant d'anglais"
   - "Enseignant d'arabe"
@@ -316,13 +339,11 @@ job.team.education.roles:
   - "Enseignant de musique"
 
 job.team.admin.title: "Équipe Management administrative"
-job.team.admin.desc: "Gestion et administration de l'établissement"
 job.team.admin.roles:
   - "Directeur administratif et RH"
   - "Office manager"
 
 job.team.hse.title: "Équipe Support"
-job.team.hse.desc: "Hygiène, sécurité et environnement"
 job.team.hse.roles:
   - "Responsable HSE"
   - "Cuisinier/Chef"
@@ -332,21 +353,18 @@ job.team.hse.roles:
   - "Factotum"
 
 job.team.extras.title: "Équipe Activité Extrascolaire"
-job.team.extras.desc: "Animation culturelle et sportive"
 job.team.extras.roles:
   - "Directeur des activités extrascolaires"
   - "Animateurs culture, sports, sciences et nature"
   - "Experts/passionnés de culture et histoire algérienne"
 
 job.team.health.title: "Équipe Santé"
-job.team.health.desc: "Soins et bien-être des élèves"
 job.team.health.roles:
   - "Médecin"
   - "Psychologue"
   - "Orthophoniste"
 
 job.team.marketing.title: "Équipe Marketing"
-job.team.marketing.desc: "Communication et support technique"
 job.team.marketing.roles:
   - "Gestionnaire de communauté"
   - "Spécialiste du marketing numérique"

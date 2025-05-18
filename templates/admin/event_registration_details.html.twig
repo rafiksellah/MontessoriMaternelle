@@ -1,0 +1,224 @@
+{% extends 'baseAdmin.html.twig' %}
+{% block title %}Détails de l'inscription{% endblock %}
+{% block body %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <div class="card">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Détails de l'inscription</h5>
+                    <div>
+                        {# <a href="{{ path('app_event_registration_edit', {'id': registration.id}) }}"
+                            class="btn btn-sm bg-gradient-info ms-auto mb-0">
+                            <i class="fas fa-edit me-1"></i> Modifier
+                        </a> #}
+                        <a href="{{ path('app_event_registration_index') }}"
+                            class="btn btn-sm bg-gradient-secondary ms-2 mb-0">
+                            <i class="fas fa-arrow-left me-1"></i> Retour
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card card-profile card-plain">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="avatar avatar-xl position-relative">
+                                                <div class="avatar-initial rounded-circle bg-gradient-primary">
+                                                    <span class="text-white font-weight-bold">{{
+                                                        registration.firstName|first }}{{ registration.lastName|first
+                                                        }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="h-100">
+                                                <h5 class="mb-1">{{ registration.firstName }} {{ registration.lastName
+                                                    }}</h5>
+                                                <p class="mb-0 font-weight-normal text-sm text-muted">
+                                                    Inscrit(e) le {{ registration.registeredAt|date('d/m/Y à H:i') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card card-profile card-plain">
+                                <div class="card-body p-3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h6 class="text-gradient text-primary mb-1">Informations de contact</h6>
+                                            <ul class="list-group">
+                                                <li class="list-group-item border-0 ps-0 pt-0 text-sm">
+                                                    <strong class="text-dark">Email:</strong> &nbsp; {{
+                                                    registration.email }}
+                                                </li>
+                                                <li class="list-group-item border-0 ps-0 text-sm">
+                                                    <strong class="text-dark">Téléphone:</strong> &nbsp; {{
+                                                    registration.phone }}
+                                                </li>
+                                                <li class="list-group-item border-0 ps-0 text-sm">
+                                                    <strong class="text-dark">Compte utilisateur:</strong> &nbsp;
+                                                    {% if registration.user %}
+                                                    <span class="badge badge-sm bg-gradient-success">Compte créé</span>
+                                                    <a href="{{ path('app_user_show', {'id': registration.user.id}) }}"
+                                                        class="btn btn-link text-secondary p-0 ms-1 mb-0">
+                                                        <i class="fas fa-external-link-alt text-xs"></i>
+                                                    </a>
+                                                    {% else %}
+                                                    <span class="badge badge-sm bg-gradient-secondary">Sans
+                                                        compte</span>
+                                                    {% endif %}
+                                                </li>
+                                                <li class="list-group-item border-0 ps-0 pb-0 text-sm">
+                                                    {# <strong class="text-dark">Rappel envoyé:</strong> &nbsp;
+                                                    {% if registration.reminderSent %}
+                                                    <span class="badge badge-sm bg-gradient-success">Oui</span>
+                                                    {% else %}
+                                                    <span class="badge badge-sm bg-gradient-warning">Non</span>
+                                                    {% endif %} #}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section des invités -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header pb-0">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <h6 class="mb-0">Liste des invités ({{ registration.guests|length }})</h6>
+                        </div>
+                        <div class="col-6 text-end">
+                            {# {% if registration.guests|length < 6 %} <a
+                                href="{{ path('app_guest_new', {'registration_id': registration.id}) }}"
+                                class="btn btn-sm bg-gradient-dark mb-0">
+                                <i class="fas fa-plus me-1"></i> Ajouter un invité
+                                </a>
+                                {% endif %} #}
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body px-0 pt-0 pb-2">
+                    <div class="table-responsive p-0">
+                        {% if registration.guests|length > 0 %}
+                        <div class="row px-4 py-3">
+                            {% for guest in registration.guests %}
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card card-profile">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="avatar avatar-lg position-relative">
+                                                    <div class="avatar-initial rounded-circle bg-gradient-info">
+                                                        <span class="text-white font-weight-bold">{{
+                                                            guest.firstName|first }}{{ guest.lastName|first }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <h6 class="mb-0 text-sm">{{ guest.firstName }} {{ guest.lastName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">Invité #{{ loop.index }}</p>
+                                                <div class="d-flex mt-2">
+                                                    {# <a href="{{ path('app_guest_edit', {'id': guest.id}) }}"
+                                                        class="btn btn-link text-secondary mb-0">
+                                                        <i class="fas fa-edit text-xs"></i> Modifier
+                                                    </a> #}
+                                                    <form method="post"
+                                                        action="{{ path('app_guest_delete', {'id': guest.id}) }}"
+                                                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet invité?');"
+                                                        class="d-inline">
+                                                        <input type="hidden" name="_token"
+                                                            value="{{ csrf_token('delete' ~ guest.id) }}">
+                                                        {# <button class="btn btn-link text-danger mb-0">
+                                                            <i class="fas fa-trash text-xs"></i> Supprimer
+                                                        </button> #}
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="text-center py-4">
+                            <p class="text-sm mb-0">Aucun invité enregistré pour cette inscription</p>
+                            <a href="{{ path('app_guest_new', {'registration_id': registration.id}) }}"
+                                class="btn btn-sm bg-gradient-primary mt-3">
+                                <i class="fas fa-plus me-1"></i> Ajouter un invité
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Boutons d'action -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            {# {% if not registration.reminderSent %}
+                            <form method="post"
+                                action="{{ path('app_event_registration_send_reminder', {'id': registration.id}) }}"
+                                class="d-inline">
+                                <input type="hidden" name="_token"
+                                    value="{{ csrf_token('reminder' ~ registration.id) }}">
+                                <button class="btn bg-gradient-warning me-2 mb-0">
+                                    <i class="fas fa-bell me-1"></i> Envoyer un rappel
+                                </button>
+                            </form>
+                            {% endif %} #}
+                            {# <form method="post"
+                                action="{{ path('app_event_registration_delete', {'id': registration.id}) }}"
+                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette inscription et tous ses invités?');"
+                                class="d-inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ registration.id) }}">
+                                <button class="btn bg-gradient-danger mb-0">
+                                    <i class="fas fa-trash me-1"></i> Supprimer l'inscription
+                                </button>
+                            </form> #}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    // Style personnalisé pour les initiales dans les cercles d'avatar
+    document.addEventListener('DOMContentLoaded', function () {
+        const avatarInitials = document.querySelectorAll('.avatar-initial');
+        avatarInitials.forEach(function (element) {
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
+        });
+    });
+</script>
+{% endblock %}

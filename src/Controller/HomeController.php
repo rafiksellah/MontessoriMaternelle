@@ -98,6 +98,48 @@ class HomeController extends AbstractController
         $form = $this->createForm(JobApplicationType::class, $jobApplication);
         $form->handleRequest($request);
 
+
+        $jobConfig = [
+            'title' => $translator->trans('job.title'),
+            'subtitle' => $translator->trans('job.subtitle'),
+            'team' => [
+                'education' => [
+                    'title' => $translator->trans('job.team.education.title'),
+                    'desc' => $translator->trans('job.team.education.desc'),
+                    'roles' => $translator->trans('job.team.education.roles'),
+                ],
+                'admin' => [
+                    'title' => $translator->trans('job.team.admin.title'),
+                    'desc' => $translator->trans('job.team.admin.desc'),
+                    'roles' => $translator->trans('job.team.admin.roles'),
+                ],
+                'hse' => [
+                    'title' => $translator->trans('job.team.hse.title'),
+                    'desc' => $translator->trans('job.team.hse.desc'),
+                    'roles' => $translator->trans('job.team.hse.roles'),
+                ],
+                'extras' => [
+                    'title' => $translator->trans('job.team.extras.title'),
+                    'desc' => $translator->trans('job.team.extras.desc'),
+                    'roles' => $translator->trans('job.team.extras.roles'),
+                ],
+                'health' => [
+                    'title' => $translator->trans('job.team.health.title'),
+                    'desc' => $translator->trans('job.team.health.desc'),
+                    'roles' => $translator->trans('job.team.health.roles'),
+                ],
+                'marketing' => [
+                    'title' => $translator->trans('job.team.marketing.title'),
+                    'desc' => $translator->trans('job.team.marketing.desc'),
+                    'roles' => $translator->trans('job.team.marketing.roles'),
+                ],
+            ],
+            'cta' => [
+                'title' => $translator->trans('job.cta.title'),
+                'button' => $translator->trans('job.cta.button'),
+            ],
+        ];
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 // Gérer l'upload des fichiers
@@ -197,7 +239,7 @@ class HomeController extends AbstractController
                     if (!$langueForm->isValid()) {
                         foreach ($langueForm->all() as $langueField => $langueFieldForm) {
                             if (!$langueFieldForm->isValid()) {
-                                $fieldName = "langues_${index}_${langueField}";
+                                $fieldName = "langues_{$index}_{$langueField}";
                                 $fieldErrors[$fieldName] = [];
                                 foreach ($langueFieldForm->getErrors() as $error) {
                                     $fieldErrors[$fieldName][] = $error->getMessage();
@@ -207,6 +249,7 @@ class HomeController extends AbstractController
                     }
                 }
             }
+
 
             return new JsonResponse([
                 'success' => false,
@@ -218,6 +261,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/recrutement.html.twig', [
             'form' => $form->createView(),
+            'job' => $jobConfig
         ]);
     }
 
