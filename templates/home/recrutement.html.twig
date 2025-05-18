@@ -21,187 +21,204 @@
     </nav>
 </div>
 
-<!-- Section 2: Pourquoi rejoindre Montessori Algérie -->
-<section id="why-us" class="section why-us">
-    <div class="container">
-        <div class="row gy-4">
-            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="why-box">
-                    <h3>{{ 'whyus.title'|trans }}</h3>
-                    <p>{{ 'whyus.intro'|trans }}</p>
-                    <div class="text-center">
-                        <a href="#" class="more-btn">
-                            <span>{{ 'whyus.button'|trans }}</span>
-                            <i class="bi bi-chevron-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div><!-- End Why Box -->
+<!-- Nouvelle version de la section des métiers -->
+<section class="montessori-jobs" id="jobs">
+    <div class="jobs-container">
+        <h2 class="section-title">{{ 'job.section.title'|trans }}</h2>
+        <p class="section-subtitle">{{ 'job.section.subtitle'|trans }}</p>
 
-            <div class="col-lg-8">
-                <div class="row gy-4 h-100" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-xl-4 d-flex">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
-                            <i class="bi bi-clipboard-data"></i>
-                            <h4>{{ 'whyus.item1.title'|trans }}</h4>
-                            <p>{{ 'whyus.item1.text'|trans }}</p>
+        <div class="jobs-categories">
+            <!-- Catégorie: Équipe Pédagogique -->
+            <div class="job-category" data-category="pedagogique">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-book"></i>
+                    </div>
+                    <h3>{{ 'job.team.education.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.title.education.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.education.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
                         </div>
-                    </div><!-- End Icon Box -->
-
-                    <div class="col-xl-4 d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
-                            <i class="bi bi-gem"></i>
-                            <h4>{{ 'whyus.item2.title'|trans }}</h4>
-                            <p>{{ 'whyus.item2.text'|trans }}</p>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.education.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
                         </div>
-                    </div><!-- End Icon Box -->
-
-                    <div class="col-xl-4 d-flex" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box d-flex flex-column justify-content-center align-items-center flex-fill">
-                            <i class="bi bi-inboxes"></i>
-                            <h4>{{ 'whyus.item3.title'|trans }}</h4>
-                            <p>{{ 'whyus.item3.text'|trans }}</p>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.education.roles.2'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
                         </div>
-                    </div><!-- End Icon Box -->
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Section 2-->
-
-<!-- Section: Nos Métiers -->
-<section class="jobs-section" id="jobs">
-    <div class="container" data-aos="fade-up">
-        <h2 class="section-title text-center">{{ 'job.title'|trans }}</h2>
-
-        <div class="row">
-
-            <!-- Équipe Pédagogique -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrutement.webp') }}" alt="">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.education.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.education.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.education.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.education.roles.1'|trans }}</li>
-                            <li>{{ 'job.team.education.roles.2'|trans }}</li>
-                            <li>{{ 'job.team.education.roles.3'|trans }}</li>
-                        </ul>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.education.roles.3'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Équipe Administrative -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrt.jpg') }}" alt="">
+            <!-- Catégorie: Équipe Administrative -->
+            <div class="job-category" data-category="administrative">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-briefcase"></i>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.admin.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.admin.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.admin.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.admin.roles.1'|trans }}</li>
-                        </ul>
+                    <h3>{{ 'job.team.admin.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.admin.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.admin.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.admin.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Équipe HSE -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrt2.avif') }}" alt="">
+            <!-- Catégorie: Équipe Support -->
+            <div class="job-category" data-category="support">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-gear"></i>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.hse.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.hse.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.hse.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.hse.roles.1'|trans }}</li>
-                            <li>{{ 'job.team.hse.roles.2'|trans }}</li>
-                            <li>{{ 'job.team.hse.roles.3'|trans }}</li>
-                            <li>{{ 'job.team.hse.roles.4'|trans }}</li>
-                            <li>{{ 'job.team.hse.roles.5'|trans }}</li>
-                        </ul>
+                    <h3>{{ 'job.team.hse.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.hse.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.2'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.3'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.4'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.hse.roles.5'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Extrascolaire -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
+            <!-- Catégorie: Activités Extrascolaires -->
+            <div class="job-category" data-category="extrascolaire">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-palette"></i>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.extras.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.extras.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.extras.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.extras.roles.1'|trans }}</li>
-                            <li>{{ 'job.team.extras.roles.2'|trans }}</li>
-                        </ul>
+                    <h3>{{ 'job.team.extras.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.extras.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.extras.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.extras.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.extras.roles.2'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Équipe Santé -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
+            <!-- Catégorie: Équipe Santé -->
+            <div class="job-category" data-category="sante">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-heart-pulse"></i>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.health.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.health.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.health.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.health.roles.1'|trans }}</li>
-                            <li>{{ 'job.team.health.roles.2'|trans }}</li>
-                        </ul>
+                    <h3>{{ 'job.team.health.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.health.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.health.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.health.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.health.roles.2'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Équipe Marketing -->
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-                <div class="card">
-                    <div class="card-img">
-                        <img src="{{ asset('assets/img/recrt3.avif') }}" alt="">
+            <!-- Catégorie: Équipe Marketing -->
+            <div class="job-category" data-category="marketing">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="bi bi-megaphone"></i>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="#">{{ 'job.team.marketing.title'|trans }}</a></h5>
-                        <p class="fst-italic text-center">{{ 'job.team.marketing.desc'|trans }}</p>
-                        <ul class="job-list">
-                            <li>{{ 'job.team.marketing.roles.0'|trans }}</li>
-                            <li>{{ 'job.team.marketing.roles.1'|trans }}</li>
-                            <li>{{ 'job.team.marketing.roles.2'|trans }}</li>
-                        </ul>
+                    <h3>{{ 'job.team.marketing.title'|trans }}</h3>
+                </div>
+                <div class="category-content">
+                    <p class="category-description">{{ 'job.team.marketing.desc'|trans }}</p>
+                    <div class="positions-list">
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.marketing.roles.0'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.marketing.roles.1'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
+                        <div class="position-item">
+                            <span class="position-name">{{ 'job.team.marketing.roles.2'|trans }}</span>
+                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Call to Action -->
-        <div class="row mt-5">
-            <div class="col-12 text-center">
-                <h3 class="mb-4">{{ 'job.cta.title'|trans }}</h3>
-                <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                    data-bs-target="#jobApplicationModal">
+        <div class="jobs-cta">
+            <div class="cta-content">
+                <h3>{{ 'job.cta.title'|trans }}</h3>
+                <p>{{ 'job.cta.description'|trans }}</p>
+                <button class="cta-button" data-bs-toggle="modal" data-bs-target="#jobApplicationModal">
                     {{ 'job.cta.button'|trans }}
                 </button>
+            </div>
+            <div class="cta-image">
+                <img src="{{asset('assets/img/postule.jpg')}}" alt="Rejoignez notre équipe Montessori" />
             </div>
         </div>
     </div>
 </section>
-<!-- Modal de candidature -->
+<!-- End Section: Nos Métiers Montessori -->
 <div class="modal fade" id="jobApplicationModal" tabindex="-1" aria-labelledby="jobApplicationModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable">
@@ -641,6 +658,35 @@
         // Nettoyer les erreurs quand le modal s'ouvre
         modal.addEventListener('show.bs.modal', function () {
             clearAllErrors();
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animation pour les catégories d'emploi
+        const categories = document.querySelectorAll('.job-category');
+
+        // Animation d'entrée avec un léger délai entre chaque catégorie
+        categories.forEach((category, index) => {
+            setTimeout(() => {
+                category.style.opacity = 1;
+                category.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+
+        // Gestion des boutons de détails de poste
+        const detailButtons = document.querySelectorAll('.position-details-btn');
+
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const positionName = this.parentElement.querySelector('.position-name').textContent;
+
+                // Ici vous pouvez ajouter le code pour afficher les détails du poste
+                // Par exemple, ouvrir une modal avec les détails du poste spécifique
+                console.log(`Afficher les détails pour: ${positionName}`);
+
+                // À compléter avec l'implémentation de la modal ou autre méthode d'affichage
+            });
         });
     });
 </script>
