@@ -1,390 +1,420 @@
 {% extends 'base.html.twig' %} {% block title %}Recrutement - {{ parent() }}{% endblock %} {% block stylesheets %}
-<link href="{{ asset('assets/css/recrutement.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
-<div class="page-title aos-init aos-animate" data-aos="fade">
-    <div class="heading">
-        <div class="container">
-            <div class="row d-flex justify-content-center text-center">
-                <div class="col-lg-8">
-                    <h2 style="color: #fff !important; font-weight: 700;">{{ 'recruitment.title'|trans }}</h2>
-                    <p class="mb-0">{{ 'recruitment.intro'|trans }}</p>
+<link href="{{ asset('assets/css/recrutement.css') }}" rel="stylesheet">
+<link href="{{ asset('assets/css/home.css') }}" rel="stylesheet">
+{% endblock %} {% block body %}
+
+<main class="main">
+    <!-- ======= Hero Section ======= -->
+    <section id="hero-carousel" class="hero-carousel">
+        <div class="container-fluid p-0" data-aos="fade-up">
+            <div class="carousel-container">
+                <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"
+                            aria-current="true"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+                    </div>
+
+                    <div class="carousel-inner">
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active">
+                            <img src="{{ asset('/assets/img/carosel3.jpg') }}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="carousel-item">
+                            <img src="{{ asset('/assets/img/carosel2.jpg') }}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="carousel-item">
+                            <img src="{{ asset('/assets/img/carosel1.jpg') }}" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <nav class="breadcrumbs">
-        <div class="container">
-            <ol>
-                <li><a href="/">{{ 'breadcrumb.home'|trans }}</a></li>
-                <li class="current">{{ 'breadcrumb.recruitment'|trans }}</li>
-            </ol>
-        </div>
-    </nav>
-</div>
+    </section>
+    <!-- End Hero Carousel -->
 
-<!-- Nouvelle version de la section des métiers -->
-<section class="montessori-jobs" id="jobs">
-    <div class="jobs-container">
-        <h2 class="section-title">{{ 'job.section.title'|trans }}</h2>
-        <p class="section-subtitle">{{ 'job.section.subtitle'|trans }}</p>
+    <!-- Nouvelle version de la section des métiers -->
+    <section class="montessori-jobs" id="jobs">
+        <div class="jobs-container">
+            <h2 class="section-title">{{ 'job.section.title'|trans }}</h2>
+            <p class="section-subtitle">{{ 'job.section.subtitle'|trans }}</p>
 
-        <div class="jobs-categories">
-            <!-- Catégorie: Équipe Pédagogique -->
-            <div class="job-category" data-category="pedagogique">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-book"></i>
+            <div class="jobs-categories">
+                <!-- Catégorie: Équipe Pédagogique -->
+                <div class="job-category" data-category="pedagogique">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-book"></i>
+                        </div>
+                        <h3>{{ 'job.team.education.title'|trans }}</h3>
                     </div>
-                    <h3>{{ 'job.team.education.title'|trans }}</h3>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.education.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.education.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.education.roles.2'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.education.roles.3'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.title.education.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.education.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+
+                <!-- Catégorie: Équipe Administrative -->
+                <div class="job-category" data-category="administrative">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-briefcase"></i>
                         </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.education.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        <h3>{{ 'job.team.admin.title'|trans }}</h3>
+                    </div>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.admin.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.admin.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
                         </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.education.roles.2'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Équipe Support -->
+                <div class="job-category" data-category="support">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-gear"></i>
                         </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.education.roles.3'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
+                        <h3>{{ 'job.team.hse.title'|trans }}</h3>
+                    </div>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.2'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.3'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.4'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.hse.roles.5'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Activités Extrascolaires -->
+                <div class="job-category" data-category="extrascolaire">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h3>{{ 'job.team.extras.title'|trans }}</h3>
+                    </div>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.extras.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.extras.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.extras.roles.2'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Équipe Santé -->
+                <div class="job-category" data-category="sante">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <h3>{{ 'job.team.health.title'|trans }}</h3>
+                    </div>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.health.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.health.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.health.roles.2'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Catégorie: Équipe Marketing -->
+                <div class="job-category" data-category="marketing">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <i class="bi bi-megaphone"></i>
+                        </div>
+                        <h3>{{ 'job.team.marketing.title'|trans }}</h3>
+                    </div>
+                    <div class="category-content">
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.marketing.roles.0'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.marketing.roles.1'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
+                            <div class="position-item">
+                                <span class="position-name">{{ 'job.team.marketing.roles.2'|trans }}</span>
+                                <button class="position-details-btn" aria-label="Voir détails">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Catégorie: Équipe Administrative -->
-            <div class="job-category" data-category="administrative">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-briefcase"></i>
-                    </div>
-                    <h3>{{ 'job.team.admin.title'|trans }}</h3>
+            <!-- Call to Action -->
+            <div class="jobs-cta">
+                <div class="cta-content">
+                    <h3>{{ 'job.cta.title'|trans }}</h3>
+                    <p>{{ 'job.cta.description'|trans }}</p>
+                    <button class="cta-button" data-bs-toggle="modal" data-bs-target="#jobApplicationModal">
+                        {{ 'job.cta.button'|trans }}
+                    </button>
                 </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.admin.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.admin.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.admin.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                    </div>
+                <div class="cta-image">
+                    <img src="{{asset('assets/img/postule.jpg')}}" alt="Rejoignez notre équipe Montessori" />
                 </div>
-            </div>
-
-            <!-- Catégorie: Équipe Support -->
-            <div class="job-category" data-category="support">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-gear"></i>
-                    </div>
-                    <h3>{{ 'job.team.hse.title'|trans }}</h3>
-                </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.hse.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.2'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.3'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.4'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.hse.roles.5'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Catégorie: Activités Extrascolaires -->
-            <div class="job-category" data-category="extrascolaire">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-palette"></i>
-                    </div>
-                    <h3>{{ 'job.team.extras.title'|trans }}</h3>
-                </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.extras.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.extras.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.extras.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.extras.roles.2'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Catégorie: Équipe Santé -->
-            <div class="job-category" data-category="sante">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-heart-pulse"></i>
-                    </div>
-                    <h3>{{ 'job.team.health.title'|trans }}</h3>
-                </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.health.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.health.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.health.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.health.roles.2'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Catégorie: Équipe Marketing -->
-            <div class="job-category" data-category="marketing">
-                <div class="category-header">
-                    <div class="category-icon">
-                        <i class="bi bi-megaphone"></i>
-                    </div>
-                    <h3>{{ 'job.team.marketing.title'|trans }}</h3>
-                </div>
-                <div class="category-content">
-                    <p class="category-description">{{ 'job.team.marketing.desc'|trans }}</p>
-                    <div class="positions-list">
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.marketing.roles.0'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.marketing.roles.1'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                        <div class="position-item">
-                            <span class="position-name">{{ 'job.team.marketing.roles.2'|trans }}</span>
-                            <button class="position-details-btn" aria-label="Voir détails">+</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="jobs-cta">
-            <div class="cta-content">
-                <h3>{{ 'job.cta.title'|trans }}</h3>
-                <p>{{ 'job.cta.description'|trans }}</p>
-                <button class="cta-button" data-bs-toggle="modal" data-bs-target="#jobApplicationModal">
-                    {{ 'job.cta.button'|trans }}
-                </button>
-            </div>
-            <div class="cta-image">
-                <img src="{{asset('assets/img/postule.jpg')}}" alt="Rejoignez notre équipe Montessori" />
             </div>
         </div>
-    </div>
-</section>
-<!-- End Section: Nos Métiers Montessori -->
-<div class="modal fade" id="jobApplicationModal" tabindex="-1" aria-labelledby="jobApplicationModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="jobApplicationModalLabel">
-                    <i class="bi bi-person-plus me-2"></i>
-                    {{ 'job_application.title'|trans }}
-                </h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                    aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Progress bar -->
-                <div class="form-progress mb-4">
-                    <div class="form-progress-bar" id="formProgressBar"></div>
+    </section>
+    <!-- End Section: Nos Métiers Montessori -->
+    <div class="modal fade" id="jobApplicationModal" tabindex="-1" aria-labelledby="jobApplicationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="jobApplicationModalLabel">
+                        <i class="bi bi-person-plus me-2"></i>
+                        {{ 'job_application.title'|trans }}
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
-
-                {{ form_start(form, {'attr': {'id': 'jobApplicationForm', 'class': 'needs-validation', 'novalidate':
-                true}}) }}
-
-                <!-- Informations personnelles -->
-                <div class="form-section">
-                    <h4><i class="bi bi-person me-2"></i>{{ 'job_application.personal_info'|trans }}</h4>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.nom) }}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.prenom) }}
-                            </div>
-                        </div>
+                <div class="modal-body">
+                    <!-- Progress bar -->
+                    <div class="form-progress mb-4">
+                        <div class="form-progress-bar" id="formProgressBar"></div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.dateNaissance) }}
+
+                    {{ form_start(form, {'attr': {'id': 'jobApplicationForm', 'class': 'needs-validation', 'novalidate':
+                    true}}) }}
+
+                    <!-- Informations personnelles -->
+                    <div class="form-section">
+                        <h4><i class="bi bi-person me-2"></i>{{ 'job_application.personal_info'|trans }}</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.nom) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.lieuResidence) }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.nationalite) }}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="form-check mt-4">
-                                    {{ form_widget(form.permisTravail) }}
-                                    {{ form_label(form.permisTravail) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.prenom) }}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.telephone) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.dateNaissance) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.lieuResidence) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.email) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.nationalite) }}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Candidature -->
-                <div class="form-section">
-                    <h4><i class="bi bi-briefcase me-2"></i>{{ 'job_application.application'|trans }}</h4>
-                    <div class="form-group">
-                        {{ form_row(form.posteSouhaite) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.raisonInteretPoste) }}
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_label(form.cvFilename) }}
-                                {{ form_widget(form.cvFilename) }}
-                                <span id="cv-filename" class="filename-display text-muted small d-block mt-1">{{
-                                    'job_application.no_file_selected'|trans }}</span>
-                                {{ form_errors(form.cvFilename) }}
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_label(form.motivationFileName) }}
-                                {{ form_widget(form.motivationFileName) }}
-                                <span id="motivation-filename" class="filename-display text-muted small d-block mt-1">{{
-                                    'job_application.no_file_selected'|trans }}</span>
-                                {{ form_errors(form.motivationFileName) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Langues -->
-                <div class="form-section">
-                    <h4><i class="bi bi-translate me-2"></i>{{ 'job_application.languages'|trans }}</h4>
-                    <div class="languages-section">
-                        {% for langue in form.langues %}
-                        <div class="language-item card mb-3">
-                            <div class="card-body">
-                                {{ form_widget(langue.nom, {'attr': {'class': 'd-none'}}) }}
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h5 class="mb-0 text-primary">{{ langue.nom.vars.value }}</h5>
-                                    <div class="col-6">
-                                        {{ form_label(langue.niveau, 'job_application.niveau_maitrise'|trans,
-                                        {'label_attr': {'class':
-                                        'visually-hidden'}}) }}
-                                        {{ form_widget(langue.niveau, {'attr': {'class': 'form-select',
-                                        'placeholder': 'job_application.language_levels.select'|trans}}) }}
-                                        {{ form_errors(langue.niveau) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-check mt-4">
+                                        {{ form_widget(form.permisTravail) }}
+                                        {{ form_label(form.permisTravail) }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Motivation et vision -->
-                <div class="form-section">
-                    <h4><i class="bi bi-heart me-2"></i>{{ 'job_application.motivation'|trans }}</h4>
-                    <div class="form-group">
-                        {{ form_row(form.motivationMMA) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.contributionMMA) }}
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.disponibilite) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.telephone) }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_row(form.engagement) }}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.email) }}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="text-center">
-                    {{ form_row(form.submit) }}
-                </div>
+                    <!-- Candidature -->
+                    <div class="form-section">
+                        <h4><i class="bi bi-briefcase me-2"></i>{{ 'job_application.application'|trans }}</h4>
+                        <div class="form-group">
+                            {{ form_row(form.posteSouhaite) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.raisonInteretPoste) }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_label(form.cvFilename) }}
+                                    {{ form_widget(form.cvFilename) }}
+                                    <span id="cv-filename" class="filename-display text-muted small d-block mt-1">{{
+                                        'job_application.no_file_selected'|trans }}</span>
+                                    {{ form_errors(form.cvFilename) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_label(form.motivationFileName) }}
+                                    {{ form_widget(form.motivationFileName) }}
+                                    <span id="motivation-filename"
+                                        class="filename-display text-muted small d-block mt-1">{{
+                                        'job_application.no_file_selected'|trans }}</span>
+                                    {{ form_errors(form.motivationFileName) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                {{ form_end(form) }}
+                    <!-- Langues -->
+                    <div class="form-section">
+                        <h4><i class="bi bi-translate me-2"></i>{{ 'job_application.languages'|trans }}</h4>
+                        <div class="languages-section">
+                            {% for langue in form.langues %}
+                            <div class="language-item card mb-3">
+                                <div class="card-body">
+                                    {{ form_widget(langue.nom, {'attr': {'class': 'd-none'}}) }}
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0 text-primary">{{ langue.nom.vars.value }}</h5>
+                                        <div class="col-6">
+                                            {{ form_label(langue.niveau, 'job_application.niveau_maitrise'|trans,
+                                            {'label_attr': {'class':
+                                            'visually-hidden'}}) }}
+                                            {{ form_widget(langue.niveau, {'attr': {'class': 'form-select',
+                                            'placeholder': 'job_application.language_levels.select'|trans}}) }}
+                                            {{ form_errors(langue.niveau) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Motivation et vision -->
+                    <div class="form-section">
+                        <h4><i class="bi bi-heart me-2"></i>{{ 'job_application.motivation'|trans }}</h4>
+                        <div class="form-group">
+                            {{ form_row(form.motivationMMA) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form.contributionMMA) }}
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.disponibilite) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ form_row(form.engagement) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        {{ form_row(form.submit) }}
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</main>
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function () {
