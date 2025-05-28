@@ -52,6 +52,12 @@ class Contact
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $status = null; // 'pending', 'accepted', 'rejected'
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $responseDate = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -168,5 +174,51 @@ class Contact
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getResponseDate(): ?\DateTimeImmutable
+    {
+        return $this->responseDate;
+    }
+
+    public function setResponseDate(?\DateTimeImmutable $responseDate): static
+    {
+        $this->responseDate = $responseDate;
+        return $this;
+    }
+
+    public function getStatusBadgeClass(): string
+    {
+        return match ($this->status) {
+            'accepted' => 'badge-success',
+            'rejected' => 'badge-danger',
+            default => 'badge-warning'
+        };
+    }
+
+    public function getStatusText(): string
+    {
+        return match ($this->status) {
+            'accepted' => 'Accepté',
+            'rejected' => 'Refusé',
+            default => 'En attente'
+        };
+    }
+
+    public function getChildAge(): int
+    {
+        $now = new \DateTime();
+        return $now->diff($this->childBirthDate)->y;
     }
 }

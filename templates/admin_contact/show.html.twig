@@ -1,0 +1,212 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Détails de la candidature - {{ contact.parentName }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm">
+                        <a class="opacity-5 text-dark" href="{{ path('app_admin_contacts') }}">Candidatures</a>
+                    </li>
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ contact.parentName }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <h6>Détails de la candidature</h6>
+                        <span
+                            class="badge bg-gradient-{{ contact.status == 'accepted' ? 'success' : (contact.status == 'rejected' ? 'danger' : 'warning') }}">
+                            {{ contact.statusText }}
+                        </span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Nom du parent</label>
+                                <div class="form-control border-0 bg-gray-100">{{ contact.parentName }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Email</label>
+                                <div class="form-control border-0 bg-gray-100">
+                                    <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Nom de l'enfant</label>
+                                <div class="form-control border-0 bg-gray-100">{{ contact.childName }}</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Téléphone</label>
+                                <div class="form-control border-0 bg-gray-100">
+                                    <a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Date de naissance</label>
+                                <div class="form-control border-0 bg-gray-100">
+                                    {{ contact.childBirthDate|date('d/m/Y') }} ({{ contact.childAge }} ans)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-control-label">Objectif</label>
+                                <div class="form-control border-0 bg-gray-100">{{ contact.objective }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label">Comment nous avez-vous connus ?</label>
+                                <div class="form-control border-0 bg-gray-100">{{ contact.heardAboutUs ?? 'Non spécifié'
+                                    }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if contact.expectations %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="form-control-label">Attentes et commentaires</label>
+                                <div class="form-control border-0 bg-gray-100" style="min-height: 100px;">
+                                    {{ contact.expectations|nl2br }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <hr class="horizontal dark">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small class="text-muted">Candidature reçue le : {{ contact.createdAt|date('d/m/Y à H:i')
+                                }}</small>
+                        </div>
+                        {% if contact.responseDate %}
+                        <div class="col-md-6 text-md-end">
+                            <small class="text-muted">Réponse envoyée le : {{ contact.responseDate|date('d/m/Y à H:i')
+                                }}</small>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            {% if contact.status == 'pending' %}
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h6>Répondre à la candidature</h6>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{{ path('app_admin_contact_respond', {id: contact.id}) }}">
+                        <div class="form-group">
+                            <label class="form-control-label">Décision</label>
+                            <select name="response" class="form-control" required>
+                                <option value="">Choisir une réponse</option>
+                                <option value="accepted">Accepter la candidature</option>
+                                <option value="rejected">Refuser la candidature</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">Message personnalisé (optionnel)</label>
+                            <textarea name="message" class="form-control" rows="4"
+                                placeholder="Ajoutez un message personnalisé qui sera inclus dans l'email..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-primary btn-sm w-100">
+                                <i class="fas fa-paper-plane me-2"></i>Envoyer la réponse
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h6>Statut de la candidature</h6>
+                </div>
+                <div class="card-body text-center">
+                    <div
+                        class="icon icon-shape bg-gradient-{{ contact.status == 'accepted' ? 'success' : 'danger' }} shadow mx-auto">
+                        <i
+                            class="ni ni-{{ contact.status == 'accepted' ? 'check-bold' : 'fat-remove' }} text-lg opacity-10"></i>
+                    </div>
+                    <h5 class="mt-3 mb-2">Candidature {{ contact.statusText|lower }}</h5>
+                    <p class="text-sm">
+                        Réponse envoyée le {{ contact.responseDate|date('d/m/Y à H:i') }}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="card mt-4">
+                <div class="card-header pb-0">
+                    <h6>Actions</h6>
+                </div>
+                <div class="card-body">
+                    <a href="{{ path('app_admin_contacts') }}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
+                        <i class="fas fa-arrow-left me-2"></i>Retour à la liste
+                    </a>
+                    <a href="mailto:{{ contact.email }}" class="btn btn-outline-info btn-sm w-100 mb-2">
+                        <i class="fas fa-envelope me-2"></i>Contacter par email
+                    </a>
+                    <a href="tel:{{ contact.phoneNumber }}" class="btn btn-outline-success btn-sm w-100 mb-2">
+                        <i class="fas fa-phone me-2"></i>Appeler
+                    </a>
+                    <hr>
+                    <form method="post" action="{{ path('app_admin_contact_delete', {id: contact.id}) }}"
+                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette candidature ?')">
+                        <button type="submit" class="btn btn-outline-danger btn-sm w-100">
+                            <i class="fas fa-trash me-2"></i>Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Auto-remplir le message selon la décision
+        const responseSelect = document.querySelector('select[name="response"]');
+        const messageTextarea = document.querySelector('textarea[name="message"]');
+
+        if (responseSelect && messageTextarea) {
+            responseSelect.addEventListener('change', function () {
+                if (this.value === 'accepted') {
+                    messageTextarea.placeholder = 'Ex: Nous sommes ravis de vous accueillir dans notre établissement. Nous vous contacterons prochainement pour finaliser l\'inscription.';
+                } else if (this.value === 'rejected') {
+                    messageTextarea.placeholder = 'Ex: Nous vous remercions pour votre intérêt. Malheureusement, nous n\'avons plus de places disponibles pour cette année.';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

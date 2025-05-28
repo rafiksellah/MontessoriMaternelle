@@ -162,6 +162,10 @@
                                     <input type="password" name="password" id="inputPassword" class="form-control"
                                         autocomplete="current-password" required
                                         placeholder="{{ 'security.login.password_placeholder'|trans }}">
+                                    <button class="btn btn-outline-secondary toggle-password" type="button"
+                                        tabindex="-1">
+                                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                    </button>
                                 </div>
                             </div>
 
@@ -193,4 +197,20 @@
         </div>
     </div>
 </section>
+{% endblock %}
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const togglePassword = document.querySelector('.toggle-password');
+        const passwordInput = document.getElementById('inputPassword');
+        const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            togglePasswordIcon.classList.toggle('bi-eye');
+            togglePasswordIcon.classList.toggle('bi-eye-slash');
+        });
+    });
+</script>
 {% endblock %}
