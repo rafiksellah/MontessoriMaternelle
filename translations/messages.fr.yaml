@@ -15,7 +15,7 @@ site:
 footer:
   useful_links: 'Liens utiles'
   contact: 'Contact'
-  address: 'Alger, Algérie'
+  address: 'Rue du Zaccar, Hydra'
   rights: 'Tous droits réservés'
 
 # messages.fr.yaml
@@ -93,10 +93,13 @@ environments:
 
 # Team section
 team:
-    title: 'L’équipe MMA'
-    subtitle: 'Chez Montessori Algérie, nous plaçons l’adulte au cœur de l’environnement de l’enfant.'
-    description: 'Ce n’est pas uniquement la richesse du matériel pédagogique qui fait la différence, mais avant tout la qualité humaine et professionnelle de ceux qui accompagnent l’enfant au quotidien. C’est pourquoi le recrutement de nos collaborateurs fait l’objet d’une attention rigoureuse et d’exigences élevées. Nos éducateurs et éducatrices sont certifiés par l’Association Montessori Internationale (AMI) ainsi que par la Positive Discipline Association (PDA). Ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel.'
-    button: 'Rejoindre notre équipe'
+  title: "L’équipe MMA"
+  part1: "Ce n’est pas uniquement la richesse du matériel pédagogique qui fait la différence, mais avant tout"
+  highlight1: "la qualité humaine et professionnelle"
+  part2: "de ceux qui accompagnent l’enfant au quotidien. C’est pourquoi le recrutement de nos collaborateurs fait l’objet d’une attention rigoureuse et d’exigences élevées."
+  highlight2: "certifiés par l’Association Montessori Internationale (AMI)"
+  highlight3: "Positive Discipline Association (PDA)"
+  part3: "Ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel."
 
 # Form labels
 form:
@@ -137,12 +140,10 @@ alerts:
 
 # Page d'accueil (existante)
 hero:
-  welcome: 'Bienvenue à la Maternelle Montessori Algérie'
-  tagline: 'Premier institut officiel Montessori en Algérie'
+  welcome: 'Développement - Transparence'
   education: 'MMA :  Maternelle Montessori Algérie '
-  adapted: 'Coopération -  Développement - Transparence'
-  development: 'Développement naturel'
-  environment: 'Nature & Culture'
+  adapted: 'Excellence - Coopération'
+  development: 'Nature & Culture'
 
 # Email de confirmation (barbecue)
 email:
