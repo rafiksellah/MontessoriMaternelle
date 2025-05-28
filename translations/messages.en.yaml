@@ -144,9 +144,7 @@ alerts:
 # Home page (existing)
 hero:
   welcome: 'Development – Transparency'
-  tagline: 'Development – Transparency'
-  education: 'MMA: Montessori Kindergarten of Algeria '
-  adapted: 'Excellence - Cooperation'
+  education: 'Excellence - Cooperation'
   development: 'Nature & Culture'
 
 # Confirmation email (barbecue)

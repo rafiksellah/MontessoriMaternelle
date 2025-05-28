@@ -141,8 +141,7 @@ alerts:
 # Page d'accueil (existante)
 hero:
   welcome: 'Développement - Transparence'
-  education: 'MMA :  Maternelle Montessori Algérie '
-  adapted: 'Excellence - Coopération'
+  education: 'Excellence - Coopération'
   development: 'Nature & Culture'
 
 # Email de confirmation (barbecue)
