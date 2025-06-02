@@ -1,0 +1,95 @@
+{# templates/emails/inscription_accepted.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #d4edda;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .success-box {
+            background-color: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>🎉 Inscription acceptée</h2>
+        </div>
+
+        <div class="content">
+            <p>Cher(e) {{ contact.parentName }},</p>
+
+            <div class="success-box">
+                <p><strong>Nous avons le plaisir de vous informer que la demande d'inscription de {{ contact.childName
+                        }} a été acceptée.</strong></p>
+            </div>
+
+            <p>Vous trouverez en pièce jointe le dossier d'inscription à compléter et à nous retourner dans un délai de
+                7 jours, accompagné de l'ensemble des documents demandés.</p>
+
+            {% if customMessage %}
+            <div style="background-color: #e7f3ff; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0;">
+                <h4>Message personnalisé :</h4>
+                <p>{{ customMessage|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <p>Nous restons à votre disposition pour toute information complémentaire.</p>
+
+            <div class="warning-box">
+                <p><strong>⚠️ NB : Tout dossier incomplet ne pourra être pris en compte et l'enfant ne sera pas
+                        inscrit.</strong></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Cordialement,<br>
+                L'équipe de l'établissement Montessori</p>
+        </div>
+    </div>
+</body>
+
+</html>

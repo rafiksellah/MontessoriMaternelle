@@ -1,0 +1,100 @@
+{# templates/emails/rejection.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Candidature - Réponse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: #f44336;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        .rejection-info {
+            background: white;
+            padding: 15px;
+            border-left: 4px solid #f44336;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Réponse à votre candidature</h1>
+        </div>
+
+        <div class="content">
+            <p>Bonjour {{ contact.parentName }},</p>
+
+            <p>Nous vous remercions sincèrement pour l'intérêt que vous portez à notre établissement et pour votre
+                candidature concernant <strong>{{ contact.childName }}</strong>.</p>
+
+            <p>Après étude attentive de votre dossier, nous regrettons de vous informer que nous ne pouvons pas donner
+                suite favorablement à votre demande pour le moment.</p>
+
+            {% if rejectionReason %}
+            <div class="rejection-info">
+                <h3>📋 Motif de notre décision :</h3>
+                <p>{{ rejectionReason|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            {% if customMessage %}
+            <div style="background: white; padding: 15px; border-left: 4px solid #FF9800; margin: 20px 0;">
+                <p><strong>Message personnalisé :</strong></p>
+                <p>{{ customMessage|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <div style="background: #fff3e0; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                <p><strong>💡 Pour l'avenir :</strong></p>
+                <p>Cette décision ne remet pas en question les qualités de {{ contact.childName }}. N'hésitez pas à
+                    renouveler votre candidature lors de nos prochaines sessions d'admission si les circonstances
+                    évoluent.</p>
+            </div>
+
+            <p>Nous vous souhaitons de trouver l'établissement qui conviendra parfaitement aux besoins de {{
+                contact.childName }}.</p>
+
+            <p>Nous vous remercions encore pour la confiance que vous nous avez témoignée.</p>
+
+            <p>Cordialement,<br>
+                L'équipe pédagogique</p>
+        </div>
+
+        <div class="footer">
+            <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre directement.</p>
+        </div>
+    </div>
+</body>
+
+</html>

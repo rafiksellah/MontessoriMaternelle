@@ -1,191 +1,194 @@
+{# templates/admin_contact/show.html.twig #}
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Détails de la candidature - {{ contact.parentName }}{% endblock %}
+{% block title %}Contact - {{ contact.parentName }}{% endblock %}
 
 {% block body %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                    <li class="breadcrumb-item text-sm">
-                        <a class="opacity-5 text-dark" href="{{ path('app_admin_contacts') }}">Candidatures</a>
-                    </li>
-                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{ contact.parentName }}
-                    </li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header pb-0">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <h6>Détails de la candidature</h6>
-                        <span
-                            class="badge bg-gradient-{{ contact.status == 'accepted' ? 'success' : (contact.status == 'rejected' ? 'danger' : 'warning') }}">
-                            {{ contact.statusText }}
-                        </span>
-                    </div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h3>Détails du contact</h3>
+                    <span class="badge badge-{{ contact.statusColor }} badge-lg">
+                        {{ contact.statusText }}
+                    </span>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Nom du parent</label>
-                                <div class="form-control border-0 bg-gray-100">{{ contact.parentName }}</div>
-                            </div>
+                            <h5>Informations parent</h5>
+                            <p><strong>Nom :</strong> {{ contact.parentName }}</p>
+                            <p><strong>Email :</strong> {{ contact.email }}</p>
+                            <p><strong>Téléphone :</strong> {{ contact.phoneNumber }}</p>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Email</label>
-                                <div class="form-control border-0 bg-gray-100">
-                                    <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-                                </div>
-                            </div>
+                            <h5>Informations enfant</h5>
+                            <p><strong>Nom :</strong> {{ contact.childName }}</p>
+                            <p><strong>Date de naissance :</strong> {{ contact.childBirthDate|date('d/m/Y') }}</p>
+                            <p><strong>Âge :</strong> {{ contact.childAge }} ans</p>
                         </div>
                     </div>
+
+                    <hr>
+
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Nom de l'enfant</label>
-                                <div class="form-control border-0 bg-gray-100">{{ contact.childName }}</div>
-                            </div>
+                            <p><strong>Objectif :</strong> {{ contact.objective }}</p>
+                            <p><strong>Comment nous a connu :</strong> {{ contact.heardAboutUs }}</p>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Téléphone</label>
-                                <div class="form-control border-0 bg-gray-100">
-                                    <a href="tel:{{ contact.phoneNumber }}">{{ contact.phoneNumber }}</a>
-                                </div>
-                            </div>
+                            <p><strong>Date de candidature :</strong> {{ contact.createdAt|date('d/m/Y H:i') }}</p>
+                            {% if contact.responseDate %}
+                            <p><strong>Date de réponse :</strong> {{ contact.responseDate|date('d/m/Y H:i') }}</p>
+                            {% endif %}
+                            {% if contact.appointmentDate %}
+                            <p><strong>RDV programmé :</strong> {{ contact.appointmentDate|date('d/m/Y H:i') }}</p>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Date de naissance</label>
-                                <div class="form-control border-0 bg-gray-100">
-                                    {{ contact.childBirthDate|date('d/m/Y') }} ({{ contact.childAge }} ans)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="form-control-label">Objectif</label>
-                                <div class="form-control border-0 bg-gray-100">{{ contact.objective }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Comment nous avez-vous connus ?</label>
-                                <div class="form-control border-0 bg-gray-100">{{ contact.heardAboutUs ?? 'Non spécifié'
-                                    }}</div>
-                            </div>
-                        </div>
-                    </div>
+
                     {% if contact.expectations %}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label class="form-control-label">Attentes et commentaires</label>
-                                <div class="form-control border-0 bg-gray-100" style="min-height: 100px;">
-                                    {{ contact.expectations|nl2br }}
-                                </div>
-                            </div>
-                        </div>
+                    <hr>
+                    <h5>Attentes</h5>
+                    <p>{{ contact.expectations|nl2br }}</p>
+                    {% endif %}
+
+                    {% if contact.customMessage %}
+                    <hr>
+                    <h5>Dernier message envoyé</h5>
+                    <div class="alert alert-info">
+                        {{ contact.customMessage|nl2br }}
                     </div>
                     {% endif %}
-                    <hr class="horizontal dark">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <small class="text-muted">Candidature reçue le : {{ contact.createdAt|date('d/m/Y à H:i')
-                                }}</small>
-                        </div>
-                        {% if contact.responseDate %}
-                        <div class="col-md-6 text-md-end">
-                            <small class="text-muted">Réponse envoyée le : {{ contact.responseDate|date('d/m/Y à H:i')
-                                }}</small>
-                        </div>
-                        {% endif %}
+
+                    {% if contact.rejectionReason %}
+                    <hr>
+                    <h5>Motif de refus</h5>
+                    <div class="alert alert-warning">
+                        {{ contact.rejectionReason|nl2br }}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            {% if contact.status == 'pending' %}
+            {% if contact.status == 'pending' or contact.status == 'appointment_scheduled' %}
             <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Répondre à la candidature</h6>
+                <div class="card-header">
+                    <h4>Répondre au contact</h4>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{ path('app_admin_contact_respond', {id: contact.id}) }}">
+                    <form method="post" action="{{ path('app_admin_contact_respond', {'id': contact.id}) }}"
+                        id="responseForm">
+
+                        <!-- Sélection du type de réponse -->
                         <div class="form-group">
-                            <label class="form-control-label">Décision</label>
-                            <select name="response" class="form-control" required>
-                                <option value="">Choisir une réponse</option>
-                                <option value="accepted">Accepter la candidature</option>
-                                <option value="rejected">Refuser la candidature</option>
+                            <label for="response">Type de réponse :</label>
+                            <select class="form-control" id="response" name="response" required
+                                onchange="toggleFields()">
+                                <option value="">-- Choisir --</option>
+                                <option value="appointment_scheduled">📅 Programmer un RDV</option>
+                                <option value="confirmed">✅ Confirmer le RDV</option>
+                                <option value="rejected">❌ Refuser la candidature</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Message personnalisé (optionnel)</label>
-                            <textarea name="message" class="form-control" rows="4"
-                                placeholder="Ajoutez un message personnalisé qui sera inclus dans l'email..."></textarea>
+
+                        <!-- Champ date/heure pour RDV -->
+                        <div class="form-group" id="appointmentDateField" style="display: none;">
+                            <label for="appointment_date">Date et heure du RDV :</label>
+                            <input type="datetime-local" class="form-control" id="appointment_date"
+                                name="appointment_date">
+                            <small class="form-text text-muted">Sélectionnez la date et l'heure du rendez-vous</small>
                         </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn bg-gradient-primary btn-sm w-100">
-                                <i class="fas fa-paper-plane me-2"></i>Envoyer la réponse
-                            </button>
+
+                        <!-- Motifs de refus prédéfinis -->
+                        <div class="form-group" id="rejectionReasonField" style="display: none;">
+                            <label for="rejection_reason">Motif de refus :</label>
+                            <select class="form-control" id="rejection_reason_select"
+                                onchange="handleRejectionReason()">
+                                <option value="">-- Choisir un motif --</option>
+                                <option value="custom">✏️ Motif personnalisé</option>
+                                <option value="Complet pour cette session">Places complètes pour cette session</option>
+                                <option value="Âge non adapté">Âge de l'enfant non adapté à nos programmes</option>
+                                <option value="Zone géographique">Enfant en dehors de notre zone géographique</option>
+                                <option value="Dossier incomplet">Dossier de candidature incomplet</option>
+                                <option value="Critères non remplis">Critères d'admission non remplis</option>
+                                <option value="Liste d'attente">Inscription en liste d'attente</option>
+                            </select>
+                            <textarea class="form-control mt-2" id="rejection_reason" name="rejection_reason" rows="3"
+                                placeholder="Détaillez le motif de refus..." style="display: none;"></textarea>
                         </div>
+
+                        <!-- Message personnalisé -->
+                        <div class="form-group" id="customMessageField" style="display: none;">
+                            <label for="message">Message personnalisé (optionnel) :</label>
+                            <textarea class="form-control" id="message" name="message" rows="4"
+                                placeholder="Ajoutez un message personnalisé..."></textarea>
+                        </div>
+
+                        <!-- Aperçu de l'email -->
+                        <div id="emailPreview" style="display: none;" class="alert alert-light border">
+                            <h6>📧 Aperçu de l'email :</h6>
+                            <div id="previewContent"></div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="submitBtn" style="display: none;">
+                            <i class="fas fa-paper-plane"></i> Envoyer l'email
+                        </button>
                     </form>
-                </div>
-            </div>
-            {% else %}
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6>Statut de la candidature</h6>
-                </div>
-                <div class="card-body text-center">
-                    <div
-                        class="icon icon-shape bg-gradient-{{ contact.status == 'accepted' ? 'success' : 'danger' }} shadow mx-auto">
-                        <i
-                            class="ni ni-{{ contact.status == 'accepted' ? 'check-bold' : 'fat-remove' }} text-lg opacity-10"></i>
-                    </div>
-                    <h5 class="mt-3 mb-2">Candidature {{ contact.statusText|lower }}</h5>
-                    <p class="text-sm">
-                        Réponse envoyée le {{ contact.responseDate|date('d/m/Y à H:i') }}
-                    </p>
                 </div>
             </div>
             {% endif %}
 
-            <div class="card mt-4">
-                <div class="card-header pb-0">
-                    <h6>Actions</h6>
+            <!-- Actions rapides -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>Actions</h5>
                 </div>
                 <div class="card-body">
-                    <a href="{{ path('app_admin_contacts') }}" class="btn btn-outline-secondary btn-sm w-100 mb-2">
-                        <i class="fas fa-arrow-left me-2"></i>Retour à la liste
+                    <a href="{{ path('app_admin_contacts') }}" class="btn btn-secondary btn-block">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
                     </a>
-                    <a href="mailto:{{ contact.email }}" class="btn btn-outline-info btn-sm w-100 mb-2">
-                        <i class="fas fa-envelope me-2"></i>Contacter par email
-                    </a>
-                    <a href="tel:{{ contact.phoneNumber }}" class="btn btn-outline-success btn-sm w-100 mb-2">
-                        <i class="fas fa-phone me-2"></i>Appeler
-                    </a>
-                    <hr>
-                    <form method="post" action="{{ path('app_admin_contact_delete', {id: contact.id}) }}"
-                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette candidature ?')">
-                        <button type="submit" class="btn btn-outline-danger btn-sm w-100">
-                            <i class="fas fa-trash me-2"></i>Supprimer
+
+                    {% if contact.status != 'pending' %}
+                    <button class="btn btn-info btn-block mt-2" onclick="window.print()">
+                        <i class="fas fa-print"></i> Imprimer
+                    </button>
+                    {% endif %}
+
+                    <form method="post" action="{{ path('app_admin_contact_delete', {'id': contact.id}) }}" class="mt-2"
+                        onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')">
+                        <button type="submit" class="btn btn-danger btn-block">
+                            <i class="fas fa-trash"></i> Supprimer
                         </button>
                     </form>
+                </div>
+            </div>
+
+            <!-- Légende des statuts -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6>Légende des statuts</h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge badge-warning mr-2">En attente</span>
+                        <small>Candidature reçue</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge badge-info mr-2">RDV programmé</span>
+                        <small>Rendez-vous fixé</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge badge-success mr-2">Confirmé</span>
+                        <small>RDV confirmé</small>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="badge badge-danger mr-2">Refusé</span>
+                        <small>Candidature refusée</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -193,20 +196,138 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Auto-remplir le message selon la décision
-        const responseSelect = document.querySelector('select[name="response"]');
-        const messageTextarea = document.querySelector('textarea[name="message"]');
+    function toggleFields() {
+        const response = document.getElementById('response').value;
+        const appointmentField = document.getElementById('appointmentDateField');
+        const rejectionField = document.getElementById('rejectionReasonField');
+        const messageField = document.getElementById('customMessageField');
+        const submitBtn = document.getElementById('submitBtn');
+        const previewDiv = document.getElementById('emailPreview');
 
-        if (responseSelect && messageTextarea) {
-            responseSelect.addEventListener('change', function () {
-                if (this.value === 'accepted') {
-                    messageTextarea.placeholder = 'Ex: Nous sommes ravis de vous accueillir dans notre établissement. Nous vous contacterons prochainement pour finaliser l\'inscription.';
-                } else if (this.value === 'rejected') {
-                    messageTextarea.placeholder = 'Ex: Nous vous remercions pour votre intérêt. Malheureusement, nous n\'avons plus de places disponibles pour cette année.';
-                }
-            });
+        // Masquer tous les champs
+        appointmentField.style.display = 'none';
+        rejectionField.style.display = 'none';
+        messageField.style.display = 'none';
+        submitBtn.style.display = 'none';
+        previewDiv.style.display = 'none';
+
+        // Réinitialiser les champs
+        document.getElementById('appointment_date').required = false;
+        document.getElementById('rejection_reason').required = false;
+
+        if (response) {
+            submitBtn.style.display = 'block';
+            messageField.style.display = 'block';
+
+            switch (response) {
+                case 'appointment_scheduled':
+                    appointmentField.style.display = 'block';
+                    document.getElementById('appointment_date').required = true;
+                    updatePreview('Programmer un RDV');
+                    break;
+
+                case 'confirmed':
+                    updatePreview('Confirmer le RDV');
+                    break;
+
+                case 'rejected':
+                    rejectionField.style.display = 'block';
+                    document.getElementById('rejection_reason').required = true;
+                    updatePreview('Refuser la candidature');
+                    break;
+            }
+            previewDiv.style.display = 'block';
         }
+    }
+
+    function handleRejectionReason() {
+        const select = document.getElementById('rejection_reason_select');
+        const textarea = document.getElementById('rejection_reason');
+
+        if (select.value === 'custom') {
+            textarea.style.display = 'block';
+            textarea.value = '';
+            textarea.required = true;
+        } else {
+            textarea.style.display = 'none';
+            textarea.value = select.value;
+            textarea.required = false;
+        }
+    }
+
+    function updatePreview(action) {
+        const previewContent = document.getElementById('previewContent');
+        const parentName = '{{ contact.parentName }}';
+        const childName = '{{ contact.childName }}';
+
+        let preview = `<strong>À :</strong> {{ contact.email }}<br>`;
+
+        switch (action) {
+            case 'Programmer un RDV':
+                preview += `<strong>Sujet :</strong> Prise de rendez-vous - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email de programmation de RDV avec date et heure`;
+                break;
+
+            case 'Confirmer le RDV':
+                preview += `<strong>Sujet :</strong> Confirmation de rendez-vous - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email de confirmation du RDV`;
+                break;
+
+            case 'Refuser la candidature':
+                preview += `<strong>Sujet :</strong> Candidature - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email de refus avec motif`;
+                break;
+        }
+
+        previewContent.innerHTML = preview;
+    }
+
+    // Prévisualisation en temps réel des champs
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputs = ['appointment_date', 'message', 'rejection_reason'];
+        inputs.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.addEventListener('input', function () {
+                    // Vous pouvez ajouter ici une logique de prévisualisation en temps réel
+                });
+            }
+        });
     });
 </script>
+
+<style>
+    .badge-lg {
+        font-size: 1em;
+        padding: 0.5em 1em;
+    }
+
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    #emailPreview {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+    }
+
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    @media print {
+
+        .col-md-4,
+        .card:last-child {
+            display: none !important;
+        }
+
+        .col-md-8 {
+            width: 100% !important;
+        }
+    }
+</style>
 {% endblock %}

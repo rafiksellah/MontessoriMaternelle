@@ -131,6 +131,7 @@ formations:
 nav:
   home: 'Home'
   employment: 'Careers'
+  formation: 'Course'
   login: 'Login'
   logout: 'Logout'
 
