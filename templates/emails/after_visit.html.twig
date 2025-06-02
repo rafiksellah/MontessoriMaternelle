@@ -1,0 +1,84 @@
+{# templates/emails/after_visit.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .info-box {
+            background-color: #d4edda;
+            padding: 15px;
+            border-left: 4px solid #28a745;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Suite à votre visite</h2>
+        </div>
+
+        <div class="content">
+            <p>Cher(e) {{ contact.parentName }},</p>
+
+            <p>Nous vous remercions pour votre visite ainsi que pour l'intérêt porté à notre établissement.</p>
+
+            <div class="info-box">
+                <p><strong>Vous trouverez en pièce jointe le dossier d'inscription relatif à votre enfant {{
+                        contact.childName }}.</strong></p>
+                <p>Dès réception des documents dûment complétés, une réponse vous sera communiquée dans les meilleurs
+                    délais.</p>
+            </div>
+
+            {% if customMessage %}
+            <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0;">
+                <h4>Message personnalisé :</h4>
+                <p>{{ customMessage|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <p>Nous restons à votre disposition pour toute information complémentaire.</p>
+        </div>
+
+        <div class="footer">
+            <p>Cordialement,<br>
+                L'équipe de l'établissement Montessori</p>
+        </div>
+    </div>
+</body>
+
+</html>

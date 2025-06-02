@@ -131,6 +131,7 @@ formations:
 nav:
   home: 'الرئيسية'
   employment: 'التوظيف'
+  formation: 'دورة تدريبية'
   login: 'تسجيل الدخول'
   logout: 'تسجيل الخروج'
 

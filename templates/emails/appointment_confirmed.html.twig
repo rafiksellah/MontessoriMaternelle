@@ -1,0 +1,103 @@
+{# templates/emails/appointment_confirmed.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #d4edda;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .info-box {
+            background-color: #d1ecf1;
+            padding: 15px;
+            border-left: 4px solid #17a2b8;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>✅ Confirmation de rendez-vous</h2>
+        </div>
+
+        <div class="content">
+            <p>Cher(e) {{ contact.parentName }},</p>
+
+            <p>Merci pour votre confirmation.</p>
+
+            <p>Nous vous retrouvons donc avec plaisir le <span class="highlight">{{
+                    contact.appointmentDate|date('d/m/Y') }} à {{ contact.appointmentDate|date('H:i') }}</span>, comme
+                convenu.</p>
+
+            <div class="info-box">
+                <h4>Pour rappel, ci-dessous notre adresse exacte :</h4>
+                <p><strong>11, rue du Zaccar Hydra, Alger</strong></p>
+                <p><strong>Lien maps :</strong> <a
+                        href="https://maps.app.goo.gl/3fkrKotqYr8fpRqP8">https://maps.app.goo.gl/3fkrKotqYr8fpRqP8</a>
+                </p>
+            </div>
+
+            {% if customMessage %}
+            <div style="background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0;">
+                <h4>Message personnalisé :</h4>
+                <p>{{ customMessage|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <div class="warning">
+                <p><strong>⚠️ NB : Tout retard de plus de 15 minutes annulera le rendez-vous.</strong></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Cordialement,<br>
+                L'équipe de l'établissement Montessori</p>
+        </div>
+    </div>
+</body>
+
+</html>

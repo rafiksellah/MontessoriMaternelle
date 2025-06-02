@@ -8,17 +8,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
-#[Route('/admin_contact')]
+#[Route('/admin/contacts')]
 class AdminContactController extends AbstractController
 {
     public function __construct(
         private ContactRepository $contactRepository,
         private EntityManagerInterface $entityManager,
-        private MailerInterface $mailer
+        private MailerInterface $mailer,
+        private Environment $twig
     ) {}
 
     #[Route('/', name: 'app_admin_contacts', methods: ['GET'])]
@@ -42,34 +44,61 @@ class AdminContactController extends AbstractController
     #[Route('/{id}/respond', name: 'app_admin_contact_respond', methods: ['POST'])]
     public function respond(Contact $contact, Request $request): Response
     {
-        $response = $request->request->get('response'); // 'accepted' ou 'rejected'
-        $message = $request->request->get('message', '');
+        $response = $request->request->get('response');
+        $customMessage = $request->request->get('message', '');
+        $appointmentDate = $request->request->get('appointment_date');
+        $rejectionReason = $request->request->get('rejection_reason');
 
         try {
             $email = (new Email())
                 ->from('admin@votre-entreprise.com')
-                ->to($contact->getEmail())
-                ->subject($response === 'accepted' ? 'Candidature acceptée' : 'Candidature refusée');
+                ->to($contact->getEmail());
 
-            if ($response === 'accepted') {
-                $emailBody = "Bonjour {$contact->getParentName()},\n\n";
-                $emailBody .= "Nous avons le plaisir de vous informer que votre candidature pour {$contact->getChildName()} a été acceptée.\n\n";
-                $emailBody .= $message ? "Message personnalisé : {$message}\n\n" : "";
-                $emailBody .= "Nous vous contacterons prochainement pour les prochaines étapes.\n\n";
-                $emailBody .= "Cordialement,\nL'équipe de recrutement";
-            } else {
-                $emailBody = "Bonjour {$contact->getParentName()},\n\n";
-                $emailBody .= "Nous vous remercions pour votre candidature concernant {$contact->getChildName()}.\n\n";
-                $emailBody .= "Malheureusement, nous ne pouvons pas donner suite à votre demande pour le moment.\n\n";
-                $emailBody .= $message ? "Message personnalisé : {$message}\n\n" : "";
-                $emailBody .= "Nous vous remercions de l'intérêt que vous portez à notre établissement.\n\n";
-                $emailBody .= "Cordialement,\nL'équipe de recrutement";
+            $emailBody = '';
+            $subject = '';
+
+            switch ($response) {
+                case 'appointment_scheduled':
+                    $subject = 'Prise de rendez-vous - ' . $contact->getChildName();
+                    $appointmentDateTime = new \DateTime($appointmentDate);
+
+                    $contact->setAppointmentDate($appointmentDateTime);
+                    $contact->setCustomMessage($customMessage);
+
+                    $emailBody = $this->twig->render('emails/appointment_scheduled.html.twig', [
+                        'contact' => $contact,
+                        'appointmentDate' => $appointmentDateTime,
+                        'customMessage' => $customMessage
+                    ]);
+                    break;
+
+                case 'confirmed':
+                    $subject = 'Confirmation de rendez-vous - ' . $contact->getChildName();
+                    $contact->setCustomMessage($customMessage);
+
+                    $emailBody = $this->twig->render('emails/appointment_confirmed.html.twig', [
+                        'contact' => $contact,
+                        'customMessage' => $customMessage
+                    ]);
+                    break;
+
+                case 'rejected':
+                    $subject = 'Candidature - ' . $contact->getChildName();
+                    $contact->setRejectionReason($rejectionReason);
+                    $contact->setCustomMessage($customMessage);
+
+                    $emailBody = $this->twig->render('emails/rejection.html.twig', [
+                        'contact' => $contact,
+                        'rejectionReason' => $rejectionReason,
+                        'customMessage' => $customMessage
+                    ]);
+                    break;
             }
 
-            $email->text($emailBody);
+            $email->subject($subject)->html($emailBody);
             $this->mailer->send($email);
 
-            // Marquer le contact comme traité
+            // Mettre à jour le statut du contact
             $contact->setStatus($response);
             $contact->setResponseDate(new \DateTimeImmutable());
             $this->entityManager->flush();

@@ -1,0 +1,92 @@
+{# templates/emails/rejection.html.twig #}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #f8d7da;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .reason-box {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Réponse à votre demande d'inscription</h2>
+        </div>
+
+        <div class="content">
+            <p>Cher(e) {{ contact.parentName }},</p>
+
+            <p>Nous vous remercions pour l'intérêt que vous portez à notre établissement et pour votre demande
+                d'inscription concernant {{ contact.childName }}.</p>
+
+            {% if rejectionReason %}
+            <div class="reason-box">
+                <h4>Motif :</h4>
+                <p>{{ rejectionReason|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <p>Nous vous informons que nous ne pouvons malheureusement pas donner suite à votre demande pour le moment.
+            </p>
+
+            <p>Toutefois, nous ne manquerons pas de revenir vers vous en cas de désistement ou de nouvelles
+                disponibilités.</p>
+
+            {% if customMessage %}
+            <div style="background-color: #e7f3ff; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0;">
+                <h4>Message personnalisé :</h4>
+                <p>{{ customMessage|nl2br }}</p>
+            </div>
+            {% endif %}
+
+            <p>Nous vous remercions pour votre compréhension et restons à votre disposition pour toute information
+                complémentaire.</p>
+        </div>
+
+        <div class="footer">
+            <p>Cordialement,<br>
+                L'équipe de l'établissement Montessori</p>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -53,16 +53,28 @@ class Contact
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 20, nullable: true)]
-    private ?string $status = null; // 'pending', 'accepted', 'rejected'
+    private ?string $status = null; // 'pending', 'appointment_scheduled', 'confirmed', 'rejected'
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $responseDate = null;
 
+    // Nouveaux champs
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeInterface $appointmentDate = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $rejectionReason = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $customMessage = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->status = 'pending';
     }
 
+    // Getters et setters existants...
     public function getId(): ?int
     {
         return $this->id;
@@ -76,7 +88,6 @@ class Contact
     public function setParentName(string $parentName): static
     {
         $this->parentName = $parentName;
-
         return $this;
     }
 
@@ -88,7 +99,6 @@ class Contact
     public function setChildName(string $childName): static
     {
         $this->childName = $childName;
-
         return $this;
     }
 
@@ -100,7 +110,6 @@ class Contact
     public function setChildBirthDate(\DateTimeInterface $childBirthDate): static
     {
         $this->childBirthDate = $childBirthDate;
-
         return $this;
     }
 
@@ -112,7 +121,6 @@ class Contact
     public function setPhoneNumber(string $phoneNumber): static
     {
         $this->phoneNumber = $phoneNumber;
-
         return $this;
     }
 
@@ -124,7 +132,6 @@ class Contact
     public function setEmail(string $email): static
     {
         $this->email = $email;
-
         return $this;
     }
 
@@ -136,7 +143,6 @@ class Contact
     public function setObjective(string $objective): static
     {
         $this->objective = $objective;
-
         return $this;
     }
 
@@ -145,10 +151,9 @@ class Contact
         return $this->heardAboutUs;
     }
 
-    public function setHeardAboutUs(string $heardAboutUs): static
+    public function setHeardAboutUs(?string $heardAboutUs): static
     {
         $this->heardAboutUs = $heardAboutUs;
-
         return $this;
     }
 
@@ -160,7 +165,6 @@ class Contact
     public function setExpectations(?string $expectations): static
     {
         $this->expectations = $expectations;
-
         return $this;
     }
 
@@ -172,7 +176,6 @@ class Contact
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -181,7 +184,7 @@ class Contact
         return $this->status;
     }
 
-    public function setStatus(?string $status): static
+    public function setStatus(string $status): static
     {
         $this->status = $status;
         return $this;
@@ -198,27 +201,69 @@ class Contact
         return $this;
     }
 
-    public function getStatusBadgeClass(): string
+    // Nouveaux getters/setters
+    public function getAppointmentDate(): ?\DateTimeInterface
     {
-        return match ($this->status) {
-            'accepted' => 'badge-success',
-            'rejected' => 'badge-danger',
-            default => 'badge-warning'
-        };
+        return $this->appointmentDate;
+    }
+
+    public function setAppointmentDate(?\DateTimeInterface $appointmentDate): static
+    {
+        $this->appointmentDate = $appointmentDate;
+        return $this;
+    }
+
+    public function getRejectionReason(): ?string
+    {
+        return $this->rejectionReason;
+    }
+
+    public function setRejectionReason(?string $rejectionReason): static
+    {
+        $this->rejectionReason = $rejectionReason;
+        return $this;
+    }
+
+    public function getCustomMessage(): ?string
+    {
+        return $this->customMessage;
+    }
+
+    public function setCustomMessage(?string $customMessage): static
+    {
+        $this->customMessage = $customMessage;
+        return $this;
+    }
+
+    // Méthodes utilitaires
+    public function getChildAge(): int
+    {
+        if (!$this->childBirthDate) {
+            return 0;
+        }
+
+        return $this->childBirthDate->diff(new \DateTime())->y;
     }
 
     public function getStatusText(): string
     {
         return match ($this->status) {
-            'accepted' => 'Accepté',
+            'pending' => 'En attente',
+            'appointment_scheduled' => 'RDV programmé',
+            'confirmed' => 'Confirmé',
             'rejected' => 'Refusé',
-            default => 'En attente'
+            default => 'Inconnu'
         };
     }
 
-    public function getChildAge(): int
+    public function getStatusColor(): string
     {
-        $now = new \DateTime();
-        return $now->diff($this->childBirthDate)->y;
+        return match ($this->status) {
+            'pending' => 'warning',
+            'appointment_scheduled' => 'info',
+            'confirmed' => 'success',
+            'rejected' => 'danger',
+            default => 'secondary'
+        };
     }
 }
