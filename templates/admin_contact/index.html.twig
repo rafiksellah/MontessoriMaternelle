@@ -44,7 +44,7 @@
         <div class="col-md-3">
             <div class="card text-center bg-danger text-white">
                 <div class="card-body">
-                    <h4>{{ contacts|filter(c => c.status == '3')|length }}</h4>
+                    <h4>{{ contacts|filter(c => c.status == '5')|length }}</h4>
                     <p class="mb-0">Refusés</p>
                 </div>
             </div>
@@ -117,7 +117,7 @@
                                     📅 {{ contact.statusText }}
                                     {% elseif contact.status == '2' %}
                                     ✅ {{ contact.statusText }}
-                                    {% elseif contact.status == '3' %}
+                                    {% elseif contact.status == '5' %}
                                     ❌ {{ contact.statusText }}
                                     {% endif %}
                                 </span>
