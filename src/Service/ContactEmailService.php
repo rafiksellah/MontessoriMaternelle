@@ -16,10 +16,10 @@ class ContactEmailService
     private $senderEmail;
 
     public function __construct(
-        MailerInterface $mailer, 
+        MailerInterface $mailer,
         UrlGeneratorInterface $urlGenerator,
-        string $adminEmail = 'event@montessorialgerie.mia-dz.com',
-        string $senderEmail = 'event@montessorialgerie.mia-dz.com'
+        string $adminEmail = 'contact@montessorialgerie.mia-dz.com',
+        string $senderEmail = 'contact@montessorialgerie.mia-dz.com'
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
