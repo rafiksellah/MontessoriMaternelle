@@ -3,6 +3,13 @@
 
 {% block title %}Contact - {{ contact.parentName }}{% endblock %}
 
+{% set STATUS_PENDING = constant('App\\Entity\\Contact::STATUS_PENDING') %}
+{% set STATUS_APPOINTMENT_SCHEDULED = constant('App\\Entity\\Contact::STATUS_APPOINTMENT_SCHEDULED') %}
+{% set STATUS_CONFIRMED = constant('App\\Entity\\Contact::STATUS_CONFIRMED') %}
+{% set STATUS_AFTER_VISIT = constant('App\\Entity\\Contact::STATUS_AFTER_VISIT') %}
+{% set STATUS_INSCRIPTION_ACCEPTED = constant('App\\Entity\\Contact::STATUS_INSCRIPTION_ACCEPTED') %}
+{% set STATUS_REJECTED = constant('App\\Entity\\Contact::STATUS_REJECTED') %}
+
 {% block body %}
 <div class="container-fluid">
     <div class="row">
@@ -72,12 +79,23 @@
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
-            {% if contact.status == 'pending' or contact.status == 'appointment_scheduled' %}
+            {# Formulaire de réponse - Utilisation des constantes #}
+            {% if contact.status in [STATUS_PENDING, STATUS_APPOINTMENT_SCHEDULED, STATUS_CONFIRMED, STATUS_AFTER_VISIT]
+            %}
             <div class="card">
                 <div class="card-header">
-                    <h4>Répondre au contact</h4>
+                    <h4>
+                        {% if contact.status == STATUS_PENDING %}
+                        Répondre au contact
+                        {% elseif contact.status == STATUS_APPOINTMENT_SCHEDULED %}
+                        Actions sur le RDV
+                        {% elseif contact.status == STATUS_CONFIRMED %}
+                        Suivi après RDV
+                        {% elseif contact.status == STATUS_AFTER_VISIT %}
+                        Finaliser l'inscription
+                        {% endif %}
+                    </h4>
                 </div>
                 <div class="card-body">
                     <form method="post" action="{{ path('app_admin_contact_respond', {'id': contact.id}) }}"
@@ -89,9 +107,20 @@
                             <select class="form-control" id="response" name="response" required
                                 onchange="toggleFields()">
                                 <option value="">-- Choisir --</option>
-                                <option value="appointment_scheduled">📅 Programmer un RDV</option>
-                                <option value="confirmed">✅ Confirmer le RDV</option>
-                                <option value="rejected">❌ Refuser la candidature</option>
+
+                                {% if contact.status == STATUS_PENDING %}
+                                <option value="{{ STATUS_APPOINTMENT_SCHEDULED }}">📅 Programmer un RDV</option>
+                                <option value="{{ STATUS_REJECTED }}">❌ Refuser la candidature (sans visite)</option>
+                                {% elseif contact.status == STATUS_APPOINTMENT_SCHEDULED %}
+                                <option value="{{ STATUS_CONFIRMED }}">✅ Confirmer le RDV</option>
+                                <option value="{{ STATUS_REJECTED }}">❌ Annuler le RDV</option>
+                                {% elseif contact.status == STATUS_CONFIRMED %}
+                                <option value="{{ STATUS_AFTER_VISIT }}">📝 Envoyer dossier après visite</option>
+                                <option value="{{ STATUS_REJECTED }}">❌ Refuser après RDV</option>
+                                {% elseif contact.status == STATUS_AFTER_VISIT %}
+                                <option value="{{ STATUS_INSCRIPTION_ACCEPTED }}">🎓 Accepter l'inscription</option>
+                                <option value="{{ STATUS_REJECTED }}">❌ Refuser l'inscription (après visite)</option>
+                                {% endif %}
                             </select>
                         </div>
 
@@ -99,7 +128,8 @@
                         <div class="form-group" id="appointmentDateField" style="display: none;">
                             <label for="appointment_date">Date et heure du RDV :</label>
                             <input type="datetime-local" class="form-control" id="appointment_date"
-                                name="appointment_date">
+                                name="appointment_date"
+                                value="{{ contact.appointmentDate ? contact.appointmentDate|date('Y-m-d\\TH:i') : '' }}">
                             <small class="form-text text-muted">Sélectionnez la date et l'heure du rendez-vous</small>
                         </div>
 
@@ -110,12 +140,29 @@
                                 onchange="handleRejectionReason()">
                                 <option value="">-- Choisir un motif --</option>
                                 <option value="custom">✏️ Motif personnalisé</option>
-                                <option value="Complet pour cette session">Places complètes pour cette session</option>
-                                <option value="Âge non adapté">Âge de l'enfant non adapté à nos programmes</option>
-                                <option value="Zone géographique">Enfant en dehors de notre zone géographique</option>
-                                <option value="Dossier incomplet">Dossier de candidature incomplet</option>
-                                <option value="Critères non remplis">Critères d'admission non remplis</option>
-                                <option value="Liste d'attente">Inscription en liste d'attente</option>
+                                <!-- Motifs pour refus sans visite (status: pending) -->
+                                <optgroup label="Refus sans visite" id="refus_sans_visite" style="display: none;">
+                                    <option value="Complet pour cette session">Places complètes pour cette session
+                                    </option>
+                                    <option value="Âge non adapté">Âge de l'enfant non adapté à nos programmes</option>
+                                    <option value="Zone géographique">Enfant en dehors de notre zone géographique
+                                    </option>
+                                    <option value="Dossier incomplet">Dossier de candidature incomplet</option>
+                                    <option value="Critères non remplis">Critères d'admission non remplis</option>
+                                </optgroup>
+                                <!-- Motifs pour annulation RDV -->
+                                <optgroup label="Annulation RDV" id="annulation_rdv" style="display: none;">
+                                    <option value="Annulation RDV">Annulation du rendez-vous</option>
+                                    <option value="Report RDV">Report du rendez-vous</option>
+                                    <option value="Indisponibilité">Indisponibilité de l'établissement</option>
+                                </optgroup>
+                                <!-- Motifs pour refus après visite -->
+                                <optgroup label="Refus après visite" id="refus_apres_visite" style="display: none;">
+                                    <option value="Places complètes">Toutes les places sont pourvues</option>
+                                    <option value="Liste d'attente">Inscription en liste d'attente</option>
+                                    <option value="Profil non adapté">Profil de l'enfant non adapté</option>
+                                    <option value="Non présentation">Non présentation au rendez-vous</option>
+                                </optgroup>
                             </select>
                             <textarea class="form-control mt-2" id="rejection_reason" name="rejection_reason" rows="3"
                                 placeholder="Détaillez le motif de refus..." style="display: none;"></textarea>
@@ -125,7 +172,7 @@
                         <div class="form-group" id="customMessageField" style="display: none;">
                             <label for="message">Message personnalisé (optionnel) :</label>
                             <textarea class="form-control" id="message" name="message" rows="4"
-                                placeholder="Ajoutez un message personnalisé..."></textarea>
+                                placeholder="Ajoutez un message personnalisé...">{{ contact.customMessage ?? '' }}</textarea>
                         </div>
 
                         <!-- Aperçu de l'email -->
@@ -152,7 +199,7 @@
                         <i class="fas fa-arrow-left"></i> Retour à la liste
                     </a>
 
-                    {% if contact.status != 'pending' %}
+                    {% if contact.status != STATUS_PENDING %}
                     <button class="btn btn-info btn-block mt-2" onclick="window.print()">
                         <i class="fas fa-print"></i> Imprimer
                     </button>
@@ -174,19 +221,27 @@
                 </div>
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-warning mr-2">En attente</span>
+                        <span class="badge bg-warning text-dark me-2">En attente</span>
                         <small>Candidature reçue</small>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-info mr-2">RDV programmé</span>
+                        <span class="badge bg-info text-dark me-2">RDV programmé</span>
                         <small>Rendez-vous fixé</small>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-success mr-2">Confirmé</span>
+                        <span class="badge bg-success text-white me-2">Confirmé</span>
                         <small>RDV confirmé</small>
                     </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-primary text-white me-2">Inscription acceptée</span>
+                        <small>Élève inscrit</small>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge bg-dark text-white me-2">Suivi après visite</span>
+                        <small>Suivi post-RDV</small>
+                    </div>
                     <div class="d-flex align-items-center">
-                        <span class="badge badge-danger mr-2">Refusé</span>
+                        <span class="badge bg-danger text-white me-2">Refusé</span>
                         <small>Candidature refusée</small>
                     </div>
                 </div>
@@ -196,6 +251,14 @@
 </div>
 
 <script>
+    // Définir les constantes JavaScript pour correspondre aux constantes PHP
+    const STATUS_PENDING = '{{ STATUS_PENDING }}';
+    const STATUS_APPOINTMENT_SCHEDULED = '{{ STATUS_APPOINTMENT_SCHEDULED }}';
+    const STATUS_CONFIRMED = '{{ STATUS_CONFIRMED }}';
+    const STATUS_AFTER_VISIT = '{{ STATUS_AFTER_VISIT }}';
+    const STATUS_INSCRIPTION_ACCEPTED = '{{ STATUS_INSCRIPTION_ACCEPTED }}';
+    const STATUS_REJECTED = '{{ STATUS_REJECTED }}';
+
     function toggleFields() {
         const response = document.getElementById('response').value;
         const appointmentField = document.getElementById('appointmentDateField');
@@ -211,29 +274,58 @@
         submitBtn.style.display = 'none';
         previewDiv.style.display = 'none';
 
+        // Masquer tous les groupes de motifs
+        const motifGroups = ['refus_sans_visite', 'annulation_rdv', 'refus_apres_visite'];
+        motifGroups.forEach(groupId => {
+            const group = document.getElementById(groupId);
+            if (group) group.style.display = 'none';
+        });
+
         // Réinitialiser les champs
         document.getElementById('appointment_date').required = false;
         document.getElementById('rejection_reason').required = false;
+        document.getElementById('rejection_reason_select').value = '';
+        document.getElementById('rejection_reason').style.display = 'none';
 
         if (response) {
             submitBtn.style.display = 'block';
             messageField.style.display = 'block';
 
             switch (response) {
-                case 'appointment_scheduled':
+                case STATUS_APPOINTMENT_SCHEDULED:
                     appointmentField.style.display = 'block';
                     document.getElementById('appointment_date').required = true;
                     updatePreview('Programmer un RDV');
                     break;
 
-                case 'confirmed':
+                case STATUS_CONFIRMED:
                     updatePreview('Confirmer le RDV');
                     break;
 
-                case 'rejected':
+                case STATUS_AFTER_VISIT:
+                    updatePreview('Envoyer dossier après visite');
+                    break;
+
+                case STATUS_INSCRIPTION_ACCEPTED:
+                    updatePreview('Accepter l\'inscription');
+                    break;
+
+                case STATUS_REJECTED:
                     rejectionField.style.display = 'block';
                     document.getElementById('rejection_reason').required = true;
-                    updatePreview('Refuser la candidature');
+
+                    // Afficher le bon groupe de motifs selon le statut actuel
+                    const currentStatus = '{{ contact.status }}';
+                    if (currentStatus === STATUS_PENDING) {
+                        document.getElementById('refus_sans_visite').style.display = 'block';
+                        updatePreview('Refuser la candidature (sans visite)');
+                    } else if (currentStatus === STATUS_APPOINTMENT_SCHEDULED || currentStatus === STATUS_CONFIRMED) {
+                        document.getElementById('annulation_rdv').style.display = 'block';
+                        updatePreview('Annuler le rendez-vous');
+                    } else if (currentStatus === STATUS_AFTER_VISIT) {
+                        document.getElementById('refus_apres_visite').style.display = 'block';
+                        updatePreview('Refuser l\'inscription (après visite)');
+                    }
                     break;
             }
             previewDiv.style.display = 'block';
@@ -273,9 +365,29 @@
                 preview += `<strong>Contenu :</strong> Email de confirmation du RDV`;
                 break;
 
-            case 'Refuser la candidature':
+            case 'Envoyer dossier après visite':
+                preview += `<strong>Sujet :</strong> Suite à votre visite - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email avec dossier d'inscription en pièce jointe`;
+                break;
+
+            case 'Accepter l\'inscription':
+                preview += `<strong>Sujet :</strong> Inscription acceptée - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email d'acceptation d'inscription`;
+                break;
+
+            case 'Refuser la candidature (sans visite)':
                 preview += `<strong>Sujet :</strong> Candidature - ${childName}<br>`;
-                preview += `<strong>Contenu :</strong> Email de refus avec motif`;
+                preview += `<strong>Contenu :</strong> Email de refus sans visite avec motif`;
+                break;
+
+            case 'Annuler le rendez-vous':
+                preview += `<strong>Sujet :</strong> Annulation du rendez-vous - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email d'annulation de RDV avec motif`;
+                break;
+
+            case 'Refuser l\'inscription (après visite)':
+                preview += `<strong>Sujet :</strong> Suite à votre visite - ${childName}<br>`;
+                preview += `<strong>Contenu :</strong> Email de refus après visite avec motif`;
                 break;
         }
 
