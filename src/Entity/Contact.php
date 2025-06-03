@@ -72,7 +72,8 @@ class Contact
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $customMessage = null;
 
-
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $appointmentDate = null;
 
     public function __construct()
     {
