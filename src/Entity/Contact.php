@@ -10,6 +10,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
 {
+    // Constantes pour les statuts
+    public const STATUS_PENDING = '0';
+    public const STATUS_APPOINTMENT_SCHEDULED = '1';
+    public const STATUS_CONFIRMED = '2';
+    public const STATUS_AFTER_VISIT = '3';
+    public const STATUS_INSCRIPTION_ACCEPTED = '4';
+    public const STATUS_REJECTED = '5';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -53,14 +61,10 @@ class Contact
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 20, nullable: true)]
-    private ?string $status = null; // 'pending', 'appointment_scheduled', 'confirmed', 'rejected'
+    private ?string $status = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $responseDate = null;
-
-    // Nouveaux champs
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeInterface $appointmentDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $rejectionReason = null;
@@ -68,13 +72,35 @@ class Contact
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $customMessage = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $appointmentDate = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->status = 'pending';
+        $this->status = self::STATUS_PENDING;
     }
 
-    // Getters et setters existants...
+    // Méthode statique pour obtenir tous les statuts
+    public static function getAllStatuses(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT,
+            self::STATUS_INSCRIPTION_ACCEPTED,
+            self::STATUS_REJECTED,
+        ];
+    }
+
+    // Méthode pour vérifier si un statut est valide
+    public static function isValidStatus(string $status): bool
+    {
+        return in_array($status, self::getAllStatuses());
+    }
+
+    // Getters et setters
     public function getId(): ?int
     {
         return $this->id;
@@ -186,6 +212,9 @@ class Contact
 
     public function setStatus(string $status): static
     {
+        if (!self::isValidStatus($status)) {
+            throw new \InvalidArgumentException(sprintf('Status "%s" is not valid', $status));
+        }
         $this->status = $status;
         return $this;
     }
@@ -198,18 +227,6 @@ class Contact
     public function setResponseDate(?\DateTimeImmutable $responseDate): static
     {
         $this->responseDate = $responseDate;
-        return $this;
-    }
-
-    // Nouveaux getters/setters
-    public function getAppointmentDate(): ?\DateTimeInterface
-    {
-        return $this->appointmentDate;
-    }
-
-    public function setAppointmentDate(?\DateTimeInterface $appointmentDate): static
-    {
-        $this->appointmentDate = $appointmentDate;
         return $this;
     }
 
@@ -248,10 +265,12 @@ class Contact
     public function getStatusText(): string
     {
         return match ($this->status) {
-            'pending' => 'En attente',
-            'appointment_scheduled' => 'RDV programmé',
-            'confirmed' => 'Confirmé',
-            'rejected' => 'Refusé',
+            self::STATUS_PENDING => 'En attente',
+            self::STATUS_APPOINTMENT_SCHEDULED => 'RDV programmé',
+            self::STATUS_CONFIRMED => 'Confirmé',
+            self::STATUS_INSCRIPTION_ACCEPTED => 'Inscription acceptée',
+            self::STATUS_AFTER_VISIT => 'Suivi après visite',
+            self::STATUS_REJECTED => 'Refusé',
             default => 'Inconnu'
         };
     }
@@ -259,11 +278,87 @@ class Contact
     public function getStatusColor(): string
     {
         return match ($this->status) {
-            'pending' => 'warning',
-            'appointment_scheduled' => 'info',
-            'confirmed' => 'success',
-            'rejected' => 'danger',
+            self::STATUS_PENDING => 'warning',
+            self::STATUS_APPOINTMENT_SCHEDULED => 'info',
+            self::STATUS_CONFIRMED => 'success',
+            self::STATUS_INSCRIPTION_ACCEPTED => 'primary',
+            self::STATUS_AFTER_VISIT => 'dark',
+            self::STATUS_REJECTED => 'danger',
             default => 'secondary'
         };
+    }
+
+    public function getAppointmentDate(): ?\DateTimeImmutable
+    {
+        return $this->appointmentDate;
+    }
+
+    public function setAppointmentDate(?\DateTimeImmutable $appointmentDate): static
+    {
+        $this->appointmentDate = $appointmentDate;
+
+        return $this;
+    }
+
+    // Méthodes pour vérifier les statuts
+    public function isPending(): bool
+    {
+        return $this->status === self::STATUS_PENDING;
+    }
+
+    public function hasAppointmentScheduled(): bool
+    {
+        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->status === self::STATUS_CONFIRMED;
+    }
+
+    public function isAfterVisit(): bool
+    {
+        return $this->status === self::STATUS_AFTER_VISIT;
+    }
+
+    public function isInscriptionAccepted(): bool
+    {
+        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->status === self::STATUS_REJECTED;
+    }
+
+    // Méthodes pour les transitions de statut
+    public function canScheduleAppointment(): bool
+    {
+        return $this->status === self::STATUS_PENDING;
+    }
+
+    public function canConfirm(): bool
+    {
+        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
+    }
+
+    public function canSendAfterVisit(): bool
+    {
+        return $this->status === self::STATUS_CONFIRMED;
+    }
+
+    public function canAcceptInscription(): bool
+    {
+        return $this->status === self::STATUS_AFTER_VISIT;
+    }
+
+    public function canReject(): bool
+    {
+        return in_array($this->status, [
+            self::STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT
+        ]);
     }
 }

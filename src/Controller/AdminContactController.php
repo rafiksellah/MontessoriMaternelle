@@ -49,21 +49,50 @@ class AdminContactController extends AbstractController
         $appointmentDate = $request->request->get('appointment_date');
         $rejectionReason = $request->request->get('rejection_reason');
 
+        // Nettoyer le message personnalisé
+        $customMessage = trim($customMessage);
+        if (empty($customMessage)) {
+            $customMessage = null;
+        }
+
+        // Debug: Log du statut actuel
+        error_log("Status actuel avant traitement: " . $contact->getStatus());
+        error_log("Response reçue: " . $response);
+
         try {
             $email = (new Email())
-                ->from('admin@votre-entreprise.com')
+                ->from('event@montessorialgerie.mia-dz.com')
                 ->to($contact->getEmail());
 
             $emailBody = '';
             $subject = '';
+            $newStatus = null; // Variable pour le nouveau statut
 
             switch ($response) {
-                case 'appointment_scheduled':
+                case Contact::STATUS_APPOINTMENT_SCHEDULED:
+                    // Transition: pending → appointment_scheduled
+                    if (!$contact->canScheduleAppointment()) {
+                        $this->addFlash('error', 'Impossible de programmer un RDV pour ce contact dans son état actuel.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
                     $subject = 'Prise de rendez-vous - ' . $contact->getChildName();
-                    $appointmentDateTime = new \DateTime($appointmentDate);
+
+                    if (empty($appointmentDate)) {
+                        $this->addFlash('error', 'La date de rendez-vous est obligatoire.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
+                    try {
+                        $appointmentDateTime = new \DateTimeImmutable($appointmentDate);
+                    } catch (\Exception $e) {
+                        $this->addFlash('error', 'Format de date invalide.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
 
                     $contact->setAppointmentDate($appointmentDateTime);
                     $contact->setCustomMessage($customMessage);
+                    $newStatus = Contact::STATUS_APPOINTMENT_SCHEDULED;
 
                     $emailBody = $this->twig->render('emails/appointment_scheduled.html.twig', [
                         'contact' => $contact,
@@ -72,9 +101,22 @@ class AdminContactController extends AbstractController
                     ]);
                     break;
 
-                case 'confirmed':
+                case Contact::STATUS_CONFIRMED:
+                    // Transition: appointment_scheduled → confirmed
+                    if (!$contact->canConfirm()) {
+                        $this->addFlash('error', 'Impossible de confirmer un RDV qui n\'est pas programmé.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
                     $subject = 'Confirmation de rendez-vous - ' . $contact->getChildName();
+
+                    if (!$contact->getAppointmentDate()) {
+                        $this->addFlash('error', 'Aucun rendez-vous programmé pour ce contact.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
                     $contact->setCustomMessage($customMessage);
+                    $newStatus = Contact::STATUS_CONFIRMED;
 
                     $emailBody = $this->twig->render('emails/appointment_confirmed.html.twig', [
                         'contact' => $contact,
@@ -82,30 +124,128 @@ class AdminContactController extends AbstractController
                     ]);
                     break;
 
-                case 'rejected':
-                    $subject = 'Candidature - ' . $contact->getChildName();
+                case Contact::STATUS_AFTER_VISIT:
+                    // Transition: confirmed → after_visit
+                    if (!$contact->canSendAfterVisit()) {
+                        $this->addFlash('error', 'Impossible d\'envoyer un email après visite sans confirmation préalable.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
+                    $subject = 'Suite à votre visite - ' . $contact->getChildName();
+                    $contact->setCustomMessage($customMessage);
+                    $newStatus = Contact::STATUS_AFTER_VISIT;
+
+                    $emailBody = $this->twig->render('emails/after_visit.html.twig', [
+                        'contact' => $contact,
+                        'customMessage' => $customMessage
+                    ]);
+                    break;
+
+                case Contact::STATUS_INSCRIPTION_ACCEPTED:
+                    // Transition: after_visit → inscription_accepted
+                    if (!$contact->canAcceptInscription()) {
+                        $this->addFlash('error', 'Impossible d\'accepter une inscription sans visite préalable.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
+                    $subject = 'Inscription acceptée - ' . $contact->getChildName();
+                    $contact->setCustomMessage($customMessage);
+                    $newStatus = Contact::STATUS_INSCRIPTION_ACCEPTED;
+
+                    $emailBody = $this->twig->render('emails/inscription_accepted.html.twig', [
+                        'contact' => $contact,
+                        'customMessage' => $customMessage
+                    ]);
+                    break;
+
+                case Contact::STATUS_REJECTED:
+                    // Possible depuis plusieurs états
+                    if (!$contact->canReject()) {
+                        $this->addFlash('error', 'Impossible de refuser ce contact dans son état actuel.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
+                    if (empty($rejectionReason)) {
+                        $this->addFlash('error', 'Le motif de refus est obligatoire.');
+                        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+                    }
+
+                    // Définir le sujet selon l'état actuel
+                    if ($contact->isPending()) {
+                        $subject = 'Candidature - ' . $contact->getChildName(); // REFUS sans visite
+                    } elseif ($contact->hasAppointmentScheduled() || $contact->isConfirmed()) {
+                        $subject = 'Annulation du rendez-vous - ' . $contact->getChildName();
+                    } else { // after_visit
+                        $subject = 'Suite à votre visite - ' . $contact->getChildName(); // REFUS après visite
+                    }
+
                     $contact->setRejectionReason($rejectionReason);
                     $contact->setCustomMessage($customMessage);
+                    $newStatus = Contact::STATUS_REJECTED;
 
                     $emailBody = $this->twig->render('emails/rejection.html.twig', [
                         'contact' => $contact,
                         'rejectionReason' => $rejectionReason,
-                        'customMessage' => $customMessage
+                        'customMessage' => $customMessage,
+                        'isAfterVisit' => $contact->isAfterVisit()
                     ]);
                     break;
+
+                default:
+                    $this->addFlash('error', 'Type de réponse non valide.');
+                    return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+            }
+
+            // Vérifier que le corps de l'email n'est pas vide
+            if (empty($emailBody)) {
+                throw new \Exception('Le template email n\'a pas pu être généré.');
             }
 
             $email->subject($subject)->html($emailBody);
+
+            // Debug: Log avant envoi email
+            error_log("Tentative d'envoi email avec sujet: " . $subject);
+
+            // Essayer d'envoyer l'email
             $this->mailer->send($email);
 
-            // Mettre à jour le statut du contact
-            $contact->setStatus($response);
-            $contact->setResponseDate(new \DateTimeImmutable());
-            $this->entityManager->flush();
+            // Debug: Email envoyé avec succès
+            error_log("Email envoyé avec succès");
 
-            $this->addFlash('success', 'Email envoyé avec succès !');
+            // Mettre à jour le statut du contact seulement si l'email a été envoyé avec succès
+            if ($newStatus) {
+                $contact->setStatus($newStatus);
+                $contact->setResponseDate(new \DateTimeImmutable());
+
+                // Debug: Log du nouveau statut
+                error_log("Nouveau statut défini: " . $newStatus);
+
+                $this->entityManager->flush();
+
+                $this->entityManager->refresh($contact);
+                error_log("Status RÉELLEMENT en base après refresh: '" . $contact->getStatus() . "'");
+                error_log("Longueur du status: " . strlen($contact->getStatus()));
+
+                // Vérifier s'il y a des espaces cachés
+                $status = $contact->getStatus();
+                for ($i = 0; $i < strlen($status); $i++) {
+                    error_log("Caractère $i: '" . $status[$i] . "' (ASCII: " . ord($status[$i]) . ")");
+                }
+
+                // Debug: Vérification après flush
+                error_log("Status après flush: " . $contact->getStatus());
+            }
+
+            $this->addFlash('success', 'Email envoyé avec succès ! Statut mis à jour vers: ' . $newStatus);
+        } catch (\Symfony\Component\Mailer\Exception\TransportExceptionInterface $e) {
+            $this->addFlash('error', 'Erreur lors de l\'envoi de l\'email : Configuration du serveur mail incorrecte.');
+            error_log('Mailer error: ' . $e->getMessage());
+        } catch (\Twig\Error\Error $e) {
+            $this->addFlash('error', 'Erreur dans le template email : ' . $e->getMessage());
+            error_log('Twig error: ' . $e->getMessage());
         } catch (\Exception $e) {
             $this->addFlash('error', 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage());
+            error_log('General error: ' . $e->getMessage());
         }
 
         return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);

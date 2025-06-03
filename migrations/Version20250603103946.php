@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250602144814 extends AbstractMigration
+final class Version20250603103946 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,10 @@ final class Version20250602144814 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE contact ADD appointment_date VARCHAR(255) DEFAULT NULL, ADD rejection_reason LONGTEXT DEFAULT NULL, ADD custom_message LONGTEXT DEFAULT NULL
+            ALTER TABLE contact ADD date_arrive VARCHAR(255) DEFAULT NULL
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE guest ADD created_at DATETIME DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)'
         SQL);
     }
 
@@ -29,7 +32,10 @@ final class Version20250602144814 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE contact DROP appointment_date, DROP rejection_reason, DROP custom_message
+            ALTER TABLE contact DROP date_arrive
+        SQL);
+        $this->addSql(<<<'SQL'
+            ALTER TABLE guest DROP created_at
         SQL);
     }
 }
