@@ -61,7 +61,7 @@ class AdminContactController extends AbstractController
 
         try {
             $email = (new Email())
-                ->from('event@montessorialgerie.mia-dz.com')
+                ->from('contact@montessorialgerie.mia-dz.com')
                 ->to($contact->getEmail());
 
             $emailBody = '';

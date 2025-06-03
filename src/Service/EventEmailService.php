@@ -16,7 +16,7 @@ class EventEmailService
     private $translator;
     private $adminEmail;
     private $params;
-    
+
     public function __construct(
         MailerInterface $mailer,
         TranslatorInterface $translator,
@@ -28,7 +28,7 @@ class EventEmailService
         $this->params = $params;
         $this->adminEmail = $adminEmail;
     }
-    
+
     /**
      * Send confirmation email with attachments
      *
@@ -46,7 +46,7 @@ class EventEmailService
         try {
             // Make sure we're using valid locale (fallback to 'en' if not in our supported list)
             $locale = in_array($locale, ['fr', 'en', 'ar']) ? $locale : 'en';
-            
+
             $email = (new TemplatedEmail())
                 ->from(new Address($this->adminEmail, 'Montessori Algérie'))
                 ->to(new Address($registration->getEmail(), $registration->getFirstName() . ' ' . $registration->getLastName()))
@@ -61,13 +61,13 @@ class EventEmailService
                     'invitation_barbecue.pdf',
                     'application/pdf'
                 );
-                // Attach the program
-                // ->attachFromPath(
-                //     $programFilePath,
-                //     'programme.pdf',
-                //     'application/pdf'
-                // );
-            
+            // Attach the program
+            // ->attachFromPath(
+            //     $programFilePath,
+            //     'programme.pdf',
+            //     'application/pdf'
+            // );
+
             $this->mailer->send($email);
         } catch (\Exception $e) {
             // Log the error
@@ -75,7 +75,7 @@ class EventEmailService
             throw $e;
         }
     }
-    
+
     /**
      * Send notification email to admin
      *
@@ -87,7 +87,7 @@ class EventEmailService
         try {
             // Make sure we're using valid locale (fallback to 'en' if not in our supported list)
             $locale = in_array($locale, ['fr', 'en', 'ar']) ? $locale : 'en';
-            
+
             $email = (new TemplatedEmail())
                 ->from(new Address($this->adminEmail, 'Système d\'inscription'))
                 ->to(new Address($this->adminEmail, 'Administrateur'))
@@ -99,7 +99,7 @@ class EventEmailService
                 ->context([
                     'registration' => $registration
                 ]);
-            
+
             $this->mailer->send($email);
         } catch (\Exception $e) {
             // Log the error
