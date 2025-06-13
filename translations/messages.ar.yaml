@@ -16,7 +16,7 @@ site:
 footer:
   useful_links: 'روابط مفيدة'
   contact: 'اتصل بنا'
-  address: 'الجزائر العاصمة، الجزائر'
+  address: ' حيدرة، الجزائر'
   rights: 'جميع الحقوق محفوظة'
 
 # messages.ar.yaml
@@ -62,8 +62,9 @@ contact:
     email_invalid: 'عنوان البريد الإلكتروني {{ value }} غير صحيح'
     objective_required: 'يرجى اختيار هدف'
     expectations_required: 'يرجى إخبارنا عن توقعاتك'
-
-
+    email_already_exists: "تم استخدام عنوان البريد الإلكتروني هذا مسبقًا للتسجيل."
+    general_error: "حدث خطأ أثناء إرسال النموذج."
+    
 # صفحة التوظيف
 employment:
   title: 'انضم إلى فريقنا'
