@@ -97,8 +97,8 @@ team:
   part1: "Ce n’est pas uniquement la richesse du matériel pédagogique qui fait la différence, mais avant tout"
   highlight1: "la qualité humaine et professionnelle"
   part2: "de ceux qui accompagnent l’enfant au quotidien. C’est pourquoi le recrutement de nos collaborateurs fait l’objet d’une attention rigoureuse et d’exigences élevées."
-  highlight2: "certifiés par l’Association Montessori Internationale (AMI)"
-  highlight3: "Positive Discipline Association (PDA)"
+  highlight2: "Certifiés par l’Association Montessori Internationale (AMI)"
+  highlight3: "et la Positive Discipline Association (PDA)"
   part3: "Ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel."
 
 # Form labels
@@ -126,7 +126,7 @@ formations:
 
 # Navigation et éléments communs
 nav:
-  home: 'Accueil'
+  home: 'L’école maternelle'
   employment: 'Recrutement'
   formation: 'Formation'
   login: 'Se connecter'
