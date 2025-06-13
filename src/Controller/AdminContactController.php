@@ -66,7 +66,7 @@ class AdminContactController extends AbstractController
 
             $emailBody = '';
             $subject = '';
-            $newStatus = null; // Variable pour le nouveau statut
+            $newStatus = null;
 
             switch ($response) {
                 case Contact::STATUS_APPOINTMENT_SCHEDULED:
@@ -172,11 +172,11 @@ class AdminContactController extends AbstractController
 
                     // Définir le sujet selon l'état actuel
                     if ($contact->isPending()) {
-                        $subject = 'Candidature - ' . $contact->getChildName(); // REFUS sans visite
+                        $subject = 'Candidature - ' . $contact->getChildName();
                     } elseif ($contact->hasAppointmentScheduled() || $contact->isConfirmed()) {
                         $subject = 'Annulation du rendez-vous - ' . $contact->getChildName();
-                    } else { // after_visit
-                        $subject = 'Suite à votre visite - ' . $contact->getChildName(); // REFUS après visite
+                    } else {
+                        $subject = 'Suite à votre visite - ' . $contact->getChildName();
                     }
 
                     $contact->setRejectionReason($rejectionReason);
@@ -221,16 +221,7 @@ class AdminContactController extends AbstractController
                 error_log("Nouveau statut défini: " . $newStatus);
 
                 $this->entityManager->flush();
-
                 $this->entityManager->refresh($contact);
-                error_log("Status RÉELLEMENT en base après refresh: '" . $contact->getStatus() . "'");
-                error_log("Longueur du status: " . strlen($contact->getStatus()));
-
-                // Vérifier s'il y a des espaces cachés
-                $status = $contact->getStatus();
-                for ($i = 0; $i < strlen($status); $i++) {
-                    error_log("Caractère $i: '" . $status[$i] . "' (ASCII: " . ord($status[$i]) . ")");
-                }
 
                 // Debug: Vérification après flush
                 error_log("Status après flush: " . $contact->getStatus());

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
+
 class Contact
 {
     // Constantes pour les statuts
@@ -16,6 +17,7 @@ class Contact
     public const STATUS_CONFIRMED = '2';
     public const STATUS_AFTER_VISIT = '3';
     public const STATUS_INSCRIPTION_ACCEPTED = '4';
+    public const STATUS_PROCESSED = '6';
     public const STATUS_REJECTED = '5';
 
     #[ORM\Id]
@@ -81,18 +83,6 @@ class Contact
         $this->status = self::STATUS_PENDING;
     }
 
-    // Méthode statique pour obtenir tous les statuts
-    public static function getAllStatuses(): array
-    {
-        return [
-            self::STATUS_PENDING,
-            self::STATUS_APPOINTMENT_SCHEDULED,
-            self::STATUS_CONFIRMED,
-            self::STATUS_AFTER_VISIT,
-            self::STATUS_INSCRIPTION_ACCEPTED,
-            self::STATUS_REJECTED,
-        ];
-    }
 
     // Méthode pour vérifier si un statut est valide
     public static function isValidStatus(string $status): bool
@@ -262,6 +252,19 @@ class Contact
         return $this->childBirthDate->diff(new \DateTime())->y;
     }
 
+    public static function getAllStatuses(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT,
+            self::STATUS_INSCRIPTION_ACCEPTED,
+            self::STATUS_PROCESSED,
+            self::STATUS_REJECTED,
+        ];
+    }
+
     public function getStatusText(): string
     {
         return match ($this->status) {
@@ -269,6 +272,7 @@ class Contact
             self::STATUS_APPOINTMENT_SCHEDULED => 'RDV programmé',
             self::STATUS_CONFIRMED => 'Confirmé',
             self::STATUS_INSCRIPTION_ACCEPTED => 'Inscription acceptée',
+            self::STATUS_PROCESSED => 'Traité',
             self::STATUS_AFTER_VISIT => 'Suivi après visite',
             self::STATUS_REJECTED => 'Refusé',
             default => 'Inconnu'
@@ -282,10 +286,22 @@ class Contact
             self::STATUS_APPOINTMENT_SCHEDULED => 'info',
             self::STATUS_CONFIRMED => 'success',
             self::STATUS_INSCRIPTION_ACCEPTED => 'primary',
+            self::STATUS_PROCESSED => 'success',
             self::STATUS_AFTER_VISIT => 'dark',
             self::STATUS_REJECTED => 'danger',
             default => 'secondary'
         };
+    }
+
+    // Nouvelles méthodes de transition pour le statut PROCESSED
+    public function canProcess(): bool
+    {
+        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
+    }
+
+    public function isProcessed(): bool
+    {
+        return $this->status === self::STATUS_PROCESSED;
     }
 
     public function getAppointmentDate(): ?\DateTimeImmutable
