@@ -159,14 +159,16 @@
     {% block footer %}
     <footer id="footer" class="footer position-relative light-background">
         <div class="container footer-top">
-            <div class="row gy-4">
+            <div class="row gy-4 {% if app.request.locale == 'ar' %}flex-row-reverse{% endif %}">
                 <!-- Logo et texte -->
-                <div class="col-lg-4 col-md-6 footer-brand">
+                <div
+                    class="col-lg-4 col-md-6 footer-brand {% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">
                     <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
-                        class="logo d-flex align-items-center">
+                        class="logo d-flex align-items-center {% if app.request.locale == 'ar' %}flex-row-reverse justify-content-end{% endif %}">
                         <img src="{{ asset('assets/img/logo.png') }}" loading="lazy" alt="{{ 'site.name'|trans }}"
                             class="logo-img">
-                        <div class="logo-text">
+                        <div
+                            class="logo-text {% if app.request.locale == 'ar' %}me-3 text-end{% else %}ms-3 text-start{% endif %}">
                             <h2 class="sitenames">{{ 'site.name'|trans }}</h2>
                             <h2 class="sitenames">{{ 'site.name1'|trans }}</h2>
                             <h2 class="sitenames">{{ 'site.name2'|trans }}</h2>
@@ -175,22 +177,42 @@
                 </div>
 
                 <!-- Liens utiles -->
-                <div class="col-lg-4 col-md-6 footer-links">
-                    <h4>{{ 'footer.useful_links'|trans }}</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="{{ path('app_home', {'_locale': app.request.locale}) }}">{{ 'nav.home'|trans }}</a>
+                <div
+                    class="col-lg-4 col-md-6 footer-links {% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">
+                    <h4 class="{% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">{{
+                        'footer.useful_links'|trans }}</h4>
+                    <ul
+                        class="list-unstyled {% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">
+                        <li class="{% if app.request.locale == 'ar' %}text-end{% endif %}">
+                            <a href="{{ path('app_home', {'_locale': app.request.locale}) }}"
+                                class="{% if app.request.locale == 'ar' %}text-end d-block{% endif %}">{{
+                                'nav.home'|trans }}</a>
                         </li>
-                        <li><a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}">{{
-                                'nav.employment'|trans }}</a></li>
+                        <li class="{% if app.request.locale == 'ar' %}text-end{% endif %}">
+                            <a href="{{ path('app_recrutement', {'_locale': app.request.locale}) }}"
+                                class="{% if app.request.locale == 'ar' %}text-end d-block{% endif %}">{{
+                                'nav.employment'|trans }}</a>
+                        </li>
+                        <li class="{% if app.request.locale == 'ar' %}text-end{% endif %}">
+                            <a href="https://www.mia-dz.com"
+                                class="{% if app.request.get('_route') == 'app_recrutement' %}active{% endif %} {% if app.request.locale == 'ar' %}text-end d-block{% endif %}">
+                                {{ 'nav.formation'|trans }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- Contact -->
-                <div class="col-lg-4 col-md-12 footer-contact">
-                    <h4>{{ 'footer.contact'|trans }}</h4>
-                    <p style="line-height: 2.8;">
-                        <i class="bi bi-geo-alt"></i> {{ 'footer.address'|trans }} <br>
-                        <i class="bi bi-envelope"></i> montessori.dz@gmail.com <br>
+                <div
+                    class="col-lg-4 col-md-12 footer-contact {% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">
+                    <h4 class="{% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">{{
+                        'footer.contact'|trans }}</h4>
+                    <p style="line-height: 2.8;"
+                        class="{% if app.request.locale == 'ar' %}text-end{% else %}text-start{% endif %}">
+                        <i class="bi bi-geo-alt {% if app.request.locale == 'ar' %}ms-2{% else %}me-2{% endif %}"></i>
+                        {{ 'footer.address'|trans }} <br>
+                        <i class="bi bi-envelope {% if app.request.locale == 'ar' %}ms-2{% else %}me-2{% endif %}"></i>
+                        montessori.dz@gmail.com <br>
                     </p>
                 </div>
             </div>

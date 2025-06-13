@@ -175,6 +175,113 @@ html[dir="rtl"] .footer-links ul li::before {
     /* Tourner la flèche pour RTL */
 }
 
+/* Ajoutez ces styles à votre fichier rtl.css */
+
+/* RTL Footer Fixes */
+.rtl #footer {
+    direction: rtl;
+    text-align: right;
+}
+
+.rtl #footer .footer-top {
+    direction: rtl;
+}
+
+.rtl #footer .row {
+    direction: rtl;
+}
+
+.rtl #footer .footer-brand {
+    text-align: right;
+}
+
+.rtl #footer .footer-links {
+    text-align: right;
+}
+
+.rtl #footer .footer-links h4 {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.rtl #footer .footer-links ul {
+    text-align: right;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.rtl #footer .footer-links ul li {
+    text-align: right;
+    margin-bottom: 8px;
+}
+
+.rtl #footer .footer-links ul li a {
+    text-align: right;
+    display: block;
+    padding-right: 0;
+}
+
+.rtl #footer .footer-contact {
+    text-align: right;
+}
+
+.rtl #footer .footer-contact h4 {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.rtl #footer .footer-contact p {
+    text-align: right;
+    direction: rtl;
+}
+
+.rtl #footer .footer-contact i {
+    margin-left: 8px;
+    margin-right: 0;
+}
+
+/* Logo RTL */
+.rtl #footer .logo {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+}
+
+.rtl #footer .logo-text {
+    text-align: right;
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+/* Copyright RTL */
+.rtl #footer .copyright {
+    direction: rtl;
+    text-align: center;
+}
+
+.rtl #footer .copyright p {
+    direction: rtl;
+}
+
+/* Responsive fixes pour RTL */
+@media (max-width: 768px) {
+    .rtl #footer .footer-brand,
+    .rtl #footer .footer-links,
+    .rtl #footer .footer-contact {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .rtl #footer .logo {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .rtl #footer .logo-text {
+        text-align: center;
+        margin-right: 0;
+        margin-left: 10px;
+    }
+}
 
 /* Adaptation des popups et dropdowns */
 

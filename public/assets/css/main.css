@@ -643,7 +643,7 @@ h6 {
 }
 
 .footer .sitenames {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
     color: var(--accent-color);  /* Utilisation de la variable d'accent pour harmoniser le vert */
     margin: 0;
@@ -657,7 +657,7 @@ h6 {
 }
 
 .footer .logo img {
-    max-height: 89px;
+    max-height: 120px;
     margin-right: 11px;
 }
 
@@ -812,9 +812,6 @@ h6 {
     font-size: 13px;
 }
 
-#footer .logo img {
-    max-height: 150px;
-}
 
 /* Ajout de style pour le texte du bas de page */
 .footer .sitename {
