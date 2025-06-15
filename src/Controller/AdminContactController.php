@@ -160,7 +160,8 @@ class AdminContactController extends AbstractController
                     // Ajouter les pièces jointes
                     $projectDir = $this->getParameter('kernel.project_dir');
                     $contratPath = $projectDir . '/public/assets/img/contratMontessori.pdf';
-                    $fichePath = $projectDir . '/public/assets/img/ficheInscription.pdf';
+                    $ficheInscriptionPath = $projectDir . '/public/assets/img/ficheInscription.pdf';
+                    $ficheInformationPath = $projectDir . '/public/assets/img/ficheInformation.docx';
 
                     // Vérifier que les fichiers existent
                     if (file_exists($contratPath)) {
@@ -169,10 +170,16 @@ class AdminContactController extends AbstractController
                         error_log('Fichier contrat non trouvé: ' . $contratPath);
                     }
 
-                    if (file_exists($fichePath)) {
-                        $email->attachFromPath($fichePath, 'Fiche_Inscription.pdf');
+                    if (file_exists($ficheInscriptionPath)) {
+                        $email->attachFromPath($ficheInscriptionPath, 'Fiche_Inscription.pdf');
                     } else {
-                        error_log('Fichier fiche inscription non trouvé: ' . $fichePath);
+                        error_log('Fichier fiche inscription non trouvé: ' . $ficheInscriptionPath);
+                    }
+
+                    if (file_exists($ficheInformationPath)) {
+                        $email->attachFromPath($ficheInformationPath, 'Fiche_Information.docx');
+                    } else {
+                        error_log('Fichier fiche information non trouvé: ' . $ficheInformationPath);
                     }
 
                     break;

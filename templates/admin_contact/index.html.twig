@@ -34,15 +34,24 @@
             </div>
         </div>
         <div class="col-md-2">
-            <div class="card text-center bg-success text-white">
+            <div class="card text-center bg-primary text-white">
                 <div class="card-body">
                     <h4>{{ contacts|filter(c => c.status == '2')|length }}</h4>
                     <p class="mb-0">Confirmés</p>
                 </div>
             </div>
         </div>
+
         <div class="col-md-2">
-            <div class="card text-center bg-primary text-white">
+            <div class="card text-center bg-info text-white">
+                <div class="card-body">
+                    <h4>{{ contacts|filter(c => c.status == '3')|length }}</h4>
+                    <p class="mb-0">Suivi après visite </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card text-center bg-success text-white">
                 <div class="card-body">
                     <h4>{{ contacts|filter(c => c.status == '4')|length }}</h4>
                     <p class="mb-0">Inscrits</p>

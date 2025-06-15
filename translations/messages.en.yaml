@@ -104,7 +104,7 @@ team:
   part2: "of those who accompany the child daily. This is why the recruitment of our staff is carried out with rigorous attention and high standards."
   highlight2: "Certified by the Association Montessori Internationale (AMI)"
   highlight3: "and the Positive Discipline Association (PDA)"
-  part3: "They also benefit from a continuous training program covering key areas such as health, safety, leadership, and both personal and professional development."
+  part3: "they also benefit from a continuous training program covering key areas such as health, safety, leadership, and both personal and professional development."
 
 
 # Form labels
@@ -133,7 +133,7 @@ formations:
 nav:
   home: 'Kindergarten'
   employment: 'Careers'
-  formation: 'Course'
+  formation: 'AMI Courses'
   login: 'Login'
   logout: 'Logout'
 

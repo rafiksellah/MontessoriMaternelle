@@ -101,7 +101,7 @@ team:
   part2: "de ceux qui accompagnent l’enfant au quotidien. C’est pourquoi le recrutement de nos collaborateurs fait l’objet d’une attention rigoureuse et d’exigences élevées."
   highlight2: "Certifiés par l’Association Montessori Internationale (AMI)"
   highlight3: "et la Positive Discipline Association (PDA)"
-  part3: "Ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel."
+  part3: "ils bénéficient également d’un programme de formation continue couvrant des domaines essentiels tels que la santé, la sécurité, le leadership, et le développement personnel et professionnel."
 
 # Form labels
 form:
@@ -130,7 +130,7 @@ formations:
 nav:
   home: 'L’école maternelle'
   employment: 'Recrutement'
-  formation: 'Formation'
+  formation: 'Formations AMI'
   login: 'Se connecter'
   logout: 'Déconnexion'
 
