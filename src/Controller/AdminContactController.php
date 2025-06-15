@@ -156,6 +156,25 @@ class AdminContactController extends AbstractController
                         'contact' => $contact,
                         'customMessage' => $customMessage
                     ]);
+
+                    // Ajouter les pièces jointes
+                    $projectDir = $this->getParameter('kernel.project_dir');
+                    $contratPath = $projectDir . '/public/assets/img/contratMontessori.pdf';
+                    $fichePath = $projectDir . '/public/assets/img/ficheInscription.pdf';
+
+                    // Vérifier que les fichiers existent
+                    if (file_exists($contratPath)) {
+                        $email->attachFromPath($contratPath, 'Contrat_Montessori.pdf');
+                    } else {
+                        error_log('Fichier contrat non trouvé: ' . $contratPath);
+                    }
+
+                    if (file_exists($fichePath)) {
+                        $email->attachFromPath($fichePath, 'Fiche_Inscription.pdf');
+                    } else {
+                        error_log('Fichier fiche inscription non trouvé: ' . $fichePath);
+                    }
+
                     break;
 
                 case Contact::STATUS_REJECTED:
