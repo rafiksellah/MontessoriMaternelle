@@ -43,6 +43,22 @@
             margin: 20px 0;
         }
 
+        .documents-list {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .documents-list ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+
+        .documents-list li {
+            margin: 5px 0;
+        }
+
         .footer {
             margin-top: 30px;
             padding-top: 20px;
@@ -63,12 +79,24 @@
             <p>Cher(e) {{ contact.parentName }},</p>
 
             <div class="success-box">
-                <p><strong>Nous avons le plaisir de vous informer que la demande d'inscription de {{ contact.childName
-                        }} a été acceptée.</strong></p>
+                <p><strong>Nous avons le plaisir de vous informer que la demande d'inscription de votre enfant {{
+                        contact.childName }} a été acceptée.</strong></p>
             </div>
 
             <p>Vous trouverez en pièce jointe le dossier d'inscription à compléter et à nous retourner dans un délai de
-                7 jours, accompagné de l'ensemble des documents demandés.</p>
+                <strong>7 jours</strong>, accompagné de l'ensemble des documents demandés :
+            </p>
+
+            <div class="documents-list">
+                <ol>
+                    <li>Acte de naissance de l'enfant.</li>
+                    <li>Certificat de résidence de l'enfant.</li>
+                    <li>Photo d'identité.</li>
+                    <li>Copie du tableau de vaccination de l'enfant (carnet de santé).</li>
+                    <li>Certificat médical de bonne santé.</li>
+                    <li>Copie de la pièce d'identité du Parent / Tuteur.</li>
+                </ol>
+            </div>
 
             {% if customMessage %}
             <div style="background-color: #e7f3ff; padding: 15px; border-left: 4px solid #007bff; margin: 20px 0;">
