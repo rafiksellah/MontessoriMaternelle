@@ -21,7 +21,7 @@ footer:
 
 # messages.ar.yaml
 contact:
-  title: 'اتصل بنا'
+  title: 'تواصل معنا'
   subtitle: 'أرسل لنا رسالة'
   parent_name: 'اسم الوالد'
   child_name: 'اسم الطفل'
@@ -32,38 +32,40 @@ contact:
   heard_about_us: 'كيف سمعت عنا؟'
   expectations: 'توقعاتك'
   submit: 'إرسال'
-  success_message: 'تم إرسال طلبك بنجاح. سنتصل بك قريبًا.'
-  error_message: 'حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى لاحقًا.'
+  success_message: 'تم إرسال طلبك بنجاح. سنتواصل معك قريباً.'
+  error_message: 'حدث خطأ أثناء إرسال طلبك. يرجى المحاولة مرة أخرى لاحقاً.'
+  form_validation_error: 'النموذج يحتوي على أخطاء. يرجى تصحيحها أدناه.'
+  contact_alternative: 'إذا استمرت المشكلة، يمكنك التواصل معنا مباشرة على: Montessori.dz@gmail.com'
   placeholder:
     parent_name: 'أدخل اسم الوالد'
     child_name: 'أدخل اسم الطفل'
-    child_birth_date: 'حدد تاريخ ميلاد الطفل'
+    child_birth_date: 'اختر تاريخ ميلاد الطفل'
     phone: 'أدخل رقم الهاتف'
     email: 'أدخل البريد الإلكتروني'
     objective: 'اختر الهدف'
-    heard_about_us: 'اختر خيارًا'
-    expectations: 'أخبرنا عن نفسك وعن توقعاتك'
+    heard_about_us: 'اختر كيف سمعت عنا'
+    expectations: 'أخبرنا عنك وعن توقعاتك لتعليم طفلك'
   choices:
     visit_request: 'طلب زيارة'
     enrollment_request: 'طلب تسجيل'
     information_request: 'طلب معلومات'
   errors:
     parent_name_required: 'يرجى إدخال اسم الوالد'
-    parent_name_min: 'يجب أن يحتوي اسم الوالد على حرفين على الأقل'
+    parent_name_min: 'يجب أن يحتوي اسم الوالد على 2 أحرف على الأقل'
     parent_name_max: 'لا يمكن أن يتجاوز اسم الوالد 100 حرف'
     child_name_required: 'يرجى إدخال اسم الطفل'
-    child_name_min: 'يجب أن يحتوي اسم الطفل على حرفين على الأقل'
+    child_name_min: 'يجب أن يحتوي اسم الطفل على 2 أحرف على الأقل'
     child_name_max: 'لا يمكن أن يتجاوز اسم الطفل 100 حرف'
     child_birth_date_required: 'يرجى إدخال تاريخ ميلاد الطفل'
     phone_required: 'يرجى إدخال رقم هاتفك'
     phone_min: 'يجب أن يحتوي رقم الهاتف على 8 أرقام على الأقل'
-    phone_max: 'لا يمكن أن يتجاوز رقم الهاتف 20 رقمًا'
+    phone_max: 'لا يمكن أن يتجاوز رقم الهاتف 20 رقم'
     email_required: 'يرجى إدخال عنوان بريدك الإلكتروني'
     email_invalid: 'عنوان البريد الإلكتروني {{ value }} غير صحيح'
     objective_required: 'يرجى اختيار هدف'
     expectations_required: 'يرجى إخبارنا عن توقعاتك'
-    email_already_exists: "تم استخدام عنوان البريد الإلكتروني هذا مسبقًا للتسجيل."
-    general_error: "حدث خطأ أثناء إرسال النموذج."
+    email_already_exists: 'تم استخدام عنوان البريد الإلكتروني هذا من قبل للتسجيل.'
+    general_error: 'حدث خطأ أثناء إرسال النموذج.'
     
 # صفحة التوظيف
 employment:

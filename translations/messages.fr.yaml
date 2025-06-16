@@ -33,6 +33,8 @@ contact:
   submit: 'Envoyer'
   success_message: 'Votre demande a été envoyée avec succès. Nous vous contacterons prochainement.'
   error_message: 'Une erreur est survenue lors de l''envoi de votre demande. Veuillez réessayer plus tard.'
+  form_validation_error: 'Le formulaire contient des erreurs. Veuillez les corriger ci-dessous.'
+  contact_alternative: 'Si le problème persiste, vous pouvez nous contacter directement à : Montessori.dz@gmail.com'
   placeholder:
     parent_name: 'Entrez le nom du parent'
     child_name: 'Entrez le nom de l''enfant'

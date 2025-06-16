@@ -45,43 +45,56 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         $form_success = false;
+        $form_error = false;
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // Récupération des données du formulaire
-            $formData = $form->getData();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    // Récupération des données du formulaire
+                    $formData = $form->getData();
 
-            // Création d'une nouvelle entité Contact
-            $contact
-                ->setParentName($formData['parentName'])
-                ->setChildName($formData['childName'])
-                ->setChildBirthDate($formData['childBirthDate'])
-                ->setPhoneNumber($formData['phoneNumber'])
-                ->setEmail($formData['email'])
-                ->setObjective($formData['objective'])
-                ->setHeardAboutUs("Non spécifié / Not specified") // Default value
-                ->setExpectations($formData['expectations'])
-                ->setCreatedAt(new \DateTimeImmutable()); // Set the current date/time
+                    // Création d'une nouvelle entité Contact
+                    $contact
+                        ->setParentName($formData['parentName'])
+                        ->setChildName($formData['childName'])
+                        ->setChildBirthDate($formData['childBirthDate'])
+                        ->setPhoneNumber($formData['phoneNumber'])
+                        ->setEmail($formData['email'])
+                        ->setObjective($formData['objective'])
+                        ->setHeardAboutUs("Non spécifié / Not specified") // Default value
+                        ->setExpectations($formData['expectations'])
+                        ->setCreatedAt(new \DateTimeImmutable()); // Set the current date/time
 
-            // Sauvegarde en base de données
-            $contactRepository->save($contact, true);
+                    // Sauvegarde en base de données
+                    $contactRepository->save($contact, true);
 
-            // Envoi des emails
-            $emailService->sendConfirmationEmail($contact);
-            $emailService->sendAdminNotificationEmail($contact);
+                    // Envoi des emails
+                    $emailService->sendConfirmationEmail($contact);
+                    $emailService->sendAdminNotificationEmail($contact);
 
-            // Message flash de succès
-            $this->addFlash('success', $this->translator->trans('contact.success_message'));
+                    // Message flash de succès
+                    $this->addFlash('success', $this->translator->trans('contact.success_message'));
 
-            // Redirection sur la même page avec un drapeau pour afficher un message de succès
-            $form_success = true;
+                    // Redirection sur la même page avec un drapeau pour afficher un message de succès
+                    $form_success = true;
 
-            // Création d'un nouveau formulaire vide
-            $form = $this->createForm(ContactFormType::class);
+                    // Création d'un nouveau formulaire vide
+                    $form = $this->createForm(ContactFormType::class);
+                } catch (\Exception $e) {
+                    // En cas d'erreur lors de la sauvegarde ou l'envoi d'emails
+                    $this->addFlash('error', $this->translator->trans('contact.error_message'));
+                    $form_error = true;
+                }
+            } else {
+                // Le formulaire a été soumis mais contient des erreurs de validation
+                $form_error = true;
+            }
         }
 
         return $this->render('home/index.html.twig', [
             'contact_form' => $form->createView(),
             'form_success' => $form_success,
+            'form_error' => $form_error,
         ]);
     }
 

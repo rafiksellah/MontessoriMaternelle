@@ -177,11 +177,12 @@
                 <p>{{ 'contact.subtitle'|trans }}</p>
             </div>
 
-            <!-- Flash messages -->
+            <!-- Flash messages de succès -->
             {% if form_success or app.flashes('success')|length > 0 %}
             <div class="row justify-content-center mb-5">
                 <div class="col-lg-8">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
                         {% for message in app.flashes('success') %}
                         {{ message }}
                         {% else %}
@@ -193,81 +194,145 @@
             </div>
             {% endif %}
 
+            <!-- Flash messages d'erreur générale -->
+            {% if app.flashes('error')|length > 0 %}
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        {% for message in app.flashes('error') %}
+                        {{ message }}
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Message d'erreur de validation du formulaire -->
+            {% if form_error and not app.flashes('error')|length > 0 %}
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8">
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>{{ 'contact.form_validation_error'|trans }}</strong><br>
+                        {{ 'contact.contact_alternative'|trans }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body p-4 p-lg-5 {% if app.request.locale == 'ar' %}rtl{% endif %}">
                             {{ form_start(contact_form, {'attr': {'class': 'needs-validation', 'dir':
-                            (app.request.locale == 'ar' ? 'rtl' : 'ltr')}}) }}
+                            (app.request.locale == 'ar' ? 'rtl' : 'ltr'), 'novalidate': true}}) }}
                             <div class="row">
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.parentName, null, {'label_attr': {'class':
                                     'form-label'}}) }}
-                                    {{ form_widget(contact_form.parentName, {'attr': {'class': 'form-control',
+                                    {{ form_widget(contact_form.parentName, {'attr': {'class': 'form-control' ~
+                                    (contact_form.parentName.vars.errors|length > 0 ? ' is-invalid' : ''),
                                     'placeholder': 'contact.placeholder.parent_name'|trans, 'dir': (app.request.locale
                                     == 'ar' ? 'rtl' : 'ltr')}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.parentName) }}
+                                    {% if contact_form.parentName.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.parentName.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.childName, null, {'label_attr': {'class': 'form-label'}})
                                     }}
-                                    {{ form_widget(contact_form.childName, {'attr': {'class': 'form-control',
+                                    {{ form_widget(contact_form.childName, {'attr': {'class': 'form-control' ~
+                                    (contact_form.childName.vars.errors|length > 0 ? ' is-invalid' : ''),
                                     'placeholder': 'contact.placeholder.child_name'|trans, 'dir': (app.request.locale ==
                                     'ar' ? 'rtl' : 'ltr')}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.childName) }}
+                                    {% if contact_form.childName.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.childName.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.childBirthDate, null, {'label_attr': {'class':
                                     'form-label'}}) }}
-                                    {{ form_widget(contact_form.childBirthDate, {'attr': {'class': 'form-control'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.childBirthDate) }}
+                                    {{ form_widget(contact_form.childBirthDate, {'attr': {'class': 'form-control' ~
+                                    (contact_form.childBirthDate.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+                                    {% if contact_form.childBirthDate.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.childBirthDate.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-md-6 mb-4">
                                     {{ form_label(contact_form.phoneNumber, null, {'label_attr': {'class':
                                     'form-label'}}) }}
-                                    {{ form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control',
+                                    {{ form_widget(contact_form.phoneNumber, {'attr': {'class': 'form-control' ~
+                                    (contact_form.phoneNumber.vars.errors|length > 0 ? ' is-invalid' : ''),
                                     'placeholder': '+213 000 000 000', 'dir': 'ltr'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.phoneNumber) }}
+                                    {% if contact_form.phoneNumber.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.phoneNumber.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-md-6 mb-4">
                                     {{ form_label(contact_form.email, null, {'label_attr': {'class': 'form-label'}}) }}
-                                    {{ form_widget(contact_form.email, {'attr': {'class': 'form-control', 'placeholder':
+                                    {{ form_widget(contact_form.email, {'attr': {'class': 'form-control' ~
+                                    (contact_form.email.vars.errors|length > 0 ? ' is-invalid' : ''), 'placeholder':
                                     'example@email.com', 'dir': 'ltr'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.email) }}
+                                    {% if contact_form.email.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.email.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.objective, null, {'label_attr': {'class': 'form-label'}})
                                     }}
-                                    {{ form_widget(contact_form.objective, {'attr': {'class': 'form-select'}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.objective) }}
+                                    {{ form_widget(contact_form.objective, {'attr': {'class': 'form-select' ~
+                                    (contact_form.objective.vars.errors|length > 0 ? ' is-invalid' : '')}}) }}
+                                    {% if contact_form.objective.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.objective.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-12 mb-4">
                                     {{ form_label(contact_form.expectations, null, {'label_attr': {'class':
                                     'form-label'}}) }}
-                                    {{ form_widget(contact_form.expectations, {'attr': {'class': 'form-control',
+                                    {{ form_widget(contact_form.expectations, {'attr': {'class': 'form-control' ~
+                                    (contact_form.expectations.vars.errors|length > 0 ? ' is-invalid' : ''),
                                     'placeholder': 'contact.placeholder.expectations'|trans, 'dir': (app.request.locale
                                     == 'ar' ? 'rtl' : 'ltr')}}) }}
-                                    <div class="invalid-feedback">
-                                        {{ form_errors(contact_form.expectations) }}
+                                    {% if contact_form.expectations.vars.errors|length > 0 %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in contact_form.expectations.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
+                                    {% endif %}
                                 </div>
 
                                 <div class="col-12">
