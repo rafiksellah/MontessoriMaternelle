@@ -33,10 +33,10 @@ class EventRegistration
     #[Assert\NotBlank(message: "Veuillez fournir un numéro de téléphone")]
     #[Assert\Regex(pattern: "/^[0-9+\s]+$/", message: "Le numéro de téléphone doit contenir uniquement des chiffres")]
     private ?string $phone = null;
-    
+
     #[ORM\Column]
     private ?\DateTimeImmutable $registeredAt = null;
-    
+
     #[ORM\OneToMany(mappedBy: 'eventRegistration', targetEntity: Guest::class, cascade: ['persist'], orphanRemoval: true)]
     #[Assert\Valid]
     #[Assert\Count(
@@ -45,13 +45,10 @@ class EventRegistration
     )]
     private Collection $guests;
 
-    #[ORM\OneToOne(mappedBy: 'eventRegistration', cascade: ['persist', 'remove'])]
-    private ?User $user = null;
 
-    
     #[ORM\Column(options: ["default" => false])]
     private bool $reminderSent = false;
-    
+
     public function __construct()
     {
         $this->guests = new ArrayCollection();
@@ -143,7 +140,7 @@ class EventRegistration
 
     /**
      * Get the value of registeredAt
-     */ 
+     */
     public function getRegisteredAt()
     {
         return $this->registeredAt;
@@ -153,7 +150,7 @@ class EventRegistration
      * Set the value of registeredAt
      *
      * @return  self
-     */ 
+     */
     public function setRegisteredAt($registeredAt)
     {
         $this->registeredAt = $registeredAt;

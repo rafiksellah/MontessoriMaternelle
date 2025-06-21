@@ -20,6 +20,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Symfony\Component\Form\FormError;
 
 class HomeController extends AbstractController
 {
@@ -53,36 +55,53 @@ class HomeController extends AbstractController
                     // Récupération des données du formulaire
                     $formData = $form->getData();
 
-                    // Création d'une nouvelle entité Contact
-                    $contact
-                        ->setParentName($formData['parentName'])
-                        ->setChildName($formData['childName'])
-                        ->setChildBirthDate($formData['childBirthDate'])
-                        ->setPhoneNumber($formData['phoneNumber'])
-                        ->setEmail($formData['email'])
-                        ->setObjective($formData['objective'])
-                        ->setHeardAboutUs("Non spécifié / Not specified") // Default value
-                        ->setExpectations($formData['expectations'])
-                        ->setCreatedAt(new \DateTimeImmutable()); // Set the current date/time
+                    // Vérifier si l'email existe déjà
+                    $existingContact = $contactRepository->findOneBy(['email' => $formData['email']]);
 
-                    // Sauvegarde en base de données
-                    $contactRepository->save($contact, true);
+                    if ($existingContact) {
+                        // Ajouter l'erreur directement au champ email
+                        $form->get('email')->addError(new FormError(
+                            $this->translator->trans('contact.errors.email_already_exists')
+                        ));
+                        $form_error = true;
+                    } else {
+                        // Création d'une nouvelle entité Contact
+                        $contact
+                            ->setParentName($formData['parentName'])
+                            ->setChildName($formData['childName'])
+                            ->setChildBirthDate($formData['childBirthDate'])
+                            ->setPhoneNumber($formData['phoneNumber'])
+                            ->setEmail($formData['email'])
+                            ->setObjective($formData['objective'])
+                            ->setHeardAboutUs("Non spécifié / Not specified") // Default value
+                            ->setExpectations($formData['expectations'])
+                            ->setCreatedAt(new \DateTimeImmutable()); // Set the current date/time
 
-                    // Envoi des emails
-                    $emailService->sendConfirmationEmail($contact);
-                    $emailService->sendAdminNotificationEmail($contact);
+                        // Sauvegarde en base de données
+                        $contactRepository->save($contact, true);
 
-                    // Message flash de succès
-                    $this->addFlash('success', $this->translator->trans('contact.success_message'));
+                        // Envoi des emails
+                        $emailService->sendConfirmationEmail($contact);
+                        $emailService->sendAdminNotificationEmail($contact);
 
-                    // Redirection sur la même page avec un drapeau pour afficher un message de succès
-                    $form_success = true;
+                        // Message flash de succès
+                        $this->addFlash('success', $this->translator->trans('contact.success_message'));
 
-                    // Création d'un nouveau formulaire vide
-                    $form = $this->createForm(ContactFormType::class);
+                        // Redirection sur la même page avec un drapeau pour afficher un message de succès
+                        $form_success = true;
+
+                        // Création d'un nouveau formulaire vide
+                        $form = $this->createForm(ContactFormType::class);
+                    }
+                } catch (UniqueConstraintViolationException $e) {
+                    // Gestion spécifique de l'erreur d'email unique (sécurité supplémentaire)
+                    $form->get('email')->addError(new FormError(
+                        $this->translator->trans('contact.errors.email_already_exists')
+                    ));
+                    $form_error = true;
                 } catch (\Exception $e) {
-                    // En cas d'erreur lors de la sauvegarde ou l'envoi d'emails
-                    $this->addFlash('error', $this->translator->trans('contact.error_message'));
+                    // En cas d'autres erreurs lors de la sauvegarde ou l'envoi d'emails
+                    $this->addFlash('error', $this->translator->trans('contact.errors.general_error'));
                     $form_error = true;
                 }
             } else {

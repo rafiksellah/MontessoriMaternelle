@@ -6,9 +6,11 @@ use App\Repository\ContactRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
-
+#[ORM\UniqueConstraint(name: 'UNIQ_CONTACT_EMAIL', columns: ['email'])]
+#[UniqueEntity('email', message: 'Cet email a déjà été utilisé.')]
 class Contact
 {
     // Constantes pour les statuts
@@ -44,7 +46,7 @@ class Contact
     #[Assert\Length(min: 8, max: 20)]
     private ?string $phoneNumber = null;
 
-    #[ORM\Column(length: 180)]
+    #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Email]
     private ?string $email = null;

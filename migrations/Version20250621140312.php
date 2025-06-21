@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250603115046 extends AbstractMigration
+final class Version20250621140312 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,7 +21,7 @@ final class Version20250603115046 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE contact ADD appointment_date DATETIME DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)'
+            CREATE UNIQUE INDEX UNIQ_CONTACT_EMAIL ON contact (email)
         SQL);
     }
 
@@ -29,7 +29,7 @@ final class Version20250603115046 extends AbstractMigration
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            ALTER TABLE contact DROP appointment_date
+            DROP INDEX UNIQ_CONTACT_EMAIL ON contact
         SQL);
     }
 }
