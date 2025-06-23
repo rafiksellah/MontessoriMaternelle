@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Guest;
 use DateTimeImmutable;
+use App\Entity\Contact;
 use App\Entity\EventRegistration;
 use App\Repository\UserRepository;
 use App\Repository\GuestRepository;
+use App\Repository\ContactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,35 +23,38 @@ class AdminController extends AbstractController
     #[Route('/', name: 'app_admin')]
     public function dashboard(
         UserRepository $userRepository,
-        EventRegistrationRepository $eventRegistrationRepository,
-        GuestRepository $guestRepository
+        ContactRepository $contactRepository
     ): Response {
         // Récupération des statistiques générales
         $users = $userRepository->findAll();
         $total_users = count($users);
 
-        $registrations = $eventRegistrationRepository->findAll();
-        $total_registrations = count($registrations);
+        $contacts = $contactRepository->findAll();
+        $total_contacts = count($contacts);
 
-        $total_guests = count($guestRepository->findAll());
+        // Statistiques par statut des contacts
+        $pending_contacts = count($contactRepository->findBy(['status' => Contact::STATUS_PENDING]));
+        $processed_contacts = count($contactRepository->findBy(['status' => Contact::STATUS_INSCRIPTION_ACCEPTED]));
+        $confirmed_contacts = count($contactRepository->findBy(['status' => Contact::STATUS_CONFIRMED]));
+        $rejected_contacts = count($contactRepository->findBy(['status' => Contact::STATUS_REJECTED]));
 
         // Statistiques mensuelles
         $now = new DateTimeImmutable();
         $oneMonthAgo = $now->modify('-1 month');
         $twoMonthsAgo = $now->modify('-2 months');
 
-        // Inscriptions du mois en cours
-        $monthly_registrations = count($eventRegistrationRepository->findRegistrationsSince($oneMonthAgo));
+        // Contacts du mois en cours
+        $monthly_contacts = count($contactRepository->findContactsSince($oneMonthAgo));
 
-        // Inscriptions du mois précédent (pour calculer l'évolution)
-        $previous_monthly_registrations = count($eventRegistrationRepository->findRegistrationsBetween(
+        // Contacts du mois précédent (pour calculer l'évolution)
+        $previous_monthly_contacts = count($contactRepository->findContactsBetween(
             $twoMonthsAgo,
             $oneMonthAgo
         ));
 
-        // Calcul du pourcentage d'évolution
-        $monthly_registrations_change = $previous_monthly_registrations > 0
-            ? round((($monthly_registrations - $previous_monthly_registrations) / $previous_monthly_registrations) * 100)
+        // Calcul du pourcentage d'évolution des contacts
+        $monthly_contacts_change = $previous_monthly_contacts > 0
+            ? round((($monthly_contacts - $previous_monthly_contacts) / $previous_monthly_contacts) * 100)
             : 0;
 
         // Évolution des utilisateurs
@@ -62,19 +67,9 @@ class AdminController extends AbstractController
             ? round((($monthly_users - $previous_monthly_users) / $previous_monthly_users) * 100)
             : 0;
 
-        // Évolution des invités
-        $monthly_guests = count($guestRepository->findGuestsSince($oneMonthAgo));
-        $previous_monthly_guests = count($guestRepository->findGuestsBetween(
-            $twoMonthsAgo,
-            $oneMonthAgo
-        ));
-        $monthly_guests_change = $previous_monthly_guests > 0
-            ? round((($monthly_guests - $previous_monthly_guests) / $previous_monthly_guests) * 100)
-            : 0;
-
-        // Données pour le graphique d'évolution des inscriptions sur les 6 derniers mois
+        // Données pour le graphique d'évolution des contacts sur les 6 derniers mois
         $chart_months = [];
-        $chart_registrations = [];
+        $chart_contacts = [];
 
         for ($i = 5; $i >= 0; $i--) {
             $month_start = $now->modify("-$i month")->modify('first day of this month');
@@ -83,43 +78,43 @@ class AdminController extends AbstractController
             $month_name = $month_start->format('M');
             $chart_months[] = $month_name;
 
-            $month_registrations = count($eventRegistrationRepository->findRegistrationsBetween(
+            $month_contacts = count($contactRepository->findContactsBetween(
                 $month_start,
                 $month_end
             ));
-            $chart_registrations[] = $month_registrations;
+            $chart_contacts[] = $month_contacts;
         }
 
-        // Statistiques sur les utilisateurs avec/sans compte
-        $users_with_account = count($eventRegistrationRepository->findRegistrationsWithAccount());
-        $users_without_account = $total_registrations - $users_with_account;
-
-        // Taux de conversion (pourcentage d'inscrits ayant créé un compte)
-        $user_conversion_rate = $total_registrations > 0
-            ? round(($users_with_account / $total_registrations) * 100)
+        // Taux de conversion (pourcentage de contacts traités avec succès)
+        $contact_success_rate = $total_contacts > 0
+            ? round(($processed_contacts / $total_contacts) * 100)
             : 0;
 
-        // Récupération des inscriptions récentes
-        $recent_registrations = $eventRegistrationRepository->findBy([], ['registeredAt' => 'DESC'], 5);
+        // Récupération des contacts récents
+        $recent_contacts = $contactRepository->findBy([], ['createdAt' => 'DESC'], 5);
 
         // Récupération des utilisateurs récents
-        $recent_users = $userRepository->findBy([], ['id' => 'DESC'], 5);
+        $recent_users = $userRepository->findBy([], ['createdAt' => 'DESC'], 5);
+
+        // Statistiques sur les objectifs des contacts
+        $objectives_stats = $contactRepository->getObjectivesStatistics();
 
         return $this->render('admin/index.html.twig', [
             'total_users' => $total_users,
-            'total_registrations' => $total_registrations,
-            'total_guests' => $total_guests,
-            'monthly_registrations' => $monthly_registrations,
-            'monthly_registrations_change' => $monthly_registrations_change,
+            'total_contacts' => $total_contacts,
+            'pending_contacts' => $pending_contacts,
+            'processed_contacts' => $processed_contacts,
+            'confirmed_contacts' => $confirmed_contacts,
+            'rejected_contacts' => $rejected_contacts,
+            'monthly_contacts' => $monthly_contacts,
+            'monthly_contacts_change' => $monthly_contacts_change,
             'monthly_users_change' => $monthly_users_change,
-            'monthly_guests_change' => $monthly_guests_change,
             'chart_months' => $chart_months,
-            'chart_registrations' => $chart_registrations,
-            'users_with_account' => $users_with_account,
-            'users_without_account' => $users_without_account,
-            'user_conversion_rate' => $user_conversion_rate,
-            'recent_registrations' => $recent_registrations,
+            'chart_contacts' => $chart_contacts,
+            'contact_success_rate' => $contact_success_rate,
+            'recent_contacts' => $recent_contacts,
             'recent_users' => $recent_users,
+            'objectives_stats' => $objectives_stats,
         ]);
     }
 

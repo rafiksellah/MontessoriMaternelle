@@ -9,14 +9,14 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total des inscrits</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total des contacts</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ total_registrations }}
-                                    {% if monthly_registrations_change > 0 %}
-                                    <span class="text-success text-sm font-weight-bolder">+{{
-                                        monthly_registrations_change }}%</span>
-                                    {% elseif monthly_registrations_change < 0 %} <span
-                                        class="text-danger text-sm font-weight-bolder">{{ monthly_registrations_change
+                                    {{ total_contacts }}
+                                    {% if monthly_contacts_change > 0 %}
+                                    <span class="text-success text-sm font-weight-bolder">+{{ monthly_contacts_change
+                                        }}%</span>
+                                    {% elseif monthly_contacts_change < 0 %} <span
+                                        class="text-danger text-sm font-weight-bolder">{{ monthly_contacts_change
                                         }}%</span>
                                         {% else %}
                                         <span class="text-secondary text-sm font-weight-bolder">0%</span>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-4 text-end">
                             <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-user-friends text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="fas fa-address-book text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                            <div class="icon icon-shape bg-gradient-success shadow text-center border-radius-md">
                                 <i class="fas fa-user text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -69,24 +69,16 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Invités</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Contacts en attente</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ total_guests }}
-                                    {% if monthly_guests_change > 0 %}
-                                    <span class="text-success text-sm font-weight-bolder">+{{ monthly_guests_change
-                                        }}%</span>
-                                    {% elseif monthly_guests_change < 0 %} <span
-                                        class="text-danger text-sm font-weight-bolder">{{ monthly_guests_change
-                                        }}%</span>
-                                        {% else %}
-                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
-                                        {% endif %}
+                                    {{ pending_contacts }}
+                                    <span class="text-warning text-sm font-weight-bolder">En cours</span>
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-users text-lg opacity-10" aria-hidden="true"></i>
+                            <div class="icon icon-shape bg-gradient-warning shadow text-center border-radius-md">
+                                <i class="fas fa-clock text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -99,24 +91,17 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Inscrits du mois</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Contacts traités</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ monthly_registrations }}
-                                    {% if monthly_registrations_change > 0 %}
-                                    <span class="text-success text-sm font-weight-bolder">+{{
-                                        monthly_registrations_change }}%</span>
-                                    {% elseif monthly_registrations_change < 0 %} <span
-                                        class="text-danger text-sm font-weight-bolder">{{ monthly_registrations_change
+                                    {{ processed_contacts }}
+                                    <span class="text-success text-sm font-weight-bolder">{{ contact_success_rate
                                         }}%</span>
-                                        {% else %}
-                                        <span class="text-secondary text-sm font-weight-bolder">0%</span>
-                                        {% endif %}
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-calendar-alt text-lg opacity-10" aria-hidden="true"></i>
+                            <div class="icon icon-shape bg-gradient-info shadow text-center border-radius-md">
+                                <i class="fas fa-check-circle text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>
@@ -130,10 +115,10 @@
         <div class="col-lg-7 mb-lg-0 mb-4">
             <div class="card z-index-2">
                 <div class="card-header pb-0">
-                    <h6>Inscriptions par mois</h6>
+                    <h6>Évolution des contacts par mois</h6>
                     <p class="text-sm">
                         <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">{{ monthly_registrations_change }}%</span> cette année
+                        <span class="font-weight-bold">{{ monthly_contacts_change }}%</span> ce mois
                     </p>
                 </div>
                 <div class="card-body p-3">
@@ -146,10 +131,10 @@
         <div class="col-lg-5">
             <div class="card z-index-2">
                 <div class="card-header pb-0">
-                    <h6>Utilisateurs avec/sans compte</h6>
+                    <h6>Statut des contacts</h6>
                     <p class="text-sm">
-                        <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">{{ user_conversion_rate }}%</span> ont créé un compte
+                        <i class="fa fa-info-circle text-info"></i>
+                        Répartition par statut de traitement
                     </p>
                 </div>
                 <div class="card-body p-3">
@@ -166,50 +151,60 @@
         <div class="col-lg-6 mb-lg-0 mb-4">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h6>Dernières inscriptions</h6>
+                    <h6>Derniers contacts</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nom
-                                    </th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Parent</th>
+                                    <th
+                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                        Enfant</th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Date</th>
                                     <th
                                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Invités</th>
-                                    <th
-                                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Compte</th>
+                                        Statut</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for registration in recent_registrations %}
+                                {% for contact in recent_contacts %}
                                 <tr>
                                     <td>
                                         <div class="d-flex px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm">{{ registration.firstName }} {{
-                                                    registration.lastName }}</h6>
-                                                <p class="text-xs text-secondary mb-0">{{ registration.email }}</p>
+                                                <h6 class="mb-0 text-sm">{{ contact.parentName }}</h6>
+                                                <p class="text-xs text-secondary mb-0">{{ contact.email }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{
-                                            registration.registeredAt|date('d/m/Y') }}</p>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ contact.childName }}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{ contact.objective }}</p>
+                                        </div>
                                     </td>
                                     <td>
-                                        <p class="text-xs font-weight-bold mb-0">{{ registration.guests|length }}</p>
+                                        <p class="text-xs font-weight-bold mb-0">{{ contact.createdAt|date('d/m/Y') }}
+                                        </p>
                                     </td>
                                     <td>
-                                        {% if registration.user %}
-                                        <span class="badge badge-sm bg-gradient-success">Oui</span>
+                                        {% if contact.status == constant('App\\Entity\\Contact::STATUS_PENDING') %}
+                                        <span class="badge badge-sm bg-gradient-warning">En attente</span>
+                                        {% elseif contact.status == constant('App\\Entity\\Contact::STATUS_PROCESSED')
+                                        %}
+                                        <span class="badge badge-sm bg-gradient-success">Traité</span>
+                                        {% elseif contact.status == constant('App\\Entity\\Contact::STATUS_CONFIRMED')
+                                        %}
+                                        <span class="badge badge-sm bg-gradient-info">Confirmé</span>
+                                        {% elseif contact.status == constant('App\\Entity\\Contact::STATUS_REJECTED') %}
+                                        <span class="badge badge-sm bg-gradient-danger">Rejeté</span>
                                         {% else %}
-                                        <span class="badge badge-sm bg-gradient-secondary">Non</span>
+                                        <span class="badge badge-sm bg-gradient-secondary">Autre</span>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -276,7 +271,7 @@
 {% block javascripts %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Données pour le graphique linéaire - Inscriptions par mois
+        // Données pour le graphique linéaire - Contacts par mois
         var ctx1 = document.getElementById("chart-line").getContext("2d");
         var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
@@ -289,7 +284,7 @@
             data: {
                 labels: {{ chart_months| json_encode | raw }},
         datasets: [{
-            label: "Inscriptions",
+            label: "Contacts",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -297,7 +292,7 @@
             backgroundColor: gradientStroke1,
             borderWidth: 3,
             fill: true,
-            data: {{ chart_registrations| json_encode | raw }},
+            data: {{ chart_contacts| json_encode | raw }},
         maxBarThickness: 6
                 }],
             },
@@ -358,24 +353,28 @@
     },
         });
 
-    // Données pour le graphique circulaire - Utilisateurs avec/sans compte
+    // Données pour le graphique circulaire - Statut des contacts
     var ctx2 = document.getElementById("chart-pie").getContext("2d");
     new Chart(ctx2, {
         type: 'pie',
         data: {
-            labels: ['Sans compte', 'Avec compte'],
+            labels: ['En attente', 'Traités', 'Confirmés', 'Rejetés'],
             datasets: [{
-                data: [{{ users_without_account }}, {{ users_with_account }}],
+                data: [{{ pending_contacts }}, {{ processed_contacts }}, {{ confirmed_contacts }}, {{ rejected_contacts }}],
         backgroundColor: [
-            'rgba(203, 12, 159, 0.8)',
-            'rgba(94, 114, 228, 0.8)'
-        ],
+        'rgba(255, 193, 7, 0.8)',
+        'rgba(40, 167, 69, 0.8)',
+        'rgba(23, 162, 184, 0.8)',
+        'rgba(220, 53, 69, 0.8)'
+    ],
         borderColor: [
-            'rgba(203, 12, 159, 1)',
-            'rgba(94, 114, 228, 1)'
-        ],
+        'rgba(255, 193, 7, 1)',
+        'rgba(40, 167, 69, 1)',
+        'rgba(23, 162, 184, 1)',
+        'rgba(220, 53, 69, 1)'
+    ],
         borderWidth: 1
-    }]
+                }]
             },
         options: {
         responsive: true,

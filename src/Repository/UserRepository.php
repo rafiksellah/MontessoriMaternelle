@@ -37,28 +37,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * Trouve tous les utilisateurs inscrits depuis une date donnée
      */
-    public function findUsersSince(DateTimeImmutable $date): array
+    public function findUsersSince(\DateTimeInterface $date): array
     {
-        // Remarque: cette méthode est un exemple et nécessite un champ de date de création sur l'entité User
-        // Si vous n'avez pas ce champ, vous devrez adapter cette méthode
         return $this->createQueryBuilder('u')
-            // Supposons que vous avez un champ 'createdAt' ou similaire
             ->andWhere('u.createdAt >= :date')
             ->setParameter('date', $date)
             ->getQuery()
             ->getResult();
     }
 
-    /**
-     * Trouve tous les utilisateurs créés entre deux dates
-     */
-    public function findUsersBetween(DateTimeImmutable $start, DateTimeImmutable $end): array
+    public function findUsersBetween(\DateTimeInterface $start, \DateTimeInterface $end): array
     {
-        // Remarque: cette méthode est un exemple et nécessite un champ de date de création sur l'entité User
-        // Si vous n'avez pas ce champ, vous devrez adapter cette méthode
         return $this->createQueryBuilder('u')
-            ->andWhere('u.createdAt >= :start')
-            ->andWhere('u.createdAt <= :end')
+            ->andWhere('u.createdAt BETWEEN :start AND :end')
             ->setParameter('start', $start)
             ->setParameter('end', $end)
             ->getQuery()
