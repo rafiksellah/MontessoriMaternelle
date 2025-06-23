@@ -49,7 +49,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Le numéro de téléphone est obligatoire.")]
     private ?string $phone = null;
 
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 

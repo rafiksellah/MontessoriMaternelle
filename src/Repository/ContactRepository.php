@@ -33,7 +33,35 @@ class ContactRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    
+
+    public function findContactsSince(\DateTimeInterface $date): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.createdAt >= :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findContactsBetween(\DateTimeInterface $start, \DateTimeInterface $end): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.createdAt BETWEEN :start AND :end')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getObjectivesStatistics(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.objective, COUNT(c.id) as count')
+            ->groupBy('c.objective')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Contact[] Returns an array of Contact objects
     //     */
