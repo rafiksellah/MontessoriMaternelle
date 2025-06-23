@@ -64,6 +64,8 @@ contact:
     expectations_required: 'Please tell us about your expectations'
     email_already_exists: "This email address has already been used for registration."
     general_error: "An error occurred while submitting the form."
+    recaptcha_invalid: "Please validate the reCAPTCHA"
+
     
 # employment page
 employment:
