@@ -66,6 +66,7 @@ contact:
     expectations_required: 'يرجى إخبارنا عن توقعاتك'
     email_already_exists: 'تم استخدام عنوان البريد الإلكتروني هذا من قبل للتسجيل.'
     general_error: 'حدث خطأ أثناء إرسال النموذج.'
+    recaptcha_invalid: "يرجى التحقق من reCAPTCHA"
     
 # صفحة التوظيف
 employment:

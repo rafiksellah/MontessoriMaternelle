@@ -335,17 +335,15 @@
                                     {% endif %}
                                 </div>
                                 <div class="col-12 mb-4">
-                                    {{ form_row(contact_form.recaptcha) }}
-                                    {# must be the same name of this put on the FormBuilder #}
-
-                                    {% if contact_form.expectations.vars.errors|length > 0 %}
+                                    {{ form_widget(contact_form.recaptcha) }}
+                                    {% if contact_form.recaptcha.vars.errors|length > 0 %}
                                     <div class="invalid-feedback d-block">
-                                        {{ form_errors(contact_form.recaptcha) }}
-                                        {# That will display the error of the captcha to user #}
+                                        {% for error in contact_form.recaptcha.vars.errors %}
+                                        <div>{{ error.message }}</div>
+                                        {% endfor %}
                                     </div>
                                     {% endif %}
                                 </div>
-
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary w-100 py-3">{{ 'contact.submit'|trans
                                         }}</button>
