@@ -334,11 +334,12 @@
                                     </div>
                                     {% endif %}
                                 </div>
+                                <!-- reCAPTCHA v3 (invisible) -->
                                 <div class="col-12 mb-4">
-                                    {{ form_widget(contact_form.recaptcha) }}
-                                    {% if contact_form.recaptcha.vars.errors|length > 0 %}
-                                    <div class="invalid-feedback d-block">
-                                        {% for error in contact_form.recaptcha.vars.errors %}
+                                    {{ form_widget(contact_form.captcha) }}
+                                    {% if contact_form.captcha.vars.errors|length > 0 %}
+                                    <div class="alert alert-danger">
+                                        {% for error in contact_form.captcha.vars.errors %}
                                         <div>{{ error.message }}</div>
                                         {% endfor %}
                                     </div>

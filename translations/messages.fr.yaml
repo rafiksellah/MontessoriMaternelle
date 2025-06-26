@@ -65,7 +65,7 @@ contact:
     expectations_required: 'Veuillez nous parler de vos attentes'
     email_already_exists: "Cette adresse email a déjà été utilisée pour une inscription."
     general_error: "Une erreur est survenue lors de l'envoi du formulaire."
-    recaptcha_invalid: "Veuillez valider le reCAPTCHA"
+    recaptcha_failed: "La vérification anti-robot a échoué. Veuillez réessayer."
 # Page de recrutement
 employment:
   title: 'Rejoignez notre équipe'
