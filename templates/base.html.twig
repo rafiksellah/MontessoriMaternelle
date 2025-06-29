@@ -80,7 +80,7 @@
     <!-- RTL support for Arabic -->
     {% if app.request.locale == 'ar' %}
     <link href="{{ asset('assets/css/rtl.css') }}" rel="stylesheet"> {% endif %} {% block stylesheets %}{% endblock %}
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 </head>
 
 <body class="{% block body_class %}{% if app.request.locale == 'ar' %}rtl{% endif %}{% endblock %}">

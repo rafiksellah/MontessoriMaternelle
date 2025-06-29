@@ -115,13 +115,7 @@ class ContactFormType extends AbstractType
                     'rows' => 5
                 ],
             ])
-            ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3([
-                    'message' => $this->translator->trans('contact.errors.recaptcha_failed'),
-                ]),
-                'action_name' => 'contact_form',
-                'locale' => 'auto', // Détection automatique de la langue
-            ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %} {% block title %}{{ 'site.name'|trans }} {{ 'site.name1'|trans }} {{ 'site.name2'|trans
 }} - {% endblock %} {% block stylesheets %}
 <link href="{{ asset('assets/css/home.css') }}" rel="stylesheet"> {% endblock %} {% block body %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <main class="main">
     <!-- ======= Hero Section ======= -->
     <section id="hero-carousel" class="hero-carousel">
@@ -334,27 +335,21 @@
                                     </div>
                                     {% endif %}
                                 </div>
-                                <!-- reCAPTCHA v3 (invisible) -->
-                                <div class="col-12 mb-4">
-                                    {{ form_widget(contact_form.captcha) }}
-                                    {% if contact_form.captcha.vars.errors|length > 0 %}
-                                    <div class="alert alert-danger">
-                                        {% for error in contact_form.captcha.vars.errors %}
-                                        <div>{{ error.message }}</div>
-                                        {% endfor %}
-                                    </div>
-                                    {% endif %}
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary w-100 py-3">{{ 'contact.submit'|trans
-                                        }}</button>
+                                <div class="col-12 mb-4 g-recaptcha"
+                                    data-sitekey="6Lcei3ErAAAAAONBoB1TDq99iHF43UQjxdnKBYs3">
+                                    }
                                 </div>
                             </div>
-                            {{ form_end(contact_form) }}
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100 py-3">{{ 'contact.submit'|trans
+                                    }}</button>
+                            </div>
                         </div>
+                        {{ form_end(contact_form) }}
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
