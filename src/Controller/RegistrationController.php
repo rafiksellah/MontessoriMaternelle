@@ -12,15 +12,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class RegistrationController extends AbstractController {
+class RegistrationController extends AbstractController
+{
     #[Route('/register', name: 'app_register_no_locale')]
-    #[Route('/{_locale}/register', name: 'app_register', methods: ['GET', 'POST'], requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
+    #[Route('/{_locale}/register', name: 'app_register', methods: ['GET', 'POST'], requirements: ['_locale' => 'en|fr|ar'], defaults: ['_locale' => 'en'])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 // Vérifier si l'email existe déjà
@@ -32,7 +33,7 @@ class RegistrationController extends AbstractController {
                         'registrationForm' => $form->createView(),
                     ]);
                 }
-                
+
                 // encode the plain password
                 $user->setPassword(
                     $userPasswordHasher->hashPassword(
@@ -40,16 +41,16 @@ class RegistrationController extends AbstractController {
                         $form->get('plainPassword')->getData()
                     )
                 );
-                
+
                 // Set default role
                 $user->setRoles(['ROLE_USER']);
-                
+
                 $entityManager->persist($user);
                 $entityManager->flush();
-                
+
                 // Flash message
                 $this->addFlash('success', $translator->trans('registration.success.account_created'));
-                
+
                 // Redirect to login page avec le paramètre _locale
                 return $this->redirectToRoute('app_login', [
                     '_locale' => $request->getLocale()
@@ -62,13 +63,13 @@ class RegistrationController extends AbstractController {
                 } else {
                     $this->addFlash('error', $translator->trans('registration.error.general_error'));
                 }
-                
+
                 return $this->render('registration/register.html.twig', [
                     'registrationForm' => $form->createView(),
                 ]);
             }
         }
-        
+
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

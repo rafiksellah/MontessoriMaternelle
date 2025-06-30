@@ -7,7 +7,7 @@ app_default:
     path: /
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
     defaults:
-        path: /fr
+        path: /en
         permanent: true
 register:
     path: /register
@@ -23,7 +23,7 @@ event:
     controller: App\Controller\EventRegistrationController::index
     methods: [GET]
     defaults:
-        path: /fr
+        path: /en
         _locale: '%kernel.default_locale%'
     requirements:
         _locale: 'en|fr|ar'        

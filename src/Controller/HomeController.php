@@ -34,7 +34,7 @@ class HomeController extends AbstractController
         $this->translator = $translator;
     }
 
-    #[Route('/{_locale}', name: 'app_home', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
+    #[Route('/{_locale}', name: 'app_home', requirements: ['_locale' => 'en|fr|ar'], defaults: ['_locale' => 'en'])]
     public function index(
         Request $request,
         ContactRepository $contactRepository,
@@ -149,7 +149,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/{_locale}/recrutement', name: 'app_recrutement', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
+    #[Route('/{_locale}/recrutement', name: 'app_recrutement', requirements: ['_locale' => 'en|fr|ar'], defaults: ['_locale' => 'en'])]
     public function recrutement(
         Request $request,
         EntityManagerInterface $em,

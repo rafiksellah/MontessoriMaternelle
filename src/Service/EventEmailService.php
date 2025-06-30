@@ -45,7 +45,7 @@ class EventEmailService
     ): void {
         try {
             // Make sure we're using valid locale (fallback to 'en' if not in our supported list)
-            $locale = in_array($locale, ['fr', 'en', 'ar']) ? $locale : 'en';
+            $locale = in_array($locale, ['en', 'fr', 'ar']) ? $locale : 'en';
 
             $email = (new TemplatedEmail())
                 ->from(new Address($this->adminEmail, 'Montessori Algérie'))
@@ -86,7 +86,7 @@ class EventEmailService
     {
         try {
             // Make sure we're using valid locale (fallback to 'en' if not in our supported list)
-            $locale = in_array($locale, ['fr', 'en', 'ar']) ? $locale : 'en';
+            $locale = in_array($locale, ['en', 'fr', 'ar']) ? $locale : 'en';
 
             $email = (new TemplatedEmail())
                 ->from(new Address($this->adminEmail, 'Système d\'inscription'))

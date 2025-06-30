@@ -32,7 +32,7 @@ class EventRegistrationController extends AbstractController
 
 
     #[Route('/event/register', name: 'event_register_no_locale')]
-    #[Route('/{_locale}/event/register', name: 'event_register', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'fr'])]
+    #[Route('/{_locale}/event/register', name: 'event_register', requirements: ['_locale' => 'fr|en|ar'], defaults: ['_locale' => 'en'])]
     public function register(
         Request $request,
         EntityManagerInterface $em,
