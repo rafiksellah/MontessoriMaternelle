@@ -66,8 +66,7 @@ contact:
     general_error: "An error occurred while submitting the form."
     recaptcha_failed: "Robot verification failed. Please try again."
     suspicious_activity: "Suspicious activity detected. Please contact administration."
-    email_already_exists: "This email address is already registered."
-    
+
 # employment page
 employment:
   title: 'Join Our Team'

@@ -67,7 +67,6 @@ contact:
     general_error: "Une erreur est survenue lors de l'envoi du formulaire."
     recaptcha_failed: "La vérification anti-robot a échoué. Veuillez réessayer."
     suspicious_activity: "Activité suspecte détectée. Veuillez contacter l'administration."
-    email_already_exists: "Cette adresse email est déjà enregistrée."
 # Page de recrutement
 employment:
   title: 'Rejoignez notre équipe'
