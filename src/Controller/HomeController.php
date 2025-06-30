@@ -52,6 +52,21 @@ class HomeController extends AbstractController
             if ($form->isValid()) {
                 try {
                     $formData = $form->getData();
+                    $blockedNames = ['RobertAnowl', 'RobertAnowI']; // Ajustez selon vos données
+                    $blockedDomains = ['registry.godaddy'];
+
+                    if (
+                        in_array($formData['parentName'], $blockedNames) ||
+                        strpos($formData['email'], 'registry.godaddy') !== false
+                    ) {
+                        $form->addError(new FormError('Inscription temporairement indisponible.'));
+                        $form_error = true;
+                        return $this->render('home/index.html.twig', [
+                            'contact_form' => $form->createView(),
+                            'form_success' => false,
+                            'form_error' => true,
+                        ]);
+                    }
 
                     // NOUVELLE VÉRIFICATION ANTI-SPAM
                     $suspiciousActivity = $this->checkForSuspiciousActivity(
