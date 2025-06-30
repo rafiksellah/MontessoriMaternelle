@@ -62,6 +62,29 @@ class ContactRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function countRecentByName(string $name, \DateTimeImmutable $since): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where('LOWER(c.parentName) = LOWER(:name)')
+            ->andWhere('c.createdAt >= :since')
+            ->setParameter('name', $name)
+            ->setParameter('since', $since)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function countRecentByIp(string $ip, \DateTimeImmutable $since): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where('c.ipAddress = :ip')
+            ->andWhere('c.createdAt >= :since')
+            ->setParameter('ip', $ip)
+            ->setParameter('since', $since)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
     //    /**
     //     * @return Contact[] Returns an array of Contact objects
     //     */

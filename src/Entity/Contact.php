@@ -79,6 +79,9 @@ class Contact
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $appointmentDate = null;
 
+    #[ORM\Column(length: 45, nullable: true)]
+    private ?string $ipAddress = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -378,5 +381,16 @@ class Contact
             self::STATUS_CONFIRMED,
             self::STATUS_AFTER_VISIT
         ]);
+    }
+
+    public function getIpAddress(): ?string
+    {
+        return $this->ipAddress;
+    }
+
+    public function setIpAddress(?string $ipAddress): static
+    {
+        $this->ipAddress = $ipAddress;
+        return $this;
     }
 }

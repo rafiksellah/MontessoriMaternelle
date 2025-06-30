@@ -42,7 +42,6 @@ class HomeController extends AbstractController
     ): Response {
         $contact = new Contact();
 
-        // Créer le formulaire avec l'injection de dépendances correcte
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
 
@@ -52,20 +51,47 @@ class HomeController extends AbstractController
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
                 try {
-                    // Récupération des données du formulaire
                     $formData = $form->getData();
+
+                    // NOUVELLE VÉRIFICATION ANTI-SPAM
+                    $suspiciousActivity = $this->checkForSuspiciousActivity(
+                        $contactRepository,
+                        $formData['parentName'],
+                        $formData['email'],
+                        $request->getClientIp()
+                    );
+
+                    if ($suspiciousActivity['blocked']) {
+                        $form->addError(new FormError(
+                            $this->translator->trans('contact.errors.suspicious_activity')
+                        ));
+                        $form_error = true;
+
+                        // Log l'activité suspecte
+                        $this->logger->warning('Suspicious registration activity detected', [
+                            'name' => $formData['parentName'],
+                            'email' => $formData['email'],
+                            'ip' => $request->getClientIp(),
+                            'reason' => $suspiciousActivity['reason']
+                        ]);
+
+                        return $this->render('home/index.html.twig', [
+                            'contact_form' => $form->createView(),
+                            'form_success' => $form_success,
+                            'form_error' => $form_error,
+                        ]);
+                    }
 
                     // Vérifier si l'email existe déjà
                     $existingContact = $contactRepository->findOneBy(['email' => $formData['email']]);
 
                     if ($existingContact) {
-                        // Ajouter l'erreur directement au champ email
                         $form->get('email')->addError(new FormError(
                             $this->translator->trans('contact.errors.email_already_exists')
                         ));
                         $form_error = true;
                     } else {
-                        // Création d'une nouvelle entité Contact
+                        // Création et sauvegarde du contact
                         $contact
                             ->setParentName($formData['parentName'])
                             ->setChildName($formData['childName'])
@@ -73,39 +99,30 @@ class HomeController extends AbstractController
                             ->setPhoneNumber($formData['phoneNumber'])
                             ->setEmail($formData['email'])
                             ->setObjective($formData['objective'])
-                            ->setHeardAboutUs("Non spécifié / Not specified") // Default value
+                            ->setHeardAboutUs("Non spécifié / Not specified")
                             ->setExpectations($formData['expectations'])
-                            ->setCreatedAt(new \DateTimeImmutable()); // Set the current date/time
+                            ->setCreatedAt(new \DateTimeImmutable())
+                            ->setIpAddress($request->getClientIp()); // Ajouter l'IP
 
-                        // Sauvegarde en base de données
                         $contactRepository->save($contact, true);
 
-                        // Envoi des emails
                         $emailService->sendConfirmationEmail($contact);
                         $emailService->sendAdminNotificationEmail($contact);
 
-                        // Message flash de succès
                         $this->addFlash('success', $this->translator->trans('contact.success_message'));
-
-                        // Redirection sur la même page avec un drapeau pour afficher un message de succès
                         $form_success = true;
-
-                        // Création d'un nouveau formulaire vide
                         $form = $this->createForm(ContactFormType::class);
                     }
                 } catch (UniqueConstraintViolationException $e) {
-                    // Gestion spécifique de l'erreur d'email unique (sécurité supplémentaire)
                     $form->get('email')->addError(new FormError(
                         $this->translator->trans('contact.errors.email_already_exists')
                     ));
                     $form_error = true;
                 } catch (\Exception $e) {
-                    // En cas d'autres erreurs lors de la sauvegarde ou l'envoi d'emails
                     $this->addFlash('error', $this->translator->trans('contact.errors.general_error'));
                     $form_error = true;
                 }
             } else {
-                // Le formulaire a été soumis mais contient des erreurs de validation
                 $form_error = true;
             }
         }
@@ -327,5 +344,76 @@ class HomeController extends AbstractController
             // Log l'erreur mais ne pas faire échouer toute la candidature
             error_log($translator->trans('job_application.messages.email_error') . ': ' . $e->getMessage());
         }
+    }
+
+    private function checkForSuspiciousActivity(
+        ContactRepository $contactRepository,
+        string $parentName,
+        string $email,
+        ?string $ip
+    ): array {
+        $now = new \DateTimeImmutable();
+        $oneHourAgo = $now->modify('-1 hour');
+        $oneDayAgo = $now->modify('-24 hours');
+
+        // Vérifier les inscriptions récentes avec le même nom
+        $recentSameNameCount = $contactRepository->countRecentByName($parentName, $oneDayAgo);
+
+        // Vérifier les inscriptions récentes depuis la même IP
+        $recentSameIpCount = $contactRepository->countRecentByIp($ip, $oneHourAgo);
+
+        // Vérifier si c'est un email temporaire/suspect
+        $suspiciousEmailDomains = [
+            'registry.godaddy',
+            '10minutemail.com',
+            'tempmail.org',
+            'guerrillamail.com',
+            'mailinator.com'
+        ];
+
+        $emailDomain = substr(strrchr($email, "@"), 1);
+        $isSuspiciousEmailDomain = false;
+        foreach ($suspiciousEmailDomains as $domain) {
+            if (strpos($emailDomain, $domain) !== false) {
+                $isSuspiciousEmailDomain = true;
+                break;
+            }
+        }
+
+        // Règles de détection
+        if ($recentSameNameCount >= 5) {
+            return [
+                'blocked' => true,
+                'reason' => 'Too many registrations with same name in 24h'
+            ];
+        }
+
+        if ($recentSameIpCount >= 3) {
+            return [
+                'blocked' => true,
+                'reason' => 'Too many registrations from same IP in 1h'
+            ];
+        }
+
+        if ($isSuspiciousEmailDomain) {
+            return [
+                'blocked' => true,
+                'reason' => 'Suspicious email domain'
+            ];
+        }
+
+        // Vérifier si le nom contient des patterns suspects
+        if (
+            preg_match('/^[A-Za-z]+[0-9]+$/', $parentName) ||
+            strlen($parentName) < 3 ||
+            preg_match('/^(test|spam|fake)/i', $parentName)
+        ) {
+            return [
+                'blocked' => true,
+                'reason' => 'Suspicious name pattern'
+            ];
+        }
+
+        return ['blocked' => false, 'reason' => null];
     }
 }
