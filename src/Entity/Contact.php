@@ -13,14 +13,21 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity('email', message: 'Cet email a déjà été utilisé.')]
 class Contact
 {
-    // Constantes pour les statuts
-    public const STATUS_PENDING = '0';
-    public const STATUS_APPOINTMENT_SCHEDULED = '1';
-    public const STATUS_CONFIRMED = '2';
-    public const STATUS_AFTER_VISIT = '3';
-    public const STATUS_INSCRIPTION_ACCEPTED = '4';
-    public const STATUS_PROCESSED = '6';
-    public const STATUS_REJECTED = '5';
+    // Constantes pour les statuts - gardons les valeurs internes pour la compatibilité
+    public const STATUS_PENDING = '0';                    // En attente
+    public const STATUS_APPOINTMENT_SCHEDULED = '1';     // En cours (étape 1)
+    public const STATUS_CONFIRMED = '2';                 // En cours (étape 2)
+    public const STATUS_AFTER_VISIT = '3';              // En cours (étape 3)
+    public const STATUS_INSCRIPTION_ACCEPTED = '4';      // Inscrit
+    public const STATUS_PROCESSED = '6';                 // Traité
+    public const STATUS_REJECTED = '5';                  // Refusé
+
+    // Mapping des statuts simplifiés
+    public const SIMPLE_STATUS_PENDING = 'pending';      // En attente
+    public const SIMPLE_STATUS_IN_PROGRESS = 'in_progress'; // En cours
+    public const SIMPLE_STATUS_REJECTED = 'rejected';    // Refusé
+    public const SIMPLE_STATUS_ENROLLED = 'enrolled';    // Inscrit
+    public const SIMPLE_STATUS_PROCESSED = 'processed';  // Traité
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -88,6 +95,61 @@ class Contact
         $this->status = self::STATUS_PENDING;
     }
 
+    // Méthode pour obtenir le statut simplifié
+    public function getSimpleStatus(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PENDING => self::SIMPLE_STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT => self::SIMPLE_STATUS_IN_PROGRESS,
+            self::STATUS_INSCRIPTION_ACCEPTED => self::SIMPLE_STATUS_ENROLLED,
+            self::STATUS_PROCESSED => self::SIMPLE_STATUS_PROCESSED,
+            self::STATUS_REJECTED => self::SIMPLE_STATUS_REJECTED,
+            default => self::SIMPLE_STATUS_PENDING
+        };
+    }
+
+    // Méthode pour obtenir le texte du statut simplifié
+    public function getSimpleStatusText(): string
+    {
+        return match ($this->getSimpleStatus()) {
+            self::SIMPLE_STATUS_PENDING => 'En attente',
+            self::SIMPLE_STATUS_IN_PROGRESS => 'En cours',
+            self::SIMPLE_STATUS_REJECTED => 'Refusé',
+            self::SIMPLE_STATUS_ENROLLED => 'Inscrit',
+            self::SIMPLE_STATUS_PROCESSED => 'Traité',
+            default => 'Inconnu'
+        };
+    }
+
+    // Méthode pour obtenir la couleur du statut simplifié
+    public function getSimpleStatusColor(): string
+    {
+        return match ($this->getSimpleStatus()) {
+            self::SIMPLE_STATUS_PENDING => 'warning',
+            self::SIMPLE_STATUS_IN_PROGRESS => 'info',
+            self::SIMPLE_STATUS_REJECTED => 'danger',
+            self::SIMPLE_STATUS_ENROLLED => 'success',
+            self::SIMPLE_STATUS_PROCESSED => 'secondary',
+            default => 'light'
+        };
+    }
+
+    // Méthode pour obtenir le détail de l'étape en cours
+    public function getProgressDetail(): ?string
+    {
+        if ($this->getSimpleStatus() !== self::SIMPLE_STATUS_IN_PROGRESS) {
+            return null;
+        }
+
+        return match ($this->status) {
+            self::STATUS_APPOINTMENT_SCHEDULED => 'RDV programmé',
+            self::STATUS_CONFIRMED => 'RDV confirmé',
+            self::STATUS_AFTER_VISIT => 'Après visite',
+            default => null
+        };
+    }
 
     // Méthode pour vérifier si un statut est valide
     public static function isValidStatus(string $status): bool
@@ -95,7 +157,121 @@ class Contact
         return in_array($status, self::getAllStatuses());
     }
 
-    // Getters et setters
+    public static function getAllStatuses(): array
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT,
+            self::STATUS_INSCRIPTION_ACCEPTED,
+            self::STATUS_PROCESSED,
+            self::STATUS_REJECTED,
+        ];
+    }
+
+    // Gardons les méthodes existantes pour la compatibilité avec les emails
+    public function getStatusText(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PENDING => 'En attente',
+            self::STATUS_APPOINTMENT_SCHEDULED => 'RDV programmé',
+            self::STATUS_CONFIRMED => 'Confirmé',
+            self::STATUS_INSCRIPTION_ACCEPTED => 'Inscription acceptée',
+            self::STATUS_PROCESSED => 'Traité',
+            self::STATUS_AFTER_VISIT => 'Suivi après visite',
+            self::STATUS_REJECTED => 'Refusé',
+            default => 'Inconnu'
+        };
+    }
+
+    public function getStatusColor(): string
+    {
+        return match ($this->status) {
+            self::STATUS_PENDING => 'warning',
+            self::STATUS_APPOINTMENT_SCHEDULED => 'info',
+            self::STATUS_CONFIRMED => 'success',
+            self::STATUS_INSCRIPTION_ACCEPTED => 'primary',
+            self::STATUS_PROCESSED => 'success',
+            self::STATUS_AFTER_VISIT => 'dark',
+            self::STATUS_REJECTED => 'danger',
+            default => 'secondary'
+        };
+    }
+
+    // Méthodes de transition - gardées identiques pour les emails
+    public function canProcess(): bool
+    {
+        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
+    }
+
+    public function isProcessed(): bool
+    {
+        return $this->status === self::STATUS_PROCESSED;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->status === self::STATUS_PENDING;
+    }
+
+    public function hasAppointmentScheduled(): bool
+    {
+        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->status === self::STATUS_CONFIRMED;
+    }
+
+    public function isAfterVisit(): bool
+    {
+        return $this->status === self::STATUS_AFTER_VISIT;
+    }
+
+    public function isInscriptionAccepted(): bool
+    {
+        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->status === self::STATUS_REJECTED;
+    }
+
+    // Méthodes pour les transitions de statut - gardées identiques
+    public function canScheduleAppointment(): bool
+    {
+        return $this->status === self::STATUS_PENDING;
+    }
+
+    public function canConfirm(): bool
+    {
+        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
+    }
+
+    public function canSendAfterVisit(): bool
+    {
+        return $this->status === self::STATUS_CONFIRMED;
+    }
+
+    public function canAcceptInscription(): bool
+    {
+        return $this->status === self::STATUS_AFTER_VISIT;
+    }
+
+    public function canReject(): bool
+    {
+        return in_array($this->status, [
+            self::STATUS_PENDING,
+            self::STATUS_APPOINTMENT_SCHEDULED,
+            self::STATUS_CONFIRMED,
+            self::STATUS_AFTER_VISIT
+        ]);
+    }
+
+    // Getters et Setters
     public function getId(): ?int
     {
         return $this->id;
@@ -132,6 +308,14 @@ class Contact
     {
         $this->childBirthDate = $childBirthDate;
         return $this;
+    }
+
+    public function getChildAge(): int
+    {
+        if (!$this->childBirthDate) {
+            return 0;
+        }
+        return (new \DateTime())->diff($this->childBirthDate)->y;
     }
 
     public function getPhoneNumber(): ?string
@@ -207,9 +391,6 @@ class Contact
 
     public function setStatus(string $status): static
     {
-        if (!self::isValidStatus($status)) {
-            throw new \InvalidArgumentException(sprintf('Status "%s" is not valid', $status));
-        }
         $this->status = $status;
         return $this;
     }
@@ -247,68 +428,6 @@ class Contact
         return $this;
     }
 
-    // Méthodes utilitaires
-    public function getChildAge(): int
-    {
-        if (!$this->childBirthDate) {
-            return 0;
-        }
-
-        return $this->childBirthDate->diff(new \DateTime())->y;
-    }
-
-    public static function getAllStatuses(): array
-    {
-        return [
-            self::STATUS_PENDING,
-            self::STATUS_APPOINTMENT_SCHEDULED,
-            self::STATUS_CONFIRMED,
-            self::STATUS_AFTER_VISIT,
-            self::STATUS_INSCRIPTION_ACCEPTED,
-            self::STATUS_PROCESSED,
-            self::STATUS_REJECTED,
-        ];
-    }
-
-    public function getStatusText(): string
-    {
-        return match ($this->status) {
-            self::STATUS_PENDING => 'En attente',
-            self::STATUS_APPOINTMENT_SCHEDULED => 'RDV programmé',
-            self::STATUS_CONFIRMED => 'Confirmé',
-            self::STATUS_INSCRIPTION_ACCEPTED => 'Inscription acceptée',
-            self::STATUS_PROCESSED => 'Traité',
-            self::STATUS_AFTER_VISIT => 'Suivi après visite',
-            self::STATUS_REJECTED => 'Refusé',
-            default => 'Inconnu'
-        };
-    }
-
-    public function getStatusColor(): string
-    {
-        return match ($this->status) {
-            self::STATUS_PENDING => 'warning',
-            self::STATUS_APPOINTMENT_SCHEDULED => 'info',
-            self::STATUS_CONFIRMED => 'success',
-            self::STATUS_INSCRIPTION_ACCEPTED => 'primary',
-            self::STATUS_PROCESSED => 'success',
-            self::STATUS_AFTER_VISIT => 'dark',
-            self::STATUS_REJECTED => 'danger',
-            default => 'secondary'
-        };
-    }
-
-    // Nouvelles méthodes de transition pour le statut PROCESSED
-    public function canProcess(): bool
-    {
-        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
-    }
-
-    public function isProcessed(): bool
-    {
-        return $this->status === self::STATUS_PROCESSED;
-    }
-
     public function getAppointmentDate(): ?\DateTimeImmutable
     {
         return $this->appointmentDate;
@@ -317,70 +436,7 @@ class Contact
     public function setAppointmentDate(?\DateTimeImmutable $appointmentDate): static
     {
         $this->appointmentDate = $appointmentDate;
-
         return $this;
-    }
-
-    // Méthodes pour vérifier les statuts
-    public function isPending(): bool
-    {
-        return $this->status === self::STATUS_PENDING;
-    }
-
-    public function hasAppointmentScheduled(): bool
-    {
-        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
-    }
-
-    public function isConfirmed(): bool
-    {
-        return $this->status === self::STATUS_CONFIRMED;
-    }
-
-    public function isAfterVisit(): bool
-    {
-        return $this->status === self::STATUS_AFTER_VISIT;
-    }
-
-    public function isInscriptionAccepted(): bool
-    {
-        return $this->status === self::STATUS_INSCRIPTION_ACCEPTED;
-    }
-
-    public function isRejected(): bool
-    {
-        return $this->status === self::STATUS_REJECTED;
-    }
-
-    // Méthodes pour les transitions de statut
-    public function canScheduleAppointment(): bool
-    {
-        return $this->status === self::STATUS_PENDING;
-    }
-
-    public function canConfirm(): bool
-    {
-        return $this->status === self::STATUS_APPOINTMENT_SCHEDULED;
-    }
-
-    public function canSendAfterVisit(): bool
-    {
-        return $this->status === self::STATUS_CONFIRMED;
-    }
-
-    public function canAcceptInscription(): bool
-    {
-        return $this->status === self::STATUS_AFTER_VISIT;
-    }
-
-    public function canReject(): bool
-    {
-        return in_array($this->status, [
-            self::STATUS_PENDING,
-            self::STATUS_APPOINTMENT_SCHEDULED,
-            self::STATUS_CONFIRMED,
-            self::STATUS_AFTER_VISIT
-        ]);
     }
 
     public function getIpAddress(): ?string

@@ -8,6 +8,7 @@
 {% set STATUS_CONFIRMED = constant('App\\Entity\\Contact::STATUS_CONFIRMED') %}
 {% set STATUS_AFTER_VISIT = constant('App\\Entity\\Contact::STATUS_AFTER_VISIT') %}
 {% set STATUS_INSCRIPTION_ACCEPTED = constant('App\\Entity\\Contact::STATUS_INSCRIPTION_ACCEPTED') %}
+{% set STATUS_PROCESSED = constant('App\\Entity\\Contact::STATUS_PROCESSED') %}
 {% set STATUS_REJECTED = constant('App\\Entity\\Contact::STATUS_REJECTED') %}
 
 {% block body %}
@@ -17,9 +18,16 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3>Détails du contact</h3>
-                    <span class="badge badge-{{ contact.statusColor }} badge-lg">
-                        {{ contact.statusText }}
-                    </span>
+                    <div class="d-flex flex-column align-items-end">
+                        <!-- Statut simplifié principal -->
+                        <span class="badge bg-{{ contact.simpleStatusColor }} badge-lg mb-1">
+                            {{ contact.simpleStatusText }}
+                        </span>
+                        <!-- Détail de l'étape si en cours -->
+                        {% if contact.simpleStatus == 'in_progress' and contact.progressDetail %}
+                        <small class="text-muted">{{ contact.progressDetail }}</small>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -80,7 +88,7 @@
             </div>
         </div>
         <div class="col-md-4">
-            {# Formulaire de réponse - Utilisation des constantes #}
+            {# Formulaire de réponse - Actions selon le statut interne #}
             {% if contact.status in [STATUS_PENDING, STATUS_APPOINTMENT_SCHEDULED, STATUS_CONFIRMED, STATUS_AFTER_VISIT]
             %}
             <div class="card">
@@ -189,6 +197,26 @@
             </div>
             {% endif %}
 
+            {# Action spéciale pour marquer comme traité (seulement si inscrit) #}
+            {% if contact.status == STATUS_INSCRIPTION_ACCEPTED %}
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5>Finaliser le dossier</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{{ path('app_admin_contact_process', {'id': contact.id}) }}"
+                        onsubmit="return confirm('Marquer ce contact comme traité définitivement ?')">
+                        <button type="submit" class="btn btn-success btn-block">
+                            <i class="fas fa-check-circle"></i> Marquer comme traité
+                        </button>
+                        <small class="form-text text-muted">
+                            Cette action finalise le dossier et le marque comme définitivement traité.
+                        </small>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
             <!-- Actions rapides -->
             <div class="card mt-3">
                 <div class="card-header">
@@ -214,7 +242,7 @@
                 </div>
             </div>
 
-            <!-- Légende des statuts -->
+            <!-- Légende des statuts simplifiés -->
             <div class="card mt-3">
                 <div class="card-header">
                     <h6>Légende des statuts</h6>
@@ -225,20 +253,16 @@
                         <small>Candidature reçue</small>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge bg-info text-dark me-2">RDV programmé</span>
-                        <small>Rendez-vous fixé</small>
+                        <span class="badge bg-info text-white me-2">En cours</span>
+                        <small>RDV programmé/confirmé/suivi</small>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge bg-success text-white me-2">Confirmé</span>
-                        <small>RDV confirmé</small>
+                        <span class="badge bg-success text-white me-2">Inscrit</span>
+                        <small>Inscription acceptée</small>
                     </div>
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge bg-primary text-white me-2">Inscription acceptée</span>
-                        <small>Élève inscrit</small>
-                    </div>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="badge bg-dark text-white me-2">Suivi après visite</span>
-                        <small>Suivi post-RDV</small>
+                        <span class="badge bg-secondary text-white me-2">Traité</span>
+                        <small>Dossier finalisé</small>
                     </div>
                     <div class="d-flex align-items-center">
                         <span class="badge bg-danger text-white me-2">Refusé</span>
@@ -407,39 +431,4 @@
         });
     });
 </script>
-
-<style>
-    .badge-lg {
-        font-size: 1em;
-        padding: 0.5em 1em;
-    }
-
-    .card {
-        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-        border: 1px solid rgba(0, 0, 0, 0.125);
-    }
-
-    #emailPreview {
-        background-color: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 0.375rem;
-    }
-
-    .form-control:focus {
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-
-    @media print {
-
-        .col-md-4,
-        .card:last-child {
-            display: none !important;
-        }
-
-        .col-md-8 {
-            width: 100% !important;
-        }
-    }
-</style>
 {% endblock %}

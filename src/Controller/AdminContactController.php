@@ -268,6 +268,31 @@ class AdminContactController extends AbstractController
         return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
     }
 
+    #[Route('/{id}/process', name: 'app_admin_contact_process', methods: ['POST'])]
+    public function process(Contact $contact): Response
+    {
+        // Vérifier que le contact peut être traité
+        if (!$contact->canProcess()) {
+            $this->addFlash('error', 'Ce contact ne peut pas être marqué comme traité dans son état actuel.');
+            return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+        }
+
+        try {
+            // Marquer comme traité
+            $contact->setStatus(Contact::STATUS_PROCESSED);
+            $contact->setResponseDate(new \DateTimeImmutable());
+
+            $this->entityManager->flush();
+
+            $this->addFlash('success', 'Contact marqué comme traité avec succès !');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'Erreur lors de la mise à jour du statut : ' . $e->getMessage());
+            error_log('Process error: ' . $e->getMessage());
+        }
+
+        return $this->redirectToRoute('app_admin_contact_show', ['id' => $contact->getId()]);
+    }
+
     #[Route('/{id}/delete', name: 'app_admin_contact_delete', methods: ['POST'])]
     public function delete(Contact $contact): Response
     {

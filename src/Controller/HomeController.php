@@ -10,7 +10,9 @@ use App\Form\JobApplicationType;
 use Symfony\Component\Mime\Email;
 use App\Service\ContactEmailService;
 use App\Repository\ContactRepository;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,20 +20,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Symfony\Component\Form\FormError;
 
 class HomeController extends AbstractController
 {
     private $translator;
-
+    private $logger;
 
     public function __construct(
         TranslatorInterface $translator,
+        LoggerInterface $logger
     ) {
         $this->translator = $translator;
+        $this->logger = $logger;
     }
 
     #[Route('/{_locale}', name: 'app_home', requirements: ['_locale' => 'en|fr|ar'], defaults: ['_locale' => 'en'])]
@@ -61,10 +64,11 @@ class HomeController extends AbstractController
                     ) {
                         $form->addError(new FormError('Inscription temporairement indisponible.'));
                         $form_error = true;
-                        return $this->render('home/index.html.twig', [
-                            'contact_form' => $form->createView(),
-                            'form_success' => false,
-                            'form_error' => true,
+
+                        // Redirection vers la section contact
+                        return $this->redirectToRoute('app_home', [
+                            '_locale' => $request->getLocale(),
+                            '_fragment' => 'contact'
                         ]);
                     }
 
@@ -90,10 +94,11 @@ class HomeController extends AbstractController
                             'reason' => $suspiciousActivity['reason']
                         ]);
 
-                        return $this->render('home/index.html.twig', [
-                            'contact_form' => $form->createView(),
-                            'form_success' => $form_success,
-                            'form_error' => $form_error,
+                        // Redirection vers la section contact avec flash message
+                        $this->addFlash('error', $this->translator->trans('contact.errors.suspicious_activity'));
+                        return $this->redirectToRoute('app_home', [
+                            '_locale' => $request->getLocale(),
+                            '_fragment' => 'contact'
                         ]);
                     }
 
@@ -101,10 +106,13 @@ class HomeController extends AbstractController
                     $existingContact = $contactRepository->findOneBy(['email' => $formData['email']]);
 
                     if ($existingContact) {
-                        $form->get('email')->addError(new FormError(
-                            $this->translator->trans('contact.errors.email_already_exists')
-                        ));
-                        $form_error = true;
+                        $this->addFlash('error', $this->translator->trans('contact.errors.email_already_exists'));
+                        // Ajouter le message alternatif
+                        $this->addFlash('info', $this->translator->trans('contact.contact_alternative'));
+                        return $this->redirectToRoute('app_home', [
+                            '_locale' => $request->getLocale(),
+                            '_fragment' => 'contact'
+                        ]);
                     } else {
                         // Création et sauvegarde du contact
                         $contact
@@ -125,20 +133,39 @@ class HomeController extends AbstractController
                         $emailService->sendAdminNotificationEmail($contact);
 
                         $this->addFlash('success', $this->translator->trans('contact.success_message'));
-                        $form_success = true;
-                        $form = $this->createForm(ContactFormType::class);
+
+                        // Redirection vers la section contact pour le succès
+                        return $this->redirectToRoute('app_home', [
+                            '_locale' => $request->getLocale(),
+                            '_fragment' => 'contact'
+                        ]);
                     }
                 } catch (UniqueConstraintViolationException $e) {
-                    $form->get('email')->addError(new FormError(
-                        $this->translator->trans('contact.errors.email_already_exists')
-                    ));
-                    $form_error = true;
+                    $this->addFlash('error', $this->translator->trans('contact.errors.email_already_exists'));
+                    // Ajouter le message alternatif
+                    $this->addFlash('info', $this->translator->trans('contact.contact_alternative'));
+                    return $this->redirectToRoute('app_home', [
+                        '_locale' => $request->getLocale(),
+                        '_fragment' => 'contact'
+                    ]);
                 } catch (\Exception $e) {
                     $this->addFlash('error', $this->translator->trans('contact.errors.general_error'));
-                    $form_error = true;
+                    // Ajouter le message alternatif pour toute erreur générale
+                    $this->addFlash('info', $this->translator->trans('contact.contact_alternative'));
+                    return $this->redirectToRoute('app_home', [
+                        '_locale' => $request->getLocale(),
+                        '_fragment' => 'contact'
+                    ]);
                 }
             } else {
-                $form_error = true;
+                // Erreurs de validation du formulaire
+                $this->addFlash('error', $this->translator->trans('contact.form_validation_error'));
+                // Ajouter le message alternatif
+                $this->addFlash('info', $this->translator->trans('contact.contact_alternative'));
+                return $this->redirectToRoute('app_home', [
+                    '_locale' => $request->getLocale(),
+                    '_fragment' => 'contact'
+                ]);
             }
         }
 
@@ -430,5 +457,10 @@ class HomeController extends AbstractController
         }
 
         return ['blocked' => false, 'reason' => null];
+    }
+
+    private function shouldScrollToContact(bool $formError, FormInterface $form): bool
+    {
+        return $formError || ($form->isSubmitted() && !$form->isValid());
     }
 }
